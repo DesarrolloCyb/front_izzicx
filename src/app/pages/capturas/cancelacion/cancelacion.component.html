@@ -1,0 +1,181 @@
+<div class="text-900 font-bold text-2xl mb-4 text-center">Formulario de Cancelación</div>
+
+<div
+  [formGroup]="formCancelacion"
+  class="card">
+
+  <p-panel
+    [toggleable]="mostrandoResultados"
+    header="Rellene los campos"
+    class="line-height-12 m-0">
+    <!-- INICIO DE INPUTS -->
+    <h5>Tipo de canclación</h5>
+    <div class="p-fluid p-formgrid grid">
+
+      <div class="col-12 md:col-3">
+        <div class="field-radiobutton" >
+          <p-radioButton
+            [value]="'Single Video'"
+            [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('tipoCancelacion')?.errors != null && formCancelacion.get('tipoCancelacion')?.touched == true}"
+            formControlName="tipoCancelacion"
+            (onClick)="tipoCancelacion($event.value)">
+          </p-radioButton>
+          <label>Single Video</label>
+        </div>
+        <div class="field-radiobutton">
+          <p-radioButton
+            [value]="'Modem Combo'"
+            [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('tipoCancelacion')?.errors != null && formCancelacion.get('tipoCancelacion')?.touched == true}"
+            formControlName="tipoCancelacion"
+            (onClick)="tipoCancelacion($event.value)">
+          </p-radioButton>
+          <label>Modem Combo</label>
+        </div>
+        <div class="field-radiobutton">
+          <p-radioButton
+            [value]="'BTCel Combo'"
+            [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('tipoCancelacion')?.errors != null && formCancelacion.get('tipoCancelacion')?.touched == true}"
+            formControlName="tipoCancelacion"
+            (onClick)="tipoCancelacion($event.value)">
+          </p-radioButton>
+          <label>BTCel Combo</label>
+        </div>
+      </div>
+
+      <div class="field col-12 md:col-4">
+
+        <span class="p-float-label">
+						<input
+            [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('cuenta')?.errors != null && formCancelacion.get('cuenta')?.touched == true}"
+            type="text"
+            pInputText
+            formControlName="cuenta"
+            onlyNumbers>
+						<label>Número de cuenta</label>
+
+
+
+					</span>
+
+      </div>
+
+      <div class="field col-12 md:col-3">
+        <div class="p-inputgroup">
+
+          <span class="p-float-label">
+						<input
+              type="text"
+               [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('ordenServicio')?.errors != null && formCancelacion.get('ordenServicio')?.touched == true}"
+              pInputText
+              formControlName="ordenServicio">
+						<label for="inputnumber">Solicitud de servicio</label>
+					</span>
+        </div>
+      </div>
+      <div class="field col-12 md:col-3">
+        <div class="p-inputgroup">
+
+          <span class="p-float-label">
+						<input
+             [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('cve_supervisor')?.errors != null && formCancelacion.get('cve_supervisor')?.touched == true}"
+              inputId="text"
+              pInputText
+              formControlName="cve_supervisor">
+						<label for="supervisor">Supervisor</label>
+					</span>
+        </div>
+      </div>
+
+      <div class="field col-12 md:col-3">
+        <p-dropdown
+        [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('pais')?.errors != null && formCancelacion.get('pais')?.touched == true}"
+          [options]="Pais"
+          [showClear]="true"
+          placeholder="Seleccione un país"
+          formControlName="pais">
+        </p-dropdown>
+      </div>
+
+      <div class="field col-12 md:col-3">
+        <span class="p-float-label">
+					<p-calendar
+          [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('fechaCorte')?.errors != null && formCancelacion.get('fechaCorte')?.touched == true}"
+            [showIcon]="true"
+            [minDate]="today"
+            dateFormat="yy-mm-dd"
+            formControlName="fechaCorte"></p-calendar>
+					<label for="inputdate">Fecha de Vencimiento</label>
+				</span>
+      </div>
+
+      <div
+        class="field col-12 md:col-6"
+        *ngIf="formCancelacion.value.tipoCancelacion =='BTCel Combo'">
+        <p-chips
+        placeholder="Separe con , "
+        [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('nd')?.errors != null && formCancelacion.get('tipoCancelacion')?.touched == true}"
+          [(ngModel)]="telefonosNd"
+          separator=","
+          [ngModelOptions]="{standalone: true}"
+          (onAdd)="telefonosMod()"
+          (onRemove)="telefonosMod()"></p-chips>
+      </div>
+
+      <!-- BOTON DE VALICACION DE DATOS -->
+
+      <!-- BOTON DE EJECUCION -->
+      <div class="col lg:col-4">
+
+        <div class="grid">
+          <div class="col-12">
+
+            <button
+              (click)="verify()"
+              pButton
+              label="Enviar"
+              style="width:auto;"></button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </p-panel>
+  <br>
+
+</div>
+
+<p-dialog
+  [closable]="closeModal"
+  header="Guardar Cancelación"
+  [(visible)]="display"
+  [modal]="true"
+  showEffect="fade"
+  [style]="{width: '30vw'}"
+  [breakpoints]="{'960px': '75vw'}">
+  <p class="line-height-3 m-0">
+        Los datos a guardar son los siguientes:
+    </p>
+
+  <ul>
+    <li>Tipo de cancelación: <strong>{{formCancelacion.value.tipoCancelacion}}</strong></li>
+    <li>Cuenta: <strong>{{formCancelacion.value.cuenta}}</strong></li>
+    <li>Solicitud de Servicio: <strong>{{formCancelacion.value.ordenServicio}}</strong></li>
+    <li>Pais: <strong>{{formCancelacion.value.pais}}</strong></li>
+    <li>Fecha de vencimiento<strong>{{formCancelacion.value.fechaCorte | date}}</strong></li>
+    <li>Supervisor: <strong>{{formCancelacion.value.cve_supervisor}}</strong></li>
+    <li>ND: <strong>{{formCancelacion.value.nd}}</strong></li>
+  </ul>
+  <ng-template pTemplate="footer">
+
+    <loading-button
+      label="Guardar"
+      labelLoad="Guardando"
+      [loading]="enviando"
+      (click)="sendData()"></loading-button>
+
+  </ng-template>
+</p-dialog>
+
+<p-toast
+  [baseZIndex]="99999"
+  key="tst"></p-toast>
