@@ -64,6 +64,8 @@ export class CancelacionComponent implements OnInit {
   aux: string | undefined;
   aux2: string | undefined;
 
+  toClearControls: string[] = ["tipoCancelacion", "cuenta", "ordenServicio", "pais", "fechaCorte", "cve_supervisor", "nd"]
+
   constructor(
     private cors: CorsService,
     private formBuilder: UntypedFormBuilder,
@@ -75,13 +77,13 @@ export class CancelacionComponent implements OnInit {
       ordenServicio: [null, Validators.required],
       pais: [null, Validators.required],
       fechaCorte: [null, Validators.required], //Esta fecha es la del dia de la maquina
-      cve_usuario: [1000, Validators.required], //Se obtiene del direcotrio activo
+      cve_usuario: ['o-egarcia', Validators.required], //Se obtiene del direcotrio activo
       cve_supervisor: [null, Validators.required],
       nd: [null],
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   verify() {
 
@@ -108,13 +110,21 @@ export class CancelacionComponent implements OnInit {
     console.log('click');
     this.closeModal = false;
     this.enviando = true;
-    if (this.formCancelacion.invalid) {
+    if (this.formCancelacion.valid) {
       this.cors
         .post('Formularios/GuardarFormulario', this.formCancelacion.value)
         .then((response) => {
-          response;
+          console.log(  "d");
+
           this.display = false;
           this.enviando = false;
+          this.toClearControls.forEach((element) => {
+            console.log(element);
+
+            this.formCancelacion.controls[element].setValue(null)
+          })
+          this.formCancelacion.markAsUntouched()
+          this.telefonosNd = []
           this.messageService.add({
             key: 'tst',
             severity: 'success',
