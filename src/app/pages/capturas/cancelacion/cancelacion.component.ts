@@ -63,7 +63,7 @@ export class CancelacionComponent implements OnInit {
   validador = [false];
   aux: string | undefined;
   aux2: string | undefined;
-
+usuario:any = JSON.parse(localStorage.getItem( "userData")||  "{}" ) 
   toClearControls: string[] = ["tipoCancelacion", "cuenta", "ordenServicio", "pais", "fechaCorte", "cve_supervisor", "nd"]
 
   constructor(
@@ -71,13 +71,15 @@ export class CancelacionComponent implements OnInit {
     private formBuilder: UntypedFormBuilder,
     private messageService: MessageService
   ) {
+
+    
     this.formCancelacion = this.formBuilder.group({
       tipoCancelacion: [null, Validators.required],
       cuenta: [null, Validators.required],
       ordenServicio: [null, Validators.required],
       pais: [null, Validators.required],
       fechaCorte: [null, Validators.required], //Esta fecha es la del dia de la maquina
-      cve_usuario: ['o-egarcia', Validators.required], //Se obtiene del direcotrio activo
+      cve_usuario: [this.usuario.email, Validators.required], //Se obtiene del direcotrio activo
       cve_supervisor: [null, Validators.required],
       nd: [null],
     });

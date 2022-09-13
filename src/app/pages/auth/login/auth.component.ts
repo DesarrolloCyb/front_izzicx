@@ -31,12 +31,14 @@ export class AuthComponent {
 
 
         if (this.formLogin.valid) {
-          this.router.navigate(['/home']);
+          
             this.cors.post('AD/Identity', this.formLogin.value).then((response) => {
                 console.log(response);
 
-                this.router.navigate(['/home']);
+                //this.router.navigate(['/home']);
 
+                localStorage.setItem( "userData",JSON.stringify(response)  )
+                this.router.navigate(['/home']);
             }).catch((error) => {
                 console.log(error);
 
