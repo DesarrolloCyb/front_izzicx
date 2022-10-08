@@ -5,6 +5,7 @@
 export const environment = {
     production: false,
     API_URL: 'https://10.251.58.11/api/',
+    SCOCKET_URL: 'http://10.251.58.11:3000',
     user: 'usrconfbot@sky.com.mx',
     password: 'MJG_37465ftg',
 };

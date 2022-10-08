@@ -47,8 +47,12 @@ import { ChartModule } from 'primeng/chart';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { MessageService } from 'primeng/api';
+import { NgxMaskModule } from 'ngx-mask';
+import { TagModule } from 'primeng/tag';
+
+
 @NgModule({
-  imports: [ButtonModule],
+  imports: [ButtonModule,NgxMaskModule.forRoot(),],
   declarations: [
     ErrorInputClassDirective,
     ErrorMessageComponent,
@@ -62,7 +66,9 @@ import { MessageService } from 'primeng/api';
     LoadingButtonComponent,
   ],
   exports: [
+    NgxMaskModule,
     //Prime
+    TagModule,
     BadgeModule,
     SidebarModule,
     InputTextModule,

@@ -5,8 +5,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { CorsService } from '@services';
+import { SocketService } from 'app/_services/socket-service';
 import { Message, MessageService } from 'primeng/api';
 import { APIService } from '../../../_services/api.service';
+
+import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import { SignalRService } from 'app/_services/sirgalR.service';
+import { SocketIoService } from 'app/_services/socketio.service';
 
 @Component({
   selector: 'cancelacion',
@@ -45,6 +50,19 @@ export class CancelacionComponent implements OnInit {
     'Honduras',
   ];
 
+  equipos = [
+    '1',
+    '2',
+    '3',
+   
+  ];
+
+  aplicacion = [
+    'Inmediato',
+    'Corte',
+   
+  ];
+
   confirmacion: any; //Mensaje de confirmmacion de datos
 
   mostrandoResultados: boolean = false;
@@ -63,16 +81,20 @@ export class CancelacionComponent implements OnInit {
   validador = [false];
   aux: string | undefined;
   aux2: string | undefined;
-usuario:any = JSON.parse(localStorage.getItem( "userData")||  "{}" ) 
-  toClearControls: string[] = ["tipoCancelacion", "cuenta", "ordenServicio", "pais", "fechaCorte", "cve_supervisor", "nd"]
+  usuario: any = JSON.parse(localStorage.getItem("userData") || "{}")
+  toClearControls: string[] = ["tipoCancelacion", "cuenta", "ordenServicio", "pais", "fechaCorte", "cve_supervisor", "nd","equipos", "aplicacion"]
+
+
+  offers: any[] = [];
 
   constructor(
+
     private cors: CorsService,
     private formBuilder: UntypedFormBuilder,
     private messageService: MessageService
   ) {
+    //this.socket.startSocket()
 
-    
     this.formCancelacion = this.formBuilder.group({
       tipoCancelacion: [null, Validators.required],
       cuenta: [null, Validators.required],
@@ -80,12 +102,18 @@ usuario:any = JSON.parse(localStorage.getItem( "userData")||  "{}" )
       pais: [null, Validators.required],
       fechaCorte: [null, Validators.required], //Esta fecha es la del dia de la maquina
       cve_usuario: [this.usuario.email, Validators.required], //Se obtiene del direcotrio activo
-      cve_supervisor: [null, Validators.required],
+      //cve_supervisor: [null, Validators.required],
       nd: [null],
+      equipos: [null],
+      aplicacion: [null],
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+  }
+
+
 
   verify() {
 
@@ -94,14 +122,27 @@ usuario:any = JSON.parse(localStorage.getItem( "userData")||  "{}" )
       this.display = true;
     }
   }
+
   tipoCancelacion(evento: any) {
     console.log(evento);
     if (evento == 'BTCel Combo') {
       this.formCancelacion.controls['nd'].setValidators(Validators.required);
       this.formCancelacion.controls['nd'].updateValueAndValidity();
-    } else {
+    }
+    else if (evento == 'Equipos Adicionales'){
+      this.formCancelacion.controls['equipos'].setValidators(Validators.required);
+      this.formCancelacion.controls['aplicacion'].setValidators(Validators.required);
+      this.formCancelacion.controls['equipos'].updateValueAndValidity();
+      this.formCancelacion.controls['aplicacion'].updateValueAndValidity();
+    }
+    
+    else {
       this.formCancelacion.controls['nd'].clearValidators();
+      this.formCancelacion.controls['equipos'].clearValidators();
+      this.formCancelacion.controls['aplicacion'].clearValidators();
       this.formCancelacion.controls['nd'].updateValueAndValidity();
+      this.formCancelacion.controls['equipos'].updateValueAndValidity();
+      this.formCancelacion.controls['aplicacion'].updateValueAndValidity();
     }
   }
 
@@ -116,7 +157,7 @@ usuario:any = JSON.parse(localStorage.getItem( "userData")||  "{}" )
       this.cors
         .post('Formularios/GuardarFormulario', this.formCancelacion.value)
         .then((response) => {
-          console.log(  "d");
+          console.log("d");
 
           this.display = false;
           this.enviando = false;

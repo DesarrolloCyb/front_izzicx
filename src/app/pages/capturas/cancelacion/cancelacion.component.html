@@ -6,10 +6,10 @@
 
   <p-panel
     [toggleable]="mostrandoResultados"
-    header="Rellene los campos"
+    header="Datos de Cancelación"
     class="line-height-12 m-0">
     <!-- INICIO DE INPUTS -->
-    <h5>Tipo de canclación</h5>
+    <h5>Tipo de cancelación</h5>
     <div class="p-fluid p-formgrid grid">
 
       <div class="col-12 md:col-4">
@@ -20,7 +20,7 @@
             formControlName="tipoCancelacion"
             (onClick)="tipoCancelacion($event.value)">
           </p-radioButton>
-          <label>Single Video</label>
+          <label>Baja Total Single Video </label>
         </div>
         <div class="field-radiobutton">
           <p-radioButton
@@ -29,7 +29,7 @@
             formControlName="tipoCancelacion"
             (onClick)="tipoCancelacion($event.value)">
           </p-radioButton>
-          <label>Modem Combo</label>
+          <label>Baja Combo BTI</label>
         </div>
         <div class="field-radiobutton">
           <p-radioButton
@@ -38,7 +38,16 @@
             formControlName="tipoCancelacion"
             (onClick)="tipoCancelacion($event.value)">
           </p-radioButton>
-          <label>BTCel Combo</label>
+          <label>Baja BTCel Combo</label>
+        </div>
+        <div class="field-radiobutton">
+          <p-radioButton
+            [value]="'Equipos Adicionales'"
+            [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('tipoCancelacion')?.errors != null && formCancelacion.get('tipoCancelacion')?.touched == true}"
+            formControlName="tipoCancelacion"
+            (onClick)="tipoCancelacion($event.value)">
+          </p-radioButton>
+          <label>Baja Equipo Adicional (Video)</label>
         </div>
       </div>
 
@@ -72,7 +81,8 @@
 					</span>
         </div>
       </div>
-      <div class="field col-12 md:col-3">
+
+      <!-- <div class="field col-12 md:col-3">
         <div class="p-inputgroup">
 
           <span class="p-float-label">
@@ -84,7 +94,7 @@
 						<label for="supervisor">Supervisor</label>
 					</span>
         </div>
-      </div>
+      </div> -->
 
       <div class="field col-12 md:col-4">
         <p-dropdown
@@ -109,16 +119,41 @@
       </div>
 
       <div
-        class="field col-12 md:col-6"
+        class="field col-12 md:col-4"
         *ngIf="formCancelacion.value.tipoCancelacion =='BTCel Combo'">
         <p-chips
-        placeholder="Separe con , "
+        placeholder="(ICCID) Separe con , "
         [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('nd')?.errors != null && formCancelacion.get('tipoCancelacion')?.touched == true}"
           [(ngModel)]="telefonosNd"
           separator=","
           [ngModelOptions]="{standalone: true}"
           (onAdd)="telefonosMod()"
-          (onRemove)="telefonosMod()"></p-chips>
+          (onRemove)="telefonosMod()">
+        </p-chips>
+      </div>
+
+      <div
+        class="field col-12 md:col-4"
+        *ngIf="formCancelacion.value.tipoCancelacion =='Equipos Adicionales'">
+        <p-dropdown
+        [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('Equipos')?.errors != null && formCancelacion.get('equipos')?.touched == true}"
+          [options]="equipos"
+          [showClear]="true"
+          placeholder="Seleccione Equipos"
+          formControlName="equipos">
+        </p-dropdown>
+      </div>
+
+      <div
+        class="field col-12 md:col-6"
+        *ngIf="formCancelacion.value.tipoCancelacion =='Equipos Adicionales'">
+        <p-dropdown
+        [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('aplicacion')?.errors != null && formCancelacion.get('aplicacion')?.touched == true}"
+          [options]="aplicacion"
+          [showClear]="true"
+          placeholder="Seleccione Fecha aplicacion"
+          formControlName="aplicacion">
+        </p-dropdown>
       </div>
 
       <!-- BOTON DE VALICACION DE DATOS -->
@@ -128,14 +163,13 @@
 
         <div class="grid">
           <div class="col-12">
-
+            
             <button
               (click)="verify()"
               pButton
               label="Enviar"
               style="width:auto;"></button>
           </div>
-
         </div>
       </div>
     </div>
@@ -162,8 +196,9 @@
     <li>Solicitud de Servicio: <strong>{{formCancelacion.value.ordenServicio}}</strong></li>
     <li>Pais: <strong>{{formCancelacion.value.pais}}</strong></li>
     <li>Fecha de vencimiento<strong>{{formCancelacion.value.fechaCorte | date}}</strong></li>
-    <li>Supervisor: <strong>{{formCancelacion.value.cve_supervisor}}</strong></li>
     <li>ND: <strong>{{formCancelacion.value.nd}}</strong></li>
+    <li>Tipo Aplicacion: <strong>{{formCancelacion.value.aplicacion}}</strong></li>
+    <li>Equipos a desconectar: <strong>{{formCancelacion.value.equipos}}</strong></li>
   </ul>
   <ng-template pTemplate="footer">
 

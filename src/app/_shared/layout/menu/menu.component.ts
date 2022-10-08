@@ -42,9 +42,26 @@ export class MenuComponent implements OnInit {
             routerLink: ['/capturas/cancelacion'],
           },
           {
-            label: 'Quejas',
+            label: 'Solicitud de Cancelación',
             icon: 'pi pi-fw pi-exclamation-triangle',
-            routerLink: ['/capturas/quejas'],
+            routerLink: ['/capturas/solicitud-cancelacion'],
+          },
+        ]
+      },
+      {
+        label: 'Robots',
+        icon: 'pi pi-fw pi-android',
+        routerLink: ['/robots'],
+        items: [
+          {
+            label: 'Actividad',
+            icon: 'pi pi-fw pi-tablet',
+            routerLink: ['/robots/'],
+          },
+          {
+            label: 'Crear nuevo',
+            icon: 'pi pi-fw pi-plus',
+            routerLink: ['/robots/nuevo'],
           },
         ]
       },

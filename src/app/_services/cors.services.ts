@@ -34,6 +34,13 @@ export class CorsService {
             .get(`${environment.API_URL}${partUrl}?${params}`)
             .toPromise();
     }
+    getCommand(partUrl: string): Promise<any> {
+        
+
+        return this.httpClient
+            .get(partUrl)
+            .toPromise();
+    }
     put(partUrl: string, dataGet: any = {}): Promise<any> {
         let body = new HttpParams({ fromObject: dataGet });
 

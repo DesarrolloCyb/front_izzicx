@@ -11,20 +11,21 @@ const routerOptions: ExtraOptions = {
 
 const routes: Routes = [
   {
-    path:'', 
-    redirectTo:'/login',
+    path: '',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
-  
+
   {
     path: 'login',
     loadChildren: () =>
       import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
-  { 
-    path: '', 
-    redirectTo: '/home', 
-    pathMatch: 'full' },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
   {
     path: 'home',
     data: { breadcrumb: 'Home' },
@@ -45,7 +46,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/reportes/reportes.module').then((m) => m.ReportesModule),
   },
-
+  { path: 'robots', loadChildren: () => import('./pages/robots/robots.module').then(m => m.RobotsModule) },
 
 
   //DEMOS
@@ -124,10 +125,11 @@ const routes: Routes = [
     path: '404',
     component: NotfoundComponent,
   },
+
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, routerOptions)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
