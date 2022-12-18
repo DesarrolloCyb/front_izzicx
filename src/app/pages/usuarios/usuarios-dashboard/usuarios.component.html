@@ -1,0 +1,98 @@
+<div class="col-12">
+    <div class="card">
+        <h5>Usuarios </h5>
+        <p-table #dt1 [value]="dataSource" dataKey="id" [rows]="50" [loading]="loading" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
+            styleClass="p-datatable-gridlines" [paginator]="true"
+            [globalFilterFields]="['userID','firstName','lastName','email','role']" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="flex justify-content-between flex-column sm:flex-row">
+
+                    <span class="p-input-icon-left mb-2">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar"
+                            class="w-full" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            User ID
+
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Nombre
+
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Usuario
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Rol
+                        </div>
+                    </th>
+                    
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+                <tr>
+                    <td>
+                       <a styleClass="p-button-link mr-2 mb-2" [routerLink]="['/usuarios/detalle/'+item.userID]"> {{item.userID}}  </a>
+                    </td>
+                    <td>
+                        {{item.firstName}}  {{item.lastName}}
+                    </td>
+                    <td>
+                        {{item.email}}
+                    </td>
+                    <td>
+                       {{item.role}}
+                    </td>
+
+                   
+                   
+                   
+                    <td>
+                        <button pButton pRipple label="Eliminar" (click)="preguntarEliminar(item)" icon="pi pi-trash" class="p-button-danger mr-2 mb-2"></button>
+                    </td>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">Sin Usuarios encontrados.</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="loadingbody">
+                <tr>
+                    <td colspan="7">Cargando usuarios, espere...</td>
+                </tr>
+
+            </ng-template>
+            <ng-template pTemplate="paginatorleft" let-state>
+                Mostrando {{(state.page  * state.rows) + 1}} a {{state.rows * (state.page + 1)}} de {{state.totalRecords}} registros.
+          </ng-template>
+        </p-table>
+    </div>
+    <p-toast key="tst" [baseZIndex]="99999"></p-toast>
+ 
+
+    
+    <p-confirmDialog header="Eliminar Usuario" key="deleteBot" icon="pi pi-exclamation-triangle"
+        acceptLabel="Si, Eliminar" rejectLabel="Cancelar" [style]="{width: '350px'}"
+        acceptButtonStyleClass="p-button-danger" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+    
+
+</div>

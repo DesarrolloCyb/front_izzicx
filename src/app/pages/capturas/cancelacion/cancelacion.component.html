@@ -9,7 +9,7 @@
     header="Datos de Cancelación"
     class="line-height-12 m-0">
     <!-- INICIO DE INPUTS -->
-    <h5>Tipo de cancelación</h5>
+    <h5>Tipo de cancelación (Tradcicional y VeTV)</h5>
     <div class="p-fluid p-formgrid grid">
 
       <div class="col-12 md:col-4">
@@ -50,6 +50,39 @@
           <label>Baja Equipo Adicional (Video)</label>
         </div>
       </div>
+      <div class="col-4"></div>
+      <div class="col-12 md:col-4">
+        <div class="field-radiobutton">
+          <p-radioButton
+            [value]="'Combo BTI VeTV'"
+            [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('tipoCancelacion')?.errors != null && formCancelacion.get('tipoCancelacion')?.touched == true}"
+            formControlName="tipoCancelacion"
+            (onClick)="tipoCancelacion($event.value)">
+          </p-radioButton>
+          <label>Baja Combo BTI VeTV </label>
+        </div>
+        <div class="field-radiobutton">
+          <p-radioButton
+            [value]="'Equipo Adicional VeTV'"
+            [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('tipoCancelacion')?.errors != null && formCancelacion.get('tipoCancelacion')?.touched == true}"
+            formControlName="tipoCancelacion"
+            (onClick)="tipoCancelacion($event.value)">
+          </p-radioButton>
+          <label>Baja Equipo Adicional (Video) VeTV</label>
+        </div>
+        <div class="field-radiobutton">
+          <p-radioButton
+            [value]="'BTCel Combo VeTV'"
+            [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('tipoCancelacion')?.errors != null && formCancelacion.get('tipoCancelacion')?.touched == true}"
+            formControlName="tipoCancelacion"
+            (onClick)="tipoCancelacion($event.value)">
+          </p-radioButton>
+          <label>Baja BTCel Combo VeTV</label>
+        </div>
+
+      </div>
+
+      <!-- <div class="field col-4"></div> -->
 
       <div class="field col-12 md:col-4">
 
@@ -68,7 +101,7 @@
 
       </div>
 
-      <div class="field col-12 md:col-4">
+      <div class="field col-12 md:col-4" *ngIf="formCancelacion.value.tipoCancelacion =='Single Video' || formCancelacion.value.tipoCancelacion =='Modem Combo'||formCancelacion.value.tipoCancelacion =='BTCel Combo'||formCancelacion.value.tipoCancelacion =='Equipos Adicionales'">
         <div class="p-inputgroup">
 
           <span class="p-float-label">
@@ -120,15 +153,16 @@
 
       <div
         class="field col-12 md:col-4"
-        *ngIf="formCancelacion.value.tipoCancelacion =='BTCel Combo'">
+        *ngIf="formCancelacion.value.tipoCancelacion =='BTCel Combo' || formCancelacion.value.tipoCancelacion =='BTCel Combo VeTV'">
         <p-chips
         placeholder="(ICCID) Separe con , "
-        [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('nd')?.errors != null && formCancelacion.get('tipoCancelacion')?.touched == true}"
+        [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('nd')?.errors != null && formCancelacion.get('nd')?.touched == true}"
           [(ngModel)]="telefonosNd"
           separator=","
           [ngModelOptions]="{standalone: true}"
           (onAdd)="telefonosMod()"
-          (onRemove)="telefonosMod()">
+          (onRemove)="telefonosMod()"
+          >
         </p-chips>
       </div>
 
@@ -145,7 +179,7 @@
       </div>
 
       <div
-        class="field col-12 md:col-6"
+        class="field col-12 md:col-4"
         *ngIf="formCancelacion.value.tipoCancelacion =='Equipos Adicionales'">
         <p-dropdown
         [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('aplicacion')?.errors != null && formCancelacion.get('aplicacion')?.touched == true}"
@@ -155,21 +189,46 @@
           formControlName="aplicacion">
         </p-dropdown>
       </div>
+      <div class="field col-12 md:col-4" *ngIf="formCancelacion.value.tipoCancelacion =='Equipo Adicional VeTV'">
+        <p-dropdown
+          [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('recargas')?.errors != null && formCancelacion.get('recargas')?.touched == true}"
+          [options]="recar"
+          [showClear]="true"
+          placeholder="Recargas"
+          formControlName="recargas"
+        >
+        </p-dropdown>
+      </div>
 
-      <!-- BOTON DE VALICACION DE DATOS -->
+      <!-- <div class="field col-12 md:col-4" *ngIf="formCancelacion.value.tipoCancelacion =='Equipo Adicional VeTV'">
 
-      <!-- BOTON DE EJECUCION -->
-      <div class="col lg:col-4">
+        <span class="p-float-label">
+						<input
+            [ngClass]="{'ng-invalid ng-dirty': formCancelacion.get('deducible')?.errors != null && formCancelacion.get('deducible')?.touched == true}"
+            type="text"
+            pInputText
+            onlyNumbers
+            formControlName="deducible"
+            >
+						<label>Deducible</label>
 
-        <div class="grid">
-          <div class="col-12">
-            
-            <button
-              (click)="verify()"
-              pButton
-              label="Enviar"
-              style="width:auto;"></button>
-          </div>
+				</span>
+
+      </div> -->
+
+
+    </div>
+    <!-- BOTON DE EJECUCION -->
+    <div class="col lg:col-12">
+
+      <div class="grid flex justify-content-center">
+        <div class="col-4 text-center">
+          
+          <button
+            (click)="verify()"
+            pButton
+            label="Enviar"
+            style="width:auto;"></button>
         </div>
       </div>
     </div>
@@ -199,6 +258,8 @@
     <li>ND: <strong>{{formCancelacion.value.nd}}</strong></li>
     <li>Tipo Aplicacion: <strong>{{formCancelacion.value.aplicacion}}</strong></li>
     <li>Equipos a desconectar: <strong>{{formCancelacion.value.equipos}}</strong></li>
+    <li>Recargas: <strong>{{formCancelacion.value.recargas}}</strong></li>
+    <li>Deducible: <strong>{{formCancelacion.value.deducible}}</strong></li>
   </ul>
   <ng-template pTemplate="footer">
 
@@ -214,3 +275,138 @@
 <p-toast
   [baseZIndex]="99999"
   key="tst"></p-toast>
+
+  <div class="row">
+    <div class="cols">
+      <div class="card">
+        <p-table #dt1 [value]="cancelacionDia" dataKey="id" [loading]="loading" [rows]="50" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
+            styleClass="p-datatable-gridlines" [paginator]="true"
+            [globalFilterFields]="['tipoCancelacion','cuenta','ordenServicio','pais','fechaCaptura','fechaCorte','fechaCancelacion','estatus','nd','aplicacion']" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="flex justify-content-between flex-column sm:flex-row">
+
+                    <span class="p-input-icon-left mb-2">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar"
+                            class="w-full" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Tipo de Cancelacion
+
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Cuenta
+
+                        </div>
+                    </th>
+                    <th>
+                        <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                            Solicitud de Servicio
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            País
+                        </div>
+                    </th>
+                    <th>
+                      <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                          Fecha de Captura
+                      </div>
+                    </th>
+                    <th>
+                      <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                          Fecha de Corte
+                      </div>
+                    </th>
+                    <th>
+                      <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                          Fecha de Cancelación
+                      </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Estatus
+                        </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-between align-items-center">
+                          ICCID
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-between align-items-center">
+                          Aplicación
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-between align-items-center">
+                          Equipos
+                      </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+                <tr>
+                    <td>
+                      {{item.tipoCancelacion}}
+                    </td>
+                    <td>
+                        {{item.cuenta}}
+                    </td>
+                    <td>
+                        {{item.ordenServicio}}
+                    </td>
+                    <td>
+                       {{item.pais}}
+                    </td>
+                    <td>
+                      {{item.fechaCaptura}}
+                    </td>
+                    <td>
+                      {{item.fechaCorte}}
+                    </td>
+                    <td>
+                      {{item.fechaCancelacion}}
+                    </td>
+                    <td>
+                        {{item.estatus}}
+                    </td>
+                    <td>
+                      {{item.nd}}
+                    </td>
+                    <td>
+                      {{item.aplicacion}}
+                    </td>
+                    <td>
+                      {{item.equipos}}
+                    </td>
+
+    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">Sin Datos para Mostrar.</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="loadingbody">
+                <tr>
+                    <td colspan="7">Cargando Datos, espere...</td>
+                </tr>
+
+            </ng-template>
+            <ng-template pTemplate="paginatorleft" let-state>
+                Mostrando {{(state.page  * state.rows) + 1}} a {{state.rows * (state.page + 1)}} de {{state.totalRecords}} registros.
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>

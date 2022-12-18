@@ -6,211 +6,207 @@ import { Component } from '@angular/core';
   templateUrl: './menu.component.html',
 })
 export class MenuComponent implements OnInit {
-  model: any[] = [];
+  model: any[] = [
 
-  ngOnInit() {
-    this.model = [
-      {
-
-///--------------------------------------------------///
-        label: 'Cyber Room',
-        icon: 'pi pi-home',
-
-        items: [
-          {
-            label: 'Home',
-            icon: 'pi pi-fw pi-home',
-            routerLink: ['/home'],
-          },
-
-          {
-            label: 'Configuración',
-            icon: 'pi pi-fw pi-cog',
-            routerLink: ['/configuración'],
-          },
-        ],
-      },
-///--------------------------------------------------///
-      {
-        label: 'Capturas',
-        icon: 'pi pi-fw pi-compass',
-        routerLink: ['/capturas'],
-        items: [
-          {
-            label: 'Cancelación',
-            icon: 'pi pi-fw pi-file-excel',
-            routerLink: ['/capturas/cancelacion'],
-          },
-          {
-            label: 'Solicitud de Cancelación',
-            icon: 'pi pi-fw pi-exclamation-triangle',
-            routerLink: ['/capturas/solicitud-cancelacion'],
-          },
-        ]
-      },
-      {
-        label: 'Robots',
-        icon: 'pi pi-fw pi-android',
-        routerLink: ['/robots'],
-        items: [
-          {
-            label: 'Actividad',
-            icon: 'pi pi-fw pi-tablet',
-            routerLink: ['/robots/'],
-          },
-          {
-            label: 'Crear nuevo',
-            icon: 'pi pi-fw pi-plus',
-            routerLink: ['/robots/nuevo'],
-          },
-        ]
-      },
-///--------------------------------------------------///
-{
-  label: 'Reportes',
-  icon: 'pi pi-fw pi-compass',
-  routerLink: ['/capturas'],
-  items: [
+  ];
+  menus: any[] = [
     {
-      label: 'Generar',
-      icon: 'pi pi-fw pi-chart-bar',
-      routerLink: ['/reportes'],
+      label: 'Cyber Room',
+      key: "home",
+      icon: 'pi pi-home',
+      // routerLink: ['/dashboard'],
+      items: [
+        {
+          label: 'Home',
+          icon: 'pi pi-fw pi-home',
+          routerLink: ['/home'],
+        }
+
+      ]
     },
+
+    {
+      label: 'Capturas Retencion',
+      key: "capturasR",
+      icon: 'pi pi-fw pi-compass',
+      routerLink: ['/capturas'],
+      items: [
+        {
+          label: 'Cancelación',
+          icon: 'pi pi-fw pi-file-excel',
+          routerLink: ['/capturas/cancelacion'],
+        },
+        {
+          label: 'Solicitud de Cancelación',
+          icon: 'pi pi-fw pi-exclamation-triangle',
+          routerLink: ['/capturas/solicitud-cancelacion'],
+        },
+        {
+          label: 'Reactivación',
+          icon: 'pi pi-fw pi-exclamation-triangle',
+          routerLink: ['/capturas/reactivacion'],
+        },
+        {
+          label: 'Servicios c/s costo',
+          icon: 'pi pi-fw pi-exclamation-triangle',
+          routerLink: ['/capturas/servicioscosto'],
+        },
+        {
+          label: 'Reembolso',
+          icon: 'pi pi-fw pi-exclamation-triangle',
+          routerLink: ['/capturas/reembolso'],
+        },
+        {
+          label: 'Cambio de Paquete',
+          icon: 'pi pi-fw pi-exclamation-triangle',
+          routerLink: ['/capturas/cambioPaquete'],
+        },
+        {
+          label: 'Cambio de Esquema',
+          icon: 'pi pi-fw pi-exclamation-triangle',
+          routerLink: ['/capturas/cambioEsquema'],
+        },
+      ]
+    },
+    {
+      label: 'Capturas atencion a clientes',
+      key: "capturasA",
+      icon: 'pi pi-fw pi-android',
+      routerLink: ['/capturas'],
+      items: [
+        {
+          label: 'Temporadas',
+          icon: 'pi pi-fw pi-exclamation-triangle',
+          routerLink: ['/capturas/temporadas'],
+        },
+        {
+          label: 'RAySE PosPago Prepago',
+          icon: 'pi pi-fw pi-exclamation-triangle',
+          routerLink: ['/capturas/PostPagoPrepago'],
+        },
+        {
+          label: 'Bolsa de datos',
+          icon: 'pi pi-fw pi-exclamation-triangle',
+          routerLink: ['/capturas/bolsaDatos'],
+        },
+        // {
+        //   label: 'Genración de Solicitud',
+        //   icon: 'pi pi-fw pi-exclamation-triangle',
+        //   routerLink: ['/capturas/generacionSolicitud'],
+        // },
+
+
+      ]
+    },
+
+    {
+      label: 'Robots',
+      key: "robots",
+      icon: 'pi pi-fw pi-android',
+      routerLink: ['/robots'],
+      items: [
+        {
+          label: 'Actividad',
+          icon: 'pi pi-fw pi-tablet',
+          routerLink: ['/robots/'],
+        },
+        {
+          label: 'Crear nuevo',
+          icon: 'pi pi-fw pi-plus',
+          routerLink: ['/robots/nuevo'],
+        },
+      ]
+    },
+    ///--------------------------------------------------///
+    {
+      label: 'Reportes',
+      key: "reportes",
+      icon: 'pi pi-fw pi-compass',
+      routerLink: ['/capturas'],
+      items: [
+        {
+          label: 'Generar',
+          icon: 'pi pi-fw pi-chart-bar',
+          routerLink: ['/reportes'],
+        },
+      ]
+    },
+    {
+      label: 'Usuarios',
+      key: "usuarios",
+      icon: 'pi pi-fw pi-users',
+      routerLink: ['/usuarios'],
+      items: [
+        {
+          label: 'Listado',
+          icon: 'pi pi-fw pi-list',
+          routerLink: ['/usuarios'],
+        },
+        {
+          label: 'Nuevo',
+          icon: 'pi pi-fw pi-user-plus',
+          routerLink: ['/usuarios/nuevo'],
+        },
+      ]
+    },
+
   ]
-},
-///--------------------------------------------------///
-///-------------------UI KIT-------------------------------///
-  
-      // {
-      //   label: 'UI Kit',
-      //   icon: 'pi pi-fw pi-star-fill',
-      //   routerLink: ['/uikit'],
-      //   items: [
-      //     {
-      //       label: 'Form Layout',
-      //       icon: 'pi pi-fw pi-id-card',
-      //       routerLink: ['/demo/uikit/formlayout'],
-      //     },
-      //     {
-      //       label: 'Input',
-      //       icon: 'pi pi-fw pi-check-square',
-      //       routerLink: ['/demo/uikit/input'],
-      //     },
-      //     {
-      //       label: 'Float Label',
-      //       icon: 'pi pi-fw pi-bookmark',
-      //       routerLink: ['/demo/uikit/floatlabel'],
-      //     },
-      //     {
-      //       label: 'Invalid State',
-      //       icon: 'pi pi-fw pi-exclamation-circle',
-      //       routerLink: ['/demo/uikit/invalidstate'],
-      //     },
-      //     {
-      //       label: 'Button',
-      //       icon: 'pi pi-fw pi-mobile',
-      //       routerLink: ['/demo/uikit/button'],
-      //       class: 'rotated-icon',
-      //     },
-      //     {
-      //       label: 'Table',
-      //       icon: 'pi pi-fw pi-table',
-      //       routerLink: ['/demo/uikit/table'],
-      //     },
-      //     {
-      //       label: 'List',
-      //       icon: 'pi pi-fw pi-list',
-      //       routerLink: ['/demo/uikit/list'],
-      //     },
-      //     {
-      //       label: 'Tree',
-      //       icon: 'pi pi-fw pi-share-alt',
-      //       routerLink: ['/demo/uikit/tree'],
-      //     },
-      //     {
-      //       label: 'Panel',
-      //       icon: 'pi pi-fw pi-tablet',
-      //       routerLink: ['/demo/uikit/panel'],
-      //     },
-      //     {
-      //       label: 'Overlay',
-      //       icon: 'pi pi-fw pi-clone',
-      //       routerLink: ['/demo/uikit/overlay'],
-      //     },
-      //     {
-      //       label: 'Media',
-      //       icon: 'pi pi-fw pi-image',
-      //       routerLink: ['/demo/uikit/media'],
-      //     },
-      //     {
-      //       label: 'Menu',
-      //       icon: 'pi pi-fw pi-bars',
-      //       routerLink: ['/demo/uikit/menu'],
-      //       routerLinkActiveOptions: { exact: false },
-      //     },
-      //     {
-      //       label: 'Message',
-      //       icon: 'pi pi-fw pi-comment',
-      //       routerLink: ['/demo/uikit/message'],
-      //     },
-      //     {
-      //       label: 'File',
-      //       icon: 'pi pi-fw pi-file',
-      //       routerLink: ['/demo/uikit/file'],
-      //     },
-      //     {
-      //       label: 'Chart',
-      //       icon: 'pi pi-fw pi-chart-bar',
-      //       routerLink: ['/demo/uikit/charts'],
-      //     },
-      //     {
-      //       label: 'Misc',
-      //       icon: 'pi pi-fw pi-circle-off',
-      //       routerLink: ['/demo/uikit/misc'],
-      //     },
-      //   ],
-      // },
+  ngOnInit() {
 
-      // {
-      //   label: 'Utilities',
-      //   icon: 'pi pi-fw pi-compass',
-      //   routerLink: ['/utilities'],
-      //   items: [
-      //     {
-      //       label: 'PrimeIcons',
-      //       icon: 'pi pi-fw pi-prime',
-      //       routerLink: ['/demo/utilities/icons'],
-      //     },
-      //     {
-      //       label: 'Colors',
-      //       icon: 'pi pi-fw pi-palette',
-      //       routerLink: ['/demo/utilities/colors'],
-      //     },
-      //     {
-      //       label: 'PrimeFlex',
-      //       icon: 'pi pi-fw pi-desktop',
-      //       url: ['https://www.primefaces.org/primeflex/'],
-      //       target: '_blank',
-      //     },
-      //   ],
-      // },
 
-      // {
-      //   label: 'User Management',
-      //   icon: 'pi pi-fw pi-user',
-      //   items: [
-      //     {
-      //       label: 'List',
-      //       icon: 'pi pi-fw pi-list',
-      //       routerLink: ['/demo/profile/list'],
-      //     },
-      //     {
-      //       label: 'Create',
-      //       icon: 'pi pi-fw pi-plus',
-      //       routerLink: ['/demo/profile/create'],
-      //     },
-      //   ],
-      // },
-    ];
+    let permisos: any = {
+      // "1": ["capturas"],
+      // "2": ["capturas", "robots"],
+      // "3": ["capturas", "robots", "reportes", "usuarios"]
+      "SUPERVISOR TROUBLESHOOTING CELULAR":['capturasA','home','reportes'],
+      "ESPECIALISTA TROUBLESHOOTING CELULAR":['capturasA'],
+      "SUPERVISOR CALL CENTER REPARACIONES":['capturasA','home','reportes'],
+      "EJECUTIVO ATENCION PREPAGO":['capturasA'],
+      "GERENTE REPARACIONES VETV":['capturasA','home','reportes'],
+      "COORDINADOR REPARACIONES":['home','reportes'],
+      "SUPERVISOR ATENCION CC MX":['capturasA','home','reportes'],
+      "COORDINADOR ATENCION CC MX":['home','reportes'],
+      "ASESOR ATENCION CC MX":['home','reportes'],
+      "EJECUTIVO ATENCION A CLIENTE":['capturasA'],
+      "ASESOR RETENCION VETV":['home','reportes'],
+      "GERENTE RETENCION INBOUND":['home','capturasR','reportes'],
+      "SUPERVISOR RETENCION WEB":['home','capturasR','reportes'],
+      "SUPERVISOR RETENCION INBOUND VETV":['home','capturasR','reportes'],
+      "SUPERVISOR RETENCION INBOUND":['home','capturasR','reportes'],
+      "ESPECIALISTA RETENCION WEB":['capturasR'],
+      "ESPECIALISTA RETENCION VETV":['capturasR'],
+      "ESPECIALISTA RETENCION INBOUND":['capturasR'],
+      "ESPECIALISTA RETENCION CHAT":['capturasR'],
+      "GERENTE ATENCION A CLIENTES":['home','reportes'], //despues de este las dos graficas
+      "SUPERVISOR ATENCION A CLIENTES INTERNO":['home','reportes'],
+      "ASESOR CONTROL INFORMACION":['home','reportes'],
+      "SUPERVISOR GESTION EDP":['home','reportes'],
+      "SUPERVISOR ESTRATEGIA OPERATIVA":['home','reportes'],
+      "ESPECIALISTA ESTRATEGIA OPERATIVA":['home'],
+      "GERENTE MESA DE CONTROL":['home','reportes'],
+      "SUPERVISOR MESA DE CONTROL":['home','reportes'],
+      "SUPERVISOR MESA CONTROL DE DOCUMENTOS":['home','reportes'],
+      "Resp: MOISES AVILA SOTO":['home','capturasR','capturasA','robots','reportes','usuarios']
+
+    }
+    this.model = [];
+
+    /**
+     * {"userID":241,"firstName":"usrconfbot","lastName":null,"email":"usrconfbot","mobile":null,"gender":null,"role":"1","pWd":"","memberSince":"2022-11-06T17:10:35.6017627",
+     */
+
+    let usuarioInfo = JSON.parse(localStorage.getItem("userData") || "{}")
+
+    // this.model.push(
+    // )
+    this.menus.forEach((elemento) => {
+
+
+      console.log(elemento)
+      if (permisos[usuarioInfo?.role].includes(elemento.key)) {
+        this.model.push(elemento)
+      }
+    })
+
   }
 }

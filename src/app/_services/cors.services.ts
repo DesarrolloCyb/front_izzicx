@@ -14,7 +14,7 @@ import { environment } from 'environments/environment';
 })
 export class CorsService {
     private headers: Headers = new Headers({});
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient) { }
 
     post(partUrl: string, dataGet: any = {}): Promise<any> {
         return this.httpClient
@@ -34,18 +34,31 @@ export class CorsService {
             .get(`${environment.API_URL}${partUrl}?${params}`)
             .toPromise();
     }
+
+    get1(partUrl: string, dataGet: any = {}): Promise<any> {
+        // const params = new HttpParams({
+        //     fromObject: dataGet,
+        // });
+
+        return this.httpClient
+            .get(`${environment.API_URL}${partUrl}?${dataGet}`,{
+                responseType:'blob'
+            })
+            .toPromise();
+    }
+
     getCommand(partUrl: string): Promise<any> {
-        
+
 
         return this.httpClient
             .get(partUrl)
             .toPromise();
     }
     put(partUrl: string, dataGet: any = {}): Promise<any> {
-        let body = new HttpParams({ fromObject: dataGet });
+
 
         return this.httpClient
-            .put(`${environment.API_URL}${partUrl}`, body.toString(), {
+            .put(`${environment.API_URL}${partUrl}`, dataGet, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -54,17 +67,19 @@ export class CorsService {
     }
 
     delete(partUrl: string, dataGet: any = {}): Promise<any> {
-        let body = new HttpParams({ fromObject: dataGet });
+     
 
+       
         return this.httpClient
             .delete(`${environment.API_URL}${partUrl}`, {
-                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',
-                },
-            })
+                },body:dataGet
+            },
+            )
             .toPromise();
     }
+
 
     private handleError(error: HttpErrorResponse) {
         if (error.status === 0 && error.error instanceof ProgressEvent) {

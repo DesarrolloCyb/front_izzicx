@@ -49,7 +49,9 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { MessageService } from 'primeng/api';
 import { NgxMaskModule } from 'ngx-mask';
 import { TagModule } from 'primeng/tag';
-
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { TimelineModule } from 'primeng/timeline';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   imports: [ButtonModule,NgxMaskModule.forRoot(),],
@@ -111,6 +113,9 @@ import { TagModule } from 'primeng/tag';
     ToggleButtonModule,
     ErrorMessageDirective,
     LoadingButtonComponent,
+    ProgressSpinnerModule,
+    TimelineModule,
+    CardModule,
     //
 
     OnlyAlphabetsDirective,

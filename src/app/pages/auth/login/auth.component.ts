@@ -29,7 +29,6 @@ export class AuthComponent {
         this.formLogin.markAllAsTouched();
         console.log(this.formLogin.valid);
 
-
         if (this.formLogin.valid) {
           
             this.cors.post('AD/Identity', this.formLogin.value).then((response) => {
@@ -46,3 +45,4 @@ export class AuthComponent {
         }
     }
 }
+

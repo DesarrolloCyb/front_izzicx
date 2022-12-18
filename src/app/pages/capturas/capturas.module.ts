@@ -7,12 +7,21 @@ import { CommonModule } from '@angular/common';
 import { CancelacionComponent } from './cancelacion/cancelacion.component';
 import { CapturasRoutingModule } from './capturas-routing.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { SolicitudCancelacionComponent } from './solicitud-cancelacion/solicitud-cancelacion/solicitud-cancelacion.component'
+import { SolicitudCancelacionComponent } from './solicitud-cancelacion/solicitud-cancelacion/solicitud-cancelacion.component';
+import { ReactivacionComponent } from './reactivacion/reactivacion.component';
+import { ServicioscscostoComponent } from './servicioscscosto/servicioscscosto.component';
+import { TemporadasComponent } from './temporadas/temporadas.component';
+import { ReembolsoComponent } from './reembolso/reembolso.component';
+import { CambioPaqueteComponent } from './cambio-paquete/cambio-paquete.component';
+import { CambioEsquemaComponent } from './cambio-esquema/cambio-esquema.component';
+import { RAySEComponent } from './ray-se/ray-se.component';
+import { BolsaDatosComponent } from './bolsa-datos/bolsa-datos.component';
+import { GeneracionSolicitudComponent } from './generacion-solicitud/generacion-solicitud.component';
 
 
 
 @NgModule({
-  declarations: [CancelacionComponent, SolicitudCancelacionComponent],
+  declarations: [CancelacionComponent, SolicitudCancelacionComponent, ReactivacionComponent, ServicioscscostoComponent, TemporadasComponent, ReembolsoComponent, CambioPaqueteComponent, CambioEsquemaComponent, RAySEComponent, BolsaDatosComponent, GeneracionSolicitudComponent],
   imports: [
     SharedModule,
     CommonModule,

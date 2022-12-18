@@ -3,13 +3,17 @@ import { Table } from 'primeng/table';
 import { CorsService } from '@services';
 import { SocketIoService } from 'app/_services/socketio.service';
 import { Socket } from 'ngx-socket-io';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, Message, MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+import * as moment from 'moment';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'robots',
   templateUrl: './robots.component.html',
   styleUrls: ['./robots.component.scss'],
-  providers: [ConfirmationService]
+  
+
 })
 export class RobotsComponent implements OnInit {
   loading: boolean = false
@@ -20,14 +24,9 @@ export class RobotsComponent implements OnInit {
 
 
 
-
   commadArr: any[] = [
 
-    {
-      id: "RUN",
-      desc: "Encender Robot"
-    }
-    ,
+
     {
       id: "STARTED",
       desc: "Iniciar Proceso"
@@ -40,17 +39,31 @@ export class RobotsComponent implements OnInit {
     {
       id: "REBOOT",
       desc: "Reiniciar PC"
-    },
-    {
-      id: "KILL",
-      desc: "Apagar Robot"
-    }, {
-      id: "PING",
-      desc: "Ping"
-    },
+    }
   ]
 
+  comando: any = null;
+
+  opcionToAction: any = {
+    hostName: null,
+    ipEquipo: null
+  };
+  opcionIndex: any = null;
+  loadingLog: boolean = false
+  logContent: any[] = []
+  usuarioInfo = JSON.parse(localStorage.getItem("userData") || "{}")
+
+  items: any[] = [
+
+
+  ];
+  displayLogDialog: boolean = false
+  statsBots:any=[];
+  loading1: boolean = false
+
   constructor(
+    private router: Router,
+    private service: MessageService,
     private confirmationService: ConfirmationService,
     private socket: Socket,
     private cors: CorsService,
@@ -60,29 +73,211 @@ export class RobotsComponent implements OnInit {
     this.cors.get('Bots/ObtenerListProcess').then((response) => {
       this.processArr = response
     }).catch((error) => {
+      console.log(error);
+      this.showToastError(`No se logro traer la lista de procesos`)
 
     })
+    this.items = [{
+      label: 'Actualizar', icon: 'pi pi-refresh', command: () => {
 
+
+
+        this.router.navigate([`/robots/editar/${this.opcionToAction.id}`])
+
+      }
+    },
+
+    {
+      label: 'ver Log', icon: 'pi pi-history', command: () => {
+
+
+        this.preguntarLog()
+      }
+    }, {
+      label: ' ', icon: ' '
+    },
+    {
+      label: 'Eliminar', icon: 'pi pi-times', command: () => {
+
+
+        this.preguntarEliminar()
+      }
+    },]
+  }
+
+  preguntarEliminar() {
+    this.confirmationService.confirm({
+      key: 'deleteBot',
+      message: `Esta seguro que desea eliminar el Robot <strong>${this.opcionToAction.hostName}</strong>(${this.opcionToAction.ipEquipo}) ?`,
+      accept: () => {
+        this.deleteMAquina()
+
+
+      }
+    })
+  }
+
+  preguntarLog() {
+    console.log("consulta log");
+    this.logContent = []
+    this.loadingLog = true
+
+    this.displayLogDialog = true
+
+    this.cors.getCommand(`http://${this.opcionToAction.ipEquipo}:9000/getLog`).then((response) => {
+      console.log(response);
+
+      this.loadingLog = false
+      this.logContent = response.data
+
+
+    }).catch((error) => {
+      console.log(error);
+      this.loadingLog = false
+      this.showToastError(`No se logro traer el log de la maquina ${this.opcionToAction.ipEquipo}`)
+
+
+    })
+  }
+  getDays(fecha:string){
+    
+    
+    let dif = moment().diff(moment(fecha),'days')
+    if (isNaN(dif)) {
+      return ''
+    }
+    return dif
+  }
+  selection(item: any, index: any) {
+
+    this.opcionToAction = item;
+    this.opcionIndex = index;
   }
 
   ngOnInit() {
 
-    this.buscaBots()
+    this.buscaBots();
+    this.getDataStatsBots();
+    this.refreshStatsBots();
   }
-  preguntarEnviar(command: any,ipMaquina:any) {
-    console.log(ipMaquina);
+
+
+  deleteMAquina() {
+    this.cors.delete(`Bots/EliminarDataBots/${this.opcionToAction.id}`, this.opcionToAction).then((response) => {
+      console.log(response);
+      this.dataSource.splice(this.opcionIndex, 1)
+      this.showToastSuccess(`Se elimino el robot ${this.opcionToAction.hostName} correctamente.`)
+    }).catch((error) => {
+      console.log(error);
+      this.showToastError(`No se logro eliminar el robot ${this.opcionToAction.hostName}`)
+
+    })
+  }
+  preguntarCambiarProceso(process: any, item: any) {
+
+    // TODO ERik: servicio para actualizar recibes el idRegistro y el IDproceso
+
 
     this.confirmationService.confirm({
-      key: 'confirm1',
-      message: 'Esta seguro que desea enviar el comando?',
+      key: 'changeProcess',
+      message: 'Esta seguro que desea cambiar el proceso?',
       accept: () => {
-        this.cors.getCommand(`http://${ipMaquina}:9000?command=${command}`)
-      },
-      reject: () => {
-          //reject action
+        this.sendProcess(item, process)
       }
     })
 
+
+  }
+  preguntarEnviar(command: any, item: any) {
+    console.log(item);
+
+
+    this.confirmationService.confirm({
+      key: 'senCommand',
+      message: 'Esta seguro que desea enviar el comando?',
+      accept: () => {
+        this.comando = null
+        this.sendCommand(item, command)
+      },
+      reject: () => {
+        this.comando = null
+      }
+    })
+
+  }
+
+  /*
+  {
+      "userID": 213,
+      "firstName": "GARCIA CUEVAS ERIK FELIPE",
+      "lastName": null,
+      "email": "saas123123",
+      "mobile": null,
+      "gender": null,
+      "role": "User",
+      "pWd": "",
+      "memberSince": "2022-10-25T10:33:25.0487022-05:00",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI
+  192.168.0.5:9000/process?id=1&name=cancelacion&userId=2&userName=ederSAntos
+  192.168.0.5:9000?command=STOPED&userId=2&userName=ederSAntos
+  }*/
+  sendCommand(item: any, command: any) {
+    item.sendingComand = true
+    console.log(this.processArr);
+    
+    let proceso = this.processArr.find(itemProcess => itemProcess.id == item.procesoId)
+    console.log(proceso);
+
+    
+
+    this.cors.getCommand(`http://${item.ipEquipo}:9000?id=${item.procesoId}&name=${proceso?.name_process || ''}&command=${command}&userId=${this.usuarioInfo.userID}&userName=${this.usuarioInfo.firstName || ''} ${this.usuarioInfo.lastName || ''} - ${this.usuarioInfo.email || ''}`).then((response) => {
+      console.log(response);
+
+
+      this.showToastSuccess(`Se envio el comando al Robot ${item.ipEquipo}`)
+      item.sendingComand = false
+    }).catch((error) => {
+      console.log(error);
+      item.sendingComand = false
+      this.showToastError(`No se logro enviar el comando al Robot ${item.ipEquipo}`)
+
+    })
+  }
+
+  sendProcess(item: any, idProceso: any) {
+    item.sendingProcess = true
+
+    let proceso = this.processArr.find(item => item.id == idProceso)
+    console.log(proceso.name_process);
+
+
+    this.cors.getCommand(`http://${item.ipEquipo}:9000/process?id=${idProceso}&name=${proceso?.name_process || ''}&userId=${this.usuarioInfo.userID}&userName=${this.usuarioInfo.firstName || ''} ${this.usuarioInfo.lastName || ''} - ${this.usuarioInfo.email || ''}`).then((response) => {
+      this.service.add({ key: 'tst', severity: 'success', summary: 'Correcto!!!', detail: `Se envio el cambio de proceso del Robot ${item.ipEquipo}` });
+      item.sendingProcess = false
+      this.cors.put(`Bots/${item.id}` , {
+        "id": item.id,
+        "ipEquipo": item.ipEquipo,
+        "hostName": item.hostName,
+        "procesoId": idProceso,
+        "comentarios": item.comentarios
+      }).then((response) => {
+        item.sendingProcess = false
+
+        this.showToastSuccess(`Se guardo el cambio de proceso del Robot ${item.ipEquipo}`)
+      }).catch((error) => {
+        console.log(error);
+        item.sendingProcess = false
+
+        this.showToastError(`No se logro guardar el proceso del Robot ${item.ipEquipo}`)
+
+      })
+
+    }).catch((error) => {
+      console.log(error);
+      item.sendingProcess = false
+      this.showToastError(`No se logro enviar el proceso del Robot ${item.ipEquipo}`)
+
+    })
   }
 
   adddListeners() {
@@ -102,7 +297,7 @@ export class RobotsComponent implements OnInit {
       console.log('processStopedNotification');
       console.error(JSON.parse(botStopped.data));
 
-      
+
       let index = this.dataSource.findIndex(item => item.ipEquipo == botStopped.host.replace("::ffff:", ""))
 
       if (index > -1) {
@@ -125,7 +320,7 @@ export class RobotsComponent implements OnInit {
       console.log('processErrorNotification');
       console.error(JSON.parse(botError.data));
 
-      
+
       let index = this.dataSource.findIndex(item => item.ipEquipo == botError.host.replace("::ffff:", ""))
 
       if (index > -1) {
@@ -138,15 +333,44 @@ export class RobotsComponent implements OnInit {
   buscaBots() {
     this.cors.get('Bots/ObtenerDataBots').then((response) => {
 
-      console.log(response);
+      // console.log(response);
       this.dataSource = response
       this.adddListeners()
 
     }).catch((error) => {
       console.log(error);
-
+      this.showToastError(`No se logro traer el listado de Robots`)
     })
   }
+
+  getDataStatsBots(){
+    // console.log("stats bots")
+    this.cors.get('Reports/getStatsBots').then((response) => {
+
+      // console.log(response);
+      this.statsBots = response;
+
+    }).catch((error) => {
+      console.log(error);
+      this.showToastError(`No se logro traer las estaditiscas de los Robots`)
+    })
+
+  }
+
+  refreshStatsBots(){
+    setInterval(()=> {
+      this.getDataStatsBots()
+    }, 10000);
+  }
+
+  statsValidation(item:any){
+    if(JSON.stringify(item) !== '{}'){
+      return item
+    }else{
+      return 0
+    }
+  }
+
 
 
   onGlobalFilter(table: Table, event: Event) {
@@ -156,6 +380,14 @@ export class RobotsComponent implements OnInit {
   clear(table: Table) {
     table.clear();
     this.filter.nativeElement.value = '';
+  }
+
+
+  showToastSuccess(mensaje: any) {
+    this.service.add({ key: 'tst', severity: 'success', summary: 'Correcto!!', detail: mensaje, });
+  }
+  showToastError(mensaje: any) {
+    this.service.add({ key: 'tst', severity: 'error', summary: 'Correcto!!', detail: mensaje, });
   }
 
   getProcessText(process: any) {

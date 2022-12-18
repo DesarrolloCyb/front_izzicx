@@ -12,6 +12,7 @@ import { APIService } from '../../../../_services/api.service';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { SignalRService } from 'app/_services/sirgalR.service';
 import { SocketIoService } from 'app/_services/socketio.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'solicitud-cancelacion',
@@ -62,6 +63,12 @@ import { SocketIoService } from 'app/_services/socketio.service';
       'Corte',
      
     ];
+
+    Subestado = [
+      'Cancelado',
+      'Retenido',
+     
+    ];
   
     confirmacion: any; //Mensaje de confirmmacion de datos
   
@@ -82,7 +89,7 @@ import { SocketIoService } from 'app/_services/socketio.service';
     aux: string | undefined;
     aux2: string | undefined;
     usuario: any = JSON.parse(localStorage.getItem("userData") || "{}")
-    toClearControls: string[] = ["TipoCuenta", "Cuenta", "SolicitudServicio", "Pais", "Cve_supervisor", "Herramientas_retencion","Motivos_cancelacion"]
+    toClearControls: string[] = ["TipoCuenta", "Cuenta", "SolicitudServicio", "Pais", "Subestado","Cve_supervisor", "Herramientas_retencion","Motivos_cancelacion"]
   
   
     offers: any[] = [];
@@ -91,7 +98,9 @@ import { SocketIoService } from 'app/_services/socketio.service';
     processArr2: any[] = []
     processArr3: any[] = []
     processArr4: any[] = []
-  
+    solicitudDia:any=[];
+    loading: boolean = false
+
     constructor(
   
       private cors: CorsService,
@@ -105,10 +114,11 @@ import { SocketIoService } from 'app/_services/socketio.service';
         Cuenta: [null, Validators.required],
         SolicitudServicio: [null, Validators.required],
         Pais: [null, Validators.required],
+        Subestado: [null, Validators.required],
         Cve_usuario: [this.usuario.email, Validators.required], //Se obtiene del direcotrio activo
         Cve_supervisor: [null, Validators.required],
-        Herramientas_retencion: [null],
-        Motivos_cancelacion: [null],
+        Herramienta_retencion: [null],
+        Motivo_cancelacion: [null],
     
         
       });
@@ -143,7 +153,7 @@ import { SocketIoService } from 'app/_services/socketio.service';
     }
   
     ngOnInit() {
-  
+      this.getDatosSolicitudCancelacion();
     }
   
   
@@ -158,24 +168,24 @@ import { SocketIoService } from 'app/_services/socketio.service';
   
     tipoCancelacion(evento: any) {
       console.log(evento);
-      if (evento == 'PrePago') {
-        this.formSolicitud.controls['Herramientas_retencion'].setValidators(Validators.required);
-        this.formSolicitud.controls['Herramientas_retencion'].updateValueAndValidity();
-        this.formSolicitud.controls['Motivos_cancelacion'].setValidators(Validators.required);
-        this.formSolicitud.controls['Motivos_cancelacion'].updateValueAndValidity();
+      if (evento == 'Tradicional / New Era') {
+        this.formSolicitud.controls['Herramienta_retencion'].setValidators(Validators.required);
+        this.formSolicitud.controls['Herramienta_retencion'].updateValueAndValidity();
+        this.formSolicitud.controls['Motivo_cancelacion'].setValidators(Validators.required);
+        this.formSolicitud.controls['Motivo_cancelacion'].updateValueAndValidity();
       }
-      else if (evento == 'PostPago') {
-        this.formSolicitud.controls['Herramientas_retencion'].setValidators(Validators.required);
-        this.formSolicitud.controls['Herramientas_retencion'].updateValueAndValidity();
-        this.formSolicitud.controls['Motivos_cancelacion'].setValidators(Validators.required);
-        this.formSolicitud.controls['Motivos_cancelacion'].updateValueAndValidity();
+      else if (evento == 'VeTV') {
+        this.formSolicitud.controls['Herramienta_retencion'].setValidators(Validators.required);
+        this.formSolicitud.controls['Herramienta_retencion'].updateValueAndValidity();
+        this.formSolicitud.controls['Motivo_cancelacion'].setValidators(Validators.required);
+        this.formSolicitud.controls['Motivo_cancelacion'].updateValueAndValidity();
       }
      
       else {
-        this.formSolicitud.controls['Herramientas_retencion'].clearValidators();
-        this.formSolicitud.controls['Herramientas_retencion'].updateValueAndValidity();
-        this.formSolicitud.controls['Motivos_cancelacion'].clearValidators();
-        this.formSolicitud.controls['Motivos_cancelacion'].updateValueAndValidity();
+        this.formSolicitud.controls['Herramienta_retencion'].clearValidators();
+        this.formSolicitud.controls['Herramienta_retencion'].updateValueAndValidity();
+        this.formSolicitud.controls['Motivo_cancelacion'].clearValidators();
+        this.formSolicitud.controls['Motivo_cancelacion'].updateValueAndValidity();
       }
     }
   
@@ -235,5 +245,20 @@ import { SocketIoService } from 'app/_services/socketio.service';
       this.validador[index] = true;
       setTimeout(() => (this.validador[index] = false), 1000);
     }
+
+
+    getDatosSolicitudCancelacion(){
+      this.cors.get('Formularios/ObtenerSolicitudCancelacionDia',{user:this.usuario.email})
+      .then((response)=>{
+        this.solicitudDia = response;
+      })
+      .catch((err)=>{
+        console.log(err)
+      });
+    }
+    onGlobalFilter(table: Table, event: Event) {
+      table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+    }
+  
   }
   

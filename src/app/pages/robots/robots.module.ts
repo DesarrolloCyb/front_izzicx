@@ -9,13 +9,18 @@ import { environment } from 'environments/environment';
 import { RobotsNuevoComponent } from './robots-nuevo/robots-nuevo.component';
 import { SharedModule } from '@shared';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RobotLogModalComponent } from './componentes/robot-log-modal/robot-log-modal.component';
+import { RobotsEditarComponent } from './robots-editar/robots-editar.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 const config: SocketIoConfig = { url: environment.SCOCKET_URL };
 
 
 @NgModule({
   declarations: [
     RobotsComponent,
-    RobotsNuevoComponent
+    RobotsNuevoComponent,
+    RobotLogModalComponent,
+    RobotsEditarComponent
   ],
   imports: [
     SharedModule,
@@ -26,7 +31,7 @@ const config: SocketIoConfig = { url: environment.SCOCKET_URL };
     FormsModule,
     ReactiveFormsModule,
   ], providers: [
-    SocketIoService
+    SocketIoService,ConfirmationService,MessageService
   ]
 })
 export class RobotsModule { }

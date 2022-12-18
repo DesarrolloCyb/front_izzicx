@@ -12,6 +12,7 @@ import { APIService } from '../../../_services/api.service';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { SignalRService } from 'app/_services/sirgalR.service';
 import { SocketIoService } from 'app/_services/socketio.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'cancelacion',
@@ -57,6 +58,12 @@ export class CancelacionComponent implements OnInit {
    
   ];
 
+  recar=[
+    'Más de 12',
+    'Menos de 12',
+    'Sin Costo'
+  ];
+
   aplicacion = [
     'Inmediato',
     'Corte',
@@ -82,10 +89,12 @@ export class CancelacionComponent implements OnInit {
   aux: string | undefined;
   aux2: string | undefined;
   usuario: any = JSON.parse(localStorage.getItem("userData") || "{}")
-  toClearControls: string[] = ["tipoCancelacion", "cuenta", "ordenServicio", "pais", "fechaCorte", "cve_supervisor", "nd","equipos", "aplicacion"]
+  toClearControls: string[] = ["recargas","tipoCancelacion", "cuenta", "ordenServicio", "pais", "fechaCorte", "cve_supervisor", "nd","equipos", "aplicacion"]
 
 
   offers: any[] = [];
+  cancelacionDia:any=[];
+  loading: boolean = false
 
   constructor(
 
@@ -98,7 +107,7 @@ export class CancelacionComponent implements OnInit {
     this.formCancelacion = this.formBuilder.group({
       tipoCancelacion: [null, Validators.required],
       cuenta: [null, Validators.required],
-      ordenServicio: [null, Validators.required],
+      ordenServicio: [null],
       pais: [null, Validators.required],
       fechaCorte: [null, Validators.required], //Esta fecha es la del dia de la maquina
       cve_usuario: [this.usuario.email, Validators.required], //Se obtiene del direcotrio activo
@@ -106,11 +115,13 @@ export class CancelacionComponent implements OnInit {
       nd: [null],
       equipos: [null],
       aplicacion: [null],
+      recargas:[null],
+      // deducible:[null],
     });
   }
 
   ngOnInit() {
-
+    this.getDatosCancelacion();
   }
 
 
@@ -122,20 +133,71 @@ export class CancelacionComponent implements OnInit {
       this.display = true;
     }
   }
-
+  resetCampos(){
+    this.formCancelacion.controls['cuenta'].reset()
+    this.formCancelacion.controls['ordenServicio'].reset()
+    this.formCancelacion.controls['pais'].reset()
+    this.formCancelacion.controls['fechaCorte'].reset()
+    this.formCancelacion.controls['equipos'].reset()
+    this.formCancelacion.controls['aplicacion'].reset()
+    this.formCancelacion.controls['recargas'].reset()
+    this.formCancelacion.controls['deducible'].reset()
+  }
   tipoCancelacion(evento: any) {
-    console.log(evento);
+    
+    this.resetCampos()
     if (evento == 'BTCel Combo') {
       this.formCancelacion.controls['nd'].setValidators(Validators.required);
       this.formCancelacion.controls['nd'].updateValueAndValidity();
+      this.formCancelacion.controls['ordenServicio'].setValidators(Validators.required);
+      this.formCancelacion.controls['ordenServicio'].updateValueAndValidity();
+      this.formCancelacion.controls['recargas'].clearValidators();
+      this.formCancelacion.controls['recargas'].updateValueAndValidity();
+
     }
     else if (evento == 'Equipos Adicionales'){
       this.formCancelacion.controls['equipos'].setValidators(Validators.required);
       this.formCancelacion.controls['aplicacion'].setValidators(Validators.required);
       this.formCancelacion.controls['equipos'].updateValueAndValidity();
       this.formCancelacion.controls['aplicacion'].updateValueAndValidity();
+      this.formCancelacion.controls['ordenServicio'].setValidators(Validators.required);
+      this.formCancelacion.controls['ordenServicio'].updateValueAndValidity();
+      this.formCancelacion.controls['recargas'].clearValidators();
+      this.formCancelacion.controls['recargas'].updateValueAndValidity();
+      this.formCancelacion.controls['nd'].clearValidators();
+      this.formCancelacion.controls['nd'].updateValueAndValidity();
+
     }
-    
+    else if(evento == 'Single Video'){
+      this.formCancelacion.controls['ordenServicio'].setValidators(Validators.required);
+      this.formCancelacion.controls['ordenServicio'].updateValueAndValidity();
+      this.formCancelacion.controls['recargas'].clearValidators();
+      this.formCancelacion.controls['recargas'].updateValueAndValidity();
+      this.formCancelacion.controls['nd'].clearValidators();
+      this.formCancelacion.controls['nd'].updateValueAndValidity();
+
+    }
+    else if(evento == 'Modem Combo'){
+      this.formCancelacion.controls['ordenServicio'].setValidators(Validators.required);
+      this.formCancelacion.controls['ordenServicio'].updateValueAndValidity();
+      this.formCancelacion.controls['recargas'].clearValidators();
+      this.formCancelacion.controls['recargas'].updateValueAndValidity();
+      this.formCancelacion.controls['nd'].clearValidators();
+      this.formCancelacion.controls['nd'].updateValueAndValidity();
+
+    }
+    else if(evento== 'Equipo Adicional VeTV'){
+      this.formCancelacion.controls['recargas'].setValidators(Validators.required);
+      this.formCancelacion.controls['recargas'].updateValueAndValidity();
+      this.formCancelacion.controls['nd'].clearValidators();
+      this.formCancelacion.controls['nd'].updateValueAndValidity();
+
+    }
+    else if(evento=='BTCel Combo VeTV'){
+      this.formCancelacion.controls['nd'].setValidators(Validators.required);
+      this.formCancelacion.controls['nd'].updateValueAndValidity();
+
+    }
     else {
       this.formCancelacion.controls['nd'].clearValidators();
       this.formCancelacion.controls['equipos'].clearValidators();
@@ -143,6 +205,10 @@ export class CancelacionComponent implements OnInit {
       this.formCancelacion.controls['nd'].updateValueAndValidity();
       this.formCancelacion.controls['equipos'].updateValueAndValidity();
       this.formCancelacion.controls['aplicacion'].updateValueAndValidity();
+      this.formCancelacion.controls['ordenServicio'].clearValidators();
+      this.formCancelacion.controls['ordenServicio'].updateValueAndValidity();
+      this.formCancelacion.controls['recargas'].clearValidators();
+      this.formCancelacion.controls['recargas'].updateValueAndValidity();
     }
   }
 
@@ -157,8 +223,6 @@ export class CancelacionComponent implements OnInit {
       this.cors
         .post('Formularios/GuardarFormulario', this.formCancelacion.value)
         .then((response) => {
-          console.log("d");
-
           this.display = false;
           this.enviando = false;
           this.toClearControls.forEach((element) => {
@@ -166,6 +230,7 @@ export class CancelacionComponent implements OnInit {
 
             this.formCancelacion.controls[element].setValue(null)
           })
+          
           this.formCancelacion.markAsUntouched()
           this.telefonosNd = []
           this.messageService.add({
@@ -202,4 +267,20 @@ export class CancelacionComponent implements OnInit {
     this.validador[index] = true;
     setTimeout(() => (this.validador[index] = false), 1000);
   }
+
+  getDatosCancelacion(){
+    this.cors.get('Formularios/ObtenerCancelacionDia',{user:this.usuario.email})
+    .then((response)=>{
+      this.cancelacionDia = response;
+    })
+    .catch((err)=>{
+      console.log(err)
+    });
+  }
+  onGlobalFilter(table: Table, event: Event) {
+    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+
+
 }

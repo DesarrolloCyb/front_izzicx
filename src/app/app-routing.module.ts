@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './_shared/layout/layout/layout.component';
 import { ReportesRoutingModule } from './pages/reportes/reportes-routing.module';
+import { AuthGuard } from './guards/auth.guard';
 
 const routerOptions: ExtraOptions = {
   anchorScrolling: 'enabled',
@@ -37,17 +38,19 @@ const routes: Routes = [
   {
     path: 'capturas',
     data: { breadcrumb: 'Capturas' },
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./pages/capturas/capturas.module').then((m) => m.CapturasModule),
   },
   {
     path: 'reportes',
     data: { breadcrumb: 'Reportes' },
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./pages/reportes/reportes.module').then((m) => m.ReportesModule),
   },
-  { path: 'robots', loadChildren: () => import('./pages/robots/robots.module').then(m => m.RobotsModule) },
-
+  { path: 'robots', data: { breadcrumb: 'Robots' }, loadChildren: () => import('./pages/robots/robots.module').then(m => m.RobotsModule) },
+  { path: 'usuarios', data: { breadcrumb: 'Usuarios' }, loadChildren: () => import('./pages/usuarios/usuarios.module').then(m => m.UsuariosModule) },
 
   //DEMOS
   {
@@ -125,6 +128,7 @@ const routes: Routes = [
     path: '404',
     component: NotfoundComponent,
   },
+
 
 ];
 
