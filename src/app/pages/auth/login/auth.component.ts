@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { environment } from 'environments/environment';
 import { CorsService } from '@services';
+import { Message, MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-root',
@@ -15,7 +16,7 @@ import { CorsService } from '@services';
 })
 export class AuthComponent {
     rememberMe: boolean = false;
-
+    msgs: Message[] = [];
     formLogin: UntypedFormGroup;
     constructor(private cors: CorsService, private formBuilder: UntypedFormBuilder, private router: Router) {
         this.formLogin = this.formBuilder.group({
@@ -40,6 +41,12 @@ export class AuthComponent {
                 this.router.navigate(['/home']);
             }).catch((error) => {
                 console.log(error);
+                // this.msgs.push({
+                //     severity: 'error',
+                //     summary: 'No se logro autenticar',
+                //     detail: 'Intenta nuevamente!',
+                // });
+
 
             })
         }

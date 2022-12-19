@@ -41,7 +41,8 @@ export class DashboardComponent implements OnInit {
 
     statsTiempo:number[]=[];
     statsTiempo2:number[]=[];
-   
+    usuario: any = JSON.parse(localStorage.getItem("userData") || "{}")
+
 
 
     constructor(public layoutService: LayoutService,private cors: CorsService,private messageService: MessageService) {
@@ -52,9 +53,56 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getStatsTiempoCompletado();
-        this.getStatsTiempoCompletado2();
-        // this.initCharts();
+        // console.log(this.usuario)
+        if(
+            this.usuario.role==='Resp: MOISES AVILA SOTO' || 
+            this.usuario.role==='GERENTE RETENCION INBOUND' ||
+            this.usuario.role==='GERENTE ATENCION A CLIENTES' ||
+            this.usuario.role==='SUPERVISOR ATENCION A CLIENTES INTERNO' ||
+            this.usuario.role==='ASESOR CONTROL INFORMACION' ||
+            this.usuario.role==='SUPERVISOR GESTION EDP' ||
+            this.usuario.role==='SUPERVISOR ESTRATEGIA OPERATIVA' ||
+            this.usuario.role==='ESPECIALISTA ESTRATEGIA OPERATIVA' ||
+            this.usuario.role==='GERENTE MESA DE CONTROL' ||
+            this.usuario.role==='SUPERVISOR MESA DE CONTROL' ||
+            this.usuario.role==='SUPERVISOR MESA CONTROL DE DOCUMENTOS' ||
+            this.usuario.role==='ASESOR RETENCION VETV' ||
+            this.usuario.role==='SUPERVISOR RETENCION WEB' ||
+            this.usuario.role==='SUPERVISOR RETENCION INBOUND VETV' ||
+            this.usuario.role==='SUPERVISOR RETENCION INBOUND' ||
+            this.usuario.role==='ESPECIALISTA RETENCION WEB' ||
+            this.usuario.role==='ESPECIALISTA RETENCION VETV' ||
+            this.usuario.role==='ESPECIALISTA RETENCION INBOUND' ||
+            this.usuario.role==='ESPECIALISTA RETENCION CHAT' 
+        ){
+            this.getStatsTiempoCompletado(); // retencion
+        }
+        if(
+            this.usuario.role==='Resp: MOISES AVILA SOTO' ||
+            this.usuario.role==='GERENTE RETENCION INBOUND' ||
+            this.usuario.role==='GERENTE ATENCION A CLIENTES' ||
+            this.usuario.role==='SUPERVISOR ATENCION A CLIENTES INTERNO' ||
+            this.usuario.role==='ASESOR CONTROL INFORMACION' ||
+            this.usuario.role==='SUPERVISOR GESTION EDP' ||
+            this.usuario.role==='SUPERVISOR ESTRATEGIA OPERATIVA' ||
+            this.usuario.role==='ESPECIALISTA ESTRATEGIA OPERATIVA' ||
+            this.usuario.role==='GERENTE MESA DE CONTROL' ||
+            this.usuario.role==='SUPERVISOR MESA DE CONTROL' ||
+            this.usuario.role==='SUPERVISOR MESA CONTROL DE DOCUMENTOS' ||
+            this.usuario.role==='SUPERVISOR TROUBLESHOOTING CELULAR' ||
+            this.usuario.role==='ESPECIALISTA TROUBLESHOOTING CELULAR' ||
+            this.usuario.role==='SUPERVISOR CALL CENTER REPARACIONES' ||
+            this.usuario.role==='EJECUTIVO ATENCION PREPAGO' ||
+            this.usuario.role==='GERENTE REPARACIONES VETV' ||
+            this.usuario.role==='COORDINADOR REPARACIONES' ||
+            this.usuario.role==='SUPERVISOR ATENCION CC MX' ||
+            this.usuario.role==='COORDINADOR ATENCION CC MX' ||
+            this.usuario.role==='ASESOR ATENCION CC MX' ||
+            this.usuario.role==='EJECUTIVO ATENCION A CLIENTE' 
+            ){
+            this.getStatsTiempoCompletado2(); //atenciona cliente
+        }
+        this.initCharts();
         
         let color =  this.generateColor()
         this.radarData.datasets.push({
@@ -136,7 +184,8 @@ export class DashboardComponent implements OnInit {
         };
 
         this.barData2 = {
-            labels: ['NFL', 'PostPago','Bolsa Datos','Generacion Solicitud'],
+            // labels: ['NFL', 'PostPago','Bolsa Datos','Generacion Solicitud'],
+            labels: ['NFL', 'PostPago','Bolsa Datos'],
             datasets: [
                 {
                     label: 'Tiempos de cierre en minutos',
@@ -357,9 +406,7 @@ export class DashboardComponent implements OnInit {
                     this.statsTiempo.push(0)
                 }
             }
-
-            
-           
+            this.initCharts()          
             // console.log(this.statsTiempo)
         //   this.messageService.add({
         //     key: 'tst',

@@ -1,13 +1,60 @@
 
 
 <div class="grid p-fluid">
-    <div class="col-12 md:col-12">
-        <div class="card">
-            <h5>Tiempo Promedio de cierre por Proceso</h5>
-            <p-chart  type="bar" [data]="barData" [options]="barOptions"></p-chart>
-        </div>
+    <!--  -->
+    <div class="col-12 md:col-12"
+        *ngIf="
+        usuario.role==='Resp: MOISES AVILA SOTO' || 
+        usuario.role==='GERENTE RETENCION INBOUND' ||
+        usuario.role==='GERENTE ATENCION A CLIENTES' ||
+        usuario.role==='SUPERVISOR ATENCION A CLIENTES INTERNO' ||
+        usuario.role==='ASESOR CONTROL INFORMACION' ||
+        usuario.role==='SUPERVISOR GESTION EDP' ||
+        usuario.role==='SUPERVISOR ESTRATEGIA OPERATIVA' ||
+        usuario.role==='ESPECIALISTA ESTRATEGIA OPERATIVA' ||
+        usuario.role==='GERENTE MESA DE CONTROL' ||
+        usuario.role==='SUPERVISOR MESA DE CONTROL' ||
+        usuario.role==='SUPERVISOR MESA CONTROL DE DOCUMENTOS' ||
+        usuario.role==='ASESOR RETENCION VETV' ||
+        usuario.role==='SUPERVISOR RETENCION WEB' ||
+        usuario.role==='SUPERVISOR RETENCION INBOUND VETV' ||
+        usuario.role==='SUPERVISOR RETENCION INBOUND' ||
+        usuario.role==='ESPECIALISTA RETENCION WEB' ||
+        usuario.role==='ESPECIALISTA RETENCION VETV' ||
+        usuario.role==='ESPECIALISTA RETENCION INBOUND' ||
+        usuario.role==='ESPECIALISTA RETENCION CHAT'
+        "
+    > 
+    <div class="card" >
+        <h5>Tiempo Promedio de cierre por Proceso</h5>
+        <p-chart  type="bar" [data]="barData" [options]="barOptions"></p-chart>
     </div>
-    <div class="col-12 md:col-12">
+    </div>
+    <div class="col-12 md:col-12"
+    *ngIf="
+        usuario.role==='Resp: MOISES AVILA SOTO' ||
+        usuario.role==='GERENTE RETENCION INBOUND' ||
+        usuario.role==='GERENTE ATENCION A CLIENTES' ||
+        usuario.role==='SUPERVISOR ATENCION A CLIENTES INTERNO' ||
+        usuario.role==='ASESOR CONTROL INFORMACION' ||
+        usuario.role==='SUPERVISOR GESTION EDP' ||
+        usuario.role==='SUPERVISOR ESTRATEGIA OPERATIVA' ||
+        usuario.role==='ESPECIALISTA ESTRATEGIA OPERATIVA' ||
+        usuario.role==='GERENTE MESA DE CONTROL' ||
+        usuario.role==='SUPERVISOR MESA DE CONTROL' ||
+        usuario.role==='SUPERVISOR MESA CONTROL DE DOCUMENTOS' ||
+        usuario.role==='SUPERVISOR TROUBLESHOOTING CELULAR' ||
+        usuario.role==='ESPECIALISTA TROUBLESHOOTING CELULAR' ||
+        usuario.role==='SUPERVISOR CALL CENTER REPARACIONES' ||
+        usuario.role==='EJECUTIVO ATENCION PREPAGO' ||
+        usuario.role==='GERENTE REPARACIONES VETV' ||
+        usuario.role==='COORDINADOR REPARACIONES' ||
+        usuario.role==='SUPERVISOR ATENCION CC MX' ||
+        usuario.role==='COORDINADOR ATENCION CC MX' ||
+        usuario.role==='ASESOR ATENCION CC MX' ||
+        usuario.role==='EJECUTIVO ATENCION A CLIENTE' 
+    "
+    >
         <div class="card">
             <h5>Tiempo Promedio de cierre por Proceso</h5>
             <p-chart type="bar" [data]="barData2" [options]="barOptions2"></p-chart>

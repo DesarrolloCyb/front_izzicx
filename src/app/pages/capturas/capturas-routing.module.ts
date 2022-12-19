@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from 'app/_shared/layout/layout/layout.component';
-import { BolsaDatosComponent } from './bolsa-datos/bolsa-datos.component';
+import { BolsaDatosComponent } from '../capturas-atc/bolsa-datos/bolsa-datos.component';
 import { CambioEsquemaComponent } from './cambio-esquema/cambio-esquema.component';
 import { CambioPaqueteComponent } from './cambio-paquete/cambio-paquete.component';
 import { CancelacionComponent } from './cancelacion/cancelacion.component';
-import { GeneracionSolicitudComponent } from './generacion-solicitud/generacion-solicitud.component';
-import { RAySEComponent } from './ray-se/ray-se.component';
+import { GeneracionSolicitudComponent } from '../capturas-atc/generacion-solicitud/generacion-solicitud.component';
+import { RAySEComponent } from '../capturas-atc/ray-se/ray-se.component';
 import { ReactivacionComponent } from './reactivacion/reactivacion.component';
 import { ReembolsoComponent } from './reembolso/reembolso.component';
 import { ServicioscscostoComponent } from './servicioscscosto/servicioscscosto.component';
 import { SolicitudCancelacionComponent } from './solicitud-cancelacion/solicitud-cancelacion/solicitud-cancelacion.component';
-import { TemporadasComponent } from './temporadas/temporadas.component';
+import { TemporadasComponent } from '../capturas-atc/temporadas/temporadas.component';
 
 
 const routes: Routes = [
@@ -40,12 +40,6 @@ const routes: Routes = [
     children: [{ path: '', component: ServicioscscostoComponent}],
   },
   {
-    path: 'temporadas',
-    data: { breadcrumb: 'Temporadas' },
-    component: LayoutComponent,
-    children: [{ path: '', component: TemporadasComponent}],
-  },
-  {
     path: 'reembolso',
     data: { breadcrumb: 'Reembolso' },
     component: LayoutComponent,
@@ -63,26 +57,6 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [{ path: '', component: CambioEsquemaComponent}],
   },
-  {
-    path: 'PostPagoPrepago',
-    data: { breadcrumb: 'RA y SE PostPago Prepago' },
-    component: LayoutComponent,
-    children: [{ path: '', component: RAySEComponent}],
-  },
-  {
-    path: 'bolsaDatos',
-    data: { breadcrumb: 'Bolsa de Datos' },
-    component: LayoutComponent,
-    children: [{ path: '', component: BolsaDatosComponent}],
-  },
-  {
-    path: 'generacionSolicitud',
-    data: { breadcrumb: 'Generacion de Solicitud' },
-    component: LayoutComponent,
-    children: [{ path: '', component: GeneracionSolicitudComponent}],
-  },
-
-
 
 ];
 

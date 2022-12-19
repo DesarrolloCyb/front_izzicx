@@ -24,18 +24,18 @@ export class AuthGuard implements CanActivate {
       // "4": [ "reportes"],//reportes
       // "5": ["capturas","capturasAtn", "robots", "reportes", "usuarios"]//administrador
       
-      "SUPERVISOR TROUBLESHOOTING CELULAR":['capturas','home','reportes'],
-      "ESPECIALISTA TROUBLESHOOTING CELULAR":['capturas'],
-      "SUPERVISOR CALL CENTER REPARACIONES":['capturas','home','reportes'],
-      "EJECUTIVO ATENCION PREPAGO":['capturas'],
-      "GERENTE REPARACIONES VETV":['capturas','home','reportes'],
+      "SUPERVISOR TROUBLESHOOTING CELULAR":['capturasAtc','home','reportes'],
+      "ESPECIALISTA TROUBLESHOOTING CELULAR":['capturasAtc'],
+      "SUPERVISOR CALL CENTER REPARACIONES":['capturasAtc','home','reportes'],
+      "EJECUTIVO ATENCION PREPAGO":['capturasAtc'],
+      "GERENTE REPARACIONES VETV":['capturasAtc','home','reportes'],
       "COORDINADOR REPARACIONES":['home','reportes'],
-      "SUPERVISOR ATENCION CC MX":['capturas','home','reportes'],
+      "SUPERVISOR ATENCION CC MX":['capturasAtc','home','reportes'],
       "COORDINADOR ATENCION CC MX":['home','reportes'],
       "ASESOR ATENCION CC MX":['home','reportes'],
-      "EJECUTIVO ATENCION A CLIENTE":['capturas'],
+      "EJECUTIVO ATENCION A CLIENTE":['capturasAtc'],
       "ASESOR RETENCION VETV":['home','reportes'],
-      "GERENTE RETENCION INBOUND":['home','capturas','reportes'],
+      "GERENTE RETENCION INBOUND":['home','capturas','capturasAtc','robots','reportes','usuarios'],
       "SUPERVISOR RETENCION WEB":['home','capturas','reportes'],
       "SUPERVISOR RETENCION INBOUND VETV":['home','capturas','reportes'],
       "SUPERVISOR RETENCION INBOUND":['home','capturas','reportes'],
@@ -52,7 +52,7 @@ export class AuthGuard implements CanActivate {
       "GERENTE MESA DE CONTROL":['home','reportes'],
       "SUPERVISOR MESA DE CONTROL":['home','reportes'],
       "SUPERVISOR MESA CONTROL DE DOCUMENTOS":['home','reportes'],
-      "Resp: MOISES AVILA SOTO":['home','capturas','robots','reportes','usuarios']
+      "Resp: MOISES AVILA SOTO":['home','capturas','capturasAtc','robots','reportes','usuarios']
     }
     console.log("aca", route.url[0].path);
 

@@ -43,6 +43,13 @@ const routes: Routes = [
       import('./pages/capturas/capturas.module').then((m) => m.CapturasModule),
   },
   {
+    path: 'capturasAtc',
+    data: { breadcrumb: 'Capturas' },
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./pages/capturas-atc/capturas-atc.module').then((m) => m.CapturasAtcModule),
+  },
+  {
     path: 'reportes',
     data: { breadcrumb: 'Reportes' },
     canActivate: [AuthGuard],

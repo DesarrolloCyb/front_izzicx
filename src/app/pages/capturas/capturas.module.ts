@@ -10,13 +10,13 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { SolicitudCancelacionComponent } from './solicitud-cancelacion/solicitud-cancelacion/solicitud-cancelacion.component';
 import { ReactivacionComponent } from './reactivacion/reactivacion.component';
 import { ServicioscscostoComponent } from './servicioscscosto/servicioscscosto.component';
-import { TemporadasComponent } from './temporadas/temporadas.component';
+import { TemporadasComponent } from '../capturas-atc/temporadas/temporadas.component';
 import { ReembolsoComponent } from './reembolso/reembolso.component';
 import { CambioPaqueteComponent } from './cambio-paquete/cambio-paquete.component';
 import { CambioEsquemaComponent } from './cambio-esquema/cambio-esquema.component';
-import { RAySEComponent } from './ray-se/ray-se.component';
-import { BolsaDatosComponent } from './bolsa-datos/bolsa-datos.component';
-import { GeneracionSolicitudComponent } from './generacion-solicitud/generacion-solicitud.component';
+import { RAySEComponent } from '../capturas-atc/ray-se/ray-se.component';
+import { BolsaDatosComponent } from '../capturas-atc/bolsa-datos/bolsa-datos.component';
+import { GeneracionSolicitudComponent } from '../capturas-atc/generacion-solicitud/generacion-solicitud.component';
 
 
 

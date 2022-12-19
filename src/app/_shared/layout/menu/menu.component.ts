@@ -77,22 +77,22 @@ export class MenuComponent implements OnInit {
         {
           label: 'Temporadas',
           icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/capturas/temporadas'],
+          routerLink: ['/capturasAtc/temporadas'],
         },
         {
           label: 'RAySE PosPago Prepago',
           icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/capturas/PostPagoPrepago'],
+          routerLink: ['/capturasAtc/PostPagoPrepago'],
         },
         {
           label: 'Bolsa de datos',
           icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/capturas/bolsaDatos'],
+          routerLink: ['/capturasAtc/bolsaDatos'],
         },
         // {
         //   label: 'Genración de Solicitud',
         //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturas/generacionSolicitud'],
+        //   routerLink: ['/capturasAtc/generacionSolicitud'],
         // },
 
 
@@ -169,7 +169,7 @@ export class MenuComponent implements OnInit {
       "ASESOR ATENCION CC MX":['home','reportes'],
       "EJECUTIVO ATENCION A CLIENTE":['capturasA'],
       "ASESOR RETENCION VETV":['home','reportes'],
-      "GERENTE RETENCION INBOUND":['home','capturasR','reportes'],
+      "GERENTE RETENCION INBOUND":['home','capturasR','capturasA','robots','reportes','usuarios'],
       "SUPERVISOR RETENCION WEB":['home','capturasR','reportes'],
       "SUPERVISOR RETENCION INBOUND VETV":['home','capturasR','reportes'],
       "SUPERVISOR RETENCION INBOUND":['home','capturasR','reportes'],
@@ -202,7 +202,7 @@ export class MenuComponent implements OnInit {
     this.menus.forEach((elemento) => {
 
 
-      console.log(elemento)
+      // console.log(elemento)
       if (permisos[usuarioInfo?.role].includes(elemento.key)) {
         this.model.push(elemento)
       }
