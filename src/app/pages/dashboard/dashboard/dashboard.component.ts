@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
     barData2: any;
 
     pieData: any;
+    pieData2: any;
 
     polarData: any;
 
@@ -41,10 +42,26 @@ export class DashboardComponent implements OnInit {
 
     statsTiempo:number[]=[];
     statsTiempo2:number[]=[];
+    statsProceso:number[]=[];
+    statsProceso2:number[]=[];
+    statsError:any[]=[];
+    statsError2:any[]=[];
     usuario: any = JSON.parse(localStorage.getItem("userData") || "{}")
-
-
-
+    errorChoise:string[]=[
+        'Single Video',
+        'Modem Combo',
+        'BTCel Combo',
+        'Equipos Adicionales',
+        'Solicitud Cancelada',
+        'Solicitud Retenida',
+        'NFL',
+        'Servicios',
+        'Reactivacion',
+        'Reembolso',
+        // 'Cambio Esquema',
+        // 'Cambio Paquete'
+    ];
+    statusRadar:boolean=false;
     constructor(public layoutService: LayoutService,private cors: CorsService,private messageService: MessageService) {
         this.subscription = this.layoutService.configUpdate$.subscribe(config => {
             this.initCharts();
@@ -75,7 +92,8 @@ export class DashboardComponent implements OnInit {
             this.usuario.role==='ESPECIALISTA RETENCION INBOUND' ||
             this.usuario.role==='ESPECIALISTA RETENCION CHAT' 
         ){
-            this.getStatsTiempoCompletado(); // retencion
+            this.getStatsTiempoCompletado();
+            this.getStatsProcesos(); // retencion
         }
         if(
             this.usuario.role==='Resp: MOISES AVILA SOTO' ||
@@ -98,32 +116,43 @@ export class DashboardComponent implements OnInit {
             this.usuario.role==='SUPERVISOR ATENCION CC MX' ||
             this.usuario.role==='COORDINADOR ATENCION CC MX' ||
             this.usuario.role==='ASESOR ATENCION CC MX' ||
-            this.usuario.role==='EJECUTIVO ATENCION A CLIENTE' 
+            this.usuario.role==='EJECUTIVO ATENCION A CLIENTE' ||
+            this.usuario.role==='EJECUTIVO ATENCION PREPAGO BRONCE J' ||
+            this.usuario.role==='EJECUTIVO ATENCION PREPAGO BRONCE S' ||
+            this.usuario.role==='EJECUTIVO REPARACIONES JR' ||
+            this.usuario.role==='EJECUTIVO ATENCION PREPAGO BRONCE' ||
+            this.usuario.role==='EJECUTIVO ATENCION A CLIENTE MX JR' ||
+            this.usuario.role==='EJECUTIVO ATENCION A CLIENTE MX SENIOR' ||
+            this.usuario.role==='EJECUTIVO ATENCION A CLIENTE MX JR' ||
+            this.usuario.role==='SUPERVISOR ATENCION CC MX' ||
+            this.usuario.role==='EJECUTIVO ATENCION POSPAGO BRONCE' 
+
             ){
             this.getStatsTiempoCompletado2(); //atenciona cliente
+            this.getStatsProcesos2();
         }
         this.initCharts();
         
-        let color =  this.generateColor()
-        this.radarData.datasets.push({
-            label: 'Servicios Costo/Sin Costo',
-            borderColor: color,
-            pointBackgroundColor: color,
-            pointBorderColor: color,
-            pointHoverBackgroundColor: color,
-            pointHoverBorderColor: color,
-            data: [0, 59, 90, 81, 56, 55, 40]
-        })
-        color =  this.generateColor()
-        this.radarData.datasets.push({
-            label: 'Reactivacion',
-            borderColor: color,
-            pointBackgroundColor: color,
-            pointBorderColor: color,
-            pointHoverBackgroundColor: color,
-            pointHoverBorderColor: color,
-            data: [40, 55, 56, 21, 2, 23, 55]
-        })
+        // let color =  this.generateColor()
+        // this.radarData.datasets.push({
+        //     label: 'Servicios Costo/Sin Costo',
+        //     borderColor: color,
+        //     pointBackgroundColor: color,
+        //     pointBorderColor: color,
+        //     pointHoverBackgroundColor: color,
+        //     pointHoverBorderColor: color,
+        //     data: [0, 59, 90, 81, 56, 55, 40]
+        // })
+        // color =  this.generateColor()
+        // this.radarData.datasets.push({
+        //     label: 'Reactivacion',
+        //     borderColor: color,
+        //     pointBackgroundColor: color,
+        //     pointBorderColor: color,
+        //     pointHoverBackgroundColor: color,
+        //     pointHoverBorderColor: color,
+        //     data: [40, 55, 56, 21, 2, 23, 55]
+        // })
         // setInterval(()=> {
         //     this.getStatsTiempoCompletado()
         //     this.getStatsTiempoCompletado2()
@@ -231,10 +260,45 @@ export class DashboardComponent implements OnInit {
 
 
         this.pieData = {
-            labels: ['A', 'B', 'C'],
+            labels: ['Single Video', 'Modem Combo', 'BTCel Combo', 'Equipos Adicionales', 'Solicitud Cancelacion', 'Solicitud Retenidos','Servicios','Reactivación','Reembolso','Cambio de Esquema','Cambio de Paquete'],
             datasets: [
                 {
-                    data: [540, 325, 702],
+                    data: this.statsProceso,
+                    backgroundColor: [
+                        documentStyle.getPropertyValue('--blue-500'),
+                        documentStyle.getPropertyValue('--green-500'),
+                        documentStyle.getPropertyValue('--yellow-500'),
+                        documentStyle.getPropertyValue('--cyan-200'),
+                        documentStyle.getPropertyValue('--pink-500'),
+                        documentStyle.getPropertyValue('--indigo-300'),
+                        documentStyle.getPropertyValue('--red-500'),
+                        documentStyle.getPropertyValue('--teal-500'),
+                        documentStyle.getPropertyValue('--orange-500'),
+                        documentStyle.getPropertyValue('--green-200'),
+                        documentStyle.getPropertyValue('--purple-500'),
+                    ],
+                    hoverBackgroundColor: [
+                        documentStyle.getPropertyValue('--blue-400'),
+                        documentStyle.getPropertyValue('--green-400'),
+                        documentStyle.getPropertyValue('--yellow-400'),
+                        documentStyle.getPropertyValue('--cyan-100'),
+                        documentStyle.getPropertyValue('--pink-400'),
+                        documentStyle.getPropertyValue('--indigo-200'),
+                        documentStyle.getPropertyValue('--red-400'),
+                        documentStyle.getPropertyValue('--teal-400'),
+                        documentStyle.getPropertyValue('--orange-400'),
+                        documentStyle.getPropertyValue('--green-100'),
+                        documentStyle.getPropertyValue('--purple-400'),
+
+                    ]
+                }]
+        };
+
+        this.pieData2 = {
+            labels: ['NFL', 'PostPago', 'Bolsa de Datos'],
+            datasets: [
+                {
+                    data: this.statsProceso2,
                     backgroundColor: [
                         documentStyle.getPropertyValue('--indigo-500'),
                         documentStyle.getPropertyValue('--purple-500'),
@@ -247,6 +311,7 @@ export class DashboardComponent implements OnInit {
                     ]
                 }]
         };
+
 
         this.pieOptions = {
             plugins: {
@@ -353,10 +418,20 @@ export class DashboardComponent implements OnInit {
         };
 
         this.radarData = {
-            labels: ['Siebel', 'Error de cuenta', 'Error de solicitud', 'Error del clasificacion/actividad', 'Error de al cancelar equipo', 'Error de envio', 'Otros'],
+            // labels: ['Single Video', 'Modem Combo', 'BTCel Combo', 'Equipos Adicionales', 'Solicitud Cancelacion', 'Solicitud Retencion', 'Servicios','Reactivacion','Reembolso','Cambio Esquema','Cambio Paquete'],
+            labels: this.statsError,
             datasets: [
-                
-            ]
+                {
+                    label: 'Error',
+                    data:this.statsError2,
+                    backgroundColor: 'rgba(255,99,132,0.2)',
+                    borderColor: 'rgba(255,99,132,1)',
+                    pointBackgroundColor: 'rgba(255,99,132,1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(255,99,132,1)',
+                }
+            ] 
         };
 
         this.radarOptions = {
@@ -461,7 +536,126 @@ export class DashboardComponent implements OnInit {
         //     detail: 'La solicitud de cancelacion no fue guardada',
         //   });
         });
-        this.initCharts()
+        
+    }
+
+    getStatsProcesos(){
+        var date = new Date();
+        var primerDia = new Date(date.getFullYear(), date.getMonth(), 1);
+        var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        var a = moment(primerDia).format('yyyy-MM-DD');
+        var b = moment(ultimoDia).format('yyyy-MM-DD');
+        this.cors
+        .get('Graficas/dashboardProcesos',{
+            fecha1:a,
+            fecha2:b
+        })
+        .then((response) => {
+            // console.log(response)
+            for(let i=0;i<=response.length-1;i++){
+                if(JSON.stringify(response[i].count) !== '{}'){
+                    this.statsProceso.push(response[i].count)
+                }else{
+                    this.statsProceso.push(0)
+                }
+            }
+            // console.log(this.statsProceso)
+            this.initCharts()
+        })
+        .catch((error) => {
+          console.log(error)
+        });
+        
+    }
+
+    getStatsProcesos2(){
+        var date = new Date();
+        var primerDia = new Date(date.getFullYear(), date.getMonth(), 1);
+        var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        var a = moment(primerDia).format('yyyy-MM-DD');
+        var b = moment(ultimoDia).format('yyyy-MM-DD');
+        this.cors
+        .get('Graficas/dashboardProcesos2',{
+            fecha1:a,
+            fecha2:b
+        })
+        .then((response) => {
+            // console.log(response)
+            for(let i=0;i<=response.length-1;i++){
+                if(JSON.stringify(response[i].count) !== '{}'){
+                    this.statsProceso2.push(response[i].count)
+                }else{
+                    this.statsProceso2.push(0)
+                }
+            }
+            // console.log(this.statsProceso2)
+            this.initCharts()
+        })
+        .catch((error) => {
+          console.log(error)
+        });
+        
+    }
+
+    // getStatsError(){
+    //     var date = new Date();
+    //     var primerDia = new Date(date.getFullYear(), date.getMonth(), 1);
+    //     var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    //     var a = moment(primerDia).format('yyyy-MM-DD');
+    //     var b = moment(ultimoDia).format('yyyy-MM-DD');
+    //     this.cors
+    //     .get('Graficas/dashboardError',{
+    //         fecha1:a,
+    //         fecha2:b
+    //     })
+    //     .then((response) => {
+    //         // console.log(response)
+    //         this.statsError = response;
+    //         for(let i=0;i<=response.length-1;i++){
+    //             if(JSON.stringify(response[i].count) !== '{}'){
+    //                 this.statsError2.push(response[i].count)
+    //             }else{
+    //                 this.statsError2.push(0)
+    //             }
+    //         }
+    //         // console.log(this.statsError2)
+    //         this.initCharts()
+    //     })
+    //     .catch((error) => {
+    //       console.log(error)
+    //     });
+        
+    // }
+
+    changeError(event:any){
+        var date = new Date();
+        var primerDia = new Date(date.getFullYear(), date.getMonth(), 1);
+        var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        var a = moment(primerDia).format('yyyy-MM-DD');
+        var b = moment(ultimoDia).format('yyyy-MM-DD');
+        this.cors
+        .get('Graficas/dashboardError',{
+            tipo:event,
+            fecha1:a,
+            fecha2:b
+        })
+        .then((response) => {
+            this.statusRadar = true;
+            // console.log(response)
+            this.statsError = [];
+            this.statsError2 = [];
+            delete response[0].tabla;
+            for (const [key, value] of Object.entries(response[0])) {
+                this.statsError.push(key);
+                this.statsError2.push(value);
+            }
+            this.initCharts()
+        })
+        .catch((error) => {
+          console.log(error)
+        });
+
+
     }
 
 

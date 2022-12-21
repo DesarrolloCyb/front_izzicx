@@ -52,7 +52,16 @@ export class AuthGuard implements CanActivate {
       "GERENTE MESA DE CONTROL":['home','reportes'],
       "SUPERVISOR MESA DE CONTROL":['home','reportes'],
       "SUPERVISOR MESA CONTROL DE DOCUMENTOS":['home','reportes'],
-      "Resp: MOISES AVILA SOTO":['home','capturas','capturasAtc','robots','reportes','usuarios']
+      "Resp: MOISES AVILA SOTO":['home','capturas','capturasAtc','robots','reportes','usuarios'],
+      "EJECUTIVO ATENCION PREPAGO BRONCE J":['home','capturasAtc'],
+      "EJECUTIVO ATENCION PREPAGO BRONCE S":['home','capturasAtc'],
+      "EJECUTIVO REPARACIONES JR":['home','capturasAtc'],
+      "EJECUTIVO ATENCION PREPAGO BRONCE":['home','capturasAtc'],
+      "EJECUTIVO ATENCION A CLIENTE MX JR":['home','capturasAtc'],
+      "EJECUTIVO ATENCION A CLIENTE MX SENIOR":['home','capturasAtc'],
+      "EJECUTIVO ATENCION A CLIENTE MX JR":['home','capturasAtc'],
+      "SUPERVISOR ATENCION CC MX":['capturasAtc','home','reportes'],
+      "EJECUTIVO ATENCION POSPAGO BRONCE":['home','capturasAtc'],
     }
     console.log("aca", route.url[0].path);
 

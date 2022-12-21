@@ -186,7 +186,16 @@ export class MenuComponent implements OnInit {
       "GERENTE MESA DE CONTROL":['home','reportes'],
       "SUPERVISOR MESA DE CONTROL":['home','reportes'],
       "SUPERVISOR MESA CONTROL DE DOCUMENTOS":['home','reportes'],
-      "Resp: MOISES AVILA SOTO":['home','capturasR','capturasA','robots','reportes','usuarios']
+      "Resp: MOISES AVILA SOTO":['home','capturasR','capturasA','robots','reportes','usuarios'],
+      "EJECUTIVO ATENCION PREPAGO BRONCE J":['home','capturasA'],
+      "EJECUTIVO ATENCION PREPAGO BRONCE S":['home','capturasA'],
+      "EJECUTIVO REPARACIONES JR":['home','capturasA'],
+      "EJECUTIVO ATENCION PREPAGO BRONCE":['home','capturasA'],
+      "EJECUTIVO ATENCION A CLIENTE MX JR":['home','capturasA'],
+      "EJECUTIVO ATENCION A CLIENTE MX SENIOR":['home','capturasA'],
+      "EJECUTIVO ATENCION A CLIENTE MX JR":['home','capturasA'],
+      "SUPERVISOR ATENCION CC MX":['capturasA','home','reportes'],
+      "EJECUTIVO ATENCION POSPAGO BRONCE":['home','capturasA'],
 
     }
     this.model = [];

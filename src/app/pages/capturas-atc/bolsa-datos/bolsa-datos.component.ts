@@ -4,6 +4,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 import { CorsService } from '@services';
 import { Message, MessageService } from 'primeng/api';
 
@@ -40,6 +41,14 @@ export class BolsaDatosComponent implements OnInit {
     '10 GB',
     '25 GB',
     '50 GB'
+  ];
+
+  paquetesDatos2=[
+    "5000 MB",
+    "10000 MB",
+    "20000 MB",
+    "30000 MB",
+    "50000 MB",
   ];
 
   constructor(
@@ -117,6 +126,17 @@ export class BolsaDatosComponent implements OnInit {
 
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+  changeCuenta(event:any){
+    // console.log(event)
+    if(event==='BT To Go'){
+      this.formBolsa.controls['paqueteDatos'].reset()
+    }else{
+      this.formBolsa.controls['paqueteDatos'].reset()
+
+    }
+    
   }
 
 

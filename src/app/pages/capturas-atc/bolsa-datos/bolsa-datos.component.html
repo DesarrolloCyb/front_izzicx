@@ -12,11 +12,12 @@
     <h5>Tipo de Cuenta</h5>
     <div class="p-fluid p-formgrid grid">
         <div class="col-12 md:col-12">
-            <div class="field-radiobutton" >
+            <div class="field-radiobutton">
                 <p-radioButton
                 [value]="'BTI Single'"
                 [ngClass]="{'ng-invalid ng-dirty': formBolsa.get('tipoCuenta')?.errors != null && formBolsa.get('tipoCuenta')?.touched == true}"
                 formControlName="tipoCuenta"
+                (onClick)="changeCuenta($event.value)"
                 >
                 </p-radioButton>
                 <label>BTI Single</label>
@@ -26,6 +27,7 @@
                 [value]="'Combo SD/HD'"
                 [ngClass]="{'ng-invalid ng-dirty': formBolsa.get('tipoCuenta')?.errors != null && formBolsa.get('tipoCuenta')?.touched == true}"
                 formControlName="tipoCuenta"
+                (onClick)="changeCuenta($event.value)"
                 >
                 </p-radioButton>
                 <label>Combo SD/HD</label>
@@ -35,6 +37,7 @@
                 [value]="'Combo VeTV'"
                 [ngClass]="{'ng-invalid ng-dirty': formBolsa.get('tipoCuenta')?.errors != null && formBolsa.get('tipoCuenta')?.touched == true}"
                 formControlName="tipoCuenta"
+                (onClick)="changeCuenta($event.value)"
                 >
                 </p-radioButton>
                 <label>Combo VeTV</label>
@@ -44,12 +47,13 @@
                 [value]="'BT To Go'"
                 [ngClass]="{'ng-invalid ng-dirty': formBolsa.get('tipoCuenta')?.errors != null && formBolsa.get('tipoCuenta')?.touched == true}"
                 formControlName="tipoCuenta"
+                (onClick)="changeCuenta($event.value)"
                 >
                 </p-radioButton>
                 <label>BT To Go</label>
             </div>
         </div>
-        <div class="field col-12 md:col-4">
+        <div class="field col-12 md:col-6">
             <span class="p-float-label">
                 <input
                     type="text"
@@ -60,7 +64,7 @@
                 <label>Número de cuenta</label>
             </span>
         </div>
-        <div class="field col-12 md:col-4">
+        <div class="field col-12 md:col-6">
             <p-dropdown
             [options]="Pais"
             [showClear]="true"
@@ -69,7 +73,7 @@
             formControlName="pais">
             </p-dropdown>
         </div>
-        <div class="field col-12 md:col-4">
+        <div class="field col-12 md:col-6" *ngIf="formBolsa.value.tipoCuenta =='BTI Single' || formBolsa.value.tipoCuenta =='Combo SD/HD' || formBolsa.value.tipoCuenta =='Combo VeTV'">
             <p-dropdown
             [options]="paquetesDatos"
             [showClear]="true"
@@ -78,6 +82,16 @@
             formControlName="paqueteDatos">
             </p-dropdown>
         </div>
+        <div class="field col-12 md:col-6" *ngIf="formBolsa.value.tipoCuenta =='BT To Go'">
+            <p-dropdown
+            [options]="paquetesDatos2"
+            [showClear]="true"
+            placeholder="Paquete de Datos a Recargar"
+            [ngClass]="{'ng-invalid ng-dirty': formBolsa.get('paqueteDatos')?.errors != null && formBolsa.get('paqueteDatos')?.touched == true}"
+            formControlName="paqueteDatos">
+            </p-dropdown>
+        </div>
+
         </div>
     <!-- BOTON DE EJECUCION -->
     <div class="col lg:col-12">
