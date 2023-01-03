@@ -16,12 +16,11 @@ import { CambioPaqueteComponent } from './cambio-paquete/cambio-paquete.componen
 import { CambioEsquemaComponent } from './cambio-esquema/cambio-esquema.component';
 import { RAySEComponent } from '../capturas-atc/ray-se/ray-se.component';
 import { BolsaDatosComponent } from '../capturas-atc/bolsa-datos/bolsa-datos.component';
-import { GeneracionSolicitudComponent } from '../capturas-atc/generacion-solicitud/generacion-solicitud.component';
 
 
 
 @NgModule({
-  declarations: [CancelacionComponent, SolicitudCancelacionComponent, ReactivacionComponent, ServicioscscostoComponent, TemporadasComponent, ReembolsoComponent, CambioPaqueteComponent, CambioEsquemaComponent, RAySEComponent, BolsaDatosComponent, GeneracionSolicitudComponent],
+  declarations: [CancelacionComponent, SolicitudCancelacionComponent, ReactivacionComponent, ServicioscscostoComponent, TemporadasComponent, ReembolsoComponent, CambioPaqueteComponent, CambioEsquemaComponent, RAySEComponent, BolsaDatosComponent],
   imports: [
     SharedModule,
     CommonModule,

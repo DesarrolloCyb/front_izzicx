@@ -11,7 +11,7 @@
     <!-- INICIO DE INPUTS -->
     <h5>Tipo de Cuenta</h5>
     <div class="p-fluid p-formgrid grid">
-        <div class="col-12 md:col-12">
+        <div class="col-12 md:col-6">
             <div class="field-radiobutton">
                 <p-radioButton
                 [value]="'BTI Single'"
@@ -53,6 +53,30 @@
                 <label>BT To Go</label>
             </div>
         </div>
+        <div class="col-12 md:col-6">
+            <div class="field-radiobutton" style="margin-top: -2.5rem;">
+                <h5>Tipo de Proceso</h5>            
+            </div>
+            <div class="field-radiobutton">
+                <p-radioButton
+                [value]="'Prepago'"
+                [ngClass]="{'ng-invalid ng-dirty': formBolsa.get('tipoProceso')?.errors != null && formBolsa.get('tipoProceso')?.touched == true}"
+                formControlName="tipoProceso"
+                >
+                </p-radioButton>
+                <label>Prepago</label>
+            </div>
+            <div class="field-radiobutton">
+                <p-radioButton
+                [value]="'Postpago'"
+                [ngClass]="{'ng-invalid ng-dirty': formBolsa.get('tipoProceso')?.errors != null && formBolsa.get('tipoProceso')?.touched == true}"
+                formControlName="tipoProceso"
+                >
+                </p-radioButton>
+                <label>Postpago</label>
+            </div>
+        </div>
+
         <div class="field col-12 md:col-6">
             <span class="p-float-label">
                 <input
@@ -126,6 +150,7 @@
 
   <ul>
       <li>Tipo de Cuenta: <strong>{{formBolsa.value.tipoCuenta}}</strong></li>
+      <li>Tipo de Proceso: <strong>{{formBolsa.value.tipoProceso}}</strong></li>
       <li>Cuenta: <strong>{{formBolsa.value.cuenta}}</strong></li>
       <li>País: <strong>{{formBolsa.value.pais}}</strong></li>
       <li>Paquete de Datos a Recargar: <strong>{{formBolsa.value.paqueteDatos}}</strong></li>

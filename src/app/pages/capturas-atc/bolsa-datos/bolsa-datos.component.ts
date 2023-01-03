@@ -18,7 +18,7 @@ import { Table } from 'primeng/table';
 export class BolsaDatosComponent implements OnInit {
   formBolsa: UntypedFormGroup;
   usuario: any = JSON.parse(localStorage.getItem("userData") || "{}")
-  toClearControls: string[] = ["cuenta","pais", "tipoCuenta",'paqueteDatos']
+  toClearControls: string[] = ["cuenta","pais", "tipoCuenta",'paqueteDatos','tipoProceso']
   mostrandoResultados: boolean = false;
   display: boolean = false; //Dialogo de confirmacion
   closeModal: boolean = true;
@@ -61,6 +61,7 @@ export class BolsaDatosComponent implements OnInit {
       pais: [null,Validators.required],
       tipoCuenta: [null,Validators.required],
       paqueteDatos: [null,Validators.required],
+      tipoProceso: [null,Validators.required],
       cve_usuario: [this.usuario.email, Validators.required], //Se obtiene del direcotrio activo
       //cve_supervisor: [null, Validators.required],
     });
@@ -73,6 +74,7 @@ export class BolsaDatosComponent implements OnInit {
 
   verify() {
     this.formBolsa.markAllAsTouched();
+    // console.log(this.formBolsa)
     if (this.formBolsa.valid) {
       this.display = true;
     }

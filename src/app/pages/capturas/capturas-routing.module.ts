@@ -5,7 +5,6 @@ import { BolsaDatosComponent } from '../capturas-atc/bolsa-datos/bolsa-datos.com
 import { CambioEsquemaComponent } from './cambio-esquema/cambio-esquema.component';
 import { CambioPaqueteComponent } from './cambio-paquete/cambio-paquete.component';
 import { CancelacionComponent } from './cancelacion/cancelacion.component';
-import { GeneracionSolicitudComponent } from '../capturas-atc/generacion-solicitud/generacion-solicitud.component';
 import { RAySEComponent } from '../capturas-atc/ray-se/ray-se.component';
 import { ReactivacionComponent } from './reactivacion/reactivacion.component';
 import { ReembolsoComponent } from './reembolso/reembolso.component';
