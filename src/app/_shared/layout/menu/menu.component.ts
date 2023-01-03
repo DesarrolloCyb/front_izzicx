@@ -89,11 +89,11 @@ export class MenuComponent implements OnInit {
           icon: 'pi pi-fw pi-exclamation-triangle',
           routerLink: ['/capturasAtc/bolsaDatos'],
         },
-        // {
-        //   label: 'Genración de Solicitud',
-        //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturasAtc/generacionSolicitud'],
-        // },
+        {
+          label: 'Genración de Solicitud',
+          icon: 'pi pi-fw pi-exclamation-triangle',
+          routerLink: ['/capturasAtc/generacionSolicitud'],
+        },
 
 
       ]
