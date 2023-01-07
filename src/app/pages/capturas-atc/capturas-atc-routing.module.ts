@@ -27,8 +27,8 @@ const routes: Routes = [
     children: [{ path: '', component: BolsaDatosComponent}],
   },
   {
-    path: 'generacionSolicitud',
-    data: { breadcrumb: 'Generacion de Solicitud' },
+    path: 'garantia',
+    data: { breadcrumb: 'Garantia' },
     component: LayoutComponent,
     children: [{ path: '', component: GeneracionSolicitudComponent}],
   },

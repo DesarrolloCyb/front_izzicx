@@ -90,9 +90,9 @@ export class MenuComponent implements OnInit {
           routerLink: ['/capturasAtc/bolsaDatos'],
         },
         {
-          label: 'Genración de Solicitud',
+          label: 'Garantia',
           icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/capturasAtc/generacionSolicitud'],
+          routerLink: ['/capturasAtc/garantia'],
         },
 
 
@@ -196,7 +196,7 @@ export class MenuComponent implements OnInit {
       "EJECUTIVO ATENCION A CLIENTE MX JR":['home','capturasA'],
       "SUPERVISOR ATENCION CC MX":['capturasA','home','reportes'],
       "EJECUTIVO ATENCION POSPAGO BRONCE":['home','capturasA'],
-
+      "EJECUTIVO ATENCION POSPAGO ORO":['home','capturasA'],
     }
     this.model = [];
 

@@ -48,6 +48,8 @@ export class GeneracionSolicitudComponent implements OnInit {
     'Queja de Reparaciones Garantia',
     'Queja de Rep Garantia VETV',
     'Queja de Instalacion Garantia',
+    'Servicios con costo VETV',
+    'Queja de Inst Garantia VETV',
   ];
 
   detalle1:string[]=[
@@ -78,6 +80,11 @@ export class GeneracionSolicitudComponent implements OnInit {
     'Cobros Indebidos',
     'Daño en Domicilio',
   ];
+  detalle6:string[]=[
+    '1 Equipo',
+    '2 Equipos'
+  ];
+
 
 
   fallas: any[] = [];

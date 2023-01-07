@@ -3,6 +3,8 @@ import { UntypedFormBuilder,UntypedFormGroup, Validators } from '@angular/forms'
 import { CorsService } from '@services';
 import { Message,MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
+import * as moment from 'moment';
+moment.lang('es');
 
 
 @Component({
@@ -180,6 +182,10 @@ export class ServicioscscostoComponent implements OnInit {
   load(index: number) {
     this.validador[index] = true;
     setTimeout(() => (this.validador[index] = false), 1000);
+  }
+
+  dateFormat(value:any){
+    return moment(value).format('DD-MMMM-yyyy')
   }
 
 }

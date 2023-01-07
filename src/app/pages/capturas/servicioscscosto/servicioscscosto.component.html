@@ -155,13 +155,14 @@
       </div>
      
 
-      <!-- BOTON DE VALICACION DE DATOS -->
+    </div>
+        <!-- BOTON DE VALICACION DE DATOS -->
 
       <!-- BOTON DE EJECUCION -->
-      <div class="col lg:col-4">
+      <div class="row">
 
-        <div class="grid">
-          <div class="col-12">
+        <div class="grid flex justify-content-center">
+          <div class="col-4" align="center">
             
             <button
               (click)="verify()"
@@ -171,7 +172,7 @@
           </div>
         </div>
       </div>
-    </div>
+  
   </p-panel>
   <br>
 
@@ -196,7 +197,7 @@
     <li>Nombre Contacto: <strong>{{formServicios.value.Nombre}}</strong></li>
     <li>Tipo Falla: <strong>{{formServicios.value.Tipo_falla}}</strong></li>
     <li>Equipos: <strong>{{formServicios.value.Equipos}}</strong></li>
-    <li>Fecha Atencion: <strong>{{formServicios.value.Fecha_atencion}}</strong></li>
+    <li>Fecha Atencion: <strong>{{dateFormat(formServicios.value.Fecha_atencion)}}</strong></li>
     <li>Horario: <strong>{{formServicios.value.Horario}}</strong></li>
     <li>Zona Reparacion:<strong>{{formServicios.value.Zona}}</strong></li>
 

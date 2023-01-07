@@ -1,4 +1,4 @@
-<div class="text-900 font-bold text-2xl mb-4 text-center">Generación de Solicitud</div>
+<div class="text-900 font-bold text-2xl mb-4 text-center">Garantia</div>
 
 <div
   [formGroup]="formGeneracionSolicitud"
@@ -6,7 +6,7 @@
 
   <p-panel
     [toggleable]="mostrandoResultados"
-    header="Datos de Generacion de Solicitud"
+    header="Datos de Garantia"
     class="line-height-12 m-0">
     <!-- <h5>Tipo Servicio:</h5> -->
     <!-- INICIO DE INPUTS -->
@@ -61,7 +61,7 @@
         formControlName="Clasificacion"
         [options]="clasifica"
         [showClear]="true"
-        placeholder="Clasificación"
+        placeholder="SubClasificación"
         (onChange)="clasificacionChange($event.value)">
         </p-dropdown>
     </div>
@@ -105,7 +105,7 @@
         placeholder="Detalle">
         </p-dropdown>
     </div>
-    <div class="field col-12 md:col-4" *ngIf="formGeneracionSolicitud.controls['Clasificacion'].value === 'Queja de Rep Garantia VETV'">
+    <div class="field col-12 md:col-4" *ngIf="formGeneracionSolicitud.controls['Clasificacion'].value === 'Queja de Rep Garantia VETV' || formGeneracionSolicitud.controls['Clasificacion'].value === 'Queja de Inst Garantia VETV'">
         <p-dropdown
         [ngClass]="{'ng-invalid ng-dirty': formGeneracionSolicitud.get('detalle')?.errors != null && formGeneracionSolicitud.get('detalle')?.touched == true}"
         formControlName="detalle"
@@ -114,7 +114,15 @@
         placeholder="Detalle">
         </p-dropdown>
     </div>
-
+    <div class="field col-12 md:col-4" *ngIf="formGeneracionSolicitud.controls['Clasificacion'].value === 'Servicios con costo VETV'">
+      <p-dropdown
+      [ngClass]="{'ng-invalid ng-dirty': formGeneracionSolicitud.get('detalle')?.errors != null && formGeneracionSolicitud.get('detalle')?.touched == true}"
+      formControlName="detalle"
+      [options]="detalle6"
+      [showClear]="true"
+      placeholder="Detalle">
+      </p-dropdown>
+    </div>
 
 
       <div class="field col-12 md:col-4">
