@@ -26,7 +26,7 @@
         </span>
       </div>
       <div class="field col-12 md:col-4">
-        <p-dropdown optionLabel="descripcion" optionValue="id"
+        <p-dropdown optionLabel="nombre" optionValue="id"
           [ngClass]="{'ng-invalid ng-dirty': formNuevoBot.get('role')?.errors != null && formNuevoBot.get('role')?.touched == true}"
           [options]="rolArr" [showClear]="true" placeholder="Rol del sistema" formControlName="role">
         </p-dropdown>
@@ -38,10 +38,10 @@
       <!-- BOTON DE VALICACION DE DATOS -->
 
       <!-- BOTON DE EJECUCION -->
-      <div class="col lg:col-4">
+      <div class="col lg:col-12">
 
-        <div class="grid">
-          <div class="col-4">
+        <div class="grid flex justify-content-center">
+          <div class="col-3 text-center">
             <p-button label="Guardar" icon="pi pi-save" styleClass="mr-2 mb-2" [loading]="guardando"
               (onClick)="guardarUser()"></p-button>
 

@@ -16,18 +16,18 @@ export class DetalleUsuarioComponent implements OnInit, OnDestroy {
 
   guardando: boolean = false
 
-
-  rolArr: any[] = [
-    {
-      id: "1", descripcion: "Agente"
-    },
-    {
-      id: "2", descripcion: "Supervisor"
-    },
-    {
-      id: "3", descripcion: "Administrador"
-    }
-  ]
+rolArr:any[]=[];
+  // rolArr: any[] = [
+  //   {
+  //     id: "1", descripcion: "Agente"
+  //   },
+  //   {
+  //     id: "2", descripcion: "Supervisor"
+  //   },
+  //   {
+  //     id: "3", descripcion: "Administrador"
+  //   }
+  // ]
   private routedSub:Subscription; 
   userID:any
   constructor(
@@ -111,7 +111,7 @@ buscarUser(){
     }
   }
   ngOnInit(): void {
-
+    this.BuscarRoles()
 
   }
   showToastSuccess(mensaje: any) {
@@ -119,6 +119,15 @@ buscarUser(){
   }
   showToastError(mensaje: any) {
     this.message.add({ key: 'tst', severity: 'error', summary: 'Correcto!!', detail: mensaje, });
+  }
+
+  BuscarRoles(){
+    this.cors.get(`Formularios/ObtenerRoles`).then((response) => {
+      // console.log(response)
+      this.rolArr=response;
+    }).catch((error) => {
+      console.log(error);
+    })
   }
 
 }
