@@ -14,12 +14,12 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [{ path: '', component: TemporadasComponent }],
   },
-  {
-    path: 'PostPagoPrepago',
-    data: { breadcrumb: 'RA y SE PostPago Prepago' },
-    component: LayoutComponent,
-    children: [{ path: '', component: RAySEComponent}],
-  },
+  // {
+  //   path: 'PostPagoPrepago',
+  //   data: { breadcrumb: 'RA y SE PostPago Prepago' },
+  //   component: LayoutComponent,
+  //   children: [{ path: '', component: RAySEComponent}],
+  // },
   {
     path: 'bolsaDatos',
     data: { breadcrumb: 'Bolsa de Datos' },
@@ -28,7 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'garantia',
-    data: { breadcrumb: 'Garantia' },
+    data: { breadcrumb: 'Garantía' },
     component: LayoutComponent,
     children: [{ path: '', component: GeneracionSolicitudComponent}],
   },

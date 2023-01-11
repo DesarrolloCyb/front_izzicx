@@ -79,11 +79,11 @@ export class MenuComponent implements OnInit {
           icon: 'pi pi-fw pi-exclamation-triangle',
           routerLink: ['/capturasAtc/temporadas'],
         },
-        {
-          label: 'RAySE PosPago Prepago',
-          icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/capturasAtc/PostPagoPrepago'],
-        },
+        // {
+        //   label: 'RAySE PosPago Prepago',
+        //   icon: 'pi pi-fw pi-exclamation-triangle',
+        //   routerLink: ['/capturasAtc/PostPagoPrepago'],
+        // },
         {
           label: 'Bolsa de datos',
           icon: 'pi pi-fw pi-exclamation-triangle',
@@ -197,6 +197,8 @@ export class MenuComponent implements OnInit {
       "SUPERVISOR ATENCION CC MX":['capturasA','home','reportes'],
       "EJECUTIVO ATENCION POSPAGO BRONCE":['home','capturasA'],
       "EJECUTIVO ATENCION POSPAGO ORO":['home','capturasA'],
+      "ESPECIALISTA RETENCION POSPAGO BRONCE":['home','capturasR'],
+
     }
     this.model = [];
 
