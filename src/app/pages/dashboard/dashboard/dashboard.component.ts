@@ -90,7 +90,8 @@ export class DashboardComponent implements OnInit {
             this.usuario.role==='ESPECIALISTA RETENCION WEB' ||
             this.usuario.role==='ESPECIALISTA RETENCION VETV' ||
             this.usuario.role==='ESPECIALISTA RETENCION INBOUND' ||
-            this.usuario.role==='ESPECIALISTA RETENCION CHAT' 
+            this.usuario.role==='ESPECIALISTA RETENCION CHAT' || 
+            this.usuario.role==='ESPECIALISTA RETENCION POSPAGO BRONCE' 
         ){
             this.getStatsTiempoCompletado();
             this.getStatsProcesos(); // retencion
@@ -125,7 +126,9 @@ export class DashboardComponent implements OnInit {
             this.usuario.role==='EJECUTIVO ATENCION A CLIENTE MX SENIOR' ||
             this.usuario.role==='EJECUTIVO ATENCION A CLIENTE MX JR' ||
             this.usuario.role==='SUPERVISOR ATENCION CC MX' ||
-            this.usuario.role==='EJECUTIVO ATENCION POSPAGO BRONCE' 
+            this.usuario.role==='EJECUTIVO ATENCION POSPAGO BRONCE' ||
+            this.usuario.role==='EJECUTIVO ATENCION POSPAGO ORO' ||
+            this.usuario.role==='EJECUTIVO ATENCION POSPAGO PLATA'
 
             ){
             this.getStatsTiempoCompletado2(); //atenciona cliente

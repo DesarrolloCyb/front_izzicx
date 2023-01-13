@@ -15,18 +15,19 @@ export class NuevoUsuarioComponent implements OnInit {
 
   guardando: boolean = false
 
+  rolArr:any[]=[];
 
-  rolArr: any[] = [
-    {
-      id: "1", descripcion: "Agente"
-    },
-    {
-      id: "2", descripcion: "Supervisor"
-    },
-    {
-      id: "3", descripcion: "Administrador"
-    }
-  ]
+  // rolArr: any[] = [
+  //   {
+  //     id: "1", descripcion: "Agente"
+  //   },
+  //   {
+  //     id: "2", descripcion: "Supervisor"
+  //   },
+  //   {
+  //     id: "3", descripcion: "Administrador"
+  //   }
+  // ]
   constructor(
 
     private message: MessageService,
@@ -75,13 +76,22 @@ export class NuevoUsuarioComponent implements OnInit {
   }
   ngOnInit(): void {
 
-
+    this.BuscarRoles()
   }
   showToastSuccess(mensaje: any) {
     this.message.add({ key: 'tst', severity: 'success', summary: 'Correcto!!', detail: mensaje, });
   }
   showToastError(mensaje: any) {
     this.message.add({ key: 'tst', severity: 'error', summary: 'Correcto!!', detail: mensaje, });
+  }
+
+  BuscarRoles(){
+    this.cors.get(`Formularios/ObtenerRoles`).then((response) => {
+      // console.log(response)
+      this.rolArr=response;
+    }).catch((error) => {
+      console.log(error);
+    })
   }
 
 }
