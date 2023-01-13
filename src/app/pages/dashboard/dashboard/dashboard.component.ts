@@ -128,7 +128,8 @@ export class DashboardComponent implements OnInit {
             this.usuario.role==='SUPERVISOR ATENCION CC MX' ||
             this.usuario.role==='EJECUTIVO ATENCION POSPAGO BRONCE' ||
             this.usuario.role==='EJECUTIVO ATENCION POSPAGO ORO' ||
-            this.usuario.role==='EJECUTIVO ATENCION POSPAGO PLATA'
+            this.usuario.role==='EJECUTIVO ATENCION POSPAGO PLATA' ||
+            this.usuario.role==='EJECUTIVO ATENCION PREPAGO PLATA'
 
             ){
             this.getStatsTiempoCompletado2(); //atenciona cliente
