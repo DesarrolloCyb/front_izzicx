@@ -199,7 +199,9 @@ export class MenuComponent implements OnInit {
       "EJECUTIVO ATENCION POSPAGO ORO":['home','capturasA'],
       "ESPECIALISTA RETENCION POSPAGO BRONCE":['home','capturasR'],
       "EJECUTIVO ATENCION POSPAGO PLATA":['home','capturasA'],
-      "EJECUTIVO ATENCION PREPAGO PLATA":['home','capturasA']
+      "EJECUTIVO ATENCION PREPAGO PLATA":['home','capturasA'],
+      "EJECUTIVO ATENCION PREPAGO ORO":['home','capturasA']
+
     }
     this.model = [];
 

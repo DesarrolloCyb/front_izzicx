@@ -129,7 +129,8 @@ export class DashboardComponent implements OnInit {
             this.usuario.role==='EJECUTIVO ATENCION POSPAGO BRONCE' ||
             this.usuario.role==='EJECUTIVO ATENCION POSPAGO ORO' ||
             this.usuario.role==='EJECUTIVO ATENCION POSPAGO PLATA' ||
-            this.usuario.role==='EJECUTIVO ATENCION PREPAGO PLATA'
+            this.usuario.role==='EJECUTIVO ATENCION PREPAGO PLATA' ||
+            this.usuario.role==='EJECUTIVO ATENCION PREPAGO ORO'
 
             ){
             this.getStatsTiempoCompletado2(); //atenciona cliente
@@ -171,7 +172,7 @@ export class DashboardComponent implements OnInit {
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
         this.barData = {
-            labels: ['Single Video', 'Modem Combo', 'BTCel Combo', 'Equipos Adicionales', 'Solicitud Cancelacion', 'Solicitud Retenidos','Servicios','Reactivación','Reembolso','Cambio de Esquema','Cambio de Paquete'],
+            labels: ['Single Video', 'Modem Combo', 'BTCel Combo','Equipos Adicionales', 'Solicitud Retenidos','Solicitud Cancelacion','Servicios','Reactivación','Reembolso','Cambio de Esquema','Cambio de Paquete'],
             datasets: [
                 {
                     label: 'Tiempos de cierre en minutos',
@@ -218,7 +219,7 @@ export class DashboardComponent implements OnInit {
 
         this.barData2 = {
             // labels: ['NFL', 'PostPago','Bolsa Datos','Generacion Solicitud'],
-            labels: ['NFL', 'PostPago','Bolsa Datos'],
+            labels: ['NFL', 'Bolsa de Datos','Garantía'],
             datasets: [
                 {
                     label: 'Tiempos de cierre en minutos',
@@ -299,7 +300,7 @@ export class DashboardComponent implements OnInit {
         };
 
         this.pieData2 = {
-            labels: ['NFL', 'PostPago', 'Bolsa de Datos'],
+            labels: ['NFL', 'Bolsa de Datos', 'Garantía'],
             datasets: [
                 {
                     data: this.statsProceso2,
