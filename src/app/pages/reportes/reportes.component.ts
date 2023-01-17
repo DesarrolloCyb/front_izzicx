@@ -135,6 +135,22 @@ export class ReportesComponent implements OnInit {
           console.log('Reporte General')
           url = `Reports/getReportGenral`;
           para =`fecha1=${fechaini}&fecha2=${fechafin}`
+        }else if(tipoR == 'Cambio de Esquema'){
+          console.log('Cambio de Esquema')
+          url = `Reports/getReportEsquema`;
+          para =`fecha1=${fechaini}&fecha2=${fechafin}`
+        }else if(tipoR == 'Cambio de Paquete'){
+          console.log('Cambio de Paquete')
+          url = `Reports/getReportPaquete`;
+          para =`fecha1=${fechaini}&fecha2=${fechafin}`
+        }else if(tipoR == 'Bolsa de Datos'){
+          console.log('Bolsa de Datos')
+          url = `Reports/getReportBolsaDatos`;
+          para =`fecha1=${fechaini}&fecha2=${fechafin}`
+        }else if(tipoR == 'Garantia'){
+          console.log('Garantia')
+          url = `Reports/getReportGarantia`;
+          para =`fecha1=${fechaini}&fecha2=${fechafin}`
         }
 
         // console.log(`${url}?${para}`)
