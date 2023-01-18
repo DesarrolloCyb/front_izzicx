@@ -66,7 +66,8 @@ export class AuthGuard implements CanActivate {
       "ESPECIALISTA RETENCION POSPAGO BRONCE":['home','capturas'],
       "EJECUTIVO ATENCION POSPAGO PLATA":['home','capturasAtc'],
       "EJECUTIVO ATENCION PREPAGO PLATA":['home','capturasAtc'],
-      "EJECUTIVO ATENCION PREPAGO ORO":['home','capturasAtc']
+      "EJECUTIVO ATENCION PREPAGO ORO":['home','capturasAtc'],
+      "ESPECIALISTA RETENCION PREPAGO BRONCE":['home','capturas']
     }
     console.log("aca", route.url[0].path);
     

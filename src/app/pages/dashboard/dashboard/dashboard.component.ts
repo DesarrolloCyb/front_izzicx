@@ -91,7 +91,8 @@ export class DashboardComponent implements OnInit {
             this.usuario.role==='ESPECIALISTA RETENCION VETV' ||
             this.usuario.role==='ESPECIALISTA RETENCION INBOUND' ||
             this.usuario.role==='ESPECIALISTA RETENCION CHAT' || 
-            this.usuario.role==='ESPECIALISTA RETENCION POSPAGO BRONCE' 
+            this.usuario.role==='ESPECIALISTA RETENCION POSPAGO BRONCE'|| 
+            this.usuario.role==='ESPECIALISTA RETENCION PREPAGO BRONCE' 
         ){
             this.getStatsTiempoCompletado();
             this.getStatsProcesos(); // retencion
