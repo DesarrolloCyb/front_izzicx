@@ -71,7 +71,23 @@ export class RobotsComponent implements OnInit {
   ) {
 
     this.cors.get('Bots/ObtenerListProcess').then((response) => {
-      this.processArr = response
+      // this.processArr = response
+      // console.log('Esto es ',response)
+      console.log('Esto es ',typeof (response))
+      // for(var b=0;b<response;b++){
+      //   console.log(response[b])
+      //   // if(response[b].status == 1){
+      //   //   let bb = {
+      //   //     id:response[b].id,
+      //   //     name_process:response[b].name_process
+      //   //   }
+      //   //   this.processArr.push(bb)
+      //   // }
+      //   // console.log(response[b])
+      // }
+      // console.log('Esto es 2',this.processArr)
+
+
     }).catch((error) => {
       console.log(error);
       this.showToastError(`No se logro traer la lista de procesos`)

@@ -136,7 +136,7 @@
         </p-dropdown>
       </div>
 
-      <div class="field col-12 md:col-4">
+      <!-- <div class="field col-12 md:col-4">
         <p-dropdown
         optionLabel="descripcion" optionValue="descripcion"
         [ngClass]="{'ng-invalid ng-dirty': formGeneracionSolicitud.get('Equipos')?.errors != null && formGeneracionSolicitud.get('Equipos')?.touched == true}"
@@ -145,7 +145,7 @@
           placeholder="Selecciona Equipos"
           formControlName="Equipos">
         </p-dropdown>
-      </div>
+      </div> -->
 
       <div class="field col-12 md:col-4">
         <span class="p-float-label">
@@ -220,7 +220,6 @@
     <li>Clasificación: <strong>{{formGeneracionSolicitud.value.Clasificacion}}</strong></li>
     <li>Detalle: <strong>{{formGeneracionSolicitud.value.detalle}}</strong></li>
     <li>Tipo Falla: <strong>{{formGeneracionSolicitud.value.Tipo_falla}}</strong></li>
-    <li>Equipos: <strong>{{formGeneracionSolicitud.value.Equipos}}</strong></li>
     <li>Fecha Atencion: <strong>{{dateFormat(formGeneracionSolicitud.value.Fecha_atencion)}}</strong></li>
     <li>Horario: <strong>{{formGeneracionSolicitud.value.Horario}}</strong></li>
     <li>Zona Reparación:<strong>{{formGeneracionSolicitud.value.Zona}}</strong></li>

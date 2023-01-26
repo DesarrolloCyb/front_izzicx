@@ -96,7 +96,7 @@ export class GeneracionSolicitudComponent implements OnInit {
   msgs: Message[] = [];
   validador = [false];
   loading: boolean = false
-  toClearControls: string[] = ["Cuenta","Tipo_Cuenta","Nombre", "Pais","Tipo_falla", "Equipos", "Horario","Fecha_atencion","Zona","Clasificacion","detalle"]
+  toClearControls: string[] = ["Cuenta","Tipo_Cuenta","Nombre", "Pais","Tipo_falla", "Horario","Fecha_atencion","Zona","Clasificacion","detalle"]
   enviando: boolean = false;
   closeModal: boolean = true;
   mostrandoResultados: boolean = false;
@@ -115,7 +115,6 @@ export class GeneracionSolicitudComponent implements OnInit {
       Nombre: [null, Validators.required],
       Pais: [null, Validators.required],
       Tipo_falla: [null, Validators.required],
-      Equipos: [null, Validators.required],
       Fecha_atencion: [null, Validators.required],
       Horario: [null, Validators.required],
       Zona: [null, Validators.required],
