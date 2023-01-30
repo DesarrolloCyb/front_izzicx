@@ -1,6 +1,6 @@
 <ng-container>
 	<div *ngIf="root && item.visible !== false"
-		class="layout-menuitem-root-text">
+		class="layout-menuitem-root-text" style="color:#E80084">
 		{{ item.label }}
 	</div>
 	<a *ngIf="(!item.routerLink || item.items) && item.visible !== false"
@@ -10,8 +10,9 @@
 		(click)="itemClick($event)"
 		(mouseenter)="onMouseEnter()"
 		tabindex="0"
-		pRipple>
-		<i [ngClass]="item.icon"
+		pRipple
+		style="color:balck">
+		<i [ngClass]="item.icon" style="color: #666666; font-size: 2rem;"
 			class="layout-menuitem-icon"></i>
 		<span class="layout-menuitem-text">{{ item.label }}</span>
 		<i *ngIf="item.items"
@@ -19,6 +20,7 @@
 	</a>
 	<a *ngIf="item.routerLink && !item.items && item.visible !== false"
 		[ngClass]="item.class"
+		style="color:black"
 		[routerLink]="item.routerLink"
 		[routerLinkActiveOptions]="item.routerLinkOptions || { exact: true }"
 		[fragment]="item.fragment"
@@ -35,7 +37,7 @@
 		tabindex="0"
 		pRipple>
 		<i [ngClass]="item.icon"
-			class="layout-menuitem-icon"></i>
+			class="layout-menuitem-icon" style="color: #666666; font-size: 2rem;"></i>
 		<span class="layout-menuitem-text">{{ item.label }}</span>
 		<i *ngIf="item.items"
 			class="pi pi-fw pi-angle-down layout-submenu-toggler"></i>

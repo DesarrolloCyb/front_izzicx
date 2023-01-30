@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit {
       label: 'Cyber Room',
       key: "home",
       icon: 'pi pi-home',
-      // routerLink: ['/dashboard'],
+    //   routerLink: ['/dashboard'],
       items: [
         {
           label: 'Home',
@@ -24,131 +24,303 @@ export class MenuComponent implements OnInit {
 
       ]
     },
-
     {
-      label: 'Capturas Retencion',
-      key: "capturasR",
-      icon: 'pi pi-fw pi-compass',
-      routerLink: ['/capturas'],
+      label: 'Extracción',
+      key: "extracion",
+    //   icon: 'pi pi-fw pi-compass',
+    //   routerLink: ['/capturas'],
       items: [
         {
-          label: 'Cancelación',
-          icon: 'pi pi-fw pi-file-excel',
-          routerLink: ['/capturas/cancelacion'],
-        },
-        {
-          label: 'Solicitud de Cancelación',
-          icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/capturas/solicitud-cancelacion'],
-        },
-        {
-          label: 'Reactivación',
-          icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/capturas/reactivacion'],
-        },
-        {
-          label: 'Servicios c/s costo',
-          icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/capturas/servicioscosto'],
-        },
-        {
-          label: 'Reembolso',
-          icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/capturas/reembolso'],
-        },
-        {
-          label: 'Cambio de Paquete',
-          icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/capturas/cambioPaquete'],
-        },
-        {
-          label: 'Cambio de Esquema',
-          icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/capturas/cambioEsquema'],
-        },
-      ]
-    },
-    {
-      label: 'Capturas atencion a clientes',
-      key: "capturasA",
-      icon: 'pi pi-fw pi-android',
-      routerLink: ['/capturas'],
-      items: [
-        {
-          label: 'Temporadas',
-          icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/capturasAtc/temporadas'],
+          label: 'Home',
+        //   icon: 'pi pi-fw pi-filter',
+          icon: 'pi pi-fw pi-file-o',
+          routerLink: ['/extraccion'],
         },
         // {
-        //   label: 'RAySE PosPago Prepago',
+        //   label: 'Solicitud de Cancelación',
         //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturasAtc/PostPagoPrepago'],
+        //   routerLink: ['/capturas/solicitud-cancelacion'],
         // },
-        {
-          label: 'Bolsa de datos',
-          icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/capturasAtc/bolsaDatos'],
-        },
-        {
-          label: 'Garantia',
-          icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/capturasAtc/garantia'],
-        },
+        // {
+        //   label: 'Reactivación',
+        //   icon: 'pi pi-fw pi-exclamation-triangle',
+        //   routerLink: ['/capturas/reactivacion'],
+        // },
+        // {
+        //   label: 'Servicios c/s costo',
+        //   icon: 'pi pi-fw pi-exclamation-triangle',
+        //   routerLink: ['/capturas/servicioscosto'],
+        // },
+        // {
+        //   label: 'Reembolso',
+        //   icon: 'pi pi-fw pi-exclamation-triangle',
+        //   routerLink: ['/capturas/reembolso'],
+        // },
+        // {
+        //   label: 'Cambio de Paquete',
+        //   icon: 'pi pi-fw pi-exclamation-triangle',
+        //   routerLink: ['/capturas/cambioPaquete'],
+        // },
+        // {
+        //   label: 'Cambio de Esquema',
+        //   icon: 'pi pi-fw pi-exclamation-triangle',
+        //   routerLink: ['/capturas/cambioEsquema'],
+        // },
+      ]
+    },
+	{
+		label: 'Asignación',
+		key: "asignacion",
+		icon: 'pi pi-fw pi-compass',
+	  //   routerLink: ['/capturas'],
+		items: [
+		  {
+			label: 'Home',
+			icon: 'pi pi-fw pi-check-square',
+		    routerLink: ['/asignacion'],
+		  },
+		  // {
+		  //   label: 'Solicitud de Cancelación',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/solicitud-cancelacion'],
+		  // },
+		  // {
+		  //   label: 'Reactivación',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/reactivacion'],
+		  // },
+		  // {
+		  //   label: 'Servicios c/s costo',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/servicioscosto'],
+		  // },
+		  // {
+		  //   label: 'Reembolso',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/reembolso'],
+		  // },
+		  // {
+		  //   label: 'Cambio de Paquete',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/cambioPaquete'],
+		  // },
+		  // {
+		  //   label: 'Cambio de Esquema',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/cambioEsquema'],
+		  // },
+		]
+	  },
+	  {
+		label: 'Casos de Negocio y Ordenes',
+		key: "casosNegocio",
+		// icon: 'pi pi-fw pi-compass',
+	  //   routerLink: ['/capturas'],
+		items: [
+		  {
+			label: 'Home',
+			icon: 'pi pi-fw pi-briefcase',
+		    routerLink: ['/casoNegocio'],
+		  },
+		  // {
+		  //   label: 'Solicitud de Cancelación',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/solicitud-cancelacion'],
+		  // },
+		  // {
+		  //   label: 'Reactivación',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/reactivacion'],
+		  // },
+		  // {
+		  //   label: 'Servicios c/s costo',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/servicioscosto'],
+		  // },
+		  // {
+		  //   label: 'Reembolso',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/reembolso'],
+		  // },
+		  // {
+		  //   label: 'Cambio de Paquete',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/cambioPaquete'],
+		  // },
+		  // {
+		  //   label: 'Cambio de Esquema',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/cambioEsquema'],
+		  // },
+		]
+	  },
+	  {
+		label: 'Depuración',
+		key: "depuracion",
+		icon: 'pi pi-fw pi-compass',
+	  //   routerLink: ['/capturas'],
+		items: [
+		  {
+			label: 'Home',
+			icon: 'pi pi-fw pi-folder-open',
+		    routerLink: ['/depuracion'],
+		  },
+		  // {
+		  //   label: 'Solicitud de Cancelación',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/solicitud-cancelacion'],
+		  // },
+		  // {
+		  //   label: 'Reactivación',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/reactivacion'],
+		  // },
+		  // {
+		  //   label: 'Servicios c/s costo',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/servicioscosto'],
+		  // },
+		  // {
+		  //   label: 'Reembolso',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/reembolso'],
+		  // },
+		  // {
+		  //   label: 'Cambio de Paquete',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/cambioPaquete'],
+		  // },
+		  // {
+		  //   label: 'Cambio de Esquema',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/cambioEsquema'],
+		  // },
+		]
+	  },
+	  {
+		label: 'Reporte Fidelización',
+		key: "reporteFidelizacion",
+		icon: 'pi pi-fw pi-compass',
+	  //   routerLink: ['/capturas'],
+		items: [
+		  {
+			label: 'Home',
+			icon: 'pi pi-fw pi-chart-bar',
+		    routerLink: ['/reporteFidelizacion'],
+		  },
+		  // {
+		  //   label: 'Solicitud de Cancelación',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/solicitud-cancelacion'],
+		  // },
+		  // {
+		  //   label: 'Reactivación',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/reactivacion'],
+		  // },
+		  // {
+		  //   label: 'Servicios c/s costo',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/servicioscosto'],
+		  // },
+		  // {
+		  //   label: 'Reembolso',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/reembolso'],
+		  // },
+		  // {
+		  //   label: 'Cambio de Paquete',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/cambioPaquete'],
+		  // },
+		  // {
+		  //   label: 'Cambio de Esquema',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/capturas/cambioEsquema'],
+		  // },
+		]
+	  },
+    // {
+    //   label: 'Capturas atencion a clientes',
+    //   key: "capturasA",
+    //   icon: 'pi pi-fw pi-android',
+    //   routerLink: ['/capturas'],
+    //   items: [
+    //     {
+    //       label: 'Temporadas',
+    //       icon: 'pi pi-fw pi-exclamation-triangle',
+    //       routerLink: ['/capturasAtc/temporadas'],
+    //     },
+    //     // {
+    //     //   label: 'RAySE PosPago Prepago',
+    //     //   icon: 'pi pi-fw pi-exclamation-triangle',
+    //     //   routerLink: ['/capturasAtc/PostPagoPrepago'],
+    //     // },
+    //     {
+    //       label: 'Bolsa de datos',
+    //       icon: 'pi pi-fw pi-exclamation-triangle',
+    //       routerLink: ['/capturasAtc/bolsaDatos'],
+    //     },
+    //     {
+    //       label: 'Garantia',
+    //       icon: 'pi pi-fw pi-exclamation-triangle',
+    //       routerLink: ['/capturasAtc/garantia'],
+    //     },
 
 
-      ]
-    },
+    //   ]
+    // },
 
-    {
-      label: 'Robots',
-      key: "robots",
-      icon: 'pi pi-fw pi-android',
-      routerLink: ['/robots'],
-      items: [
-        {
-          label: 'Actividad',
-          icon: 'pi pi-fw pi-tablet',
-          routerLink: ['/robots/'],
-        },
-        {
-          label: 'Crear nuevo',
-          icon: 'pi pi-fw pi-plus',
-          routerLink: ['/robots/nuevo'],
-        },
-      ]
-    },
-    ///--------------------------------------------------///
-    {
-      label: 'Reportes',
-      key: "reportes",
-      icon: 'pi pi-fw pi-compass',
-      routerLink: ['/capturas'],
-      items: [
-        {
-          label: 'Generar',
-          icon: 'pi pi-fw pi-chart-bar',
-          routerLink: ['/reportes'],
-        },
-      ]
-    },
-    {
-      label: 'Usuarios',
-      key: "usuarios",
-      icon: 'pi pi-fw pi-users',
-      routerLink: ['/usuarios'],
-      items: [
-        {
-          label: 'Listado',
-          icon: 'pi pi-fw pi-list',
-          routerLink: ['/usuarios'],
-        },
-        {
-          label: 'Nuevo',
-          icon: 'pi pi-fw pi-user-plus',
-          routerLink: ['/usuarios/nuevo'],
-        },
-      ]
-    },
+    // {
+    //   label: 'Robots',
+    //   key: "robots",
+    //   icon: 'pi pi-fw pi-android',
+    //   routerLink: ['/robots'],
+    //   items: [
+    //     {
+    //       label: 'Actividad',
+    //       icon: 'pi pi-fw pi-tablet',
+    //       routerLink: ['/robots/'],
+    //     },
+    //     {
+    //       label: 'Crear nuevo',
+    //       icon: 'pi pi-fw pi-plus',
+    //       routerLink: ['/robots/nuevo'],
+    //     },
+    //   ]
+    // },
+    // ///--------------------------------------------------///
+    // {
+    //   label: 'Reportes',
+    //   key: "reportes",
+    //   icon: 'pi pi-fw pi-compass',
+    //   routerLink: ['/capturas'],
+    //   items: [
+    //     {
+    //       label: 'Generar',
+    //       icon: 'pi pi-fw pi-chart-bar',
+    //       routerLink: ['/reportes'],
+    //     },
+    //   ]
+    // },
+    // {
+    //   label: 'Usuarios',
+    //   key: "usuarios",
+    //   icon: 'pi pi-fw pi-users',
+    //   routerLink: ['/usuarios'],
+    //   items: [
+    //     {
+    //       label: 'Listado',
+    //       icon: 'pi pi-fw pi-list',
+    //       routerLink: ['/usuarios'],
+    //     },
+    //     {
+    //       label: 'Nuevo',
+    //       icon: 'pi pi-fw pi-user-plus',
+    //       routerLink: ['/usuarios/nuevo'],
+    //     },
+    //   ]
+    // },
 
   ]
   ngOnInit() {
@@ -158,50 +330,51 @@ export class MenuComponent implements OnInit {
       // "1": ["capturas"],
       // "2": ["capturas", "robots"],
       // "3": ["capturas", "robots", "reportes", "usuarios"]
-      "SUPERVISOR TROUBLESHOOTING CELULAR":['capturasA','home','reportes'],
-      "ESPECIALISTA TROUBLESHOOTING CELULAR":['capturasA'],
-      "SUPERVISOR CALL CENTER REPARACIONES":['capturasA','home','reportes'],
-      "EJECUTIVO ATENCION PREPAGO":['capturasA'],
-      "GERENTE REPARACIONES VETV":['capturasA','home','reportes'],
-      "COORDINADOR REPARACIONES":['home','reportes'],
-      "SUPERVISOR ATENCION CC MX":['capturasA','home','reportes'],
-      "COORDINADOR ATENCION CC MX":['home','reportes'],
-      "ASESOR ATENCION CC MX":['home','reportes'],
-      "EJECUTIVO ATENCION A CLIENTE":['capturasA'],
-      "ASESOR RETENCION VETV":['home','reportes'],
-      "GERENTE RETENCION INBOUND":['home','capturasR','capturasA','robots','reportes','usuarios'],
-      "SUPERVISOR RETENCION WEB":['home','capturasR','reportes'],
-      "SUPERVISOR RETENCION INBOUND VETV":['home','capturasR','reportes'],
-      "SUPERVISOR RETENCION INBOUND":['home','capturasR','reportes'],
-      "ESPECIALISTA RETENCION WEB":['capturasR'],
-      "ESPECIALISTA RETENCION VETV":['capturasR'],
-      "ESPECIALISTA RETENCION INBOUND":['capturasR'],
-      "ESPECIALISTA RETENCION CHAT":['capturasR'],
-      "GERENTE ATENCION A CLIENTES":['home','reportes'], //despues de este las dos graficas
-      "SUPERVISOR ATENCION A CLIENTES INTERNO":['home','reportes'],
-      "ASESOR CONTROL INFORMACION":['home','reportes'],
-      "SUPERVISOR GESTION EDP":['home','reportes'],
-      "SUPERVISOR ESTRATEGIA OPERATIVA":['home','reportes'],
-      "ESPECIALISTA ESTRATEGIA OPERATIVA":['home'],
-      "GERENTE MESA DE CONTROL":['home','reportes'],
-      "SUPERVISOR MESA DE CONTROL":['home','reportes'],
-      "SUPERVISOR MESA CONTROL DE DOCUMENTOS":['home','reportes'],
-      "Resp: MOISES AVILA SOTO":['home','capturasR','capturasA','robots','reportes','usuarios'],
-      "EJECUTIVO ATENCION PREPAGO BRONCE J":['home','capturasA'],
-      "EJECUTIVO ATENCION PREPAGO BRONCE S":['home','capturasA'],
-      "EJECUTIVO REPARACIONES JR":['home','capturasA'],
-      "EJECUTIVO ATENCION PREPAGO BRONCE":['home','capturasA'],
-      "EJECUTIVO ATENCION A CLIENTE MX JR":['home','capturasA'],
-      "EJECUTIVO ATENCION A CLIENTE MX SENIOR":['home','capturasA'],
-      "EJECUTIVO ATENCION A CLIENTE MX JR":['home','capturasA'],
-      "SUPERVISOR ATENCION CC MX":['capturasA','home','reportes'],
-      "EJECUTIVO ATENCION POSPAGO BRONCE":['home','capturasA'],
-      "EJECUTIVO ATENCION POSPAGO ORO":['home','capturasA'],
-      "ESPECIALISTA RETENCION POSPAGO BRONCE":['home','capturasR'],
-      "EJECUTIVO ATENCION POSPAGO PLATA":['home','capturasA'],
-      "EJECUTIVO ATENCION PREPAGO PLATA":['home','capturasA'],
-      "EJECUTIVO ATENCION PREPAGO ORO":['home','capturasA'],
-      "ESPECIALISTA RETENCION PREPAGO BRONCE":['home','capturasR']
+    //   "SUPERVISOR TROUBLESHOOTING CELULAR":['capturasA','home','reportes'],
+    //   "ESPECIALISTA TROUBLESHOOTING CELULAR":['capturasA'],
+    //   "SUPERVISOR CALL CENTER REPARACIONES":['capturasA','home','reportes'],
+    //   "EJECUTIVO ATENCION PREPAGO":['capturasA'],
+    //   "GERENTE REPARACIONES VETV":['capturasA','home','reportes'],
+    //   "COORDINADOR REPARACIONES":['home','reportes'],
+    //   "SUPERVISOR ATENCION CC MX":['capturasA','home','reportes'],
+    //   "COORDINADOR ATENCION CC MX":['home','reportes'],
+    //   "ASESOR ATENCION CC MX":['home','reportes'],
+    //   "EJECUTIVO ATENCION A CLIENTE":['capturasA'],
+    //   "ASESOR RETENCION VETV":['home','reportes'],
+    //   "GERENTE RETENCION INBOUND":['home','capturasR','capturasA','robots','reportes','usuarios'],
+    //   "SUPERVISOR RETENCION WEB":['home','capturasR','reportes'],
+    //   "SUPERVISOR RETENCION INBOUND VETV":['home','capturasR','reportes'],
+    //   "SUPERVISOR RETENCION INBOUND":['home','capturasR','reportes'],
+    //   "ESPECIALISTA RETENCION WEB":['capturasR'],
+    //   "ESPECIALISTA RETENCION VETV":['capturasR'],
+    //   "ESPECIALISTA RETENCION INBOUND":['capturasR'],
+    //   "ESPECIALISTA RETENCION CHAT":['capturasR'],
+    //   "GERENTE ATENCION A CLIENTES":['home','reportes'], //despues de este las dos graficas
+    //   "SUPERVISOR ATENCION A CLIENTES INTERNO":['home','reportes'],
+    //   "ASESOR CONTROL INFORMACION":['home','reportes'],
+    //   "SUPERVISOR GESTION EDP":['home','reportes'],
+    //   "SUPERVISOR ESTRATEGIA OPERATIVA":['home','reportes'],
+    //   "ESPECIALISTA ESTRATEGIA OPERATIVA":['home'],
+    //   "GERENTE MESA DE CONTROL":['home','reportes'],
+    //   "SUPERVISOR MESA DE CONTROL":['home','reportes'],
+    //   "SUPERVISOR MESA CONTROL DE DOCUMENTOS":['home','reportes'],
+    //   "Resp: MOISES AVILA SOTO":['home','capturasR','capturasA','robots','reportes','usuarios'],
+    //   "EJECUTIVO ATENCION PREPAGO BRONCE J":['home','capturasA'],
+    //   "EJECUTIVO ATENCION PREPAGO BRONCE S":['home','capturasA'],
+    //   "EJECUTIVO REPARACIONES JR":['home','capturasA'],
+    //   "EJECUTIVO ATENCION PREPAGO BRONCE":['home','capturasA'],
+    //   "EJECUTIVO ATENCION A CLIENTE MX JR":['home','capturasA'],
+    //   "EJECUTIVO ATENCION A CLIENTE MX SENIOR":['home','capturasA'],
+    //   "EJECUTIVO ATENCION A CLIENTE MX JR":['home','capturasA'],
+    //   "SUPERVISOR ATENCION CC MX":['capturasA','home','reportes'],
+    //   "EJECUTIVO ATENCION POSPAGO BRONCE":['home','capturasA'],
+    //   "EJECUTIVO ATENCION POSPAGO ORO":['home','capturasA'],
+    //   "ESPECIALISTA RETENCION POSPAGO BRONCE":['home','capturasR'],
+    //   "EJECUTIVO ATENCION POSPAGO PLATA":['home','capturasA'],
+    //   "EJECUTIVO ATENCION PREPAGO PLATA":['home','capturasA'],
+    //   "EJECUTIVO ATENCION PREPAGO ORO":['home','capturasA'],
+    //   "ESPECIALISTA RETENCION PREPAGO BRONCE":['home','capturasR']
+    //   "":['home']
     }
     this.model = [];
 
@@ -217,9 +390,9 @@ export class MenuComponent implements OnInit {
 
 
       // console.log(elemento)
-      if (permisos[usuarioInfo?.role].includes(elemento.key)) {
+    //   if (permisos[usuarioInfo?.role].includes(elemento.key)) {
         this.model.push(elemento)
-      }
+    //   }
     })
 
   }

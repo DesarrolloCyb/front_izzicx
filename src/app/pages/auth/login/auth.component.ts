@@ -27,29 +27,30 @@ export class AuthComponent {
     }
 
     onSignIn() {
-        this.formLogin.markAllAsTouched();
-        console.log(this.formLogin.valid);
+        // this.formLogin.markAllAsTouched();
+        // console.log(this.formLogin.valid);
 
-        if (this.formLogin.valid) {
+		this.router.navigate(['/home']);
+        // if (this.formLogin.valid) {
           
-            this.cors.post('AD/Identity', this.formLogin.value).then((response) => {
-                console.log(response);
+        //     this.cors.post('AD/Identity', this.formLogin.value).then((response) => {
+        //         console.log(response);
 
-                //this.router.navigate(['/home']);
+        //         //this.router.navigate(['/home']);
 
-                localStorage.setItem( "userData",JSON.stringify(response)  )
-                this.router.navigate(['/home']);
-            }).catch((error) => {
-                console.log(error);
-                // this.msgs.push({
-                //     severity: 'error',
-                //     summary: 'No se logro autenticar',
-                //     detail: 'Intenta nuevamente!',
-                // });
+        //         localStorage.setItem( "userData",JSON.stringify(response)  )
+        //         this.router.navigate(['/home']);
+        //     }).catch((error) => {
+        //         console.log(error);
+        //         // this.msgs.push({
+        //         //     severity: 'error',
+        //         //     summary: 'No se logro autenticar',
+        //         //     detail: 'Intenta nuevamente!',
+        //         // });
 
 
-            })
-        }
+        //     })
+        // }
     }
 }
 
