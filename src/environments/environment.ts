@@ -4,9 +4,10 @@
 
 export const environment = {
     production: false,
-    API_URL: 'https://10.251.58.11/api/',
+	API_URL: 'https://backrpa.azurewebsites.net/',
+    // API_URL: 'https://10.251.58.11/api/',
     // API_URL: "https://localhost:44372/",
-    SCOCKET_URL: 'http://10.251.58.11:3000',
+    SCOCKET_URL: 'https://backrpa.azurewebsites.net:3000',
     user: 'mavilas@sky.com.mx',
     password: 'mik4asa2022/',
 };

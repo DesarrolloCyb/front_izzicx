@@ -52,6 +52,7 @@ import { TagModule } from 'primeng/tag';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { TimelineModule } from 'primeng/timeline';
 import { CardModule } from 'primeng/card';
+import {FileUploadModule} from 'primeng/fileupload';
 
 @NgModule({
   imports: [ButtonModule,NgxMaskModule.forRoot(),],
@@ -116,6 +117,7 @@ import { CardModule } from 'primeng/card';
     ProgressSpinnerModule,
     TimelineModule,
     CardModule,
+	FileUploadModule,
     //
 
     OnlyAlphabetsDirective,
