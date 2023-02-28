@@ -5,15 +5,20 @@ import { ExtraccionRoutingModule } from './extraccion-routing.module';
 import { DashboardExtraccionComponent } from './dashboard-extraccion/dashboard-extraccion.component';
 
 import { SharedModule } from 'app/_shared/modules/shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { VisualizacionComponent } from './visualizacion/visualizacion.component';
 
 @NgModule({
   declarations: [
-    DashboardExtraccionComponent
+    DashboardExtraccionComponent,
+    VisualizacionComponent
   ],
   imports: [
     CommonModule,
     ExtraccionRoutingModule,
-	SharedModule
+	  SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ExtraccionModule { }
