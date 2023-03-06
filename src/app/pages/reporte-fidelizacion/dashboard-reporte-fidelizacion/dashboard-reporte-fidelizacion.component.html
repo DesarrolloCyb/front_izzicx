@@ -1,1 +1,106 @@
-<p>dashboard-reporte-fidelizacion works!</p>
+<div class="text-900 font-bold text-2xl mb-4 text-center">Reporte Fidelización</div>
+
+<form [formGroup]="formReporte">
+    <div class="card" style="padding-left: 1rem;">
+        <p-panel header="Datos"
+          class="line-height-12 m-0">
+          <!-- INICIO DE INPUTS -->
+          <!-- <h5>Tipo de Cuenta</h5> -->
+          <div class="p-fluid p-formgrid grid">
+              <div class="field col-12 md:col-4">
+                  <p-dropdown
+                  
+                  [showClear]="true"
+                  placeholder="Tipo de Extracción"
+                  formControlName="reporte"
+                  [ngClass]="{'ng-invalid ng-dirty': formReporte.get('reporte')?.errors != null && formReporte.get('reporte')?.touched == true}"
+                  (onChange)="cambioReporte($event.value)"
+                  >
+                  </p-dropdown>
+              </div>              
+              <div class="field col-12 md:col-4">
+                  <span class="p-float-label">
+                      <p-calendar
+                          [showIcon]="true"
+                          [minDate]="today"
+                          dateFormat="yy-mm-dd"
+                          [showTime]="true" 
+                          [showSeconds]="true"
+                          formControlName="fechaini"
+                          [ngClass]="{'ng-invalid ng-dirty': formReporte.get('fechaini')?.errors != null && formReporte.get('fechaini')?.touched == true}"
+                      >
+                      </p-calendar>
+                      <label for="inputdate">Fecha Inicio</label>
+                  </span>
+                </div>
+                <div class="field col-12 md:col-4">
+                  <span class="p-float-label">
+                      <p-calendar
+                          [showIcon]="true"
+                          [minDate]="today"
+                          dateFormat="yy-mm-dd"
+                          [showTime]="true" 
+                          [showSeconds]="true"
+                          formControlName="fechafin"
+                          [ngClass]="{'ng-invalid ng-dirty': formReporte.get('fechafin')?.errors != null && formReporte.get('fechafin')?.touched == true}"
+                      >
+                      </p-calendar>
+                      <label for="inputdate">Fecha Fin</label>
+                  </span>
+                </div>
+          </div>
+          <!-- BOTON DE EJECUCION -->
+          <div class="col lg:col-12">
+      
+            <div class="grid flex justify-content-center">
+              <div class="col-4 text-center">
+                  <button
+                  type="button"
+                  pButton
+                  label="Enviar"
+                  style="width:auto;"></button>
+      
+              </div>
+            </div>
+          </div>
+          
+        </p-panel>
+        <br>
+      
+      </div>
+    </form>
+
+<!-- <p-dialog
+  [closable]="closeModal"
+  header="Guardar Cancelación"
+  [(visible)]="display"
+  [modal]="true"
+  showEffect="fade"
+  [style]="{width: '30vw'}"
+  [breakpoints]="{'960px': '75vw'}">
+  <p class="line-height-3 m-0">
+        Los datos a guardar son los siguientes:
+    </p>
+
+  <ul>
+      <li>Tipo de Cuenta: <strong>{{formBolsa.value.tipoCuenta}}</strong></li>
+      <li>Tipo de Proceso: <strong>{{formBolsa.value.tipoProceso}}</strong></li>
+      <li>Cuenta: <strong>{{formBolsa.value.cuenta}}</strong></li>
+      <li>País: <strong>{{formBolsa.value.pais}}</strong></li>
+      <li>Paquete de Datos a Recargar: <strong>{{formBolsa.value.paqueteDatos}}</strong></li>
+  </ul>
+  <ng-template pTemplate="footer">
+
+    <loading-button
+      label="Guardar"
+      labelLoad="Guardando"
+      [loading]="enviando"
+      (click)="sendData()"></loading-button>
+
+  </ng-template>
+</p-dialog> -->
+
+<!-- <p-toast
+  [baseZIndex]="99999"
+  key="tst"></p-toast> -->
+

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReporteFidelizacionRoutingModule } from './reporte-fidelizacion-routing.module';
 import { DashboardReporteFidelizacionComponent } from './dashboard-reporte-fidelizacion/dashboard-reporte-fidelizacion.component';
 import { SharedModule } from 'app/_shared/modules/shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,10 @@ import { SharedModule } from 'app/_shared/modules/shared/shared.module';
   imports: [
     CommonModule,
     ReporteFidelizacionRoutingModule,
-	SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
+
   ]
 })
 export class ReporteFidelizacionModule { }
