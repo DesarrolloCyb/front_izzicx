@@ -34,4 +34,8 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
     console.log(event)
   }
 
+  enviar(){
+    console.log(this.formReporte)
+  }
+
 }
