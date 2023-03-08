@@ -14,25 +14,7 @@ export class DashboardDepuracionComponent implements OnInit {
 	  uploadedFiles: any[] = [];
 
   constructor(private cors: CorsService) {
-	this.cors
-	.get('Prueba')
-	.then((response) => {
-		console.log(response)
-	//   this.messageService.add({
-	//     key: 'tst',
-	//     severity: 'success',
-	//     summary: 'Datos guardados',
-	//     detail: 'La solicitud de cancelacion fue guardada',
-	//   });
-	})
-	.catch((error) => {
-	  console.log(error)
-	//   this.msgs.push({
-	//     severity: 'error',
-	//     summary: 'No se logro guardar',
-	//     detail: 'La solicitud de cancelacion no fue guardada',
-	//   });
-	});
+	
    }
 
   ngOnInit(): void {

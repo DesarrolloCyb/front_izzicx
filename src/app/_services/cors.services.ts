@@ -23,7 +23,7 @@ export class CorsService {
                     'Content-Type': 'application/json',
                 },
             })
-            .toPromise();
+            .toPromise(); 
     }
     get(partUrl: string, dataGet: any = {}): Promise<any> {
         const params = new HttpParams({
@@ -32,6 +32,7 @@ export class CorsService {
 
         return this.httpClient
             .get(`${environment.API_URL}${partUrl}?${params}`)
+            // .get(`${environment.API_URL}${partUrl}`)
             .toPromise();
     }
 

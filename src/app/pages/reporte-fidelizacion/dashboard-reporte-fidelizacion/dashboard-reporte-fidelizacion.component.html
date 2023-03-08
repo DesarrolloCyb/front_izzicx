@@ -9,7 +9,9 @@
           <div class="p-fluid p-formgrid grid">
               <div class="field col-12 md:col-4">
                   <p-dropdown
-                  
+                  [options]="result"
+                  optionValue="list_id"
+                  optionLabel="list_name"
                   [showClear]="true"
                   placeholder="Tipo de Extracción"
                   formControlName="reporte"
