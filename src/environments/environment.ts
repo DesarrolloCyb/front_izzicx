@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-	API_URL: 'https://backrpa.azurewebsites.net/',
+	API_URL: 'https://backrpaizzi.azurewebsites.net/',
     // API_URL: 'https://10.251.58.11/api/',
     // API_URL: "https://localhost:44372/",
     SCOCKET_URL: 'https://backrpa.azurewebsites.net:3000',
