@@ -19,12 +19,12 @@
 
 
 		<div class="mb-4">
-			<img src="../../../../assets/cyber/logo-cyber-azul.png"
-				alt="cyberideas"
+			<img src="../../../../assets/cyber/Logo_Izzi.svg.png"
+				alt="izzi"
 				style="width: 25rem; max-width: 100%">
 			<div class="text-900 text-xl font-bold mb-2"></div>
-			<span class="text-blue-800 text-xl font-bold mb-2">
-				Ingrese sus credenciales de SKY
+			<span class="text-blue-800 text-xl font-bold mb-2" style="margin-left: 2rem;">
+				Ingrese sus credenciales de IZZI
 			</span>
 		</div>
 		<div class="flex flex-column">
@@ -35,6 +35,7 @@
 					id="email"
 					formControlName="email"
 					type="email"
+					autocomplete="off"
 					pInputText
 					placeholder="Email"
 					style="background-color: rgba(255, 255, 255,0.3); ">
@@ -52,6 +53,7 @@
 				<input id="pwd"
 					type="password"
 					pInputText
+					autocomplete="off"
 					formControlName="pWd"
 					class="w-full md:w-25rem"
 					placeholder="Contraseña"
@@ -94,3 +96,7 @@
 
 	</form>
 </div>
+
+<p-toast
+  [baseZIndex]="99999"
+  key="tst"></p-toast>

@@ -18,19 +18,48 @@ export class AuthComponent {
     rememberMe: boolean = false;
     msgs: Message[] = [];
     formLogin: UntypedFormGroup;
-    constructor(private cors: CorsService, private formBuilder: UntypedFormBuilder, private router: Router) {
+    constructor(private messageService: MessageService,private cors: CorsService, private formBuilder: UntypedFormBuilder, private router: Router) {
         this.formLogin = this.formBuilder.group({
-            email: [environment.user, Validators.required],
-            pWd: [environment.password, Validators.required],
+            // email: [environment.user, Validators.required],
+            // pWd: [environment.password, Validators.required],
+            email: [null, Validators.required],
+            pWd: [null, Validators.required],
             remember: [null],
         });
     }
 
     onSignIn() {
-        // this.formLogin.markAllAsTouched();
-        // console.log(this.formLogin.valid);
-
-		this.router.navigate(['/home']);
+        this.formLogin.markAllAsTouched();
+        if(this.formLogin.valid){
+            if((this.formLogin.value.email =='admin' && this.formLogin.value.pWd =='admin') || (this.formLogin.value.email =='usuario1' && this.formLogin.value.pWd =='123') ){
+                if(this.formLogin.value.email =='admin'){
+                    let a={
+                        "role":"admin",
+                        "firstName":"admin",
+                        "lastName":"admin"
+                    }
+                    localStorage.setItem( "userData",JSON.stringify(a))   
+                }else if(this.formLogin.value.email =='usuario1'){
+                    let a={
+                        "role":"Reporte",
+                        "firstName":"Persona1",
+                        "lastName":"Persona1"
+                    }
+                    localStorage.setItem( "userData",JSON.stringify(a))   
+                }
+    
+                this.router.navigate(['/home']);
+    
+            }else{
+                this.messageService.add({
+                    key: 'tst',
+                    severity: 'error',
+                    summary: 'Usuario o contraseña Invalidos',
+                    detail: 'Intentalo Nuevamente!!',
+                  });
+            }
+    
+        }
         // if (this.formLogin.valid) {
           
         //     this.cors.post('AD/Identity', this.formLogin.value).then((response) => {

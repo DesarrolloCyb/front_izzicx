@@ -11,17 +11,17 @@ const routerOptions: ExtraOptions = {
 };
 
 const routes: Routes = [
-//   {
-//     path: '',
-//     redirectTo: '/login',
-//     pathMatch: 'full'
-//   },
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
 
-//   {
-//     path: 'login',
-//     loadChildren: () =>
-//       import('./pages/auth/auth.module').then((m) => m.AuthModule),
-//   },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./pages/auth/auth.module').then((m) => m.AuthModule),
+  },
   {
     path: '',
     redirectTo: '/home',
@@ -30,6 +30,7 @@ const routes: Routes = [
   {
     path: 'home',
     data: { breadcrumb: 'Home' },
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./pages/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
@@ -38,35 +39,35 @@ const routes: Routes = [
   {
     path: 'extraccion',
     data: { breadcrumb: 'Extracción' },
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./pages/extraccion/extraccion.module').then((m) => m.ExtraccionModule),
   },
   {
     path: 'asignacion',
     data: { breadcrumb: 'Asignación' },
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./pages/asignacion/asignacion.module').then((m) => m.AsignacionModule),
   },
   {
     path: 'casoNegocio',
     data: { breadcrumb: 'Caso de Negocio y Ordenes' },
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./pages/casos-negocio/casos-negocio.module').then((m) => m.CasosNegocioModule),
   },
   {
     path: 'depuracion',
     data: { breadcrumb: 'Depuración'},
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./pages/depuracion/depuracion.module').then((m) => m.DepuracionModule),
   },
   {
     path: 'reporteFidelizacion',
     data: { breadcrumb: 'Reporte Fidelización'},
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./pages/reporte-fidelizacion/reporte-fidelizacion.module').then((m) => m.ReporteFidelizacionModule),
   },

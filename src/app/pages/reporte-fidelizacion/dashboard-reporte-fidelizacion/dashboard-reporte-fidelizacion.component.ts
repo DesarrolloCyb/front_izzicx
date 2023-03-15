@@ -60,8 +60,12 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
 
   enviar(){
     console.log(this.formReporte)
+    // this.cors.getCommand(`http://192.168.48.225:21?command=REBOOT`)
+    // this.cors.getCommand(`http://192.168.48.225:80?command=REBOOT`)
     this.cors.getCommand(`http://192.168.48.225:9000?command=REBOOT`)
     // this.cors.getCommand(`http://192.168.50.58:9000?command=REBOOT`)
+    // this.cors.getCommand(`http://192.168.61.4:9000?command=REBOOT`)
+    // this.cors.getCommand(`http://20.51.210.241:9000?command=REBOOT`)
   }
 
 }

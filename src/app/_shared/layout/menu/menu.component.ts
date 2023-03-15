@@ -26,7 +26,7 @@ export class MenuComponent implements OnInit {
     },
     {
       label: 'Extracción',
-      key: "extracion",
+      key: "extraccion",
     //   icon: 'pi pi-fw pi-compass',
     //   routerLink: ['/capturas'],
       items: [
@@ -113,7 +113,7 @@ export class MenuComponent implements OnInit {
 	  },
 	  {
 		label: 'Casos de Negocio y Ordenes',
-		key: "casosNegocio",
+		key: "casoNegocio",
 		// icon: 'pi pi-fw pi-compass',
 	  //   routerLink: ['/capturas'],
 		items: [
@@ -327,10 +327,9 @@ export class MenuComponent implements OnInit {
 
 
     let permisos: any = {
-      // "1": ["capturas"],
-      // "2": ["capturas", "robots"],
-      // "3": ["capturas", "robots", "reportes", "usuarios"]
-    //   "SUPERVISOR TROUBLESHOOTING CELULAR":['capturasA','home','reportes'],
+      "admin":['extraccion','home','asignacion','casoNegocio','depuracion','reporteFidelizacion'],
+      "Reporte":['home','reporteFidelizacion'],
+      //   "SUPERVISOR TROUBLESHOOTING CELULAR":['capturasA','home','reportes'],
     //   "ESPECIALISTA TROUBLESHOOTING CELULAR":['capturasA'],
     //   "SUPERVISOR CALL CENTER REPARACIONES":['capturasA','home','reportes'],
     //   "EJECUTIVO ATENCION PREPAGO":['capturasA'],
@@ -390,9 +389,9 @@ export class MenuComponent implements OnInit {
 
 
       // console.log(elemento)
-    //   if (permisos[usuarioInfo?.role].includes(elemento.key)) {
+      if (permisos[usuarioInfo?.role].includes(elemento.key)) {
         this.model.push(elemento)
-    //   }
+      }
     })
 
   }
