@@ -17,12 +17,14 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
   formReporte:UntypedFormGroup;
   today = new Date();
   result:any=[];
+  usuario: any = JSON.parse(localStorage.getItem("userData") || "{}")
+
 
   constructor(private messageService: MessageService,private formBuilder: UntypedFormBuilder,private cors: CorsService) { 
     this.formReporte = this.formBuilder.group({
       reporte: [null, Validators.required],
-      fechaini: [null],
-      fechafin: [null],
+      fechaini: [null, Validators.required],
+      fechafin: [null, Validators.required],
     });
     this.cors
     .get('Reporte/vici')
@@ -49,6 +51,8 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
 
   ngOnInit(): void {
 
+    console.log(this.usuario)
+
   }
 
   dateFormat(value:any){
@@ -67,7 +71,7 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
     if(this.formReporte.valid){
         let a={
           "id":0,
-          "Cve_usuario": "",
+          "Cve_usuario": `${this.usuario.email}`,
           "list_id": `${this.formReporte.value.reporte}`,
           "archivo": "",
           "procesando": "",
@@ -95,6 +99,9 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
             detail: 'Intenta Nuevamente!!!',
           });
         });
+        this.formReporte.controls['reporte'].reset();
+        this.formReporte.controls['fechaini'].reset();
+        this.formReporte.controls['fechafin'].reset();
     }else{
       this.messageService.add({
         key:'tst',

@@ -36,14 +36,16 @@ export class AuthComponent {
                     let a={
                         "role":"admin",
                         "firstName":"admin",
-                        "lastName":"admin"
+                        "lastName":"admin",
+                        "email":"admin@test.com"
                     }
                     localStorage.setItem( "userData",JSON.stringify(a))   
                 }else if(this.formLogin.value.email =='usuario1'){
                     let a={
                         "role":"Reporte",
                         "firstName":"Persona1",
-                        "lastName":"Persona1"
+                        "lastName":"Persona1",
+                        "email":"usuario1@test.com"
                     }
                     localStorage.setItem( "userData",JSON.stringify(a))   
                 }
