@@ -1,109 +1,174 @@
 <div class="text-900 font-bold text-2xl mb-4 text-center">Reporte Fidelización</div>
 
 <form [formGroup]="formReporte">
-    <div class="card" style="padding-left: 1rem;">
-        <p-panel header="Datos"
-          class="line-height-12 m-0">
-          <!-- INICIO DE INPUTS -->
-          <!-- <h5>Tipo de Cuenta</h5> -->
-          <div class="p-fluid p-formgrid grid">
-              <div class="field col-12 md:col-4">
-                  <p-dropdown
-                  [options]="result"
-                  optionValue="list_id"
-                  optionLabel="list_name"
-                  [showClear]="true"
-                  placeholder="Tipo de Extracción"
-                  formControlName="reporte"
-                  [ngClass]="{'ng-invalid ng-dirty': formReporte.get('reporte')?.errors != null && formReporte.get('reporte')?.touched == true}"
-                  
-                  >
-                  </p-dropdown>
-              </div>              
-              <div class="field col-12 md:col-4">
-                  <span class="p-float-label">
-                      <p-calendar
-                          [showIcon]="true"
-                          [minDate]="today"
-                          dateFormat="yy-mm-dd"
-                          [showTime]="true" 
-                          [showSeconds]="true"
-                          formControlName="fechaini"
-                          [ngClass]="{'ng-invalid ng-dirty': formReporte.get('fechaini')?.errors != null && formReporte.get('fechaini')?.touched == true}"
-                      >
-                      </p-calendar>
-                      <label for="inputdate">Fecha Inicio</label>
-                  </span>
-                </div>
-                <div class="field col-12 md:col-4">
-                  <span class="p-float-label">
-                      <p-calendar
-                          [showIcon]="true"
-                          [minDate]="today"
-                          dateFormat="yy-mm-dd"
-                          [showTime]="true" 
-                          [showSeconds]="true"
-                          formControlName="fechafin"
-                          [ngClass]="{'ng-invalid ng-dirty': formReporte.get('fechafin')?.errors != null && formReporte.get('fechafin')?.touched == true}"
-                      >
-                      </p-calendar>
-                      <label for="inputdate">Fecha Fin</label>
-                  </span>
-                </div>
-          </div>
-          <!-- BOTON DE EJECUCION -->
-          <div class="col lg:col-12">
-      
-            <div class="grid flex justify-content-center">
-              <div class="col-4 text-center">
-                  <button
-                  type="button"
-                  pButton
-                  (click)="enviar()"
-                  label="Enviar"
-                  style="width:auto;"></button>
-      
+  <div class="card" style="padding-left: 1rem;">
+      <p-panel header="Datos"
+        class="line-height-12 m-0">
+        <!-- INICIO DE INPUTS -->
+        <!-- <h5>Tipo de Cuenta</h5> -->
+        <div class="p-fluid p-formgrid grid">
+            <div class="field col-12 md:col-4">
+                <p-dropdown
+                [options]="result"
+                optionValue="list_id"
+                optionLabel="list_name"
+                [showClear]="true"
+                placeholder="Tipo de Extracción"
+                formControlName="reporte"
+                [ngClass]="{'ng-invalid ng-dirty': formReporte.get('reporte')?.errors != null && formReporte.get('reporte')?.touched == true}"
+                
+                >
+                </p-dropdown>
+            </div>              
+            <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <p-calendar
+                        [showIcon]="true"
+                        [minDate]="today"
+                        dateFormat="yy-mm-dd"
+                        [showTime]="true" 
+                        [showSeconds]="true"
+                        formControlName="fechaini"
+                        [ngClass]="{'ng-invalid ng-dirty': formReporte.get('fechaini')?.errors != null && formReporte.get('fechaini')?.touched == true}"
+                    >
+                    </p-calendar>
+                    <label for="inputdate">Fecha Inicio</label>
+                </span>
               </div>
+              <div class="field col-12 md:col-4">
+                <span class="p-float-label">
+                    <p-calendar
+                        [showIcon]="true"
+                        [minDate]="today"
+                        dateFormat="yy-mm-dd"
+                        [showTime]="true" 
+                        [showSeconds]="true"
+                        formControlName="fechafin"
+                        [ngClass]="{'ng-invalid ng-dirty': formReporte.get('fechafin')?.errors != null && formReporte.get('fechafin')?.touched == true}"
+                    >
+                    </p-calendar>
+                    <label for="inputdate">Fecha Fin</label>
+                </span>
+              </div>
+        </div>
+        <!-- BOTON DE EJECUCION -->
+        <div class="col lg:col-12">
+    
+          <div class="grid flex justify-content-center">
+            <div class="col-4 text-center" *ngIf="spinner">
+              <p-progressSpinner></p-progressSpinner>
+            </div>
+            <div class="col-4 text-center" *ngIf="!spinner">
+                <button
+                type="button"
+                pButton
+                (click)="enviar()"
+                label="Enviar"
+                style="width:auto;"></button>
+    
             </div>
           </div>
-          
-        </p-panel>
-        <br>
-      
-      </div>
-    </form>
-
-<!-- <p-dialog
-  [closable]="closeModal"
-  header="Guardar Cancelación"
-  [(visible)]="display"
-  [modal]="true"
-  showEffect="fade"
-  [style]="{width: '30vw'}"
-  [breakpoints]="{'960px': '75vw'}">
-  <p class="line-height-3 m-0">
-        Los datos a guardar son los siguientes:
-    </p>
-
-  <ul>
-      <li>Tipo de Cuenta: <strong>{{formBolsa.value.tipoCuenta}}</strong></li>
-      <li>Tipo de Proceso: <strong>{{formBolsa.value.tipoProceso}}</strong></li>
-      <li>Cuenta: <strong>{{formBolsa.value.cuenta}}</strong></li>
-      <li>País: <strong>{{formBolsa.value.pais}}</strong></li>
-      <li>Paquete de Datos a Recargar: <strong>{{formBolsa.value.paqueteDatos}}</strong></li>
-  </ul>
-  <ng-template pTemplate="footer">
-
-    <loading-button
-      label="Guardar"
-      labelLoad="Guardando"
-      [loading]="enviando"
-      (click)="sendData()"></loading-button>
-
-  </ng-template>
-</p-dialog> -->
-
+        </div>
+        
+      </p-panel>
+      <br>
+    
+    </div>
+</form>
 <p-toast
-  [baseZIndex]="99999"
-  key="tst"></p-toast>
+[baseZIndex]="99999"
+key="tst"></p-toast>
+
+<div class="row">
+  <div class="cols">
+    <div class="card">
+      <p-table #dt1 [value]="reportes" dataKey="id" [loading]="loading" [rows]="50" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
+          styleClass="p-datatable-gridlines" [paginator]="true"
+          responsiveLayout="scroll">
+          <!-- <ng-template pTemplate="caption">
+              <div class="flex justify-content-between flex-column sm:flex-row">
+
+                  <span class="p-input-icon-left mb-2">
+                      <i class="pi pi-search"></i>
+                      <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar"
+                          class="w-full" />
+                  </span>
+              </div>
+          </ng-template> -->
+          <ng-template pTemplate="header">
+              <tr>
+                  <th>
+                      <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                          Usuario
+
+                      </div>
+                  </th>
+                  <th>
+                      <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                          Archivo
+
+                      </div>
+                  </th>
+                  <th>
+                    <div style="width: 160px;" class="flex justify-content-between align-items-center">
+                        Fecha de Captura
+                    </div>
+                  </th>
+                  <th>
+                    <div style="width: 160px;" class="flex justify-content-between align-items-center">
+                        Fecha de Completado
+                    </div>
+                  </th>
+                  <th>
+                      <div class="flex justify-content-between align-items-center">
+                          Procesando
+                      </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-between align-items-center">
+                        Estatus
+                    </div>
+                  </th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item let-i="rowIndex">
+              <tr>
+                  <td class="text-center">
+                    {{item.cve_usuario}}
+                  </td>
+                  <td class="text-center">
+                      {{item.archivo}}
+                  </td>
+                  <td class="text-center">
+                      {{dateFormat(item.fechaCaptura)}}
+                  </td>
+                  <td class="text-center">
+                     {{dateFormat(item.fechaCompletado)}}
+                  </td>
+                  <td class="text-center">
+                    {{item.procesando}}
+                  </td>
+                  <td class="text-center">
+                    {{item.status}}
+                  </td>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+              <tr>
+                  <td colspan="7">Sin Datos para Mostrar.</td>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="loadingbody">
+              <tr>
+                  <td colspan="7">Cargando Datos, espere...</td>
+              </tr>
+
+          </ng-template>
+          <ng-template pTemplate="paginatorleft" let-state>
+              Mostrando {{(state.page  * state.rows) + 1}} a {{state.rows * (state.page + 1)}} de {{state.totalRecords}} registros.
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
 

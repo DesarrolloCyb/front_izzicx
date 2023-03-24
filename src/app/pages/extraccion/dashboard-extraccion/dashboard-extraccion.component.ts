@@ -3,6 +3,8 @@ import { UntypedFormBuilder,UntypedFormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 moment.lang('es');
+import { Message, MessageService } from 'primeng/api';
+import { CorsService } from '@services';
 
 @Component({
   selector: 'dashboard-extraccion',
@@ -11,18 +13,18 @@ moment.lang('es');
 })
 export class DashboardExtraccionComponent implements OnInit {
 
+  usuario: any = JSON.parse(localStorage.getItem("userData") || "{}")
   tipoExtraccion:string[]=[
     'Cuenta',
     'Casos de negocio',
     'Actividades',
     'Ordenes de servicio'
-  ];
- 
+  ]; 
   today = new Date();
   formExtraccion:UntypedFormGroup;
   spinner:boolean=false;
 
-  constructor(private formBuilder: UntypedFormBuilder,private router:Router) {
+  constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService) {
     this.formExtraccion = this.formBuilder.group({
       tipoExtraccion: [null, Validators.required],
       fechaini: [null, Validators.required],
@@ -59,58 +61,77 @@ export class DashboardExtraccionComponent implements OnInit {
 
   Enviar(){
     this.formExtraccion.markAllAsTouched();
-    let data ={
-      "tipoExtraccion":"",
-      "datos":"",
-      "fechaini":"",
-      "fechafin":""
-    };
-    if(this.formExtraccion.controls['tipoExtraccion'].value === "Cuenta"){
-      // console.log("Esto es Cuenta")
-      data={
-        'tipoExtraccion':`"${this.formExtraccion.controls['tipoExtraccion'].value}"`,
-        'fechaini':`"${this.dateFormat(this.formExtraccion.controls['fechaini'].value)}"`,
-        'fechafin':`"${this.dateFormat(this.formExtraccion.controls['fechafin'].value)}"`,
-        'datos':`[{"estado":"${this.formExtraccion.controls['estado'].value}","tipo":"${this.formExtraccion.controls['tipo'].value}","subtipo":"${this.formExtraccion.controls['subtipo'].value}","canalIngreso":"${this.formExtraccion.controls['canalIngreso'].value}"}]`,
-      }
-      // var myObject = JSON.parse(data.datos);
-      // console.log(myObject)
-    }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Casos de negocio"){
-      // console.log("Casos de negocio")
-      data={
-        'tipoExtraccion':`"${this.formExtraccion.controls['tipoExtraccion'].value}"`,
-        'fechaini':`"${this.dateFormat(this.formExtraccion.controls['fechaini'].value)}"`,
-        'fechafin':`"${this.dateFormat(this.formExtraccion.controls['fechafin'].value)}"`,
-        'datos':`[{"estado":"${this.formExtraccion.controls['estado'].value}","numCaso":"${this.formExtraccion.controls['numCaso'].value}","cuenta":"${this.formExtraccion.controls['cuenta'].value}","categoria":"${this.formExtraccion.controls['categoria'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","subMotivo":"${this.formExtraccion.controls['subMotivo'].value}","solucion":"${this.formExtraccion.controls['solucion'].value}"}]`,
-      }
-
-
-    }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Actividades"){
-      // console.log("Actividades")
-      data={
-        'tipoExtraccion':`"${this.formExtraccion.controls['tipoExtraccion'].value}"`,
-        'fechaini':`"${this.dateFormat(this.formExtraccion.controls['fechaini'].value)}"`,
-        'fechafin':`"${this.dateFormat(this.formExtraccion.controls['fechafin'].value)}"`,
-        'datos':`[{"estado":"${this.formExtraccion.controls['estado'].value}","areaConocimiento":"${this.formExtraccion.controls['areaConocimiento'].value}","fechaAsignacion":"${this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value)}"}]`,
-      }
-      
-    }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Ordenes de servicio"){
-      // console.log("Ordenes de servicio")
-      data={
-        'tipoExtraccion':`"${this.formExtraccion.controls['tipoExtraccion'].value}"`,
-        'fechaini':`"${this.dateFormat(this.formExtraccion.controls['fechaini'].value)}"`,
-        'fechafin':`"${this.dateFormat(this.formExtraccion.controls['fechafin'].value)}"`,
-        'datos':`[{"estado":"${this.formExtraccion.controls['estado'].value}","rpt":"${this.formExtraccion.controls['rpt'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","asignada":"${this.formExtraccion.controls['asignada'].value}"}]`,
-      }
-
-    }
-
     if(this.formExtraccion.valid){
       this.spinner = true;
+      let data ={
+        "id": 0,
+        "cve_usuario": `${this.usuario.email}`,
+        "tipoExtraccion":`${this.formExtraccion.controls['tipoExtraccion'].value}`,
+        "fechaCompletado": null,
+        "status": "",
+        "fechaCaptura": null,
+        "ip": "",
+        "parametrosExtraccion":"",
+        "fechaInicial":`${this.dateFormat1(this.formExtraccion.controls['fechaini'].value)}`,
+        "fechaFinal":`${this.dateFormat1(this.formExtraccion.controls['fechafin'].value)}`,
+        "procesando": "",
+        "fechaExtraccion": null,
+        "archivo": ""
+      };
+      if(this.formExtraccion.controls['tipoExtraccion'].value === "Cuenta"){
+        // console.log("Esto es Cuenta")
+        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","tipo":"${this.formExtraccion.controls['tipo'].value}","subtipo":"${this.formExtraccion.controls['subtipo'].value}","canalIngreso":"${this.formExtraccion.controls['canalIngreso'].value}"}]`;
+        
+        // var myObject = JSON.parse(data.parametrosExtraccion);
+        // console.log(myObject)
+      }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Casos de negocio"){
+        // console.log("Casos de negocio")
+        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","numCaso":"${this.formExtraccion.controls['numCaso'].value}","cuenta":"${this.formExtraccion.controls['cuenta'].value}","categoria":"${this.formExtraccion.controls['categoria'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","subMotivo":"${this.formExtraccion.controls['subMotivo'].value}","solucion":"${this.formExtraccion.controls['solucion'].value}"}]`;
+      }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Actividades"){
+        // console.log("Actividades")
+        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","areaConocimiento":"${this.formExtraccion.controls['areaConocimiento'].value}","fechaAsignacion":"${this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value)}"}]`;
+        
+      }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Ordenes de servicio"){
+        // console.log("Ordenes de servicio")
+        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","rpt":"${this.formExtraccion.controls['rpt'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","asignada":"${this.formExtraccion.controls['asignada'].value}"}]`;
+      }
+      console.log(data)
+      this.cors.post('Reporte/GuardarFormularioEjecucionExtraccion',data)
+      .then((response) => {
+        // console.log(response)
+        this.messageService.add({
+          key: 'tst',
+          severity: 'success',
+          summary: 'Exito!!!',
+          detail: 'Datos guardados',
+        });
+      })
+      .catch((error) => {
+        console.log(error)
+        this.messageService.add({
+          key:'tst',
+          severity: 'error',
+          summary: 'No se logro guardar',
+          detail: 'Intenta Nuevamente!!!',
+        });
+      });
+
       setTimeout(() => {
         this.spinner = false;
+        this.reset()
         this.router.navigate(['/extraccion/visualizacion']);
-      }, 5000);
+        
+      }, 2000);
+      
+    }else{
+      
+      this.messageService.add({
+        key:'tst',
+        severity: 'error',
+        summary: 'Faltaron campos por rellenar!',
+        detail: 'Intenta Nuevamente!!!',
+      });
+      
     }
 
 
@@ -220,6 +241,9 @@ export class DashboardExtraccionComponent implements OnInit {
   }
   dateFormat(value:any){
     return moment(value).format('yyyy-MM-DD hh:mm:ss')
+  }
+  dateFormat1(value:any){
+    return moment(value).format('yyyy-MM-DDThh:mm:ss')
   }
 
 

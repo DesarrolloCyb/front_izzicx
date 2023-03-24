@@ -4,6 +4,9 @@ import * as moment from 'moment';
 moment.lang('es');
 import { CorsService } from '@services';
 import { Message, MessageService } from 'primeng/api';
+import { Table } from 'primeng/table';
+import { ThisReceiver } from '@angular/compiler';
+
 
 
 
@@ -17,7 +20,10 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
   formReporte:UntypedFormGroup;
   today = new Date();
   result:any=[];
-  usuario: any = JSON.parse(localStorage.getItem("userData") || "{}")
+  usuario: any = JSON.parse(localStorage.getItem("userData") || "{}");
+  spinner:boolean=false;
+  reportes:any=[];
+  loading: boolean = false
 
 
   constructor(private messageService: MessageService,private formBuilder: UntypedFormBuilder,private cors: CorsService) { 
@@ -51,12 +57,31 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.usuario)
+    // console.log(this.usuario)
+    this.registrosReporte()
 
   }
 
+  registrosReporte(){
+    this.cors.get('Reporte/getRowsReporte')
+    .then((response) => {
+      if(response[0] != "SIN INFO"){
+        // console.log(response)
+        this.reportes=response
+
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+  }
+
   dateFormat(value:any){
-    return moment(value).format('yyyy-MM-DD hh:mm:ss')
+    if(value == null){
+      return "-"
+    }else{
+      return moment(value).format('DD-MM-yyyy hh:mm:ss')
+    }
   }
 
   enviar(){
@@ -69,6 +94,7 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
     // this.cors.getCommand(`http://192.168.61.4:9000?command=REBOOT`)
     // this.cors.getCommand(`http://20.51.210.241:9000?command=REBOOT`)
     if(this.formReporte.valid){
+        this.spinner = true;
         let a={
           "id":0,
           "Cve_usuario": `${this.usuario.email}`,
@@ -86,9 +112,10 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
           this.messageService.add({
             key: 'tst',
             severity: 'success',
-            summary: 'Datos guardados',
-            detail: 'La solicitud de cancelacion fue guardada',
+            summary: 'Exito!!',
+            detail: 'Datos guardados',
           });
+          this.registrosReporte()
         })
         .catch((error) => {
           console.log(error)
@@ -102,10 +129,11 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
         this.formReporte.controls['reporte'].reset();
         this.formReporte.controls['fechaini'].reset();
         this.formReporte.controls['fechafin'].reset();
-    }else{
-      this.messageService.add({
-        key:'tst',
-        severity: 'error',
+        this.spinner = false;
+      }else{
+        this.messageService.add({
+          key:'tst',
+          severity: 'error',
         summary: 'Faltaron campos por rellenar!',
         detail: 'Intenta Nuevamente!!!',
       });
@@ -113,5 +141,12 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
     }
 
   }
+
+  onGlobalFilter(table: Table, event: Event) {
+    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+
+
 
 }

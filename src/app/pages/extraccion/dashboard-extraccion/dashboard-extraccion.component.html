@@ -239,8 +239,8 @@
           <!-- BOTON DE EJECUCION -->
           <div class="col lg:col-12">
       
-            <div class="grid flex justify-content-center">
-              <div class="col-4 text-center">
+            <div class="grid flex justify-content-center" *ngIf="!spinner">
+              <div class="col-4 text-center" >
                 
                 <button
                   type="button"
@@ -260,8 +260,8 @@
       
               </div>
             </div>
-            <div class="col-12 text-center">
-              <p-progressSpinner *ngIf="spinner"></p-progressSpinner>
+            <div class="col-12 text-center" *ngIf="spinner">
+              <p-progressSpinner ></p-progressSpinner>
             </div>
           </div>
           
@@ -301,7 +301,7 @@
   </ng-template>
 </p-dialog> -->
 
-<!-- <p-toast
+<p-toast
   [baseZIndex]="99999"
-  key="tst"></p-toast> -->
+  key="tst"></p-toast>
 

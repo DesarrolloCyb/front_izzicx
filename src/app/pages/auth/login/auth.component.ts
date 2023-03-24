@@ -31,7 +31,7 @@ export class AuthComponent {
     onSignIn() {
         this.formLogin.markAllAsTouched();
         if(this.formLogin.valid){
-            if((this.formLogin.value.email =='admin' && this.formLogin.value.pWd =='admin') || (this.formLogin.value.email =='usuario1' && this.formLogin.value.pWd =='123') ){
+            if((this.formLogin.value.email =='admin' && this.formLogin.value.pWd =='admin') || (this.formLogin.value.email =='usuario1' && this.formLogin.value.pWd =='usuario1_2023') ){
                 if(this.formLogin.value.email =='admin'){
                     let a={
                         "role":"admin",
