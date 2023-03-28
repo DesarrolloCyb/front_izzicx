@@ -27,8 +27,8 @@ export class DashboardExtraccionComponent implements OnInit {
   constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService) {
     this.formExtraccion = this.formBuilder.group({
       tipoExtraccion: [null, Validators.required],
-      fechaini: [null, Validators.required],
-      fechafin: [null, Validators.required],
+      fechaini: [null],
+      fechafin: [null],
 
       estado: [null],
       tipo: [null],
@@ -72,15 +72,16 @@ export class DashboardExtraccionComponent implements OnInit {
         "fechaCaptura": null,
         "ip": "",
         "parametrosExtraccion":"",
-        "fechaInicial":`${this.dateFormat1(this.formExtraccion.controls['fechaini'].value)}`,
-        "fechaFinal":`${this.dateFormat1(this.formExtraccion.controls['fechafin'].value)}`,
+        "fechaInicial":null,
+        "fechaFinal":null,
         "procesando": "",
         "fechaExtraccion": null,
         "archivo": ""
       };
       if(this.formExtraccion.controls['tipoExtraccion'].value === "Cuenta"){
         // console.log("Esto es Cuenta")
-        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","tipo":"${this.formExtraccion.controls['tipo'].value}","subtipo":"${this.formExtraccion.controls['subtipo'].value}","canalIngreso":"${this.formExtraccion.controls['canalIngreso'].value}"}]`;
+        // data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","tipo":"${this.formExtraccion.controls['tipo'].value}","subtipo":"${this.formExtraccion.controls['subtipo'].value}","canalIngreso":"${this.formExtraccion.controls['canalIngreso'].value}"}]`;
+        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","tipo":"${this.formExtraccion.controls['tipo'].value}","subtipo":"${this.formExtraccion.controls['subtipo'].value}"}]`;
         
         // var myObject = JSON.parse(data.parametrosExtraccion);
         // console.log(myObject)
@@ -93,9 +94,10 @@ export class DashboardExtraccionComponent implements OnInit {
         
       }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Ordenes de servicio"){
         // console.log("Ordenes de servicio")
-        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","rpt":"${this.formExtraccion.controls['rpt'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","asignada":"${this.formExtraccion.controls['asignada'].value}"}]`;
+        // data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","rpt":"${this.formExtraccion.controls['rpt'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","asignada":"${this.formExtraccion.controls['asignada'].value}"}]`;
+        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","fechaAsignacion":"${this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value)}"}]`;
       }
-      console.log(data)
+      // console.log(data)
       this.cors.post('Reporte/GuardarFormularioEjecucionExtraccion',data)
       .then((response) => {
         // console.log(response)
@@ -240,7 +242,7 @@ export class DashboardExtraccionComponent implements OnInit {
     }
   }
   dateFormat(value:any){
-    return moment(value).format('yyyy-MM-DD hh:mm:ss')
+    return moment(value).format('DD-MM-yyyy hh:mm:ss')
   }
   dateFormat1(value:any){
     return moment(value).format('yyyy-MM-DDThh:mm:ss')
