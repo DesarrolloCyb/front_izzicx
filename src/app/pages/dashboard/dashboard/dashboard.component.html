@@ -1,186 +1,31 @@
+<div class="text-900 font-bold text-2xl mb-4 text-center">Dashboard CyberRoom</div>
+
+<div class="card" style="padding-left: 1rem;">
+  <p-panel header=""
+    class="line-height-12 m-0">
+    <!-- INICIO DE INPUTS -->
+    <!-- <h5>Tipo de Cuenta</h5> -->
+    <div class="p-fluid p-formgrid grid">
+      <div class="field col-12 md:col-12">
+      </div>
 
 
-<div class="grid p-fluid">
-    <!--  -->
-    <div class="col-12 md:col-12"
-        *ngIf="
-        usuario.role==='Resp: MOISES AVILA SOTO' || 
-        usuario.role==='GERENTE RETENCION INBOUND' ||
-        usuario.role==='GERENTE ATENCION A CLIENTES' ||
-        usuario.role==='SUPERVISOR ATENCION A CLIENTES INTERNO' ||
-        usuario.role==='ASESOR CONTROL INFORMACION' ||
-        usuario.role==='SUPERVISOR GESTION EDP' ||
-        usuario.role==='SUPERVISOR ESTRATEGIA OPERATIVA' ||
-        usuario.role==='ESPECIALISTA ESTRATEGIA OPERATIVA' ||
-        usuario.role==='GERENTE MESA DE CONTROL' ||
-        usuario.role==='SUPERVISOR MESA DE CONTROL' ||
-        usuario.role==='SUPERVISOR MESA CONTROL DE DOCUMENTOS' ||
-        usuario.role==='ASESOR RETENCION VETV' ||
-        usuario.role==='SUPERVISOR RETENCION WEB' ||
-        usuario.role==='SUPERVISOR RETENCION INBOUND VETV' ||
-        usuario.role==='SUPERVISOR RETENCION INBOUND' ||
-        usuario.role==='ESPECIALISTA RETENCION WEB' ||
-        usuario.role==='ESPECIALISTA RETENCION VETV' ||
-        usuario.role==='ESPECIALISTA RETENCION INBOUND' ||
-        usuario.role==='ESPECIALISTA RETENCION CHAT' ||
-        usuario.role==='ESPECIALISTA RETENCION POSPAGO BRONCE'||
-        usuario.role==='ESPECIALISTA RETENCION PREPAGO BRONCE'
-        "
-    > 
-    <div class="card text-center" >
-        <h5>Tiempo Promedio de cierre por Proceso</h5>
-        <p-chart  type="bar" [data]="barData" [options]="barOptions"></p-chart>
     </div>
-    </div>
-    <div class="col-12 md:col-12"
-    *ngIf="
-        usuario.role==='Resp: MOISES AVILA SOTO' ||
-        usuario.role==='GERENTE RETENCION INBOUND' ||
-        usuario.role==='GERENTE ATENCION A CLIENTES' ||
-        usuario.role==='SUPERVISOR ATENCION A CLIENTES INTERNO' ||
-        usuario.role==='ASESOR CONTROL INFORMACION' ||
-        usuario.role==='SUPERVISOR GESTION EDP' ||
-        usuario.role==='SUPERVISOR ESTRATEGIA OPERATIVA' ||
-        usuario.role==='ESPECIALISTA ESTRATEGIA OPERATIVA' ||
-        usuario.role==='GERENTE MESA DE CONTROL' ||
-        usuario.role==='SUPERVISOR MESA DE CONTROL' ||
-        usuario.role==='SUPERVISOR MESA CONTROL DE DOCUMENTOS' ||
-        usuario.role==='SUPERVISOR TROUBLESHOOTING CELULAR' ||
-        usuario.role==='ESPECIALISTA TROUBLESHOOTING CELULAR' ||
-        usuario.role==='SUPERVISOR CALL CENTER REPARACIONES' ||
-        usuario.role==='EJECUTIVO ATENCION PREPAGO' ||
-        usuario.role==='GERENTE REPARACIONES VETV' ||
-        usuario.role==='COORDINADOR REPARACIONES' ||
-        usuario.role==='SUPERVISOR ATENCION CC MX' ||
-        usuario.role==='COORDINADOR ATENCION CC MX' ||
-        usuario.role==='ASESOR ATENCION CC MX' ||
-        usuario.role==='EJECUTIVO ATENCION A CLIENTE' ||
-        usuario.role==='EJECUTIVO ATENCION PREPAGO BRONCE J' ||
-        usuario.role==='EJECUTIVO ATENCION PREPAGO BRONCE S' ||
-        usuario.role==='EJECUTIVO REPARACIONES JR' ||
-        usuario.role==='EJECUTIVO ATENCION PREPAGO BRONCE' ||
-        usuario.role==='EJECUTIVO ATENCION A CLIENTE MX JR' ||
-        usuario.role==='EJECUTIVO ATENCION A CLIENTE MX SENIOR' ||
-        usuario.role==='EJECUTIVO ATENCION A CLIENTE MX JR' ||
-        usuario.role==='SUPERVISOR ATENCION CC MX' ||
-        usuario.role==='EJECUTIVO ATENCION POSPAGO BRONCE' ||
-        usuario.role==='EJECUTIVO ATENCION POSPAGO ORO' ||
-        usuario.role==='EJECUTIVO ATENCION POSPAGO PLATA' || 
-        usuario.role==='EJECUTIVO ATENCION PREPAGO PLATA' || 
-        usuario.role==='EJECUTIVO ATENCION PREPAGO ORO' 
-    
-        "
-    >
-        <div class="card text-center">
-            <h5>Tiempo Promedio de cierre por Proceso</h5>
-            <p-chart type="bar" [data]="barData2" [options]="barOptions2"></p-chart>
+    <!-- BOTON DE EJECUCION -->
+    <!-- <div class="col lg:col-12">
+
+      <div class="grid flex justify-content-center">
+        <div class="col-4 text-center">
+          
+          <button
+            (click)="verify()"
+            pButton
+            label="Enviar"
+            style="width:auto;"></button>
         </div>
-    </div>
-
-  <div class="col-12 md:col-6" *ngIf="false">
-      <div class="card ">
-          <h5>Signle Video</h5>
-          <p-chart type="line" [data]="lineData" [options]="lineOptions" [style]="{'width': '50%'}"></p-chart>
       </div>
+    </div> -->
+  </p-panel>
+  <br>
 
-      
-
-      <div class="card flex flex-column align-items-center">
-          <h5 class="text-left w-full">New Era vs Tradicional</h5>
-          <p-chart type="polarArea" [data]="polarData" [options]="polarOptions" [style]="{'width': '50%'}"></p-chart>
-      </div>
-  </div>
-  <div class="col-12 md:col-6" 
-        *ngIf="
-        usuario.role==='Resp: MOISES AVILA SOTO' || 
-        usuario.role==='GERENTE RETENCION INBOUND' ||
-        usuario.role==='GERENTE ATENCION A CLIENTES' ||
-        usuario.role==='SUPERVISOR ATENCION A CLIENTES INTERNO' ||
-        usuario.role==='ASESOR CONTROL INFORMACION' ||
-        usuario.role==='SUPERVISOR GESTION EDP' ||
-        usuario.role==='SUPERVISOR ESTRATEGIA OPERATIVA' ||
-        usuario.role==='ESPECIALISTA ESTRATEGIA OPERATIVA' ||
-        usuario.role==='GERENTE MESA DE CONTROL' ||
-        usuario.role==='SUPERVISOR MESA DE CONTROL' ||
-        usuario.role==='SUPERVISOR MESA CONTROL DE DOCUMENTOS' ||
-        usuario.role==='ASESOR RETENCION VETV' ||
-        usuario.role==='SUPERVISOR RETENCION WEB' ||
-        usuario.role==='SUPERVISOR RETENCION INBOUND VETV' ||
-        usuario.role==='SUPERVISOR RETENCION INBOUND' ||
-        usuario.role==='ESPECIALISTA RETENCION WEB' ||
-        usuario.role==='ESPECIALISTA RETENCION VETV' ||
-        usuario.role==='ESPECIALISTA RETENCION INBOUND' ||
-        usuario.role==='ESPECIALISTA RETENCION CHAT' ||
-        usuario.role==='ESPECIALISTA RETENCION POSPAGO BRONCE'||
-        usuario.role==='ESPECIALISTA RETENCION PREPAGO BRONCE'
-        "
-    >
-    <div class="card flex flex-column align-items-center ">
-        <h5 class="text-center w-full">Tipos de Cancelacion</h5>
-        <p-chart type="pie" [data]="pieData" [options]="pieOptions" [style]="{'width': '100%'}"></p-chart>
-    </div>
-     
-     
-  </div>
-  <div class="col-12 md:col-6"
-    *ngIf="
-    usuario.role==='Resp: MOISES AVILA SOTO' ||
-    usuario.role==='GERENTE RETENCION INBOUND' ||
-    usuario.role==='GERENTE ATENCION A CLIENTES' ||
-    usuario.role==='SUPERVISOR ATENCION A CLIENTES INTERNO' ||
-    usuario.role==='ASESOR CONTROL INFORMACION' ||
-    usuario.role==='SUPERVISOR GESTION EDP' ||
-    usuario.role==='SUPERVISOR ESTRATEGIA OPERATIVA' ||
-    usuario.role==='ESPECIALISTA ESTRATEGIA OPERATIVA' ||
-    usuario.role==='GERENTE MESA DE CONTROL' ||
-    usuario.role==='SUPERVISOR MESA DE CONTROL' ||
-    usuario.role==='SUPERVISOR MESA CONTROL DE DOCUMENTOS' ||
-    usuario.role==='SUPERVISOR TROUBLESHOOTING CELULAR' ||
-    usuario.role==='ESPECIALISTA TROUBLESHOOTING CELULAR' ||
-    usuario.role==='SUPERVISOR CALL CENTER REPARACIONES' ||
-    usuario.role==='EJECUTIVO ATENCION PREPAGO' ||
-    usuario.role==='GERENTE REPARACIONES VETV' ||
-    usuario.role==='COORDINADOR REPARACIONES' ||
-    usuario.role==='SUPERVISOR ATENCION CC MX' ||
-    usuario.role==='COORDINADOR ATENCION CC MX' ||
-    usuario.role==='ASESOR ATENCION CC MX' ||
-    usuario.role==='EJECUTIVO ATENCION A CLIENTE' ||
-    usuario.role==='EJECUTIVO ATENCION PREPAGO BRONCE J' ||
-    usuario.role==='EJECUTIVO ATENCION PREPAGO BRONCE S' ||
-    usuario.role==='EJECUTIVO REPARACIONES JR' || 
-    usuario.role==='EJECUTIVO ATENCION PREPAGO BRONCE' ||
-    usuario.role==='EJECUTIVO ATENCION A CLIENTE MX JR' ||
-    usuario.role==='EJECUTIVO ATENCION A CLIENTE MX SENIOR' ||
-    usuario.role==='EJECUTIVO ATENCION A CLIENTE MX JR' ||
-    usuario.role==='SUPERVISOR ATENCION CC MX' ||
-    usuario.role==='EJECUTIVO ATENCION POSPAGO BRONCE' || 
-    usuario.role==='EJECUTIVO ATENCION POSPAGO ORO' ||
-    usuario.role==='EJECUTIVO ATENCION POSPAGO PLATA' ||
-    usuario.role==='EJECUTIVO ATENCION PREPAGO PLATA' ||
-    usuario.role==='EJECUTIVO ATENCION PREPAGO ORO'
-
-
-    "
-  >    
-      <div class="card flex flex-column align-items-center">
-          <h5 class="text-center w-full">Tipos de Cancelacion</h5>
-          <p-chart type="doughnut" [data]="pieData2" [options]="pieOptions" [style]="{'width': '100%'}"></p-chart>
-      </div>     
-  </div>
-  <div class="col-12 md:col-12">
-      <div class="card flex flex-column align-items-center">
-        <div class="field col-12 md:col-6">
-            <p-dropdown
-              [options]="errorChoise"
-              [showClear]="true"
-              placeholder="Seleccionar"
-              (onChange)="changeError($event.value)"
-            >
-            </p-dropdown>
-        </div>
-    
-          <!-- <h5 class="text-center w-full">Errores</h5> -->
-          <p-chart type="radar" [data]="radarData" [options]="radarOptions" [style]="{'width': '70%'}" *ngIf="statusRadar"></p-chart>
-      </div>
-  </div>
 </div>

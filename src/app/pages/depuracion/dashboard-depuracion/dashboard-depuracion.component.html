@@ -4,56 +4,27 @@
   <p-panel header=""
     class="line-height-12 m-0">
     <!-- INICIO DE INPUTS -->
-    <!-- <h5>Tipo de Cuenta</h5> -->
-    <div class="p-fluid p-formgrid grid">
-		<div class="field col-12 md:col-12">
-			<p-fileUpload 
-				chooseLabel="Seleccionar Archivo"
-				[customUpload]="true"
-				(uploadHandler)="uploadfun($event)"
-				[auto]="true">
-				<span class="p-button-label">H</span>
-			</p-fileUpload>
-		</div>
-        <div class="field col-12 md:col-10">
-            <p-dropdown
-            [options]="detalle"
-            [showClear]="true"
-            placeholder="Seleccionar Tipo"
-            >
-            </p-dropdown>
-        </div>
-		<div class="field col-12 md:col-2">
-			<p-button icon="pi pi-send" iconPos="left"></p-button>
-		</div>
+    <h5>Configuración de Horarios</h5>
+    <div class="p-fluid p-formgrid grid justify-content-center">
+      <div class="field col-12 md:col-6">
+        <p-dropdown
+        [options]="horarios"
+        [showClear]="true"
+        optionLabel="horario" optionValue="id"
+        placeholder="Selecciona un Horario"
+        (onChange)="changeHorarios($event.value)"
+        [(ngModel)]="first"
+        >
+        </p-dropdown>
+      </div>
+      <div class="field col-12 md:col-6" *ngIf="first != null">
+          <p-calendar   [showClear]="true" (onSelect)="changeTime($event)" (onClear)="second = null" placeholder="Ingresar Nuevo Horario" [timeOnly]="true" hourFormat="12" inputId="timeonly"></p-calendar>
+      </div>
+      <div class="field col-12 md:col-2 text-center " *ngIf="second != null">
+        <!-- <p-button icon="pi pi-send" iconPos="left">Guardar</p-button>    -->
+        <p-button (click)="enviar()">Guardar</p-button>   
+      </div>
 
-        <!-- <div class="field col-12 md:col-6">
-            <p-dropdown
-            [options]="Pais"
-            [showClear]="true"
-            [ngClass]="{'ng-invalid ng-dirty': formBolsa.get('pais')?.errors != null && formBolsa.get('pais')?.touched == true}"
-            placeholder="Seleccione un país"
-            formControlName="pais">
-            </p-dropdown>
-        </div>
-        <div class="field col-12 md:col-6" *ngIf="formBolsa.value.tipoCuenta =='BTI Single' || formBolsa.value.tipoCuenta =='Combo SD/HD' || formBolsa.value.tipoCuenta =='Combo VeTV'">
-            <p-dropdown
-            [options]="paquetesDatos"
-            [showClear]="true"
-            placeholder="Paquete de Datos a Recargar"
-            [ngClass]="{'ng-invalid ng-dirty': formBolsa.get('paqueteDatos')?.errors != null && formBolsa.get('paqueteDatos')?.touched == true}"
-            formControlName="paqueteDatos">
-            </p-dropdown>
-        </div>
-        <div class="field col-12 md:col-6" *ngIf="formBolsa.value.tipoCuenta =='BT To Go'">
-            <p-dropdown
-            [options]="paquetesDatos2"
-            [showClear]="true"
-            placeholder="Paquete de Datos a Recargar"
-            [ngClass]="{'ng-invalid ng-dirty': formBolsa.get('paqueteDatos')?.errors != null && formBolsa.get('paqueteDatos')?.touched == true}"
-            formControlName="paqueteDatos">
-            </p-dropdown>
-        </div> -->
 
     </div>
     <!-- BOTON DE EJECUCION -->
@@ -105,6 +76,6 @@
   </ng-template>
 </p-dialog> -->
 
-<!-- <p-toast
+<p-toast
   [baseZIndex]="99999"
-  key="tst"></p-toast> -->
+  key="tst"></p-toast>

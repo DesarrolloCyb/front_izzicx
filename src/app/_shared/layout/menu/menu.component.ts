@@ -161,10 +161,15 @@ export class MenuComponent implements OnInit {
 	  //   routerLink: ['/capturas'],
 		items: [
 		  {
-			label: 'Home',
+			label: 'Extracción',
 			icon: 'pi pi-fw pi-folder-open',
 		    routerLink: ['/depuracion'],
 		  },
+      {
+        label: 'Bases depuradas',
+        icon: 'pi pi-fw pi-folder-open',
+          routerLink: ['/depuracion/bases'],
+      },
 		  // {
 		  //   label: 'Solicitud de Cancelación',
 		  //   icon: 'pi pi-fw pi-exclamation-triangle',
