@@ -1,4 +1,4 @@
-<div class="text-900 font-bold text-2xl mb-4 text-center">Extracción</div>
+<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #FC760F;color: white !important;">Extracción</div>
 
 <div [formGroup]="formExtraccion">
     <div class="card" style="padding-left: 1rem;">
@@ -144,7 +144,7 @@
                     <label>Área de Conocimiento</label>
                 </span>
               </div>
-              <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
+              <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
                 <span class="p-float-label">
                     <p-calendar
                         [showIcon]="true"
@@ -156,7 +156,16 @@
                     </p-calendar>
                     <label for="inputdate">Fecha de Asignación</label>
                 </span>
-              </div>
+              </div> -->
+              <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
+                <span class="p-float-label">
+                    
+                  <p-calendar  formControlName="fechaAsignacion" selectionMode="range"  inputId="icon">
+                  </p-calendar>
+                  <label for="inputdate">Rango de Fechas</label>
+              </span>
+            </div>
+              
               <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
                 <span class="p-float-label">
                     <input
@@ -244,7 +253,7 @@
                   type="button"
                   pButton
                   label="Limpiar"
-                  style="width:8rem;"
+                  style="width:8rem;background-color: #FC760F;border: 0;"
                   (click)="reset()"
                   ></button>
               </div>
@@ -253,8 +262,8 @@
                   type="button"
                   (click)="Enviar()"
                   pButton
-                  label="Continuar"
-                  style="width:8rem;"></button>
+                  label="Guardar"
+                  style="width:8rem;background-color: #FC760F;border: 0;"></button>
       
               </div>
             </div>
@@ -302,4 +311,115 @@
 <p-toast
   [baseZIndex]="99999"
   key="tst"></p-toast>
+
+  <div class="row">
+    <div class="cols">
+      <div class="card">
+        <p-table #dt1 [value]="datosExtraccion" dataKey="id" [loading]="loading" [rows]="50" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
+            styleClass="p-datatable-gridlines" [paginator]="true"
+            [globalFilterFields]="['tipoExtraccion','archivo','cve_usuario','fechaCompletado','status','procesando']" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="flex justify-content-between flex-column sm:flex-row">
+
+                    <span class="p-input-icon-left mb-2">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar"
+                            class="w-full" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                            Tipo de Extracción
+
+                        </div>
+                    </th>
+                    <th>
+                        <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                            Fecha de Extracción
+
+                        </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-between align-items-center">
+                          Usuario
+                      </div>
+                    </th>
+                    <th>
+                        <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                            Fecha Completado
+                        </div>
+                      </th>
+                      <th>
+                      <div class="flex justify-content-between align-items-center">
+                          Estatus
+                      </div>
+                    </th>
+                    <th>
+                      <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                          Procesando
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-between align-items-center">
+                          Archivo
+                      </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+                <tr>
+                    <td>
+                      {{item.tipoExtraccion}}
+                    </td>
+                    <td>
+                      {{item.fechaExtraccion ? dateFormat(item.fechaExtraccion):""}}
+                    </td>
+                    <td>
+                      {{item.cve_usuario}}
+                    </td>
+                    <td class="text-center">
+                      {{item.fechaCompletado ? dateFormat(item.fechaCompletado):""}}
+                    </td>
+                    <td>
+                      {{item.status}}
+                    </td>
+                    <td class="text-center">
+                      {{item.procesando == 1 ? "Si":""}}
+                    </td>
+                    <td *ngIf="item.archivo">
+                      <!-- {{item.archivo}} -->
+                        <button pButton  style="background-color: #e0e76df9;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
+                        <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
+                      </td>
+                      <td *ngIf="!item.archivo">
+                      <button pButton disabled style="background-color: grey;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
+                      <!-- {{item.archivo}} -->
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">Sin Datos para Mostrar.</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="loadingbody">
+                <tr>
+                    <td colspan="7">Cargando Datos, espere...</td>
+                </tr>
+
+            </ng-template>
+            <ng-template pTemplate="paginatorleft" let-state>
+                Mostrando {{(state.page  * state.rows) + 1}} a {{state.rows * (state.page + 1)}} de {{state.totalRecords}} registros.
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="show" style="display: none;">
+    <iframe id="report" height="1000" width="1000" [src]="url1 | safeUrl"></iframe>
+  </div>
+
 

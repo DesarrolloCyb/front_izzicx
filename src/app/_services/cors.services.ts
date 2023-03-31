@@ -37,12 +37,12 @@ export class CorsService {
     }
 
     get1(partUrl: string, dataGet: any = {}): Promise<any> {
-        // const params = new HttpParams({
-        //     fromObject: dataGet,
-        // });
+        const params = new HttpParams({
+            fromObject: dataGet,
+        });
 
         return this.httpClient
-            .get(`${environment.API_URL}${partUrl}?${dataGet}`,{
+            .get(`${environment.API_URL}${partUrl}?${params}`,{
                 responseType:'blob'
             })
             .toPromise();

@@ -5,6 +5,8 @@ import * as moment from 'moment';
 moment.lang('es');
 import { Message, MessageService } from 'primeng/api';
 import { CorsService } from '@services';
+import { Table } from 'primeng/table';
+
 
 @Component({
   selector: 'dashboard-extraccion',
@@ -20,11 +22,15 @@ export class DashboardExtraccionComponent implements OnInit {
     'Actividades',
     'Ordenes de servicio'
   ]; 
-  today = new Date();
   formExtraccion:UntypedFormGroup;
   spinner:boolean=false;
+  datosExtraccion:any[]=[];
+  loading: boolean = false
+  show:boolean=false;
+  url1:any;
 
   constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService) {
+    this.tablaExtraccion();
     this.formExtraccion = this.formBuilder.group({
       tipoExtraccion: [null, Validators.required],
       fechaini: [null],
@@ -53,8 +59,13 @@ export class DashboardExtraccionComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  ngOnInit(): any {
+    setInterval(() => {
+      this.tablaExtraccion();
+    }, 5000);
+    
   }
+
   reset(){
     this.formExtraccion.reset()
   }
@@ -90,12 +101,12 @@ export class DashboardExtraccionComponent implements OnInit {
         data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","numCaso":"${this.formExtraccion.controls['numCaso'].value}","cuenta":"${this.formExtraccion.controls['cuenta'].value}","categoria":"${this.formExtraccion.controls['categoria'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","subMotivo":"${this.formExtraccion.controls['subMotivo'].value}","solucion":"${this.formExtraccion.controls['solucion'].value}"}]`;
       }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Actividades"){
         // console.log("Actividades")
-        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","areaConocimiento":"${this.formExtraccion.controls['areaConocimiento'].value}","fechaAsignacion":"${this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value)}"}]`;
+        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","areaConocimiento":"${this.formExtraccion.controls['areaConocimiento'].value}","fechaAsignacion":">=${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value[0]):null } AND <= ${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value[1]):null}"}]`;
         
       }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Ordenes de servicio"){
         // console.log("Ordenes de servicio")
         // data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","rpt":"${this.formExtraccion.controls['rpt'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","asignada":"${this.formExtraccion.controls['asignada'].value}"}]`;
-        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","fechaAsignacion":"${this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value)}"}]`;
+        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","fechaAsignacion":"${this.formExtraccion.controls['areaConocimiento'].value}","fechaAsignacion":">=${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value[0]):null } AND <= ${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value[1]):null}"}]`;
       }
       // console.log(data)
       this.cors.post('Reporte/GuardarFormularioEjecucionExtraccion',data)
@@ -107,6 +118,7 @@ export class DashboardExtraccionComponent implements OnInit {
           summary: 'Exito!!!',
           detail: 'Datos guardados',
         });
+        this.tablaExtraccion();
       })
       .catch((error) => {
         console.log(error)
@@ -121,9 +133,9 @@ export class DashboardExtraccionComponent implements OnInit {
       setTimeout(() => {
         this.spinner = false;
         this.reset()
-        this.router.navigate(['/extraccion/visualizacion']);
+        // this.router.navigate(['/extraccion/visualizacion']);
         
-      }, 2000);
+      }, 3000);
       
     }else{
       
@@ -141,6 +153,11 @@ export class DashboardExtraccionComponent implements OnInit {
 
 
   }
+
+  onGlobalFilter(table: Table, event: Event) {
+    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
 
   clearValidators(){
     this.formExtraccion.controls['estado'].reset();
@@ -242,10 +259,62 @@ export class DashboardExtraccionComponent implements OnInit {
     }
   }
   dateFormat(value:any){
-    return moment(value).format('DD-MM-yyyy hh:mm:ss')
+    // console.log(value)
+    if(value != null){
+      return moment(value).format('DD-MM-yyyy hh:mm:ss')
+    }else{
+      return ""
+    }
   }
   dateFormat1(value:any){
     return moment(value).format('yyyy-MM-DDThh:mm:ss')
+  }
+
+  tablaExtraccion(){
+    // console.log("Tabla Extraccion")
+    this.cors.get('Reporte/getmostrarTablaExtraccion',{})
+    .then((response) => {
+      // console.log(response)
+      this.datosExtraccion = response;
+    })
+    .catch((error) => {
+      console.log(error)
+      this.messageService.add({
+        key:'tst',
+        severity: 'error',
+        summary: 'No se logro mostrar los datos',
+        detail: 'Intenta Nuevamente!!!',
+      });
+    });
+  }
+
+  descargarArchivo(archivo:string){
+    this.cors.get1(`Reporte/BajarExtraccionExcelFTP`,{
+      "nombre":archivo
+    })
+    .then((response) => {
+      // console.log(response)
+      this.show = true;
+      this.url1 = `https://rpabackizzi.azurewebsites.net/Reporte/BajarExtraccionExcelFTP?nombre=${archivo}`;
+      this.messageService.add({
+        key:'tst',
+        severity: 'success',
+        summary: 'Se descargo el archivo',
+        detail: 'Con exito!!',
+      });
+
+      
+    })
+    .catch((error) => {
+      console.log(error)
+      this.messageService.add({
+        key:'tst',
+        severity: 'error',
+        summary: 'No se logro descargar',
+        detail: 'Intenta Nuevamente!!!',
+      });
+    });
+
   }
 
 
