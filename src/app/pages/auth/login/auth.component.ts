@@ -31,25 +31,39 @@ export class AuthComponent {
     onSignIn() {
         this.formLogin.markAllAsTouched();
         if(this.formLogin.valid){
-            if((this.formLogin.value.email =='admin' && this.formLogin.value.pWd =='admin') || (this.formLogin.value.email =='usuario1' && this.formLogin.value.pWd =='usuario1_2023') ){
+            if((this.formLogin.value.email =='admin' && this.formLogin.value.pWd =='admin_2023') || (this.formLogin.value.email =='usuario1' && this.formLogin.value.pWd =='usuario1_2023') || (this.formLogin.value.email =='testExtraccion' && this.formLogin.value.pWd =='testExtraccion_2023') || (this.formLogin.value.email =='testDepuracion' && this.formLogin.value.pWd =='testDepuracion_2023')){
+                let a=null;
                 if(this.formLogin.value.email =='admin'){
-                    let a={
+                    a={
                         "role":"admin",
                         "firstName":"admin",
                         "lastName":"admin",
                         "email":"admin@test.com"
                     }
-                    localStorage.setItem( "userData",JSON.stringify(a))   
-                }else if(this.formLogin.value.email =='usuario1'){
-                    let a={
+                }else if(this.formLogin.value.email =='usuario1'){ //reporte fidelizacion reporte
+                    a={
                         "role":"Reporte",
                         "firstName":"Persona1",
                         "lastName":"Persona1",
                         "email":"usuario1@test.com"
                     }
-                    localStorage.setItem( "userData",JSON.stringify(a))   
+                }else if(this.formLogin.value.email =='testExtraccion'){ //reporte extraccion
+                    a={
+                        "role":"Extraccion",
+                        "firstName":"extraccion",
+                        "lastName":"extraccion",
+                        "email":"testExtraccion@test.com"
+                    }
+                }else if(this.formLogin.value.email =='testDepuracion'){ //reporte Depuracion
+                    a={
+                        "role":"Depuracion",
+                        "firstName":"depuracion",
+                        "lastName":"depuracion",
+                        "email":"testDepuracion@test.com"
+                    }
                 }
-    
+                
+                localStorage.setItem( "userData",JSON.stringify(a))   
                 this.router.navigate(['/home']);
     
             }else{

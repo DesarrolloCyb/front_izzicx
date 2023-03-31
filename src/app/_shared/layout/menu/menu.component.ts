@@ -334,6 +334,8 @@ export class MenuComponent implements OnInit {
     let permisos: any = {
       "admin":['extraccion','home','asignacion','casoNegocio','depuracion','reporteFidelizacion'],
       "Reporte":['home','reporteFidelizacion'],
+      "Extraccion":['home','extraccion'],
+      "Depuracion":['home','depuracion'],
       //   "SUPERVISOR TROUBLESHOOTING CELULAR":['capturasA','home','reportes'],
     //   "ESPECIALISTA TROUBLESHOOTING CELULAR":['capturasA'],
     //   "SUPERVISOR CALL CENTER REPARACIONES":['capturasA','home','reportes'],

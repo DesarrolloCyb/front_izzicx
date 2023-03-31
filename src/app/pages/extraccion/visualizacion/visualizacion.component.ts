@@ -12,4 +12,8 @@ export class VisualizacionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  prueba(){
+    console.log("hola")
+  } 
+
 }
