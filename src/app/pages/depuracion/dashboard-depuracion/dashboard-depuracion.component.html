@@ -1,4 +1,4 @@
-<div class="text-900 font-bold text-2xl mb-4 text-center">Depuración/Cierre</div>
+<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #E80084;color: white !important;">Depuración/Cierre</div>
 
 <div class="card" style="padding-left: 1rem;">
   <p-panel header=""
@@ -79,3 +79,119 @@
 <p-toast
   [baseZIndex]="99999"
   key="tst"></p-toast>
+  <div class="row">
+    <div class="cols">
+      <div class="card">
+        <p-table #dt1 [value]="tablaDepuracion" dataKey="id" [loading]="loading" [rows]="50" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
+            styleClass="p-datatable-gridlines" [paginator]="true"
+            [globalFilterFields]="['tipoExtraccion','fechaExtraccion','archivo','cve_usuario','horarioInicio','fechaCompletado','status','procesando','ip']" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="flex justify-content-between flex-column sm:flex-row">
+
+                    <span class="p-input-icon-left mb-2">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar"
+                            class="w-full" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                            Tipo de Extracción
+
+                        </div>
+                    </th>
+                    <th>
+                        <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                            Fecha Extracción
+
+                        </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-center align-items-center">
+                          Archivo
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-center align-items-center">
+                          Usuario
+                      </div>
+                    </th>
+                    <th>
+                        <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                            Horario de Inicio
+                        </div>
+                    </th>
+                    <th>
+                      <div style="width: 160px;" class="flex justify-content-center align-items-center">
+                          Fecha Completado
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-center align-items-center">
+                          Estatus
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-center align-items-center">
+                          Procesando
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-center align-items-center">
+                          IP
+                      </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+                <tr>
+                    <td class="flex justify-content-center align-items-center">
+                      {{item.tipoExtraccion}}
+                    </td>
+                    <td>
+                        {{dateFormat(item.fechaExtraccion)}}
+                    </td>
+                    <td>
+                        {{item.archivo}}
+                    </td>
+                    <td>
+                       {{item.cve_usuario}}
+                    </td>
+                    <td>
+                      {{item.horarioInicio}}
+                    </td>
+                    <td>
+                      {{dateFormat(item.fechaCompletado)}}
+                    </td>
+                    <td>
+                      {{item.status}}
+                    </td>
+                    <td class="flex justify-content-center align-items-center">
+                      {{item.procesando}}
+                    </td>
+                    <td>
+                      {{item.ip}}
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">Sin Datos para Mostrar.</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="loadingbody">
+                <tr>
+                    <td colspan="7">Cargando Datos, espere...</td>
+                </tr>
+
+            </ng-template>
+            <ng-template pTemplate="paginatorleft" let-state>
+                Mostrando {{(state.page  * state.rows) + 1}} a {{state.rows * (state.page + 1)}} de {{state.totalRecords}} registros.
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>

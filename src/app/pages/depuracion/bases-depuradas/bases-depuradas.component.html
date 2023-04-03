@@ -1,4 +1,4 @@
-<div class="text-900 font-bold text-2xl mb-4 text-center">Depuración/Cierre</div>
+<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #E80084;border: 0;color: white !important;">Depuración/Cierre</div>
 
 <div class="card" style="padding-left: 1rem;">
   <p-panel header=""
@@ -11,8 +11,10 @@
 				chooseLabel="Seleccionar Archivo"
 				[customUpload]="true"
 				(uploadHandler)="uploadfun($event)"
-				[auto]="true">
-				<span class="p-button-label">H</span>
+				[auto]="true"
+        
+        >
+				<!-- <span class="p-button-label">H</span> -->
 			</p-fileUpload>
 		</div>
         <div class="field col-12 md:col-10">
@@ -24,7 +26,11 @@
             </p-dropdown>
         </div>
 		<div class="field col-12 md:col-2">
-			<p-button icon="pi pi-send" iconPos="left"></p-button>
+			<!-- <p-button class="i" icon="pi pi-send" iconPos="left" ></p-button> -->
+      <button  type="button"
+      pButton
+      label="Guardar"
+      style="width:8rem;background-color: #E80084;border: 0;"></button>
 		</div>
 
         <!-- <div class="field col-12 md:col-6">
@@ -105,6 +111,82 @@
   </ng-template>
 </p-dialog> -->
 
-<!-- <p-toast
+<p-toast
   [baseZIndex]="99999"
-  key="tst"></p-toast> -->
+  key="tst"></p-toast>
+  <div class="row">
+    <div class="cols">
+      <div class="card">
+        <p-table #dt1 [value]="basesTabla" dataKey="id" [loading]="loading" [rows]="50" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
+            styleClass="p-datatable-gridlines" [paginator]="true"
+            [globalFilterFields]="['horario','fecha_Registro','cantidad','archivo']" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="flex justify-content-between flex-column sm:flex-row">
+
+                    <span class="p-input-icon-left mb-2">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar"
+                            class="w-full" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                            Horario
+
+                        </div>
+                    </th>
+                    <th>
+                        <div class="text-center">
+                            Cantidad
+
+                        </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-center align-items-center">
+                          Archivo
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-center align-items-center">
+                          Fecha de Registro
+                      </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+                <tr>
+                    <td class="flex justify-content-center align-items-center">
+                      {{item.horario}}
+                    </td>
+                    <td class="text-center">
+                        {{item.cantidad}}
+                    </td>
+                    <td class="text-center">
+                        {{item.archivo}}
+                    </td>
+                    <td class="text-center">
+                       {{dateFormat(item.fecha_Registro)}}
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">Sin Datos para Mostrar.</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="loadingbody">
+                <tr>
+                    <td colspan="7">Cargando Datos, espere...</td>
+                </tr>
+
+            </ng-template>
+            <ng-template pTemplate="paginatorleft" let-state>
+                Mostrando {{(state.page  * state.rows) + 1}} a {{state.rows * (state.page + 1)}} de {{state.totalRecords}} registros.
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>

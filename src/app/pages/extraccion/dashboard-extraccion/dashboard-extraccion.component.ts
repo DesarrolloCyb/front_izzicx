@@ -92,21 +92,21 @@ export class DashboardExtraccionComponent implements OnInit {
       if(this.formExtraccion.controls['tipoExtraccion'].value === "Cuenta"){
         // console.log("Esto es Cuenta")
         // data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","tipo":"${this.formExtraccion.controls['tipo'].value}","subtipo":"${this.formExtraccion.controls['subtipo'].value}","canalIngreso":"${this.formExtraccion.controls['canalIngreso'].value}"}]`;
-        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","tipo":"${this.formExtraccion.controls['tipo'].value}","subtipo":"${this.formExtraccion.controls['subtipo'].value}"}]`;
+        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","tipo":"${this.formExtraccion.controls['tipo'].value ? this.formExtraccion.controls['tipo'].value :""}","subtipo":"${this.formExtraccion.controls['subtipo'].value ? this.formExtraccion.controls['subtipo'].value :""}"}]`;
         
         // var myObject = JSON.parse(data.parametrosExtraccion);
         // console.log(myObject)
       }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Casos de negocio"){
         // console.log("Casos de negocio")
-        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","numCaso":"${this.formExtraccion.controls['numCaso'].value}","cuenta":"${this.formExtraccion.controls['cuenta'].value}","categoria":"${this.formExtraccion.controls['categoria'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","subMotivo":"${this.formExtraccion.controls['subMotivo'].value}","solucion":"${this.formExtraccion.controls['solucion'].value}"}]`;
+        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","numCaso":"${this.formExtraccion.controls['numCaso'].value ? this.formExtraccion.controls['numCaso'].value : ""}","cuenta":"${this.formExtraccion.controls['cuenta'].value ? this.formExtraccion.controls['cuenta'].value :""}","categoria":"${this.formExtraccion.controls['categoria'].value ? this.formExtraccion.controls['categoria'].value :""}","motivo":"${this.formExtraccion.controls['motivo'].value ? this.formExtraccion.controls['motivo'].value:""}","subMotivo":"${this.formExtraccion.controls['subMotivo'].value ? this.formExtraccion.controls['subMotivo'].value :""}","solucion":"${this.formExtraccion.controls['solucion'].value ? this.formExtraccion.controls['solucion'].value :""}"}]`;
       }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Actividades"){
         // console.log("Actividades")
-        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","areaConocimiento":"${this.formExtraccion.controls['areaConocimiento'].value}","fechaAsignacion":">=${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value[0]):null } AND <= ${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value[1]):null}"}]`;
+        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","areaConocimiento":"${this.formExtraccion.controls['areaConocimiento'].value ? this.formExtraccion.controls['areaConocimiento'].value :""}","fechaAsignacion":">='${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value[0]):null }' AND <= '${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value[1]):null}'"}]`;
         
       }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Ordenes de servicio"){
         // console.log("Ordenes de servicio")
-        // data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","rpt":"${this.formExtraccion.controls['rpt'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","asignada":"${this.formExtraccion.controls['asignada'].value}"}]`;
-        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","fechaAsignacion":"${this.formExtraccion.controls['areaConocimiento'].value}","fechaAsignacion":">=${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value[0]):null } AND <= ${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value[1]):null}"}]`;
+        // data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","rpt":"${this.formExtraccion.controls['rpt'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","asignada":"${this.formExtraccion.controls['asignada'].value}"}]`;
+        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value ? this.formExtraccion.controls['tipoOrden'].value :""}","motivo":"${this.formExtraccion.controls['motivo'].value ? this.formExtraccion.controls['motivo'].value:""}","areaConocimiento":"${this.formExtraccion.controls['areaConocimiento'].value ? this.formExtraccion.controls['areaConocimiento'].value :""}","fechaAsignacion":">='${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value[0]):null }' AND <= '${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value[1]):null}'"}]`;
       }
       // console.log(data)
       this.cors.post('Reporte/GuardarFormularioEjecucionExtraccion',data)
@@ -118,7 +118,6 @@ export class DashboardExtraccionComponent implements OnInit {
           summary: 'Exito!!!',
           detail: 'Datos guardados',
         });
-        this.tablaExtraccion();
       })
       .catch((error) => {
         console.log(error)
@@ -129,9 +128,10 @@ export class DashboardExtraccionComponent implements OnInit {
           detail: 'Intenta Nuevamente!!!',
         });
       });
-
+      
       setTimeout(() => {
         this.spinner = false;
+        this.tablaExtraccion();
         this.reset()
         // this.router.navigate(['/extraccion/visualizacion']);
         
@@ -261,7 +261,7 @@ export class DashboardExtraccionComponent implements OnInit {
   dateFormat(value:any){
     // console.log(value)
     if(value != null){
-      return moment(value).format('DD-MM-yyyy hh:mm:ss')
+      return moment(value).format('DD/MM/yyyy hh:mm:00')
     }else{
       return ""
     }

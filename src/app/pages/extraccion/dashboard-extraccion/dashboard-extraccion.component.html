@@ -160,7 +160,7 @@
               <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
                 <span class="p-float-label">
                     
-                  <p-calendar  formControlName="fechaAsignacion" selectionMode="range"  inputId="icon">
+                  <p-calendar [showTime]="true" formControlName="fechaAsignacion" selectionMode="range"  inputId="icon">
                   </p-calendar>
                   <label for="inputdate">Rango de Fechas</label>
               </span>

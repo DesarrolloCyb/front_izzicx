@@ -3,6 +3,7 @@ import { CorsService } from '@services';
 import * as moment from 'moment';
 moment.lang('es');
 import { Message, MessageService } from 'primeng/api';
+import { Table } from 'primeng/table';
 
 
 @Component({
@@ -14,12 +15,16 @@ export class DashboardDepuracionComponent implements OnInit {
 	horarios:any[]=[];
 	first:any=null;
 	second:any=null;
+	tablaDepuracion:any[]=[];
+	loading: boolean = false
+
 	constructor(private cors: CorsService,private messageService: MessageService) {
 		
 	}
 
 	ngOnInit(): void {
-		this.visualizarHorarios()
+		this.visualizarHorarios();
+		this.getTabladepuracion();
 	}
 
 	visualizarHorarios(){
@@ -84,6 +89,42 @@ export class DashboardDepuracionComponent implements OnInit {
 		this.first =null;
 		this.second =null;
 	}
+
+	getTabladepuracion(){
+		this.cors.get('EjecucionDepuracion/getEjecucionDepuracion')
+		.then((response) => {
+		//   console.log(response)
+		  this.tablaDepuracion = response;
+		//   this.messageService.add({
+		// 	key: 'tst',
+		// 	severity: 'success',
+		// 	summary: 'Exito!!!',
+		// 	detail: 'Datos guardados',
+		//   });
+		})
+		.catch((error) => {
+		console.log(error)
+		//   this.messageService.add({
+		// 	key:'tst',
+		// 	severity: 'error',
+		// 	summary: 'No se logro guardar',
+		// 	detail: 'Intenta Nuevamente!!!',
+		//   });
+		});
+
+	}
+	onGlobalFilter(table: Table, event: Event) {
+		table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+	}
+
+	dateFormat(value:any){
+		if(value != null || value != ""){
+			return moment(value).format('DD-MM-yyyy hh:mm:ss')
+		}else{
+			return "---"
+		}
+	}
+	
 
 
 }
