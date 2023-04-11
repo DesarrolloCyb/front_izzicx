@@ -1,4 +1,4 @@
-<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #FC760F;color: white !important;">Extracción</div>
+<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #FF5200;color: white !important;">Extracción</div>
 
 <div [formGroup]="formExtraccion">
     <div class="card" style="padding-left: 1rem;">
@@ -253,7 +253,7 @@
                   type="button"
                   pButton
                   label="Limpiar"
-                  style="width:8rem;background-color: #FC760F;border: 0;"
+                  style="width:8rem;background-color: #FF5200;border: 0;"
                   (click)="reset()"
                   ></button>
               </div>
@@ -263,7 +263,7 @@
                   (click)="Enviar()"
                   pButton
                   label="Guardar"
-                  style="width:8rem;background-color: #FC760F;border: 0;"></button>
+                  style="width:8rem;background-color: #FF5200;border: 0;"></button>
       
               </div>
             </div>
@@ -390,13 +390,13 @@
                       {{item.procesando == 1 ? "Si":""}}
                     </td>
                     <td *ngIf="item.archivo">
-                      <!-- {{item.archivo}} -->
-                        <button pButton  style="background-color: #e0e76df9;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
-                        <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
-                      </td>
-                      <td *ngIf="!item.archivo">
+                    <!-- {{item.archivo}} -->
+                      <button pButton  style="background-color: #FFD419;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
+                      <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
+                    </td>
+                    <td *ngIf="!item.archivo">
                       <button pButton disabled style="background-color: grey;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
-                      <!-- {{item.archivo}} -->
+                    <!-- {{item.archivo}} -->
                     </td>
                 </tr>
             </ng-template>

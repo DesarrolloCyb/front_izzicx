@@ -18,17 +18,21 @@ import { ThisReceiver } from '@angular/compiler';
 export class DashboardReporteFidelizacionComponent implements OnInit {
 
   formReporte:UntypedFormGroup;
-  today = new Date();
   result:any=[];
+  result1:any=[];
   usuario: any = JSON.parse(localStorage.getItem("userData") || "{}");
   spinner:boolean=false;
   reportes:any=[];
-  loading: boolean = false
+  loading: boolean = false;
+  show:boolean=false;
+  url1:any;
+
 
 
   constructor(private messageService: MessageService,private formBuilder: UntypedFormBuilder,private cors: CorsService) { 
     this.formReporte = this.formBuilder.group({
       reporte: [null, Validators.required],
+      base: [null, Validators.required],
       fechaini: [null, Validators.required],
       fechafin: [null, Validators.required],
     });
@@ -37,6 +41,27 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
     .then((response) => {
       // console.log(response)
       this.result = response;
+    //   this.messageService.add({
+    //     key: 'tst',
+    //     severity: 'success',
+    //     summary: 'Datos guardados',
+    //     detail: 'La solicitud de cancelacion fue guardada',
+    //   });
+    })
+    .catch((error) => {
+      console.log(error)
+    //   this.msgs.push({
+    //     severity: 'error',
+    //     summary: 'No se logro guardar',
+    //     detail: 'La solicitud de cancelacion no fue guardada',
+    //   });
+    });
+    this.cors
+    .get('Reporte/vici1')
+    .then((response) => {
+      // console.log(response)
+      this.result1 = response;
+
     //   this.messageService.add({
     //     key: 'tst',
     //     severity: 'success',
@@ -145,6 +170,36 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
+
+  descargarArchivo(archivo:string){
+    this.cors.get1(`Reporte/BajarExcelFTPReporteFidelizacion`,{
+      "nombre":archivo
+    })
+    .then((response) => {
+      // console.log(response)
+      this.show = true;
+      this.url1 = `https://rpabackizzi.azurewebsites.net/Reporte/BajarExcelFTPReporteFidelizacion?nombre=${archivo}`;
+      this.messageService.add({
+        key:'tst',
+        severity: 'success',
+        summary: 'Se descargo el archivo',
+        detail: 'Con exito!!',
+      });
+
+      
+    })
+    .catch((error) => {
+      console.log(error)
+      this.messageService.add({
+        key:'tst',
+        severity: 'error',
+        summary: 'No se logro descargar',
+        detail: 'Intenta Nuevamente!!!',
+      });
+    });
+
+  }
+
 
 
 

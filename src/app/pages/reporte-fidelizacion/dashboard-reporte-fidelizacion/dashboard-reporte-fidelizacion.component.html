@@ -19,12 +19,25 @@
                 
                 >
                 </p-dropdown>
-            </div>              
+            </div>    
+            <div class="field col-12 md:col-4">
+              <p-dropdown
+              [options]="result1"
+              optionValue="list_id"
+              optionLabel="list_description"
+              [showClear]="true"
+              placeholder="Selecciona la Base"
+              formControlName="base"
+              [ngClass]="{'ng-invalid ng-dirty': formReporte.get('base')?.errors != null && formReporte.get('base')?.touched == true}"
+              
+              >
+              </p-dropdown>
+          </div>              
+        
             <div class="field col-12 md:col-4">
                 <span class="p-float-label">
                     <p-calendar
                         [showIcon]="true"
-                        [minDate]="today"
                         dateFormat="yy-mm-dd"
                         [showTime]="true" 
                         [showSeconds]="true"
@@ -39,7 +52,6 @@
                 <span class="p-float-label">
                     <p-calendar
                         [showIcon]="true"
-                        [minDate]="today"
                         dateFormat="yy-mm-dd"
                         [showTime]="true" 
                         [showSeconds]="true"
@@ -104,14 +116,8 @@ key="tst"></p-toast>
                       </div>
                   </th>
                   <th>
-                      <div style="width: 150px;" class="flex justify-content-between align-items-center">
-                          Archivo
-
-                      </div>
-                  </th>
-                  <th>
                     <div style="width: 160px;" class="flex justify-content-between align-items-center">
-                        Fecha de Captura
+                      Fecha de Captura
                     </div>
                   </th>
                   <th>
@@ -120,14 +126,20 @@ key="tst"></p-toast>
                     </div>
                   </th>
                   <th>
-                      <div class="flex justify-content-between align-items-center">
+                    <div class="flex justify-content-between align-items-center">
                           Procesando
                       </div>
                   </th>
                   <th>
                     <div class="flex justify-content-between align-items-center">
-                        Estatus
+                      Estatus
                     </div>
+                  </th>
+                  <th>
+                      <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                          Archivo
+
+                      </div>
                   </th>
               </tr>
           </ng-template>
@@ -137,19 +149,25 @@ key="tst"></p-toast>
                     {{item.cve_usuario}}
                   </td>
                   <td class="text-center">
-                      {{item.archivo}}
-                  </td>
-                  <td class="text-center">
                       {{dateFormat(item.fechaCaptura)}}
                   </td>
                   <td class="text-center">
                      {{dateFormat(item.fechaCompletado)}}
                   </td>
                   <td class="text-center">
-                    {{item.procesando}}
+                    {{item.procesando != 0 ? "Si":""}}
                   </td>
                   <td class="text-center">
                     {{item.status}}
+                  </td>
+                  <td *ngIf="item.archivo" class="text-center">
+                    <!-- {{item.archivo}} -->
+                      <button pButton  style="background-color: #FFD419;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
+                      <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
+                    </td>
+                    <td *ngIf="!item.archivo" class="text-center">
+                      <button pButton disabled style="background-color: grey;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
+                    <!-- {{item.archivo}} -->
                   </td>
               </tr>
           </ng-template>
@@ -170,5 +188,8 @@ key="tst"></p-toast>
       </p-table>
     </div>
   </div>
+</div>
+<div *ngIf="show" style="display: none;">
+  <iframe id="report" height="1000" width="1000" [src]="url1 | safeUrl"></iframe>
 </div>
 
