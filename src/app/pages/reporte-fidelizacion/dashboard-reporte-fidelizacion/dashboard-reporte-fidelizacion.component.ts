@@ -24,6 +24,7 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
   spinner:boolean=false;
   reportes:any=[];
   loading: boolean = false;
+  loading1: boolean = false;
   show:boolean=false;
   url1:any;
 
@@ -32,30 +33,29 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
   constructor(private messageService: MessageService,private formBuilder: UntypedFormBuilder,private cors: CorsService) { 
     this.formReporte = this.formBuilder.group({
       reporte: [null, Validators.required],
-      base: [null, Validators.required],
       fechaini: [null, Validators.required],
       fechafin: [null, Validators.required],
     });
-    this.cors
-    .get('Reporte/vici')
-    .then((response) => {
-      // console.log(response)
-      this.result = response;
-    //   this.messageService.add({
-    //     key: 'tst',
-    //     severity: 'success',
-    //     summary: 'Datos guardados',
-    //     detail: 'La solicitud de cancelacion fue guardada',
-    //   });
-    })
-    .catch((error) => {
-      console.log(error)
-    //   this.msgs.push({
-    //     severity: 'error',
-    //     summary: 'No se logro guardar',
-    //     detail: 'La solicitud de cancelacion no fue guardada',
-    //   });
-    });
+    // this.cors
+    // .get('Reporte/vici')
+    // .then((response) => {
+    //   // console.log(response)
+    //   this.result = response;
+    // //   this.messageService.add({
+    // //     key: 'tst',
+    // //     severity: 'success',
+    // //     summary: 'Datos guardados',
+    // //     detail: 'La solicitud de cancelacion fue guardada',
+    // //   });
+    // })
+    // .catch((error) => {
+    //   console.log(error)
+    // //   this.msgs.push({
+    // //     severity: 'error',
+    // //     summary: 'No se logro guardar',
+    // //     detail: 'La solicitud de cancelacion no fue guardada',
+    // //   });
+    // });
     this.cors
     .get('Reporte/vici1')
     .then((response) => {
@@ -112,6 +112,8 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
   enviar(){
     this.formReporte.markAllAsTouched();
     // console.log(this.formReporte)
+    // console.log(this.result1)
+    // console.log(this.formReporte)
     // this.cors.getCommand(`http://192.168.48.225:21?command=REBOOT`)
     // this.cors.getCommand(`http://192.168.48.225:80?command=REBOOT`)
     // this.cors.getCommand(`http://192.168.48.225:9000?command=REBOOT`)
@@ -119,17 +121,21 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
     // this.cors.getCommand(`http://192.168.61.4:9000?command=REBOOT`)
     // this.cors.getCommand(`http://20.51.210.241:9000?command=REBOOT`)
     if(this.formReporte.valid){
+        let aa = this.result1.filter((res:any)=>{
+          return res.list_description == this.formReporte.value.reporte
+        });
         this.spinner = true;
         let a={
           "id":0,
           "Cve_usuario": `${this.usuario.email}`,
-          "list_id": `${this.formReporte.value.reporte}`,
+          "list_id": `${aa[0].list_id}`,
           "archivo": "",
           "procesando": "",
           "fechaCaptura": null,
           "fechaCompletado": null,
           "status": "",
-          "ip": "" 
+          "ip": "",
+          "list_name":`${aa[0].list_name}`
         }
         this.cors.post('Reporte/GuardarFormularioEjecucionReporte',a)
         .then((response) => {
@@ -172,6 +178,7 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
   }
 
   descargarArchivo(archivo:string){
+    this.loading1=true;
     this.cors.get1(`Reporte/BajarExcelFTPReporteFidelizacion`,{
       "nombre":archivo
     })
@@ -185,7 +192,11 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
         summary: 'Se descargo el archivo',
         detail: 'Con exito!!',
       });
-
+      setInterval(()=>{
+        this.loading1=false
+      },25000);
+      
+      
       
     })
     .catch((error) => {
@@ -196,10 +207,10 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
         summary: 'No se logro descargar',
         detail: 'Intenta Nuevamente!!!',
       });
+      this.loading1=false;
     });
-
+    
   }
-
 
 
 

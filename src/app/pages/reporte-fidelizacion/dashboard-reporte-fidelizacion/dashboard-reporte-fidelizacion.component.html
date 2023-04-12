@@ -7,7 +7,7 @@
         <!-- INICIO DE INPUTS -->
         <!-- <h5>Tipo de Cuenta</h5> -->
         <div class="p-fluid p-formgrid grid">
-            <div class="field col-12 md:col-4">
+            <!-- <div class="field col-12 md:col-4">
                 <p-dropdown
                 [options]="result"
                 optionValue="list_id"
@@ -19,20 +19,19 @@
                 
                 >
                 </p-dropdown>
-            </div>    
+            </div>     -->
             <div class="field col-12 md:col-4">
               <p-dropdown
               [options]="result1"
-              optionValue="list_id"
+              optionValue="list_description"
               optionLabel="list_description"
               [showClear]="true"
               placeholder="Selecciona la Base"
-              formControlName="base"
+              formControlName="reporte"
               [ngClass]="{'ng-invalid ng-dirty': formReporte.get('base')?.errors != null && formReporte.get('base')?.touched == true}"
-              
               >
               </p-dropdown>
-          </div>              
+            </div>              
         
             <div class="field col-12 md:col-4">
                 <span class="p-float-label">
@@ -162,7 +161,7 @@ key="tst"></p-toast>
                   </td>
                   <td *ngIf="item.archivo" class="text-center">
                     <!-- {{item.archivo}} -->
-                      <button pButton  style="background-color: #FFD419;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
+                      <button pButton  style="background-color: #FFD419;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)" [loading]="loading1"></button>
                       <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
                     </td>
                     <td *ngIf="!item.archivo" class="text-center">
