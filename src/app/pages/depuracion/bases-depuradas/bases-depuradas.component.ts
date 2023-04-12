@@ -18,6 +18,8 @@ export class BasesDepuradasComponent implements OnInit {
 	uploadedFiles: any[] = [];
   basesTabla:any[]=[];
   loading: boolean = false
+  show:boolean=false;
+  url1:any;
 
 
   constructor(private cors: CorsService,private messageService: MessageService) { }
@@ -68,5 +70,36 @@ export class BasesDepuradasComponent implements OnInit {
 			return "---"
 		}
 	}
+
+
+	descargarArchivo(archivo:string){
+		this.cors.get1(`EjecucionDepuracion/BajarExcelFTPBasesDepuradas`,{
+		  "nombre":archivo
+		})
+		.then((response) => {
+		  // console.log(response)
+		  this.show = true;
+		  this.url1 = `https://rpabackizzi.azurewebsites.net/EjecucionDepuracion/BajarExcelFTPBasesDepuradas?nombre=${archivo}`;
+		  this.messageService.add({
+			key:'tst',
+			severity: 'success',
+			summary: 'Se descargo el archivo',
+			detail: 'Con exito!!',
+		  });
+	
+		  
+		})
+		.catch((error) => {
+		  console.log(error)
+		  this.messageService.add({
+			key:'tst',
+			severity: 'error',
+			summary: 'No se logro descargar',
+			detail: 'Intenta Nuevamente!!!',
+		  });
+		});
+	
+	  }
+
   
 }

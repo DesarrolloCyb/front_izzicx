@@ -146,12 +146,12 @@
                     </th>
                     <th>
                       <div class="flex justify-content-center align-items-center">
-                          Archivo
+                        Fecha de Registro
                       </div>
                     </th>
                     <th>
                       <div class="flex justify-content-center align-items-center">
-                          Fecha de Registro
+                          Archivo
                       </div>
                     </th>
                 </tr>
@@ -165,10 +165,16 @@
                         {{item.cantidad}}
                     </td>
                     <td class="text-center">
-                        {{item.archivo}}
-                    </td>
-                    <td class="text-center">
                        {{dateFormat(item.fecha_Registro)}}
+                    </td>
+                    <td *ngIf="item.archivo" class="text-center">
+                      <!-- {{item.archivo}} -->
+                        <button pButton  style="background-color: #FFD419;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
+                        <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
+                      </td>
+                      <td *ngIf="!item.archivo" class="text-center">
+                        <button pButton disabled style="background-color: grey;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
+                      <!-- {{item.archivo}} -->
                     </td>
                 </tr>
             </ng-template>
@@ -189,4 +195,7 @@
         </p-table>
       </div>
     </div>
+  </div>
+  <div *ngIf="show" style="display: none;">
+    <iframe id="report" height="1000" width="1000" [src]="url1 | safeUrl"></iframe>
   </div>

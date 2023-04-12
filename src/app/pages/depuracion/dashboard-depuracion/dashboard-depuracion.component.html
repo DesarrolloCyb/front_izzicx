@@ -111,11 +111,6 @@
                     </th>
                     <th>
                       <div class="flex justify-content-center align-items-center">
-                          Archivo
-                      </div>
-                    </th>
-                    <th>
-                      <div class="flex justify-content-center align-items-center">
                           Usuario
                       </div>
                     </th>
@@ -144,37 +139,48 @@
                           IP
                       </div>
                     </th>
+                    <th>
+                      <div class="flex justify-content-center align-items-center">
+                          Archivo
+                      </div>
+                    </th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item let-i="rowIndex">
                 <tr>
-                    <td class="flex justify-content-center align-items-center">
+                    <td class="text-center">
                       {{item.tipoExtraccion}}
                     </td>
-                    <td>
+                    <td class="text-center">
                         {{dateFormat(item.fechaExtraccion)}}
                     </td>
-                    <td>
-                        {{item.archivo}}
-                    </td>
-                    <td>
+                    <td class="text-center">
                        {{item.cve_usuario}}
                     </td>
-                    <td>
+                    <td class="text-center">
                       {{item.horarioInicio}}
                     </td>
-                    <td>
+                    <td class="text-center">
                       {{dateFormat(item.fechaCompletado)}}
                     </td>
-                    <td>
+                    <td class="text-center">
                       {{item.status}}
                     </td>
-                    <td class="flex justify-content-center align-items-center">
+                    <td class="text-center">
                       {{item.procesando}}
                     </td>
-                    <td>
+                    <td class="text-center">
                       {{item.ip}}
                     </td>
+                    <td *ngIf="item.archivo" class="text-center">
+                      <!-- {{item.archivo}} -->
+                        <button pButton  style="background-color: #FFD419;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
+                        <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
+                      </td>
+                      <td *ngIf="!item.archivo" class="text-center">
+                        <button pButton disabled style="background-color: grey;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
+                      <!-- {{item.archivo}} -->
+                    </td>  
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
@@ -195,3 +201,8 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="show" style="display: none;">
+    <iframe id="report" height="1000" width="1000" [src]="url1 | safeUrl"></iframe>
+  </div>
+  
