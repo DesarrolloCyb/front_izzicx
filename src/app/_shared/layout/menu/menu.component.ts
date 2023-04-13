@@ -245,6 +245,49 @@ export class MenuComponent implements OnInit {
 		  // },
 		]
 	  },
+    {
+      label: 'Reportes',
+      key: "reportes",
+      icon: 'pi pi-fw pi-compass',
+      //   routerLink: ['/capturas'],
+      items: [
+        {
+        label: 'Dashboard',
+        icon: 'pi pi-fw pi-folder-open',
+          routerLink: ['/reportes'],
+        },
+        // {
+        //   label: 'Solicitud de Cancelación',
+        //   icon: 'pi pi-fw pi-exclamation-triangle',
+        //   routerLink: ['/capturas/solicitud-cancelacion'],
+        // },
+        // {
+        //   label: 'Reactivación',
+        //   icon: 'pi pi-fw pi-exclamation-triangle',
+        //   routerLink: ['/capturas/reactivacion'],
+        // },
+        // {
+        //   label: 'Servicios c/s costo',
+        //   icon: 'pi pi-fw pi-exclamation-triangle',
+        //   routerLink: ['/capturas/servicioscosto'],
+        // },
+        // {
+        //   label: 'Reembolso',
+        //   icon: 'pi pi-fw pi-exclamation-triangle',
+        //   routerLink: ['/capturas/reembolso'],
+        // },
+        // {
+        //   label: 'Cambio de Paquete',
+        //   icon: 'pi pi-fw pi-exclamation-triangle',
+        //   routerLink: ['/capturas/cambioPaquete'],
+        // },
+        // {
+        //   label: 'Cambio de Esquema',
+        //   icon: 'pi pi-fw pi-exclamation-triangle',
+        //   routerLink: ['/capturas/cambioEsquema'],
+        // },
+      ]
+      },
     // {
     //   label: 'Capturas atencion a clientes',
     //   key: "capturasA",
@@ -332,7 +375,7 @@ export class MenuComponent implements OnInit {
 
 
     let permisos: any = {
-      "admin":['extraccion','home','asignacion','casoNegocio','depuracion','reporteFidelizacion'],
+      "admin":['extraccion','home','asignacion','casoNegocio','depuracion','reporteFidelizacion','reportes'],
       "Reporte":['home','reporteFidelizacion'],
       "Extraccion":['home','extraccion'],
       "Depuracion":['home','depuracion'],

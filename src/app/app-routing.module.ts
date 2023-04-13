@@ -71,6 +71,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/reporte-fidelizacion/reporte-fidelizacion.module').then((m) => m.ReporteFidelizacionModule),
   },
+  {
+    path: 'reportes',
+    data: { breadcrumb: 'Reportes'},
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./pages/reportes-izzi/reportes-izzi.module').then((m) => m.ReportesIzziModule),
+  },
 //   { path: 'robots', data: { breadcrumb: 'Robots' }, loadChildren: () => import('./pages/robots/robots.module').then(m => m.RobotsModule) },
 //   { path: 'usuarios', data: { breadcrumb: 'Usuarios' }, loadChildren: () => import('./pages/usuarios/usuarios.module').then(m => m.UsuariosModule) },
 
