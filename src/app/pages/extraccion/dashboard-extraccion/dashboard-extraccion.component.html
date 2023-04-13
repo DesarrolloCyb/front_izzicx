@@ -246,7 +246,7 @@
           <!-- BOTON DE EJECUCION -->
           <div class="col lg:col-12">
       
-            <div class="grid flex justify-content-center" *ngIf="!spinner">
+            <div class="grid flex justify-content-center">
               <div class="col-4 text-center" >
                 
                 <button
@@ -262,14 +262,15 @@
                   type="button"
                   (click)="Enviar()"
                   pButton
+                  [loading]="spinner"
                   label="Guardar"
                   style="width:8rem;background-color: #FF5200;border: 0;"></button>
       
               </div>
             </div>
-            <div class="col-12 text-center" *ngIf="spinner">
+            <!-- <div class="col-12 text-center" *ngIf="spinner">
               <p-progressSpinner ></p-progressSpinner>
-            </div>
+            </div> -->
           </div>
           
         </p-panel>
@@ -331,39 +332,39 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th>
-                        <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                        <div style="width: 150px;" class="flex justify-content-center align-items-center">
                             Tipo de Extracción
 
                         </div>
                     </th>
                     <th>
-                        <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                        <div style="width: 150px;" class="flex justify-content-center align-items-center">
                             Fecha de Extracción
 
                         </div>
                     </th>
                     <th>
-                      <div class="flex justify-content-between align-items-center">
+                      <div class="flex justify-content-center align-items-center">
                           Usuario
                       </div>
                     </th>
                     <th>
-                        <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                        <div style="width: 150px;" class="flex justify-content-center align-items-center">
                             Fecha Completado
                         </div>
                       </th>
                       <th>
-                      <div class="flex justify-content-between align-items-center">
+                      <div class="flex justify-content-center align-items-center">
                           Estatus
                       </div>
                     </th>
                     <th>
-                      <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                      <div style="width: 150px;" class="flex justify-content-center align-items-center">
                           Procesando
                       </div>
                     </th>
                     <th>
-                      <div class="flex justify-content-between align-items-center">
+                      <div class="flex justify-content-center align-items-center">
                           Archivo
                       </div>
                     </th>
@@ -371,30 +372,30 @@
             </ng-template>
             <ng-template pTemplate="body" let-item let-i="rowIndex">
                 <tr>
-                    <td>
+                    <td class="text-center">
                       {{item.tipoExtraccion}}
                     </td>
-                    <td>
+                    <td class="text-center">
                       {{item.fechaExtraccion ? dateFormat(item.fechaExtraccion):""}}
                     </td>
-                    <td>
+                    <td class="text-center">
                       {{item.cve_usuario}}
                     </td>
                     <td class="text-center">
                       {{item.fechaCompletado ? dateFormat(item.fechaCompletado):""}}
                     </td>
-                    <td>
+                    <td class="text-center">
                       {{item.status}}
                     </td>
                     <td class="text-center">
                       {{item.procesando == 1 ? "Si":""}}
                     </td>
-                    <td *ngIf="item.archivo">
+                    <td *ngIf="item.archivo" class="text-center">
                     <!-- {{item.archivo}} -->
                       <button pButton  style="background-color: #FFD419;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
                       <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
                     </td>
-                    <td *ngIf="!item.archivo">
+                    <td *ngIf="!item.archivo" class="text-center">
                       <button pButton disabled style="background-color: grey;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
                     <!-- {{item.archivo}} -->
                     </td>

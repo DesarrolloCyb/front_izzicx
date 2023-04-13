@@ -1,0 +1,41 @@
+:host ::ng-deep ::-webkit-scrollbar-thumb:horizontal {
+    background-color: #FF5200;
+}
+
+// .p-inputtext.p-component:focus,
+// .p-inputgroup:focus-within {
+//   border-color: #FF5200; /* Cambiar a tu color deseado */
+  
+// }
+
+// .p-inputtext.p-component::selection
+//  {
+//   border-color: red; /* Cambiar a tu color deseado */
+// }
+
+// /* Cambiar el color del borde de los inputs de PrimeNG por defecto */
+// .p-inputtext.p-component,
+// .p-dropdown.p-component .p-dropdown-label,
+// .p-calendar.p-inputtext,
+// .p-inputtextarea.p-inputtext,
+// .p-password.p-inputtext,
+// .p-slider .p-slider-handle,
+// .p-slider .p-slider-range,
+// .p-rating .p-rating-icon {
+//   border-color: red; /* Cambiar a tu color deseado */
+// }
+
+.p-inputtext:hover {
+    border-color: red; /* Cambiar a tu color deseado para el borde en estado de enfoque */
+  }
+.p-inputtext:focus {
+    border-color: red !important; /* Cambiar a tu color deseado para el borde en estado de enfoque */
+  }
+
+  .p-dropdown:focus {
+    border-color: red !important; /* Cambiar a tu color deseado para el borde en estado de enfoque */
+  }
+  
+  .p-dropdown:hover {
+    border-color: red !important; /* Cambiar a tu color deseado para el borde en estado de enfoque */
+  }

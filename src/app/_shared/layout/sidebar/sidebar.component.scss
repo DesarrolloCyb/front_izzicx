@@ -10,3 +10,7 @@ img{
 .layout-colorscheme-menu {
     --logo-color: var(#212121);
 }
+
+:host ::ng-deep ::-webkit-scrollbar-thumb:vertical {
+    background-color: #E80084;
+}
