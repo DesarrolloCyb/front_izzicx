@@ -78,6 +78,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/reportes-izzi/reportes-izzi.module').then((m) => m.ReportesIzziModule),
   },
+  {
+    path: 'ajustesYcambioServicio',
+    data: { breadcrumb: 'Ajustes y Cambio de Servicio'},
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./pages/ajustes-ycambio-servicios/ajustes-ycambio-servicios.module').then((m) => m.AjustesYcambioServiciosModule),
+  },
 //   { path: 'robots', data: { breadcrumb: 'Robots' }, loadChildren: () => import('./pages/robots/robots.module').then(m => m.RobotsModule) },
 //   { path: 'usuarios', data: { breadcrumb: 'Usuarios' }, loadChildren: () => import('./pages/usuarios/usuarios.module').then(m => m.UsuariosModule) },
 

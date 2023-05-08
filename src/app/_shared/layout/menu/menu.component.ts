@@ -288,6 +288,50 @@ export class MenuComponent implements OnInit {
         // },
       ]
       },
+      {
+        label: 'Ajustes y Cambios de Servicios',
+        key: "ajustesYcambioServicio",
+        icon: 'pi pi-fw pi-compass',
+        //   routerLink: ['/capturas'],
+        items: [
+          {
+          label: 'Base de Datos Ajustes',
+          icon: 'pi pi-fw pi-chart-bar',
+            routerLink: ['/ajustesYcambioServicio/BDajustes'],
+          },
+          {
+            label: 'Estadísticas',
+            icon: 'pi pi-fw pi-exclamation-triangle',
+            routerLink: ['/ajustesYcambioServicio/estadisticas'],
+          },
+          {
+            label: 'Reporte',
+            icon: 'pi pi-fw pi-exclamation-triangle',
+            routerLink: ['/ajustesYcambioServicio/reporte'],
+          },
+          // {
+          //   label: 'Servicios c/s costo',
+          //   icon: 'pi pi-fw pi-exclamation-triangle',
+          //   routerLink: ['/capturas/servicioscosto'],
+          // },
+          // {
+          //   label: 'Reembolso',
+          //   icon: 'pi pi-fw pi-exclamation-triangle',
+          //   routerLink: ['/capturas/reembolso'],
+          // },
+          // {
+          //   label: 'Cambio de Paquete',
+          //   icon: 'pi pi-fw pi-exclamation-triangle',
+          //   routerLink: ['/capturas/cambioPaquete'],
+          // },
+          // {
+          //   label: 'Cambio de Esquema',
+          //   icon: 'pi pi-fw pi-exclamation-triangle',
+          //   routerLink: ['/capturas/cambioEsquema'],
+          // },
+        ]
+        },
+    
     // {
     //   label: 'Capturas atencion a clientes',
     //   key: "capturasA",
@@ -375,7 +419,7 @@ export class MenuComponent implements OnInit {
 
 
     let permisos: any = {
-      "admin":['extraccion','home','asignacion','casoNegocio','depuracion','reporteFidelizacion','reportes'],
+      "admin":['extraccion','home','asignacion','casoNegocio','depuracion','reporteFidelizacion','reportes','ajustesYcambioServicio'],
       "Reporte":['home','reporteFidelizacion'],
       "Extraccion":['home','extraccion'],
       "Depuracion":['home','depuracion'],
