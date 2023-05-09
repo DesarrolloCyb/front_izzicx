@@ -1,4 +1,4 @@
-<div class="text-900 font-bold text-2xl mb-4 text-center">Exportar Base de Datos Ajustes</div>
+<div class="text-900 font-bold text-2xl mb-4 text-center">Importar Base de Datos Ajustes</div>
 
 <div class="card">
     <p-panel header="Importar Excel" class="line-height-12 m-0">
@@ -80,9 +80,11 @@
         <div class="grid flex justify-content-center">
             <div class="col-4 text-center">
                 <button
+                mat-button 
+                [disabled]="button"
                 (click)="saveExcel()"
                 pButton
-                label="Exportar"
+                label="Importar Base"
                 style="width:auto;"></button>      
             </div>
         </div>

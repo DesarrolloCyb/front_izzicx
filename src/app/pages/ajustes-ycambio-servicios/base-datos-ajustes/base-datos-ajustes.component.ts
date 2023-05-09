@@ -15,6 +15,7 @@ export class BaseDatosAjustesComponent implements OnInit {
   msgs: Message[] = [];
   ExcelData:any;
   spinner:boolean=false;
+  button:boolean=true;
 
 
   constructor(
@@ -199,6 +200,7 @@ export class BaseDatosAjustesComponent implements OnInit {
           summary: 'Exito!!!',
           detail: 'El archivo se a cargado completamente!!!',
         });
+        this.button=false;
       }
     }
 
@@ -222,6 +224,7 @@ export class BaseDatosAjustesComponent implements OnInit {
     // "Vencimiento":"2023-05-06 02:07:36"
     // }
     // ];
+    this.button=true;
     let filteredArray = this.ExcelData.filter((obj:any) => obj.Cliente !== "" && obj.Cliente !== undefined );
     this.cors.post('AjustesCambiosServicios/InsertarBaseDatosAjustesExcel',filteredArray).then((response) => {
       // console.log(response)
