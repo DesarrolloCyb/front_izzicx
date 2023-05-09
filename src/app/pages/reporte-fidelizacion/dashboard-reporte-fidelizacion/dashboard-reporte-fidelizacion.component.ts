@@ -24,10 +24,10 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
   spinner:boolean=false;
   reportes:any=[];
   loading: boolean = false;
-  loading1: boolean = false;
   show:boolean=false;
   url1:any;
-
+  archivoSeleccionado:string="";
+  loading2:boolean=false;
 
 
   constructor(private messageService: MessageService,private formBuilder: UntypedFormBuilder,private cors: CorsService) { 
@@ -178,7 +178,8 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
   }
 
   descargarArchivo(archivo:string){
-    this.loading1=true;
+    this.archivoSeleccionado = archivo;
+    this.loading2 = true;
     this.cors.get1(`Reporte/BajarExcelFTPReporteFidelizacion`,{
       "nombre":archivo
     })
@@ -186,14 +187,15 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
       // console.log(response)
       this.show = true;
       this.url1 = `https://rpabackizzi.azurewebsites.net/Reporte/BajarExcelFTPReporteFidelizacion?nombre=${archivo}`;
-      this.messageService.add({
-        key:'tst',
-        severity: 'success',
-        summary: 'Se descargo el archivo',
-        detail: 'Con exito!!',
-      });
       setInterval(()=>{
-        this.loading1=false
+        this.loading2 = false;
+        this.archivoSeleccionado = '';
+        this.messageService.add({
+          key:'tst',
+          severity: 'success',
+          summary: 'Se descargo el archivo',
+          detail: 'Con exito!!',
+        });
       },25000);
       
       
@@ -207,9 +209,13 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
         summary: 'No se logro descargar',
         detail: 'Intenta Nuevamente!!!',
       });
-      this.loading1=false;
+      this.loading2 = false;
+      this.archivoSeleccionado = '';
     });
     
+  }
+  estaSiendoDescargado(archivo: string): boolean {
+    return this.archivoSeleccionado === archivo && this.loading2;
   }
 
 

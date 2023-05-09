@@ -161,7 +161,7 @@ key="tst"></p-toast>
                   </td>
                   <td *ngIf="item.archivo" class="text-center">
                     <!-- {{item.archivo}} -->
-                      <button pButton  style="background-color: #FFD419;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)" [loading]="loading1"></button>
+                      <button pButton  style="background-color: #FFD419;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)" [loading]="estaSiendoDescargado(item.archivo)"></button>
                       <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
                     </td>
                     <td *ngIf="!item.archivo" class="text-center">
