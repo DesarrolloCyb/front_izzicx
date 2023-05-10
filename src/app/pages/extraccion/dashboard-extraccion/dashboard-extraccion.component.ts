@@ -20,7 +20,9 @@ export class DashboardExtraccionComponent implements OnInit {
     'Cuenta',
     'Casos de negocio',
     'Actividades',
-    'Ordenes de servicio'
+    'Ordenes de servicio',
+    'Pagos',
+    'Fallas generales'
   ]; 
   formExtraccion:UntypedFormGroup;
   spinner:boolean=false;
@@ -39,21 +41,42 @@ export class DashboardExtraccionComponent implements OnInit {
       estado: [null],
       tipo: [null],
       subtipo: [null],
-      canalIngreso: [null],
       
-      numCaso: [null],
+      fechaApertura:[null],
       cuenta: [null],
+      medioContacto: [null],
+      casoNegocio: [null],
       categoria: [null],
       motivo: [null],
       subMotivo: [null],
       solucion: [null],
+      motivoCliente: [null],
 
       areaConocimiento: [null],
       fechaAsignacion: [null],
       
-      rpt: [null],
+      compania: [null],
+      telefonos: [null],
+      numOrden: [null],
       tipoOrden: [null],
-      asignada: [null],
+      fechaOrden: [null],
+      
+      numPago: [null],
+      fechaPago: [null],
+      importe: [null],
+      formaPago: [null],
+      ultimaActualizacion: [null],
+      
+      vencimiento: [null],
+      FallaGeneralAsociada: [null],
+      tecnologia: [null],
+      hub: [null],
+      rama: [null],
+      nodo: [null],
+      fiberDeep: [null],
+      fechaInicio: [null],
+      nombreHub: [null],
+      Incidente: [null],
 
     });
 
@@ -98,7 +121,7 @@ export class DashboardExtraccionComponent implements OnInit {
         // console.log(myObject)
       }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Casos de negocio"){
         // console.log("Casos de negocio")
-        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","numCaso":"${this.formExtraccion.controls['numCaso'].value ? this.formExtraccion.controls['numCaso'].value : ""}","cuenta":"${this.formExtraccion.controls['cuenta'].value ? this.formExtraccion.controls['cuenta'].value :""}","categoria":"${this.formExtraccion.controls['categoria'].value ? this.formExtraccion.controls['categoria'].value :""}","motivo":"${this.formExtraccion.controls['motivo'].value ? this.formExtraccion.controls['motivo'].value:""}","subMotivo":"${this.formExtraccion.controls['subMotivo'].value ? this.formExtraccion.controls['subMotivo'].value :""}","solucion":"${this.formExtraccion.controls['solucion'].value ? this.formExtraccion.controls['solucion'].value :""}"}]`;
+        data.parametrosExtraccion =`[{"fechaApertura":"${this.formExtraccion.controls['fechaApertura'].value ? this.formExtraccion.controls['fechaApertura'].value : ""}","estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","cuenta":"${this.formExtraccion.controls['cuenta'].value ? this.formExtraccion.controls['cuenta'].value :""}","medioContacto":"${this.formExtraccion.controls['medioContacto'].value ? this.formExtraccion.controls['medioContacto'].value :""}","casoNegocio":"${this.formExtraccion.controls['casoNegocio'].value ? this.formExtraccion.controls['casoNegocio'].value :""}","categoria":"${this.formExtraccion.controls['categoria'].value ? this.formExtraccion.controls['categoria'].value :""}","motivo":"${this.formExtraccion.controls['motivo'].value ? this.formExtraccion.controls['motivo'].value:""}","subMotivo":"${this.formExtraccion.controls['subMotivo'].value ? this.formExtraccion.controls['subMotivo'].value :""}","solucion":"${this.formExtraccion.controls['solucion'].value ? this.formExtraccion.controls['solucion'].value :""}","motivoCliente":"${this.formExtraccion.controls['motivoCliente'].value ? this.formExtraccion.controls['motivoCliente'].value :""}"}]`;
       }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Actividades"){
         // console.log("Actividades")
         data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","areaConocimiento":"${this.formExtraccion.controls['areaConocimiento'].value ? this.formExtraccion.controls['areaConocimiento'].value :""}","fechaAsignacion":">='${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormatDate(this.formExtraccion.controls['fechaAsignacion'].value[0]):null }' AND <= '${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormatDate(this.formExtraccion.controls['fechaAsignacion'].value[1]):null}'"}]`;
@@ -106,33 +129,41 @@ export class DashboardExtraccionComponent implements OnInit {
       }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Ordenes de servicio"){
         // console.log("Ordenes de servicio")
         // data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","rpt":"${this.formExtraccion.controls['rpt'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","asignada":"${this.formExtraccion.controls['asignada'].value}"}]`;
-        data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value ? this.formExtraccion.controls['tipoOrden'].value :""}","motivo":"${this.formExtraccion.controls['motivo'].value ? this.formExtraccion.controls['motivo'].value:""}","areaConocimiento":"${this.formExtraccion.controls['areaConocimiento'].value ? this.formExtraccion.controls['areaConocimiento'].value :""}","fechaAsignacion":">='${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value[0]):null }' AND <= '${this.formExtraccion.controls['fechaAsignacion'].value ? this.dateFormat(this.formExtraccion.controls['fechaAsignacion'].value[1]):null}'"}]`;
+        data.parametrosExtraccion =`[{"cuenta":"${this.formExtraccion.controls['cuenta'].value ? this.formExtraccion.controls['cuenta'].value : ""}","compania":"${this.formExtraccion.controls['compania'].value ? this.formExtraccion.controls['compania'].value :""}","telefonos":"${this.formExtraccion.controls['telefonos'].value ? this.formExtraccion.controls['telefonos'].value :""}","numOrden":"${this.formExtraccion.controls['numOrden'].value ? this.formExtraccion.controls['numOrden'].value :""}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value ? this.formExtraccion.controls['tipoOrden'].value :""}","fechaOrden":"${this.formExtraccion.controls['fechaOrden'].value ? this.formExtraccion.controls['fechaOrden'].value:""}","estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value :""}"}]`;
+      }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Pagos"){
+        // console.log("Ordenes de servicio")
+        // data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","rpt":"${this.formExtraccion.controls['rpt'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","asignada":"${this.formExtraccion.controls['asignada'].value}"}]`;
+        data.parametrosExtraccion =`[{"numPago":"${this.formExtraccion.controls['numPago'].value ? this.formExtraccion.controls['numPago'].value : ""}","fechaPago":"${this.formExtraccion.controls['fechaPago'].value ? this.formExtraccion.controls['fechaPago'].value :""}","importe":"${this.formExtraccion.controls['importe'].value ? this.formExtraccion.controls['importe'].value :""}","formaPago":"${this.formExtraccion.controls['formaPago'].value ? this.formExtraccion.controls['formaPago'].value :""}","estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value :""}","ultimaActualizacion":"${this.formExtraccion.controls['ultimaActualizacion'].value ? this.formExtraccion.controls['ultimaActualizacion'].value:""}"}]`;
+      }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Fallas generales"){
+        // console.log("Ordenes de servicio")
+        // data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","rpt":"${this.formExtraccion.controls['rpt'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","asignada":"${this.formExtraccion.controls['asignada'].value}"}]`;
+        data.parametrosExtraccion =`[{"vencimiento":"${this.formExtraccion.controls['vencimiento'].value ? this.formExtraccion.controls['vencimiento'].value : ""}","FallaGeneralAsociada":"${this.formExtraccion.controls['FallaGeneralAsociada'].value ? this.formExtraccion.controls['FallaGeneralAsociada'].value :""}","categoria":"${this.formExtraccion.controls['categoria'].value ? this.formExtraccion.controls['categoria'].value :""}","motivo":"${this.formExtraccion.controls['motivo'].value ? this.formExtraccion.controls['motivo'].value :""}","subMotivo":"${this.formExtraccion.controls['subMotivo'].value ? this.formExtraccion.controls['subMotivo'].value :""}","solucion":"${this.formExtraccion.controls['solucion'].value ? this.formExtraccion.controls['solucion'].value:""}","tecnologia":"${this.formExtraccion.controls['tecnologia'].value ? this.formExtraccion.controls['tecnologia'].value:""}","estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value:""}","hub":"${this.formExtraccion.controls['hub'].value ? this.formExtraccion.controls['hub'].value:""}","rama":"${this.formExtraccion.controls['rama'].value ? this.formExtraccion.controls['rama'].value:""}","nodo":"${this.formExtraccion.controls['nodo'].value ? this.formExtraccion.controls['nodo'].value:""}","fiberDeep":"${this.formExtraccion.controls['fiberDeep'].value ? this.formExtraccion.controls['fiberDeep'].value:""}","fechaInicio":"${this.formExtraccion.controls['fechaInicio'].value ? this.formExtraccion.controls['fechaInicio'].value:""}","nombreHub":"${this.formExtraccion.controls['nombreHub'].value ? this.formExtraccion.controls['nombreHub'].value:""}","Incidente":"${this.formExtraccion.controls['Incidente'].value ? this.formExtraccion.controls['Incidente'].value:""}","numOrden":"${this.formExtraccion.controls['numOrden'].value ? this.formExtraccion.controls['numOrden'].value:""}"}]`;
       }
-      // console.log(data)
-      this.cors.post('Reporte/GuardarFormularioEjecucionExtraccion',data)
-      .then((response) => {
-        // console.log(response)
-        this.messageService.add({
-          key: 'tst',
-          severity: 'success',
-          summary: 'Exito!!!',
-          detail: 'Datos guardados',
-        });
-      })
-      .catch((error) => {
-        console.log(error)
-        this.messageService.add({
-          key:'tst',
-          severity: 'error',
-          summary: 'No se logro guardar',
-          detail: 'Intenta Nuevamente!!!',
-        });
-      });
+      console.log(data)
+      // this.cors.post('Reporte/GuardarFormularioEjecucionExtraccion',data)
+      // .then((response) => {
+      //   // console.log(response)
+      //   this.messageService.add({
+      //     key: 'tst',
+      //     severity: 'success',
+      //     summary: 'Exito!!!',
+      //     detail: 'Datos guardados',
+      //   });
+      // })
+      // .catch((error) => {
+      //   console.log(error)
+      //   this.messageService.add({
+      //     key:'tst',
+      //     severity: 'error',
+      //     summary: 'No se logro guardar',
+      //     detail: 'Intenta Nuevamente!!!',
+      //   });
+      // });
       
       setTimeout(() => {
         this.spinner = false;
-        this.tablaExtraccion();
-        this.reset()
+        // this.tablaExtraccion();
+        // this.reset()
         // this.router.navigate(['/extraccion/visualizacion']);
         
       }, 3000);
