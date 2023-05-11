@@ -63,7 +63,7 @@
                 </span>
               </div>
               <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
-                <span class="p-float-label">
+                <!-- <span class="p-float-label">
                     <p-calendar
                         [showIcon]="true"
                         dateFormat="yy-mm-dd"
@@ -74,6 +74,11 @@
                     >
                     </p-calendar>
                     <label for="inputdate">Fecha de Apertura</label>
+                </span> -->
+                <span class="p-float-label"> 
+                  <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" formControlName="fechaApertura" selectionMode="range"  inputId="icon">
+                  </p-calendar>
+                  <label for="inputdate">Fecha de Apertura</label>
                 </span>
               </div>
               <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
@@ -180,7 +185,7 @@
                 </span>
               </div>
               <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
-                <span class="p-float-label">
+                <!-- <span class="p-float-label">
                     <p-calendar
                         [showIcon]="true"
                         dateFormat="yy-mm-dd"
@@ -190,10 +195,16 @@
                         formControlName="fechaAsignacion">
                     </p-calendar>
                     <label for="inputdate">Fecha de Asignación</label>
+                </span> -->
+                <span class="p-float-label"> 
+                  <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" formControlName="fechaAsignacion" selectionMode="range"  inputId="icon">
+                  </p-calendar>
+                  <label for="inputdate">Fecha de Asignacion</label>
                 </span>
+
               </div>
               <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
-                <span class="p-float-label">
+                <!-- <span class="p-float-label">
                     <p-calendar
                         [showIcon]="true"
                         dateFormat="yy-mm-dd"
@@ -203,7 +214,32 @@
                         formControlName="vencimientoActividad">
                     </p-calendar>
                     <label for="inputdate">Vencimiento</label>
+                </span> -->
+                <span class="p-float-label"> 
+                  <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" formControlName="vencimientoActividad" selectionMode="range"  inputId="icon">
+                  </p-calendar>
+                  <label for="inputdate">Vencimiento</label>
                 </span>
+
+              </div>
+              <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
+                <!-- <span class="p-float-label">
+                    <p-calendar
+                        [showIcon]="true"
+                        dateFormat="yy-mm-dd"
+                        [showTime]="true" 
+                        [showSeconds]="true"
+                        [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('vencimientoActividad')?.errors != null && formExtraccion.get('vencimientoActividad')?.touched == true}"
+                        formControlName="vencimientoActividad">
+                    </p-calendar>
+                    <label for="inputdate">Vencimiento</label>
+                </span> -->
+                <span class="p-float-label"> 
+                  <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" formControlName="fechaCreacion" selectionMode="range"  inputId="icon">
+                  </p-calendar>
+                  <label for="inputdate">Fecha de Creación</label>
+                </span>
+
               </div>
               
               <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
@@ -270,17 +306,22 @@
                     <label>Tipo de Orden</label>
                 </span>
               </div>
-              <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
-                <span class="p-float-label">
+              <div class="field col-12 md:col-8" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
+                <!-- <span class="p-float-label">
                     <p-calendar
                         [showIcon]="true"
-                        dateFormat="yy-mm-dd"
+                        dateFormat="dd-mm-yy"
                         [showTime]="true" 
                         [showSeconds]="true"
                         [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('fechaOrden')?.errors != null && formExtraccion.get('fechaOrden')?.touched == true}"
                         formControlName="fechaOrden">
                     </p-calendar>
                     <label for="inputdate">Fecha de la Orden</label>
+                </span> -->
+                <span class="p-float-label"> 
+                  <p-calendar [showIcon]="true" [showSeconds]="true" [showTime]="true" dateFormat="dd-mm-yy" formControlName="fechaOrden" selectionMode="range"  inputId="icon">
+                  </p-calendar>
+                  <label for="inputdate">Fecha de la Orden</label>
                 </span>
               </div>
               <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Pagos'">
@@ -295,7 +336,7 @@
                 </span>
               </div>
               <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Pagos'">
-                <span class="p-float-label">
+                <!-- <span class="p-float-label">
                     <p-calendar
                         [showIcon]="true"
                         dateFormat="yy-mm-dd"
@@ -305,7 +346,13 @@
                         formControlName="fechaPago">
                     </p-calendar>
                     <label for="inputdate">Fecha de Pago</label>
+                </span> -->
+                <span class="p-float-label"> 
+                  <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" formControlName="fechaPago" selectionMode="range"  inputId="icon">
+                  </p-calendar>
+                  <label for="inputdate">Fecha de Pago</label>
                 </span>
+
               </div>
               <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Pagos'">
                 <span class="p-float-label">
@@ -330,7 +377,7 @@
                 </span>
               </div>
               <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Pagos'">
-                <span class="p-float-label">
+                <!-- <span class="p-float-label">
                     <p-calendar
                         [showIcon]="true"
                         dateFormat="yy-mm-dd"
@@ -340,6 +387,11 @@
                         formControlName="ultimaActualizacion">
                     </p-calendar>
                     <label for="inputdate">Ultima Actualización</label>
+                </span> -->
+                <span class="p-float-label"> 
+                  <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" formControlName="ultimaActualizacion" selectionMode="range"  inputId="icon">
+                  </p-calendar>
+                  <label for="inputdate">Ultima Actualización</label>
                 </span>
               </div>
               <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Fallas generales'">
