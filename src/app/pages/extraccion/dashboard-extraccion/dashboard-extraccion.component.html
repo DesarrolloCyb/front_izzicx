@@ -29,7 +29,7 @@
                     <label>Estado</label>
                 </span>
               </div>
-              <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Cuenta'">
+              <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Cuenta' || formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
                 <span class="p-float-label">
                     <input
                     type="text"
@@ -49,6 +49,17 @@
                     formControlName="subtipo"
                     >
                     <label>Sub Tipo</label>
+                </span>
+              </div>
+              <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Cuenta'">
+                <span class="p-float-label">
+                    <input
+                    type="text"
+                    pInputText
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('canalIngreso')?.errors != null && formExtraccion.get('canalIngreso')?.touched == true}"
+                    formControlName="canalIngreso"
+                    >
+                    <label>Canal de Ingreso</label>
                 </span>
               </div>
               <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
@@ -181,6 +192,20 @@
                     <label for="inputdate">Fecha de Asignación</label>
                 </span>
               </div>
+              <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
+                <span class="p-float-label">
+                    <p-calendar
+                        [showIcon]="true"
+                        dateFormat="yy-mm-dd"
+                        [showTime]="true" 
+                        [showSeconds]="true"
+                        [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('vencimientoActividad')?.errors != null && formExtraccion.get('vencimientoActividad')?.touched == true}"
+                        formControlName="vencimientoActividad">
+                    </p-calendar>
+                    <label for="inputdate">Vencimiento</label>
+                </span>
+              </div>
+              
               <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
                 <span class="p-float-label">
                     
