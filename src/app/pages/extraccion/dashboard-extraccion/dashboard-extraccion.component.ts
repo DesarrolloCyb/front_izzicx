@@ -139,31 +139,31 @@ export class DashboardExtraccionComponent implements OnInit {
         // data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","rpt":"${this.formExtraccion.controls['rpt'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","asignada":"${this.formExtraccion.controls['asignada'].value}"}]`;
         data.parametrosExtraccion =`[{"vencimiento":"${this.formExtraccion.controls['vencimiento'].value ? this.formExtraccion.controls['vencimiento'].value : ""}","FallaGeneralAsociada":"${this.formExtraccion.controls['FallaGeneralAsociada'].value ? this.formExtraccion.controls['FallaGeneralAsociada'].value :""}","categoria":"${this.formExtraccion.controls['categoria'].value ? this.formExtraccion.controls['categoria'].value :""}","motivo":"${this.formExtraccion.controls['motivo'].value ? this.formExtraccion.controls['motivo'].value :""}","subMotivo":"${this.formExtraccion.controls['subMotivo'].value ? this.formExtraccion.controls['subMotivo'].value :""}","solucion":"${this.formExtraccion.controls['solucion'].value ? this.formExtraccion.controls['solucion'].value:""}","tecnologia":"${this.formExtraccion.controls['tecnologia'].value ? this.formExtraccion.controls['tecnologia'].value:""}","estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value:""}","hub":"${this.formExtraccion.controls['hub'].value ? this.formExtraccion.controls['hub'].value:""}","rama":"${this.formExtraccion.controls['rama'].value ? this.formExtraccion.controls['rama'].value:""}","nodo":"${this.formExtraccion.controls['nodo'].value ? this.formExtraccion.controls['nodo'].value:""}","fiberDeep":"${this.formExtraccion.controls['fiberDeep'].value ? this.formExtraccion.controls['fiberDeep'].value:""}","fechaInicio":"${this.formExtraccion.controls['fechaInicio'].value ? this.formExtraccion.controls['fechaInicio'].value:""}","nombreHub":"${this.formExtraccion.controls['nombreHub'].value ? this.formExtraccion.controls['nombreHub'].value:""}","Incidente":"${this.formExtraccion.controls['Incidente'].value ? this.formExtraccion.controls['Incidente'].value:""}","numOrden":"${this.formExtraccion.controls['numOrden'].value ? this.formExtraccion.controls['numOrden'].value:""}"}]`;
       }
-      console.log(data)
-      // this.cors.post('Reporte/GuardarFormularioEjecucionExtraccion',data)
-      // .then((response) => {
-      //   // console.log(response)
-      //   this.messageService.add({
-      //     key: 'tst',
-      //     severity: 'success',
-      //     summary: 'Exito!!!',
-      //     detail: 'Datos guardados',
-      //   });
-      // })
-      // .catch((error) => {
-      //   console.log(error)
-      //   this.messageService.add({
-      //     key:'tst',
-      //     severity: 'error',
-      //     summary: 'No se logro guardar',
-      //     detail: 'Intenta Nuevamente!!!',
-      //   });
-      // });
+      // console.log(data)
+      this.cors.post('Reporte/GuardarFormularioEjecucionExtraccion',data)
+      .then((response) => {
+        // console.log(response)
+        this.messageService.add({
+          key: 'tst',
+          severity: 'success',
+          summary: 'Exito!!!',
+          detail: 'Datos guardados',
+        });
+      })
+      .catch((error) => {
+        console.log(error)
+        this.messageService.add({
+          key:'tst',
+          severity: 'error',
+          summary: 'No se logro guardar',
+          detail: 'Intenta Nuevamente!!!',
+        });
+      });
       
       setTimeout(() => {
         this.spinner = false;
-        // this.tablaExtraccion();
-        // this.reset()
+        this.tablaExtraccion();
+        this.reset()
         // this.router.navigate(['/extraccion/visualizacion']);
         
       }, 3000);
