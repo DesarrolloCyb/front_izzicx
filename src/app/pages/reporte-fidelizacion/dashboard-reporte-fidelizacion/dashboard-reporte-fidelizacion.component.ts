@@ -135,7 +135,9 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
           "fechaCompletado": null,
           "status": "",
           "ip": "",
-          "list_name":`${aa[0].list_name}`
+          "list_name":`${aa[0].list_name}`,
+          "FechaInicio":`${this.dateFormat1(this.formReporte.value.fechaini)}`,
+          "FechaFin":`${this.dateFormat1(this.formReporte.value.fechafin)}`
         }
         this.cors.post('Reporte/GuardarFormularioEjecucionReporte',a)
         .then((response) => {
@@ -187,7 +189,8 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
       // console.log(response)
       this.show = true;
       this.url1 = `https://rpabackizzi.azurewebsites.net/Reporte/BajarExcelFTPReporteFidelizacion?nombre=${archivo}`;
-      setInterval(()=>{
+      
+      setTimeout(()=> {
         this.loading2 = false;
         this.archivoSeleccionado = '';
         this.messageService.add({
@@ -196,8 +199,8 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
           summary: 'Se descargo el archivo',
           detail: 'Con exito!!',
         });
-      },25000);
-      
+      }, 25000);
+      this.show=false
       
       
     })
@@ -216,6 +219,15 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
   }
   estaSiendoDescargado(archivo: string): boolean {
     return this.archivoSeleccionado === archivo && this.loading2;
+  }
+
+  dateFormat1(value:any){
+    // console.log(value)
+    if(value != null){
+      return moment(value).format('yyyy-MM-DDThh:mm:00')
+    }else{
+      return ""
+    }
   }
 
 

@@ -320,6 +320,15 @@ export class DashboardExtraccionComponent implements OnInit {
     this.cors.get('Reporte/getmostrarTablaExtraccion',{})
     .then((response) => {
       // console.log(response)
+      // let b=0;
+      // for(let i =0; i<response.length;i++){
+      //   let a  = JSON.parse(response[i].parametrosExtraccion)
+      //   response[i].a=a;
+      //   console.log(b)
+      //   b++;
+      // }
+      // console.log(response)
+
       this.datosExtraccion = response;
     })
     .catch((error) => {
