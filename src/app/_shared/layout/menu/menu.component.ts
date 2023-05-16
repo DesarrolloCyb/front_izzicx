@@ -170,21 +170,21 @@ export class MenuComponent implements OnInit {
         icon: 'pi pi-fw pi-folder-open',
           routerLink: ['/depuracion/bases'],
       },
-		  // {
-		  //   label: 'Solicitud de Cancelación',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/solicitud-cancelacion'],
-		  // },
-		  // {
-		  //   label: 'Reactivación',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/reactivacion'],
-		  // },
-		  // {
-		  //   label: 'Servicios c/s costo',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/servicioscosto'],
-		  // },
+		  {
+		    label: 'Bases Canceladas',
+		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    routerLink: ['/depuracion/basesCanceladas'],
+		  },
+		  {
+		    label: 'Pantalla Consulta',
+		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    routerLink: ['/depuracion/consulta'],
+		  },
+		  {
+		    label: 'Reporte',
+		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    routerLink: ['/depuracion/reporte'],
+		  },
 		  // {
 		  //   label: 'Reembolso',
 		  //   icon: 'pi pi-fw pi-exclamation-triangle',
