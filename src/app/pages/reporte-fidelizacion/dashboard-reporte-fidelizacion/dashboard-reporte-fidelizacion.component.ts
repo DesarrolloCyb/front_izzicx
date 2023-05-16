@@ -200,7 +200,6 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
           detail: 'Con exito!!',
         });
       }, 25000);
-      this.show=false
       
       
     })
@@ -215,6 +214,8 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
       this.loading2 = false;
       this.archivoSeleccionado = '';
     });
+    this.show=false
+
     
   }
   estaSiendoDescargado(archivo: string): boolean {
