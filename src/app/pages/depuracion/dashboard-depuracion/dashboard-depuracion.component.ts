@@ -154,7 +154,7 @@ export class DashboardDepuracionComponent implements OnInit {
 		  });
 		});
 	
-	  }
+	}
 	
 	
 

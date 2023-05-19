@@ -296,7 +296,7 @@ export class DashboardExtraccionComponent implements OnInit {
   dateFormat(value:any){
     // console.log(value)
     if(value != null){
-      return moment(value).format('DD/MM/yyyy hh:mm:00')
+      return moment(value).format('DD/MM/yyyy HH:mm:ss')
     }else{
       return ""
     }
