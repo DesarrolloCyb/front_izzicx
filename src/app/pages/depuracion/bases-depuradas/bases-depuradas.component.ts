@@ -12,14 +12,17 @@ import { Message, MessageService } from 'primeng/api';
 })
 export class BasesDepuradasComponent implements OnInit {
   detalle=[
-		"Caso de Negocio",
-		"Ordenes de Servicio"
-	  ];
-	uploadedFiles: any[] = [];
+	"Caso de Negocio",
+	"Ordenes de Servicio"
+  ];
+  uploadedFiles: any[] = [];
   basesTabla:any[]=[];
   loading: boolean = false
   show:boolean=false;
   url1:any;
+  archivoSeleccionado:string="";
+  loading2:boolean=false;
+
 
 
   constructor(private cors: CorsService,private messageService: MessageService) { }
@@ -65,7 +68,7 @@ export class BasesDepuradasComponent implements OnInit {
 
 	dateFormat(value:any){
 		if(value != null || value != ""){
-			return moment(value).format('DD-MM-yyyy hh:mm:ss')
+			return moment(value).format('DD-MM-yyyy HH:mm:ss')
 		}else{
 			return "---"
 		}
@@ -73,6 +76,8 @@ export class BasesDepuradasComponent implements OnInit {
 
 
 	descargarArchivo(archivo:string){
+		this.archivoSeleccionado = archivo;
+		this.loading2 = true;
 		this.cors.get1(`EjecucionDepuracion/BajarExcelFTPBasesDepuradas`,{
 		  "nombre":archivo
 		})
@@ -80,12 +85,18 @@ export class BasesDepuradasComponent implements OnInit {
 		  // console.log(response)
 		  this.show = true;
 		  this.url1 = `https://rpabackizzi.azurewebsites.net/EjecucionDepuracion/BajarExcelFTPBasesDepuradas?nombre=${archivo}`;
-		  this.messageService.add({
-			key:'tst',
-			severity: 'success',
-			summary: 'Se descargo el archivo',
-			detail: 'Con exito!!',
-		  });
+
+			setTimeout(()=> {
+				this.loading2 = false;
+				this.archivoSeleccionado = '';
+				this.messageService.add({
+					key:'tst',
+					severity: 'success',
+					summary: 'Se descargo el archivo',
+					detail: 'Con exito!!',
+				});
+			}, 5000);
+
 	
 		  
 		})
@@ -97,9 +108,16 @@ export class BasesDepuradasComponent implements OnInit {
 			summary: 'No se logro descargar',
 			detail: 'Intenta Nuevamente!!!',
 		  });
+		  this.loading2 = false;
+		  this.archivoSeleccionado = '';
 		});
+		this.show=false;
 	
 	  }
+
+	estaSiendoDescargado(archivo: string): boolean {
+		return this.archivoSeleccionado === archivo && this.loading2;
+	}
 
   
 }

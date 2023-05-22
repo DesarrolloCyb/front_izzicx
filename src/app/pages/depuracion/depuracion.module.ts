@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DepuracionRoutingModule } from './depuracion-routing.module';
 import { DashboardDepuracionComponent } from './dashboard-depuracion/dashboard-depuracion.component';
@@ -23,7 +24,9 @@ import { ReportesComponent } from './reportes/reportes.component';
   imports: [
     CommonModule,
     DepuracionRoutingModule,
-	SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class DepuracionModule { }

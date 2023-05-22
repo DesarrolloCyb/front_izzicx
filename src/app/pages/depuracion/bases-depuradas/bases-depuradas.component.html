@@ -1,20 +1,17 @@
-<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #E80084;border: 0;color: white !important;">Depuración/Cierre</div>
+<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #FF7987;border: 0;color: white !important;">Bases Depuradas</div>
 
-<div class="card" style="padding-left: 1rem;">
+<!-- <div class="card" style="padding-left: 1rem;">
   <p-panel header=""
     class="line-height-12 m-0">
-    <!-- INICIO DE INPUTS -->
-    <!-- <h5>Tipo de Cuenta</h5> -->
     <div class="p-fluid p-formgrid grid">
-		<div class="field col-12 md:col-12">
-			<p-fileUpload 
+		<div class="field col-12 md:col-12"> -->
+			<!-- <p-fileUpload 
 				chooseLabel="Seleccionar Archivo"
 				[customUpload]="true"
 				(uploadHandler)="uploadfun($event)"
 				[auto]="true"
         
         >
-				<!-- <span class="p-button-label">H</span> -->
 			</p-fileUpload>
 		</div>
         <div class="field col-12 md:col-10">
@@ -26,12 +23,11 @@
             </p-dropdown>
         </div>
 		<div class="field col-12 md:col-2">
-			<!-- <p-button class="i" icon="pi pi-send" iconPos="left" ></p-button> -->
       <button  type="button"
       pButton
       label="Guardar"
       style="width:8rem;background-color: #E80084;border: 0;"></button>
-		</div>
+		</div> -->
 
         <!-- <div class="field col-12 md:col-6">
             <p-dropdown
@@ -61,7 +57,7 @@
             </p-dropdown>
         </div> -->
 
-    </div>
+    <!-- </div> -->
     <!-- BOTON DE EJECUCION -->
     <!-- <div class="col lg:col-12">
 
@@ -76,10 +72,10 @@
         </div>
       </div>
     </div> -->
-  </p-panel>
+  <!-- </p-panel>
   <br>
 
-</div>
+</div> -->
 
 <!-- <p-dialog
   [closable]="closeModal"
@@ -158,7 +154,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-item let-i="rowIndex">
                 <tr>
-                    <td class="flex justify-content-center align-items-center">
+                    <td class="text-center">
                       {{item.horario}}
                     </td>
                     <td class="text-center">
@@ -169,7 +165,7 @@
                     </td>
                     <td *ngIf="item.archivo" class="text-center">
                       <!-- {{item.archivo}} -->
-                        <button pButton  style="background-color: #FFD419;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
+                        <button pButton  style="background-color: #FF7987;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)" [loading]="estaSiendoDescargado(item.archivo)"></button>
                         <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
                       </td>
                       <td *ngIf="!item.archivo" class="text-center">

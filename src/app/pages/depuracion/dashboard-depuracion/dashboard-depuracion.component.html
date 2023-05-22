@@ -1,4 +1,5 @@
-<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #E80084;color: white !important;">Depuración/Cierre</div>
+<!-- <div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #E80084;color: white !important;">Bases Depuradas</div> -->
+<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #FF7987;color: white !important;">Depuración/Cierre</div>
 
 <div class="card" style="padding-left: 1rem;">
   <p-panel header=""
@@ -152,7 +153,7 @@
                       {{item.tipoExtraccion}}
                     </td>
                     <td class="text-center">
-                        {{dateFormat(item.fechaExtraccion1)}}
+                        {{dateFormat(item.fechaExtraccion)}}
                     </td>
                     <td class="text-center">
                        {{item.cve_usuario}}
@@ -161,7 +162,7 @@
                       {{item.horarioInicio}}
                     </td>
                     <td class="text-center">
-                      {{dateFormat(item.fechaCompletado1)}}
+                      {{dateFormat(item.fechaCompletado)}}
                     </td>
                     <td class="text-center">
                       {{item.status}}
@@ -174,7 +175,7 @@
                     </td>
                     <td *ngIf="item.archivo" class="text-center">
                       <!-- {{item.archivo}} -->
-                        <button pButton  style="background-color: #FFD419;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
+                        <button pButton  style="background-color: #FF7987;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)" [loading]="estaSiendoDescargado(item.archivo)"></button>
                         <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
                       </td>
                       <td *ngIf="!item.archivo" class="text-center">

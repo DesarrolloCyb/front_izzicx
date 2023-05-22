@@ -19,6 +19,9 @@ export class DashboardDepuracionComponent implements OnInit {
 	loading: boolean = false
 	show:boolean=false;
 	url1:any;
+	archivoSeleccionado:string="";
+	loading2:boolean=false;
+  
   
 	constructor(private cors: CorsService,private messageService: MessageService) {
 		
@@ -121,13 +124,16 @@ export class DashboardDepuracionComponent implements OnInit {
 
 	dateFormat(value:any){
 		if(value != null || value != ""){
-			return moment(value).format('DD-MM-yyyy hh:mm:ss')
+			return moment(value).format('DD-MM-yyyy HH:mm:ss')
 		}else{
 			return "---"
 		}
 	}
 
 	descargarArchivo(archivo:string){
+		this.archivoSeleccionado = archivo;
+		this.loading2 = true;
+	
 		this.cors.get1(`EjecucionDepuracion/BajarExcelFTPExtraccionesDepuracion`,{
 		  "nombre":archivo
 		})
@@ -135,12 +141,17 @@ export class DashboardDepuracionComponent implements OnInit {
 		  // console.log(response)
 		  this.show = true;
 		  this.url1 = `https://rpabackizzi.azurewebsites.net/EjecucionDepuracion/BajarExcelFTPExtraccionesDepuracion?nombre=${archivo}`;
-		  this.messageService.add({
-			key:'tst',
-			severity: 'success',
-			summary: 'Se descargo el archivo',
-			detail: 'Con exito!!',
-		  });
+
+		  setTimeout(()=> {
+			this.loading2 = false;
+			this.archivoSeleccionado = '';
+			this.messageService.add({
+				key:'tst',
+				severity: 'success',
+				summary: 'Se descargo el archivo',
+				detail: 'Con exito!!',
+			  });
+			}, 5000);
 	
 		  
 		})
@@ -152,9 +163,19 @@ export class DashboardDepuracionComponent implements OnInit {
 			summary: 'No se logro descargar',
 			detail: 'Intenta Nuevamente!!!',
 		  });
+		  this.loading2 = false;
+		  this.archivoSeleccionado = '';
 		});
+		this.show=false;
+
+
 	
 	}
+
+	estaSiendoDescargado(archivo: string): boolean {
+		return this.archivoSeleccionado === archivo && this.loading2;
+	}
+	
 	
 	
 
