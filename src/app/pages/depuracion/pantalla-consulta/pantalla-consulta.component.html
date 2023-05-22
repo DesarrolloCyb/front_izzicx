@@ -8,12 +8,20 @@
                 <tr >
                     <th style="background-color: #FF7987; color: white;">Base</th>
                     <th style="background-color: #FF7987; color: white;">Pendientes</th>
+                    <th style="background-color: #FF7987; color: white;">Procesando</th>
+                    <th style="background-color: #FF7987; color: white;">Error</th>
+                    <th style="background-color: #FF7987; color: white;">Completadas</th>
+                    <th style="background-color: #FF7987; color: white;">Total</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-product>
                 <tr>
                     <td>{{ product.base }}</td>
                     <td>{{ product.pendientes }}</td>
+                    <td>{{ product.procesando }}</td>
+                    <td>{{ product.error }}</td>
+                    <td>{{ product.completado }}</td>
+                    <td>{{ product.total }}</td>
                 </tr>
             </ng-template>
         </p-table>
