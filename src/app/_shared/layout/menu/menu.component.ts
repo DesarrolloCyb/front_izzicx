@@ -299,16 +299,16 @@ export class MenuComponent implements OnInit {
           icon: 'pi pi-fw pi-chart-bar',
             routerLink: ['/ajustesYcambioServicio/BDajustes'],
           },
-          {
-            label: 'Estadísticas',
-            icon: 'pi pi-fw pi-exclamation-triangle',
-            routerLink: ['/ajustesYcambioServicio/estadisticas'],
-          },
-          {
-            label: 'Reporte',
-            icon: 'pi pi-fw pi-exclamation-triangle',
-            routerLink: ['/ajustesYcambioServicio/reporte'],
-          },
+          // {
+          //   label: 'Estadísticas',
+          //   icon: 'pi pi-fw pi-exclamation-triangle',
+          //   routerLink: ['/ajustesYcambioServicio/estadisticas'],
+          // },
+          // {
+          //   label: 'Reporte',
+          //   icon: 'pi pi-fw pi-exclamation-triangle',
+          //   routerLink: ['/ajustesYcambioServicio/reporte'],
+          // },
           // {
           //   label: 'Servicios c/s costo',
           //   icon: 'pi pi-fw pi-exclamation-triangle',
@@ -423,6 +423,7 @@ export class MenuComponent implements OnInit {
       "Reporte":['home','reporteFidelizacion'],
       "Extraccion":['home','extraccion'],
       "Depuracion":['home','depuracion'],
+      "Ajustes":['home','ajustesYcambioServicio'],
       //   "SUPERVISOR TROUBLESHOOTING CELULAR":['capturasA','home','reportes'],
     //   "ESPECIALISTA TROUBLESHOOTING CELULAR":['capturasA'],
     //   "SUPERVISOR CALL CENTER REPARACIONES":['capturasA','home','reportes'],
