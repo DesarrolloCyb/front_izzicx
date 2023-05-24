@@ -98,7 +98,7 @@ export class DashboardDepuracionComponent implements OnInit {
 	getTabladepuracion(){
 		this.cors.get('EjecucionDepuracion/getEjecucionDepuracion')
 		.then((response) => {
-			console.log(response)
+			// console.log(response)
 			for(let i =0;i<response.length;i++){
 				if(response[i].procesando == "1"){
 					response[i].procesando = "Si"

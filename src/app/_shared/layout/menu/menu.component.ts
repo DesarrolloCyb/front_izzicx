@@ -180,11 +180,11 @@ export class MenuComponent implements OnInit {
 		    icon: 'pi pi-fw pi-exclamation-triangle',
 		    routerLink: ['/depuracion/consulta'],
 		  },
-		  {
-		    label: 'Reporte',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
-		    routerLink: ['/depuracion/reporte'],
-		  },
+		  // {
+		  //   label: 'Reporte',
+		  //   icon: 'pi pi-fw pi-exclamation-triangle',
+		  //   routerLink: ['/depuracion/reporte'],
+		  // },
 		  // {
 		  //   label: 'Reembolso',
 		  //   icon: 'pi pi-fw pi-exclamation-triangle',
