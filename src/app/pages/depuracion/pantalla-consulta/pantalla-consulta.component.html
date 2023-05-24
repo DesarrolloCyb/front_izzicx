@@ -3,28 +3,34 @@
 <div class="card" >
     <p-panel header="EstadÍsticas Cancelación OS" class="line-height-12 m-0" >
 
-        <p-table [value]="stats" [tableStyle]="{ 'min-width': '50rem' }" class="flex align-items-center justify-content-center centered-table" >
-            <ng-template pTemplate="header" >
-                <tr >
-                    <th style="background-color: #FFC0CB; color: white;">Base</th>
-                    <th style="background-color: #FFC0CB; color: white;">Pendientes</th>
-                    <th style="background-color: #FFC0CB; color: white;">Procesando</th>
-                    <th style="background-color: #FFC0CB; color: white;">Error</th>
-                    <th style="background-color: #FFC0CB; color: white;">Completadas</th>
-                    <th style="background-color: #FFC0CB; color: white;">Total</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-product>
-                <tr>
-                    <td>{{ product.base }}</td>
-                    <td>{{ product.pendientes }}</td>
-                    <td>{{ product.procesando }}</td>
-                    <td>{{ product.error }}</td>
-                    <td>{{ product.completado }}</td>
-                    <td>{{ product.total }}</td>
-                </tr>
-            </ng-template>
-        </p-table>
+        <div class="p-grid p-dir-col p-nogutter">
+            <div class="p-col">
+                <p-table [value]="stats"  [scrollable]="true" [scrollHeight]="'auto'" [responsive]="true" class="flex align-items-center justify-content-center centered-table p-datatable-responsive" >
+                    <ng-template pTemplate="header" >
+                        <tr >
+                            <th style="background-color: #FFC0CB; color: white;">Base</th>
+                            <th style="background-color: #FFC0CB; color: white;">Pendientes</th>
+                            <th style="background-color: #FFC0CB; color: white;">Procesando</th>
+                            <th style="background-color: #FFC0CB; color: white;">Error</th>
+                            <th style="background-color: #FFC0CB; color: white;">Completadas</th>
+                            <th style="background-color: #FFC0CB; color: white;">Total</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+                            <td>{{ product.base }}</td>
+                            <td>{{ product.pendientes }}</td>
+                            <td>{{ product.procesando }}</td>
+                            <td>{{ product.error }}</td>
+                            <td>{{ product.completado }}</td>
+                            <td>{{ product.total }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+            </div>
+          </div>
+
     </p-panel>
 </div>
 
