@@ -58,11 +58,14 @@ export class PantallaConsultaComponent implements OnInit {
         delete info.motivoOrden;
         info['Número de la Orden']=info.numOrden;
         delete info.numOrden;
-        
+        delete info.usuario;
+        info['procesando']= info['procesando']=="1"?"Si":"No";
+        delete info.numOrden;
+        console.log(info)
         let objetoLimpio = Object.entries(info)
         .filter(([key, value]) => value !== null && value !== "" && !this.isObjectEmpty(value))
         .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
-        // console.log(objetoLimpio)
+        console.log(objetoLimpio)
         this.consulta=objetoLimpio;
         // this.consulta=response;
         
