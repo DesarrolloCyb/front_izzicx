@@ -171,7 +171,7 @@ export class MenuComponent implements OnInit {
           routerLink: ['/depuracion/bases'],
       },
 		  {
-		    label: 'Bases Canceladas',
+		    label: 'Bases Cancelación OS',
 		    icon: 'pi pi-fw pi-exclamation-triangle',
 		    routerLink: ['/depuracion/basesCanceladas'],
 		  },

@@ -1,4 +1,4 @@
-<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #FF7987;border: 0;color: white !important;">Bases Canceladas OS</div>
+<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #E80084;border: 0;color: white !important;">Bases Cancelación OS</div>
 
 <div class="card">
     <p-panel header="Importar Excel" class="line-height-12 m-0">
@@ -92,6 +92,17 @@
     
     </p-panel>
 </div>
+<!-- <iframe [src]="pdfContent" width="100%" height="500px"></iframe>
+<button (click)="generatePDF()">Generar PDF</button> -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
+        </div>
+    </div>
+</div>
+
 <!-- <p-dialog
   [closable]="closeModal"
   header="Guardar"
@@ -126,13 +137,13 @@
   [baseZIndex]="99999"
   key="tst"></p-toast>
 
-  <!-- <div class="row">
+  <div class="row" *ngIf="tabla">
     <div class="cols">
       <div class="card">
-        <p-table #dt1 [value]="cambioPaqueteEsquemaDia" dataKey="id" [loading]="loading" [rows]="50" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
+        <p-table #dt1 [value]="ExcelData" dataKey="Nº de orden" [rows]="50" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
             styleClass="p-datatable-gridlines" [paginator]="true"
-            [globalFilterFields]="['tipoCuenta','cuenta','pais','tipoCambio','numDispositivos','status']" responsiveLayout="scroll">
-            <ng-template pTemplate="caption">
+            responsiveLayout="scroll">
+            <!-- <ng-template pTemplate="caption">
                 <div class="flex justify-content-between flex-column sm:flex-row">
 
                     <span class="p-input-icon-left mb-2">
@@ -141,45 +152,71 @@
                             class="w-full" />
                     </span>
                 </div>
-            </ng-template>
+            </ng-template> -->
             <ng-template pTemplate="header">
                 <tr>
                     <th>
                         <div class="flex justify-content-between align-items-center">
-                            Tipo de Cuenta
-
-                        </div>
-                    </th>
-                    <th>
-                        <div class="flex justify-content-between align-items-center">
                             Cuenta
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Orden
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Comentarios
 
                         </div>
                     </th>
                     <th>
                         <div class="flex justify-content-between align-items-center">
-                            Pais
+                            Compañia
+
                         </div>
                     </th>
                     <th>
                         <div class="flex justify-content-between align-items-center">
-                            Tipo de Cambio
+                            Creado
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Usuario
                         </div>
                     </th>
                     <th>
                       <div class="flex justify-content-between align-items-center">
-                          Número de Dispositivos
+                          Estado
                       </div>
                     </th>
                     <th>
                       <div class="flex justify-content-between align-items-center">
-                          Estatus
+                          Fecha de Carga
                       </div>
                     </th>
                     <th>
                       <div class="flex justify-content-between align-items-center">
-                          Fecha Captura
+                          HUB
                       </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Motivo de la Orden
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Nodo
+                        </div>
+                    </th>
+
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Tipo
+                        </div>
                     </th>
   
                 </tr>
@@ -187,26 +224,42 @@
             <ng-template pTemplate="body" let-item let-i="rowIndex">
                 <tr>
                     <td>
-                      {{item.tipoCuenta}}
+                        {{item['Nº de cuenta']}}
                     </td>
                     <td>
-                        {{item.cuenta}}
+                        {{item['Nº de orden']}}
                     </td>
                     <td>
-                        {{item.pais}}
+                      {{item.Comentarios}}
                     </td>
                     <td>
-                       {{item.tipoCambio}}
+                        {{item['Compañía']}}
                     </td>
                     <td>
-                      {{item.numDispositivos}}
+                        {{item.Creado}}
                     </td>
                     <td>
-                      {{item.status}}
+                       {{item.Cve_usuario}}
                     </td>
                     <td>
-                      {{item.fechaCaptura}}
+                      {{item.Estado}}
                     </td>
+                    <td>
+                      {{item.Fecha_Carga}}
+                    </td>
+                    <td>
+                      {{item.Hub}}
+                    </td>
+                    <td>
+                        {{item['Motivo de la orden']}}
+                    </td>
+                    <td>
+                        {{item.Nodo}}
+                    </td>
+                    <td>
+                        {{item.Tipo}}
+                    </td>
+          
     
                 </tr>
             </ng-template>
@@ -227,4 +280,4 @@
         </p-table>
       </div>
     </div>
-  </div> -->
+  </div>

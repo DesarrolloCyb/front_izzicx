@@ -3,6 +3,9 @@ import { Message,MessageService } from 'primeng/api';
 import { CorsService } from '@services';
 import * as moment from 'moment';
 import * as XLSX from 'xlsx';
+// import { jsPDF } from 'jspdf';
+// import 'jspdf-autotable';
+// import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'bases-canceladas',
@@ -14,7 +17,7 @@ export class BasesCanceladasComponent implements OnInit {
   button:boolean=true;
   usuario: any = JSON.parse(localStorage.getItem("userData") || "{}")
   msgs: Message[] = [];
-  ExcelData:any;
+  ExcelData:any=[];
   headers:string[]=[
     'Comentarios',
     'Compañía',
@@ -27,12 +30,46 @@ export class BasesCanceladasComponent implements OnInit {
     'Nº de orden',
     'Tipo'
   ];
+  pdfContent:any;
+  tabla:boolean=false;
+
 
   constructor(
     private cors: CorsService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    // private sanitizer: DomSanitizer
   ) { }
 
+//   generatePDF() {
+//     const doc = new jsPDF();
+    
+//     const data = this.ExcelData;
+    
+//     const columns = [
+//       // { header: 'Comentarios', dataKey: 'Comentarios' },
+//       // { header: 'Compañía', dataKey: 'Compañía' },
+//       { header: 'Creado', dataKey: 'Creado' },
+//       { header: 'Cve_usuario', dataKey: 'Cve_usuario' },
+//       { header: 'Estado', dataKey: 'Estado' },
+//       { header: 'Fecha_Carga', dataKey: 'Fecha_Carga' },
+//       { header: 'Hub', dataKey: 'Hub' },
+//       { header: 'Motivo de la orden', dataKey: 'Motivo de la orden' },
+//       { header: 'Nodo', dataKey: 'Nodo' },
+//       { header: 'Nº de cuenta', dataKey: 'Nº de cuenta' },
+//       { header: 'Nº de orden', dataKey: 'Nº de orden' },
+//       { header: 'Tipo', dataKey: 'Tipo' },
+//     ];
+    
+//     (doc as any).autoTable({
+//       columns,
+//       body: data,
+//     });
+    
+//     // const pdfOutput = doc.output('blob');
+//     this.pdfContent = doc.output('datauristring');
+//     this.pdfContent = this.sanitizer.bypassSecurityTrustResourceUrl(this.pdfContent) as SafeResourceUrl;
+// }
+  
   ngOnInit(): void {
   }
 
@@ -171,7 +208,8 @@ export class BasesCanceladasComponent implements OnInit {
             summary: 'Exito!!!',
             detail: 'El archivo se a cargado completamente!!!',
           });
-          this.button=false;         
+          this.button=false;   
+          this.tabla=true;
         }else{
           this.messageService.add({
             key: 'tst',
@@ -212,6 +250,7 @@ export class BasesCanceladasComponent implements OnInit {
     })
     
     this.button=true;
+    this.tabla=false;
 
   }
 

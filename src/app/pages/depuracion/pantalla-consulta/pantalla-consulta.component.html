@@ -1,17 +1,17 @@
-<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #FF7987;border: 0;color: white !important;">Bases Canceladas CC Y EXT</div>
+<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #E80084;border: 0;color: white !important;">Bases Cancelacion OS CC</div>
 
 <div class="card" >
-    <p-panel header="Estadisticas de las Bases Canceladas" class="line-height-12 m-0" >
+    <p-panel header="EstadÍsticas Cancelación OS" class="line-height-12 m-0" >
 
         <p-table [value]="stats" [tableStyle]="{ 'min-width': '50rem' }" class="flex align-items-center justify-content-center centered-table" >
             <ng-template pTemplate="header" >
                 <tr >
-                    <th style="background-color: #FF7987; color: white;">Base</th>
-                    <th style="background-color: #FF7987; color: white;">Pendientes</th>
-                    <th style="background-color: #FF7987; color: white;">Procesando</th>
-                    <th style="background-color: #FF7987; color: white;">Error</th>
-                    <th style="background-color: #FF7987; color: white;">Completadas</th>
-                    <th style="background-color: #FF7987; color: white;">Total</th>
+                    <th style="background-color: #FFC0CB; color: white;">Base</th>
+                    <th style="background-color: #FFC0CB; color: white;">Pendientes</th>
+                    <th style="background-color: #FFC0CB; color: white;">Procesando</th>
+                    <th style="background-color: #FFC0CB; color: white;">Error</th>
+                    <th style="background-color: #FFC0CB; color: white;">Completadas</th>
+                    <th style="background-color: #FFC0CB; color: white;">Total</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-product>
@@ -48,7 +48,7 @@
                         (click)="buscar()"
                         pButton
                         label="Buscar"
-                        style="width:auto;"></button>      
+                        style="width:auto; color: white;background-color: #FFC0CB; border-color: #FFC0CB;"></button>      
                     </div>
                 </div>
             </form>

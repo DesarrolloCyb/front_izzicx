@@ -34,7 +34,7 @@ export class BasesDepuradasComponent implements OnInit {
     for(let file of event.files) {
       this.uploadedFiles.push(file);
     }
-    console.log(this.uploadedFiles)
+    // console.log(this.uploadedFiles)
   
     // this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
   }
@@ -42,8 +42,11 @@ export class BasesDepuradasComponent implements OnInit {
   getTablaBases(){
 		this.cors.get('EjecucionDepuracion/getBasesDepuracion')
 		.then((response) => {
-		  // console.log(response)
-      this.basesTabla = response;
+		  if(response[0] == "SIN INFO"){
+			  this.basesTabla = [];
+		  }else{
+			  this.basesTabla = response;
+		  }
 		//   this.messageService.add({
 		// 	key: 'tst',
 		// 	severity: 'success',

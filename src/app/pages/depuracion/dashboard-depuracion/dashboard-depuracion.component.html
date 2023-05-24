@@ -1,11 +1,11 @@
 <!-- <div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #E80084;color: white !important;">Bases Depuradas</div> -->
-<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #FF7987;color: white !important;">Depuración/Cierre</div>
+<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #E80084;color: white !important;">Depuración/Cierre</div>
 
 <div class="card" style="padding-left: 1rem;">
   <p-panel header=""
     class="line-height-12 m-0">
     <!-- INICIO DE INPUTS -->
-    <h5>Configuración de Horarios</h5>
+    <h5 class="text-center">Configuración de Horarios</h5>
     <div class="p-fluid p-formgrid grid justify-content-center">
       <div class="field col-12 md:col-6">
         <p-dropdown
@@ -175,7 +175,7 @@
                     </td>
                     <td *ngIf="item.archivo" class="text-center">
                       <!-- {{item.archivo}} -->
-                        <button pButton  style="background-color: #FF7987;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)" [loading]="estaSiendoDescargado(item.archivo)"></button>
+                        <button pButton  style="background-color: #FFC0CB;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)" [loading]="estaSiendoDescargado(item.archivo)"></button>
                         <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
                       </td>
                       <td *ngIf="!item.archivo" class="text-center">
