@@ -69,15 +69,15 @@ export class MenuComponent implements OnInit {
       ]
     },
 	{
-		label: 'Asignación',
-		key: "asignacion",
+		label: 'Ajustes', // Ajustes
+		key: "ajustes",
 		icon: 'pi pi-fw pi-compass',
 	  //   routerLink: ['/capturas'],
 		items: [
 		  {
 			label: 'Home',
 			icon: 'pi pi-fw pi-check-square',
-		    routerLink: ['/asignacion'],
+		    routerLink: ['/ajustes'],
 		  },
 		  // {
 		  //   label: 'Solicitud de Cancelación',
@@ -112,15 +112,15 @@ export class MenuComponent implements OnInit {
 		]
 	  },
 	  {
-		label: 'Casos de Negocio y Ordenes',
-		key: "casoNegocio",
+		label: 'NotDone', // NOTDONE
+		key: "notDone",
 		// icon: 'pi pi-fw pi-compass',
 	  //   routerLink: ['/capturas'],
 		items: [
 		  {
 			label: 'Home',
 			icon: 'pi pi-fw pi-briefcase',
-		    routerLink: ['/casoNegocio'],
+		    routerLink: ['/notDone'],
 		  },
 		  // {
 		  //   label: 'Solicitud de Cancelación',
@@ -419,7 +419,7 @@ export class MenuComponent implements OnInit {
 
 
     let permisos: any = {
-      "admin":['extraccion','home','asignacion','casoNegocio','depuracion','reporteFidelizacion','reportes','ajustesYcambioServicio'],
+      "admin":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','ajustesYcambioServicio'],
       "Reporte":['home','reporteFidelizacion'],
       "Extraccion":['home','extraccion'],
       "Depuracion":['home','depuracion'],

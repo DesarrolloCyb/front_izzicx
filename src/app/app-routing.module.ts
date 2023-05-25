@@ -44,15 +44,15 @@ const routes: Routes = [
       import('./pages/extraccion/extraccion.module').then((m) => m.ExtraccionModule),
   },
   {
-    path: 'asignacion',
-    data: { breadcrumb: 'Asignación' },
+    path: 'ajustes',
+    data: { breadcrumb: 'Ajustes' },
     canActivate: [AuthGuard],
     loadChildren: () =>
       import('./pages/asignacion/asignacion.module').then((m) => m.AsignacionModule),
   },
   {
-    path: 'casoNegocio',
-    data: { breadcrumb: 'Caso de Negocio y Ordenes' },
+    path: 'notDone',
+    data: { breadcrumb: 'NotDone' },
     canActivate: [AuthGuard],
     loadChildren: () =>
       import('./pages/casos-negocio/casos-negocio.module').then((m) => m.CasosNegocioModule),
