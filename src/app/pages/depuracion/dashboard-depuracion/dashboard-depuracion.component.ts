@@ -99,14 +99,18 @@ export class DashboardDepuracionComponent implements OnInit {
 		this.cors.get('EjecucionDepuracion/getEjecucionDepuracion')
 		.then((response) => {
 			// console.log(response)
-			for(let i =0;i<response.length;i++){
-				if(response[i].procesando == "1"){
-					response[i].procesando = "Si"
-				}else{
-					response[i].procesando="No"
+			if(response[0]=="SIN INFO"){
+				this.tablaDepuracion = [];
+			}else{
+				for(let i =0;i<response.length;i++){
+					if(response[i].procesando == "1"){
+						response[i].procesando = "Si"
+					}else{
+						response[i].procesando="No"
+					}
 				}
+			  	this.tablaDepuracion = response;
 			}
-		  this.tablaDepuracion = response;
 		//   this.messageService.add({
 		// 	key: 'tst',
 		// 	severity: 'success',
