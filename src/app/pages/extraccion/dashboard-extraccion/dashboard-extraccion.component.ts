@@ -30,6 +30,9 @@ export class DashboardExtraccionComponent implements OnInit {
   loading: boolean = false
   show:boolean=false;
   url1:any;
+  archivoSeleccionado:string="";
+	loading2:boolean=false;
+
 
   constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService) {
     this.tablaExtraccion();
@@ -316,17 +319,8 @@ export class DashboardExtraccionComponent implements OnInit {
   }
 
   tablaExtraccion(){
-    // console.log("Tabla Extraccion")
     this.cors.get('Reporte/getmostrarTablaExtraccion',{})
     .then((response) => {
-      // console.log(response)
-      // let b=0;
-      // for(let i =0; i<response.length;i++){
-      //   let a  = JSON.parse(response[i].parametrosExtraccion)
-      //   response[i].a=a;
-      //   console.log(b)
-      //   b++;
-      // }
       for(let i = 0 ; i<response.length;i++){
         if(response[i].procesando && response[i].procesando=="1"){
           response[i].procesando="Si"
@@ -349,6 +343,9 @@ export class DashboardExtraccionComponent implements OnInit {
   }
 
   descargarArchivo(archivo:string){
+    this.archivoSeleccionado = archivo;
+		this.loading2 = true;
+
     this.cors.get1(`Reporte/BajarExtraccionExcelFTP`,{
       "nombre":archivo
     })
@@ -356,13 +353,18 @@ export class DashboardExtraccionComponent implements OnInit {
       // console.log(response)
       this.show = true;
       this.url1 = `https://rpabackizzi.azurewebsites.net/Reporte/BajarExtraccionExcelFTP?nombre=${archivo}`;
-      this.messageService.add({
-        key:'tst',
-        severity: 'success',
-        summary: 'Se descargo el archivo',
-        detail: 'Con exito!!',
-      });
 
+      setTimeout(()=> {
+        this.loading2 = false;
+        this.archivoSeleccionado = '';
+        this.messageService.add({
+          key:'tst',
+          severity: 'success',
+          summary: 'Se descargo el archivo',
+          detail: 'Con exito!!',
+          });
+        }, 5000);
+  
       
     })
     .catch((error) => {
@@ -373,9 +375,18 @@ export class DashboardExtraccionComponent implements OnInit {
         summary: 'No se logro descargar',
         detail: 'Intenta Nuevamente!!!',
       });
+      this.loading2 = false;
+      this.archivoSeleccionado = '';
+
     });
+    this.show=false;
 
   }
+
+  estaSiendoDescargado(archivo: string): boolean {
+		return this.archivoSeleccionado === archivo && this.loading2;
+	}
+
 
 
 

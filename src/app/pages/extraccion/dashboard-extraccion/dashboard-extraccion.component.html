@@ -714,7 +714,7 @@
                     </td>
                     <td *ngIf="item.archivo" class="text-center">
                     <!-- {{item.archivo}} -->
-                      <button pButton  style="background-color: #FFC69E;border: 0;opacity: 0.5;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
+                      <button pButton  style="background-color: #FFC69E;border: 0;opacity: 0.5;" label="Descargar" (click)="descargarArchivo(item.archivo)" [loading]="estaSiendoDescargado(item.archivo)"></button>
                       <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
                     </td>
                     <td *ngIf="!item.archivo" class="text-center">
