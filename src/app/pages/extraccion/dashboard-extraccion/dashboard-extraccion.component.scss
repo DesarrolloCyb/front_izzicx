@@ -15,6 +15,9 @@
 .p-button:active {
   box-shadow: #FFC69E;
 }
+::ng-deep .p-calendar .p-button-icon-only {
+  background-color: #FFC69E !important;
+}
 
 // .p-inputtext.p-component:focus,
 // .p-inputgroup:focus-within {
