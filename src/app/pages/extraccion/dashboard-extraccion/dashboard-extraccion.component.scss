@@ -1,22 +1,22 @@
 :host ::ng-deep ::-webkit-scrollbar-thumb:horizontal {
-  background-color: #FFC69E;
+  background-color: #FF671F;
   opacity: 0.5;
 }
 :host ::ng-deep ::-webkit-scrollbar-thumb:vertical {
-  background-color: #FFC69E;
-  opacity: 0.5;
+  background-color: #FF671F;
+  // opacity: 0.5;
 }
 
 ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
   color: white;
   opacity: 0.5;
-  background-color: #FFC69E; /* Cambia el color de la página activa del paginador */
+  background-color: #FF671F; /* Cambia el color de la página activa del paginador */
 }
 .p-button:active {
-  box-shadow: #FFC69E;
+  box-shadow: #FF671F;
 }
 ::ng-deep .p-calendar .p-button-icon-only {
-  background-color: #FFC69E !important;
+  background-color: #FF671F !important;
 }
 
 // .p-inputtext.p-component:focus,
