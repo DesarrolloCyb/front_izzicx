@@ -327,8 +327,14 @@ export class DashboardExtraccionComponent implements OnInit {
       //   console.log(b)
       //   b++;
       // }
-      // console.log(response)
-
+      for(let i = 0 ; i<response.length;i++){
+        if(response[i].procesando && response[i].procesando=="1"){
+          response[i].procesando="Si"
+        }else{
+          response[i].procesando="No"
+        }
+      }
+      
       this.datosExtraccion = response;
     })
     .catch((error) => {
