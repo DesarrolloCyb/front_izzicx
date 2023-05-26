@@ -21,6 +21,8 @@ export class DashboardDepuracionComponent implements OnInit {
 	url1:any;
 	archivoSeleccionado:string="";
 	loading2:boolean=false;
+	time:any;
+	nuevo:boolean=false;
   
   
 	constructor(private cors: CorsService,private messageService: MessageService) {
@@ -35,8 +37,12 @@ export class DashboardDepuracionComponent implements OnInit {
 	visualizarHorarios(){
 		this.cors.get('EjecucionDepuracion/getHoursDepuracion')
 		.then((response) => {
-		//   console.log(response)
-		this.horarios = response;
+
+		  if(response[0]=="SIN INFO"){
+			this.horarios = [];
+		  }else{
+			  this.horarios = response;
+		  }
 		//   this.messageService.add({
 		// 	key: 'tst',
 		// 	severity: 'success',
@@ -63,8 +69,9 @@ export class DashboardDepuracionComponent implements OnInit {
 
 	changeTime(event:any){
 		this.second = moment(event).format('HH:mm:00 a');
-		// console.log(this.second)
-
+	}
+	changeTime2(event:any){
+		this.time = moment(event).format('HH:mm:00 a');
 	}
 	enviar(){
 		let a ={
@@ -187,7 +194,60 @@ export class DashboardDepuracionComponent implements OnInit {
 		return this.archivoSeleccionado === archivo && this.loading2;
 	}
 	
-	
+	eliminar(value:any){
+		this.cors.delete(`EjecucionDepuracion/EliminarHoursDepuracion?id=${value}`,{"id":value})
+		.then((response) => {
+		//   this.messageService.add({
+		// 	key: 'tst',
+		// 	severity: 'success',
+		// 	summary: 'Exito!!!',
+		// 	detail: 'Datos guardados',
+		//   });
+		this.visualizarHorarios();
+		})
+		.catch((error) => {
+		console.log(error)
+		//   this.messageService.add({
+		// 	key:'tst',
+		// 	severity: 'error',
+		// 	summary: 'No se logro guardar',
+		// 	detail: 'Intenta Nuevamente!!!',
+		//   });
+		});	
+	}
+
+	add(){
+		if(this.time != undefined){
+			this.cors.post(`EjecucionDepuracion/GuardarHoursDepuracion`,{"horario":this.time})
+			.then((response) => {
+			  this.messageService.add({
+				key: 'tst',
+				severity: 'success',
+				summary: 'Exito!!!',
+				detail: 'Hora guardada',
+			  });
+			this.visualizarHorarios();
+			this.time=null;
+			this.nuevo=false;
+			})
+			.catch((error) => {
+			console.log(error)
+			//   this.messageService.add({
+			// 	key:'tst',
+			// 	severity: 'error',
+			// 	summary: 'No se logro guardar',
+			// 	detail: 'Intenta Nuevamente!!!',
+			//   });
+			});	
+		}else{
+			this.messageService.add({
+				key:'tst',
+				severity: 'error',
+				summary: 'Falta agregar una hora!',
+				detail: 'Intenta Nuevamente!!!',
+			});
+		}
+	}
 	
 
 

@@ -13,6 +13,7 @@
                   [showClear]="true"
                   placeholder="Tipo de Extracción"
                   formControlName="tipoExtraccion"
+                  class="custom-dropdown"
                   [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('tipoExtraccion')?.errors != null && formExtraccion.get('tipoExtraccion')?.touched == true}"
                   >
                   </p-dropdown>
@@ -575,7 +576,7 @@
                   type="button"
                   pButton
                   label="Limpiar"
-                  style="width:8rem;background-color: #FF671F;border: 0;"
+                  style="width:8rem;background-color: #FFC300;border: 0;"
                   (click)="reset()"
                   ></button>
               </div>
@@ -586,7 +587,7 @@
                   pButton
                   [loading]="spinner"
                   label="Guardar"
-                  style="width:8rem;background-color: #FF671F;border: 0;"></button>
+                  style="width:8rem;background-color: #FFC300;border: 0;"></button>
       
               </div>
             </div>
@@ -714,7 +715,7 @@
                     </td>
                     <td *ngIf="item.archivo" class="text-center">
                     <!-- {{item.archivo}} -->
-                      <button pButton  style="background-color: #FF671F;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)" [loading]="estaSiendoDescargado(item.archivo)"></button>
+                      <button pButton  style="background-color: #FFC300;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)" [loading]="estaSiendoDescargado(item.archivo)"></button>
                       <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
                     </td>
                     <td *ngIf="!item.archivo" class="text-center">

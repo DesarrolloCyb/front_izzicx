@@ -1,23 +1,27 @@
 :host ::ng-deep ::-webkit-scrollbar-thumb:horizontal {
-  background-color: #FF671F;
+  background-color: #FFC300;
   opacity: 0.5;
 }
 :host ::ng-deep ::-webkit-scrollbar-thumb:vertical {
-  background-color: #FF671F;
+  background-color: #FFC300;
   // opacity: 0.5;
 }
 
 ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
   color: white;
   opacity: 0.5;
-  background-color: #FF671F; /* Cambia el color de la página activa del paginador */
+  background-color: #FFC300; /* Cambia el color de la página activa del paginador */
 }
 .p-button:active {
-  box-shadow: #FF671F;
+  box-shadow: #FFC300;
 }
 ::ng-deep .p-calendar .p-button-icon-only {
-  background-color: #FF671F !important;
+  background-color: #FFC300 !important;
 }
+
+
+
+
 
 // .p-inputtext.p-component:focus,
 // .p-inputgroup:focus-within {
@@ -43,16 +47,8 @@
 // }
 
 .p-inputtext:hover {
-    border-color: red; /* Cambiar a tu color deseado para el borde en estado de enfoque */
+    border-color: #FFC300; /* Cambiar a tu color deseado para el borde en estado de enfoque */
   }
 .p-inputtext:focus {
-    border-color: red !important; /* Cambiar a tu color deseado para el borde en estado de enfoque */
-  }
-
-  .p-dropdown:focus {
-    border-color: red !important; /* Cambiar a tu color deseado para el borde en estado de enfoque */
-  }
-  
-  .p-dropdown:hover {
-    border-color: red !important; /* Cambiar a tu color deseado para el borde en estado de enfoque */
+    border-color: #FFC300 !important; /* Cambiar a tu color deseado para el borde en estado de enfoque */
   }

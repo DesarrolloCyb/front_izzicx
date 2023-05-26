@@ -5,6 +5,17 @@
   <p-panel header=""
     class="line-height-12 m-0">
     <!-- INICIO DE INPUTS -->
+    <div class="p-fluid p-formgrid grid justify-content-center">
+      <div class="field col-12 md:col-3">
+        <button type="button" (click)="nuevo=true" style="width: 4rem;height: 3rem;background-color: #FF7987; color: white; border-radius: 0.5rem;border: 0;" > <i class="pi pi-plus custom-icon"></i></button>
+      </div>
+      <div class="field col-12 md:col-5" *ngIf="nuevo">
+        <p-calendar   [showClear]="true" (onSelect)="changeTime2($event)" (onClear)="time = null" placeholder="Ingresar Nuevo Horario" [timeOnly]="true" hourFormat="12" inputId="timeonly"></p-calendar>
+      </div>
+      <div class="field col-12 md:col-4" *ngIf="nuevo">
+        <button type="button" (click)="add()" style="width: 5rem;height: 3rem;background-color: #FF7987; color: white; border-radius: 0.5rem;border: 0;" >Agregar</button>
+      </div>
+    </div>
     <h5 class="text-center">Configuración de Horarios</h5>
     <div class="p-fluid p-formgrid grid justify-content-center">
       <div class="field col-12 md:col-6">
@@ -16,10 +27,18 @@
         (onChange)="changeHorarios($event.value)"
         [(ngModel)]="first"
         >
+        <ng-template pTemplate="option" let-option>
+          <div class="dropdown-option">
+            <span>{{ option.horario }}</span>
+            <div class="option-buttons">
+              <button type="button" (click)="eliminar(option.id);$event.stopPropagation()" style="background-color: #FF7987; color: white; border-radius: 0.5rem;border: 0;" > <i class="pi pi-trash custom-icon"></i></button>
+            </div>
+          </div>
+        </ng-template>
         </p-dropdown>
       </div>
       <div class="field col-12 md:col-6" *ngIf="first != null">
-          <p-calendar   [showClear]="true" (onSelect)="changeTime($event)" (onClear)="second = null" placeholder="Ingresar Nuevo Horario" [timeOnly]="true" hourFormat="12" inputId="timeonly"></p-calendar>
+          <p-calendar   [showClear]="true" (onSelect)="changeTime($event)" (onClear)="second = null" placeholder="Editar Horario" [timeOnly]="true" hourFormat="12" inputId="timeonly"></p-calendar>
       </div>
       <div class="field col-12 md:col-2 text-center " *ngIf="second != null">
         <!-- <p-button icon="pi pi-send" iconPos="left">Guardar</p-button>    -->
