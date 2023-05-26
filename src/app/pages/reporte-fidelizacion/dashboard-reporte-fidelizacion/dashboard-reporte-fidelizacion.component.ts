@@ -33,8 +33,8 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
   constructor(private messageService: MessageService,private formBuilder: UntypedFormBuilder,private cors: CorsService) { 
     this.formReporte = this.formBuilder.group({
       reporte: [null, Validators.required],
-      fechaini: [null, Validators.required],
-      fechafin: [null, Validators.required],
+      fechaini: [null],
+      fechafin: [null],
     });
     // this.cors
     // .get('Reporte/vici')
@@ -136,8 +136,10 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
           "status": "",
           "ip": "",
           "list_name":`${aa[0].list_name}`,
-          "FechaInicio":`${this.dateFormat1(this.formReporte.value.fechaini)}`,
-          "FechaFin":`${this.dateFormat1(this.formReporte.value.fechafin)}`
+          // "FechaInicio":`${this.dateFormat1(this.formReporte.value.fechaini)}`,
+          // "FechaFin":`${this.dateFormat1(this.formReporte.value.fechafin)}`
+          "FechaInicio":null,
+          "FechaFin":null
         }
         this.cors.post('Reporte/GuardarFormularioEjecucionReporte',a)
         .then((response) => {
