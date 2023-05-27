@@ -69,21 +69,21 @@ export class MenuComponent implements OnInit {
       ]
     },
 	{
-		label: 'Ajustes', // Ajustes
+		label: 'Ajustes', // Ajustes -asignacion
 		key: "ajustes",
 		icon: 'pi pi-fw pi-compass',
 	  //   routerLink: ['/capturas'],
 		items: [
 		  {
-			label: 'Home',
+			label: 'Importar Casos de Negocio Cobranza',
 			icon: 'pi pi-fw pi-check-square',
 		    routerLink: ['/ajustes'],
 		  },
-		  // {
-		  //   label: 'Solicitud de Cancelación',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/solicitud-cancelacion'],
-		  // },
+		  {
+		    label: 'Consulta registros de ajustes',
+		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    routerLink: ['/ajustes/consulta'],
+		  },
 		  // {
 		  //   label: 'Reactivación',
 		  //   icon: 'pi pi-fw pi-exclamation-triangle',
@@ -112,21 +112,21 @@ export class MenuComponent implements OnInit {
 		]
 	  },
 	  {
-		label: 'NotDone', // NOTDONE
+		label: 'NotDone', // NOTDONE - caso-negocio
 		key: "notDone",
 		// icon: 'pi pi-fw pi-compass',
 	  //   routerLink: ['/capturas'],
 		items: [
 		  {
-			label: 'Home',
+			label: 'Importar Bases NotDone',
 			icon: 'pi pi-fw pi-briefcase',
 		    routerLink: ['/notDone'],
 		  },
-		  // {
-		  //   label: 'Solicitud de Cancelación',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/solicitud-cancelacion'],
-		  // },
+		  {
+		    label: 'Consulta Registros NotDone',
+		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    routerLink: ['/notDone/consulta'],
+		  },
 		  // {
 		  //   label: 'Reactivación',
 		  //   icon: 'pi pi-fw pi-exclamation-triangle',

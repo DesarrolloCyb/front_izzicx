@@ -236,7 +236,7 @@ export class BasesCanceladasComponent implements OnInit {
       this.messageService.add({
         key: 'tst',
         severity: 'success',
-        summary: 'Excel Exportado',
+        summary: 'Excel Importado',
         detail: 'Correctamente!!',
       }); 
     }).catch((error) => {
