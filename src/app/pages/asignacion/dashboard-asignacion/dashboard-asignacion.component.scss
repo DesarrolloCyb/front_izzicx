@@ -1,5 +1,5 @@
 #file::file-selector-button{
-    background-color: #FF7987;
+    background-color: #FFE39E;
     color: white;
     margin-right: 20px;
     border: none;
@@ -38,3 +38,18 @@
         stroke: #3B82F6;
     }
 }
+
+:host ::ng-deep ::-webkit-scrollbar-thumb:horizontal {
+    background-color: #FFE39E;
+  }
+  :host ::ng-deep ::-webkit-scrollbar-thumb:vertical {
+    background-color: #FFE39E;
+  }
+  
+  ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    color: white;
+    background-color: #FFE39E; /* Cambia el color de la página activa del paginador */
+  }
+  .p-button:active {
+    box-shadow: #FFE39E;
+  }
