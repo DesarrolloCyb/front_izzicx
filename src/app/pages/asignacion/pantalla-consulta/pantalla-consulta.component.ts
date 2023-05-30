@@ -28,6 +28,7 @@ export class PantallaConsultaComponent implements OnInit {
 
   getTableCasosNegocioCobranza(){
     this.cors.get('AjustesNotDone/getAllAjustesCasosNegocioCobranza').then((response) => {
+      console.log(response)
       if(response[0] =='SIN INFO'){
         this.showtable = [];
 

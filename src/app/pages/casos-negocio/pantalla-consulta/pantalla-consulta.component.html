@@ -18,12 +18,38 @@
                 <tr>
                     <th>
                         <div class="flex justify-content-between align-items-center">
-                            Ciudad
+                            Cuenta
+                            
                         </div>
                     </th>
+                    <th style="padding-right: 5rem;">
+                        <div class="flex justify-content-between align-items-center">
+                            Número de Orden
+                        </div>
+                    </th>  
                     <th>
                         <div class="flex justify-content-between align-items-center">
-                            Comentarios
+                            Paquete
+                        </div>
+                    </th>  
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            RPT
+                        </div>
+                    </th>  
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Tipo de Cliente
+                        </div>
+                    </th>  
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            SubTipo Cliente
+                        </div>
+                    </th>  
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            HUB
                         </div>
                     </th>
                     <th>
@@ -34,18 +60,22 @@
                     </th>
                     <th>
                         <div class="flex justify-content-between align-items-center">
-                            Cuenta
-
+                            Estado de la Orden
+                        </div>
+                    </th>
+                     <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Estatus
                         </div>
                     </th>
                     <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Fecha Completado
+                        </div>
+                    </th>
+                    <!-- <th>
                         <div class="flex justify-content-between align-items-center">
                             Dirección
-                        </div>
-                    </th>
-                    <th>
-                        <div class="flex justify-content-between align-items-center">
-                            Estado de la Orden
                         </div>
                     </th>
                     <th>
@@ -57,11 +87,6 @@
                       <div class="flex justify-content-between align-items-center">
                           Fecha Solicitada
                       </div>
-                    </th>
-                    <th>
-                        <div class="flex justify-content-between align-items-center">
-                            HUB
-                        </div>
                     </th>
                     <th>
                         <div class="flex justify-content-between align-items-center">
@@ -85,16 +110,6 @@
                     </th>  
                     <th>
                         <div class="flex justify-content-between align-items-center">
-                            Número de Orden
-                        </div>
-                    </th>  
-                    <th>
-                        <div class="flex justify-content-between align-items-center">
-                            Paquete
-                        </div>
-                    </th>  
-                    <th>
-                        <div class="flex justify-content-between align-items-center">
                             Perfil de Pago
                         </div>
                     </th>  
@@ -110,17 +125,7 @@
                     </th>  
                     <th>
                         <div class="flex justify-content-between align-items-center">
-                            RPT
-                        </div>
-                    </th>  
-                    <th>
-                        <div class="flex justify-content-between align-items-center">
                             Situación anticipo
-                        </div>
-                    </th>  
-                    <th>
-                        <div class="flex justify-content-between align-items-center">
-                            SubTipo Cliente
                         </div>
                     </th>  
                     <th>
@@ -140,11 +145,6 @@
                     </th>  
                     <th>
                         <div class="flex justify-content-between align-items-center">
-                            Tipo de Cliente
-                        </div>
-                    </th>  
-                    <th>
-                        <div class="flex justify-content-between align-items-center">
                             Tipo de Orden
                         </div>
                     </th>  
@@ -157,37 +157,52 @@
                         <div class="flex justify-content-between align-items-center">
                             Vendedor
                         </div>
-                    </th> 
+                    </th>  -->
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item let-i="rowIndex">
                 <tr>
                     <td>
-                        {{item.ciudad}}
+                        {{item.cuenta}}
+                    </td>
+                    <td >
+                        {{item.numeroOrden}}
                     </td>
                     <td>
-                        {{item.comentarios}}
+                        {{item.paquete}}
+                    </td>
+                    <td>
+                        {{item.rpt}}
+                    </td>
+                    <td>
+                        {{item.tipCliente}}
+                    </td>
+                    <td>
+                        {{item.subtipoCliente}}
+                    </td>
+                    <td>
+                      {{item.hub}}
                     </td>
                     <td>
                       {{item.creadoPor}}
                     </td>
                     <td>
-                        {{item.cuenta}}
+                       {{item.estadoOrden }}
+                    </td>
+                     <td>
+                        {{item.status}}
                     </td>
                     <td>
+                        {{item.fechaCompletado}}
+                    </td>
+                    <!--<td>
                         {{ item.direccion }}
                     </td>
                     <td>
-                       {{item.estadoOrden }}
-                    </td>
-                    <td>
-                      {{ dateFormat(item.fechaApertura) }}
+                        {{ dateFormat(item.fechaApertura) }}
                     </td>
                     <td>
                       {{ dateFormat(item.fechaSolicitada) }}
-                    </td>
-                    <td>
-                      {{item.hub}}
                     </td>
                     <td>
                         {{item.motivoCancelacion}}
@@ -202,12 +217,6 @@
                         {{item.nombreCliente}}
                     </td>
                     <td>
-                        {{item.numeroOrden}}
-                    </td>
-                    <td>
-                        {{item.paquete}}
-                    </td>
-                    <td>
                         {{item.perfilPago}}
                     </td>
                     <td>
@@ -217,13 +226,7 @@
                         {{item.referido}}
                     </td>
                     <td>
-                        {{item.rpt}}
-                    </td>
-                    <td>
                         {{item.situacionAnticipo}}
-                    </td>
-                    <td>
-                        {{item.subtipoCliente}}
                     </td>
                     <td>
                         {{item.subtipoOrden}}
@@ -235,9 +238,6 @@
                         {{item.telefono}}
                     </td>
                     <td>
-                        {{item.tipCliente}}
-                    </td>
-                    <td>
                         {{item.tipoOrden}}
                     </td>
                     <td>
@@ -245,7 +245,7 @@
                     </td>
                     <td>
                         {{item.vendedor}}
-                    </td>
+                    </td> -->
           
     
                 </tr>

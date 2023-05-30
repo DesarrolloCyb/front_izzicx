@@ -363,24 +363,24 @@ export class MenuComponent implements OnInit {
     //   ]
     // },
 
-    // {
-    //   label: 'Robots',
-    //   key: "robots",
-    //   icon: 'pi pi-fw pi-android',
-    //   routerLink: ['/robots'],
-    //   items: [
-    //     {
-    //       label: 'Actividad',
-    //       icon: 'pi pi-fw pi-tablet',
-    //       routerLink: ['/robots/'],
-    //     },
-    //     {
-    //       label: 'Crear nuevo',
-    //       icon: 'pi pi-fw pi-plus',
-    //       routerLink: ['/robots/nuevo'],
-    //     },
-    //   ]
-    // },
+    {
+      label: 'Robots',
+      key: "robots",
+      icon: 'pi pi-fw pi-android',
+      routerLink: ['/robots'],
+      items: [
+        {
+          label: 'Actividad',
+          icon: 'pi pi-fw pi-tablet',
+          routerLink: ['/robots/'],
+        },
+        {
+          label: 'Crear nuevo',
+          icon: 'pi pi-fw pi-plus',
+          routerLink: ['/robots/nuevo'],
+        },
+      ]
+    },
     // ///--------------------------------------------------///
     // {
     //   label: 'Reportes',
@@ -419,7 +419,7 @@ export class MenuComponent implements OnInit {
 
 
     let permisos: any = {
-      "admin":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','ajustesYcambioServicio'],
+      "admin":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','ajustesYcambioServicio','robots'],
       "Reporte":['home','reporteFidelizacion'],
       "Extraccion":['home','extraccion'],
       "Depuracion":['home','depuracion'],

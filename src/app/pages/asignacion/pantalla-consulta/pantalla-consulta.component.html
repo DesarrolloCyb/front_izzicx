@@ -68,6 +68,16 @@
                             Submotivo
                         </div>
                     </th>  
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Estatus
+                        </div>
+                    </th>  
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Fecha Completado
+                        </div>
+                    </th>  
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item let-i="rowIndex">
@@ -101,6 +111,12 @@
                     </td>
                     <td>
                         {{item.submotivo}}
+                    </td>
+                    <td>
+                        {{item.status}}
+                    </td>
+                    <td>
+                          {{item.fechaCompletado}}
                     </td>
           
     

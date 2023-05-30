@@ -70,29 +70,29 @@ export class RobotsComponent implements OnInit {
     private socketIo: SocketIoService
   ) {
 
-    this.cors.get('Bots/ObtenerListProcess').then((response) => {
-      // this.processArr = response
-      // console.log('Esto es ',response)
-      console.log('Esto es ',typeof (response))
-      // for(var b=0;b<response;b++){
-      //   console.log(response[b])
-      //   // if(response[b].status == 1){
-      //   //   let bb = {
-      //   //     id:response[b].id,
-      //   //     name_process:response[b].name_process
-      //   //   }
-      //   //   this.processArr.push(bb)
-      //   // }
-      //   // console.log(response[b])
-      // }
-      // console.log('Esto es 2',this.processArr)
+    // this.cors.get('Bots/ObtenerListProcess').then((response) => {
+    //   // this.processArr = response
+    //   // console.log('Esto es ',response)
+    //   console.log('Esto es ',typeof (response))
+    //   // for(var b=0;b<response;b++){
+    //   //   console.log(response[b])
+    //   //   // if(response[b].status == 1){
+    //   //   //   let bb = {
+    //   //   //     id:response[b].id,
+    //   //   //     name_process:response[b].name_process
+    //   //   //   }
+    //   //   //   this.processArr.push(bb)
+    //   //   // }
+    //   //   // console.log(response[b])
+    //   // }
+    //   // console.log('Esto es 2',this.processArr)
 
 
-    }).catch((error) => {
-      console.log(error);
-      this.showToastError(`No se logro traer la lista de procesos`)
+    // }).catch((error) => {
+    //   console.log(error);
+    //   this.showToastError(`No se logro traer la lista de procesos`)
 
-    })
+    // })
     this.items = [{
       label: 'Actualizar', icon: 'pi pi-refresh', command: () => {
 
@@ -172,9 +172,9 @@ export class RobotsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.buscaBots();
-    this.getDataStatsBots();
-    this.refreshStatsBots();
+    // this.buscaBots();
+    // this.getDataStatsBots();
+    // this.refreshStatsBots();
   }
 
 
@@ -346,38 +346,38 @@ export class RobotsComponent implements OnInit {
     })
 
   }
-  buscaBots() {
-    this.cors.get('Bots/ObtenerDataBots').then((response) => {
+  // buscaBots() {
+  //   this.cors.get('Bots/ObtenerDataBots').then((response) => {
 
-      // console.log(response);
-      this.dataSource = response
-      this.adddListeners()
+  //     // console.log(response);
+  //     this.dataSource = response
+  //     this.adddListeners()
 
-    }).catch((error) => {
-      console.log(error);
-      this.showToastError(`No se logro traer el listado de Robots`)
-    })
-  }
+  //   }).catch((error) => {
+  //     console.log(error);
+  //     this.showToastError(`No se logro traer el listado de Robots`)
+  //   })
+  // }
 
-  getDataStatsBots(){
-    // console.log("stats bots")
-    this.cors.get('Reports/getStatsBots').then((response) => {
+  // getDataStatsBots(){
+  //   // console.log("stats bots")
+  //   this.cors.get('Reports/getStatsBots').then((response) => {
 
-      // console.log(response);
-      this.statsBots = response;
+  //     // console.log(response);
+  //     this.statsBots = response;
 
-    }).catch((error) => {
-      console.log(error);
-      this.showToastError(`No se logro traer las estaditiscas de los Robots`)
-    })
+  //   }).catch((error) => {
+  //     console.log(error);
+  //     this.showToastError(`No se logro traer las estaditiscas de los Robots`)
+  //   })
 
-  }
+  // }
 
-  refreshStatsBots(){
-    setInterval(()=> {
-      this.getDataStatsBots()
-    }, 10000);
-  }
+  // refreshStatsBots(){
+  //   setInterval(()=> {
+  //     this.getDataStatsBots()
+  //   }, 10000);
+  // }
 
   statsValidation(item:any){
     if(JSON.stringify(item) !== '{}'){
