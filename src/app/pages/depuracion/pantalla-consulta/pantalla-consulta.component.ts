@@ -99,7 +99,7 @@ export class PantallaConsultaComponent implements OnInit {
 
   statsBasesDepuradas(){
     this.cors.get('EjecucionDepuracion/statsBasesCanceladas').then((response) => {
-      // console.log("Esto es",response)
+      // console.log(response)
       for (let i = 0; i < response.length; i++) {
         const jsonObject = response[i];
         for (let key in jsonObject) {

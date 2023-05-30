@@ -15,6 +15,7 @@ export class PantallaConsultaComponent implements OnInit {
   usuario: any = JSON.parse(localStorage.getItem("userData") || "{}")
   msgs: Message[] = [];
   showtable:any;
+  stats:any[]=[];
 
   constructor(
     private cors: CorsService,
@@ -24,6 +25,7 @@ export class PantallaConsultaComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTableCasosNegocioCobranza();
+    this.statsAjustesCasoNeogicoCobranza();
   }
 
   getTableCasosNegocioCobranza(){
@@ -51,6 +53,22 @@ export class PantallaConsultaComponent implements OnInit {
     }else{
       return ""
     }
+  }
+
+  statsAjustesCasoNeogicoCobranza(){
+    this.cors.get('AjustesNotDone/getStatsAjustesCasoNegocioCobranza').then((response) => {
+      for (let i = 0; i < response.length; i++) {
+        const jsonObject = response[i];
+        for (let key in jsonObject) {
+          if (jsonObject.hasOwnProperty(key) && typeof jsonObject[key] === "object" && !Array.isArray(jsonObject[key])) {
+            jsonObject[key] = 0;
+          }
+        }
+      }      
+      this.stats=response;
+    }).catch((error) => {
+      console.log(error)
+    })
   }
 
 

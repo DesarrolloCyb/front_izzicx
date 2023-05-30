@@ -13,6 +13,7 @@ import { Table } from 'primeng/table';
 })
 export class PantallaConsultaComponent implements OnInit {
   notdone:any[]=[];
+  stats:any[]=[];
   constructor(
     private cors: CorsService,
     private messageService: MessageService,
@@ -20,6 +21,7 @@ export class PantallaConsultaComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTablaNotDone();
+    this.statsNotDone();
   }
 
   getTablaNotDone(){
@@ -44,6 +46,21 @@ export class PantallaConsultaComponent implements OnInit {
   }
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+  statsNotDone(){
+    this.cors.get('AjustesNotDone/getStatsNotDone').then((response) => {
+      for (let i = 0; i < response.length; i++) {
+        const jsonObject = response[i];
+        for (let key in jsonObject) {
+          if (jsonObject.hasOwnProperty(key) && typeof jsonObject[key] === "object" && !Array.isArray(jsonObject[key])) {
+            jsonObject[key] = 0;
+          }
+        }
+      }      
+      this.stats=response;
+    }).catch((error) => {
+      console.log(error)
+    })
   }
 
 
