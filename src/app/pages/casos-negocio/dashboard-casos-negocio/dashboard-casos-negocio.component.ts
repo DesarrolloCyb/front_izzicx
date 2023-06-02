@@ -42,7 +42,8 @@ export class DashboardCasosNegocioComponent implements OnInit {
     'TIPO_CLIENTE',
     'TIPO_ORDEN',
     'ULTIMA_MOD_POR',
-    'VENDEDOR'
+    'VENDEDOR',
+    'RESULTADO_LLAMADA'
   ];
   button:boolean=true;
   tabla:boolean=false;
@@ -86,7 +87,7 @@ export class DashboardCasosNegocioComponent implements OnInit {
             }
           }
         }
-        if(count == 29){ 
+        if(count == 30){ 
           Object.keys(this.ExcelData).forEach(key => {
             this.ExcelData[key]["Status"]='Pendiente';
             this.ExcelData[key]["Cve_usuario"]=this.usuario.email;
@@ -104,7 +105,7 @@ export class DashboardCasosNegocioComponent implements OnInit {
             summary: 'Exito!!!',
             detail: 'El archivo se a cargado completamente!!!',
           });
-          // console.log(this.ExcelData)
+          console.log(this.ExcelData)
           this.tabla=true;
           this.button=false;
         }else{

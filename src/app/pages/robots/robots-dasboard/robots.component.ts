@@ -70,29 +70,25 @@ export class RobotsComponent implements OnInit {
     private socketIo: SocketIoService
   ) {
 
-    // this.cors.get('Bots/ObtenerListProcess').then((response) => {
-    //   // this.processArr = response
-    //   // console.log('Esto es ',response)
-    //   console.log('Esto es ',typeof (response))
-    //   // for(var b=0;b<response;b++){
-    //   //   console.log(response[b])
-    //   //   // if(response[b].status == 1){
-    //   //   //   let bb = {
-    //   //   //     id:response[b].id,
-    //   //   //     name_process:response[b].name_process
-    //   //   //   }
-    //   //   //   this.processArr.push(bb)
-    //   //   // }
-    //   //   // console.log(response[b])
-    //   // }
-    //   // console.log('Esto es 2',this.processArr)
+    this.cors.get('Bots/getCatProcesos').then((response) => {
+      if(response[0] == 'SIN INFO'){
+        this.processArr = [];
+      }else{
+        for(var b=0;b<response.length;b++){
+          if(response[b].status == "1"){
+            let bb = {
+              id:response[b].id,
+              name_process:response[b].name_process
+            }
+            this.processArr.push(bb)
+          }
+        }
+      }
+    }).catch((error) => {
+      console.log(error);
+      this.showToastError(`No se logro traer la lista de procesos`)
+    })
 
-
-    // }).catch((error) => {
-    //   console.log(error);
-    //   this.showToastError(`No se logro traer la lista de procesos`)
-
-    // })
     this.items = [{
       label: 'Actualizar', icon: 'pi pi-refresh', command: () => {
 
@@ -172,7 +168,7 @@ export class RobotsComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.buscaBots();
+    this.buscaBots();
     // this.getDataStatsBots();
     // this.refreshStatsBots();
   }
@@ -346,18 +342,24 @@ export class RobotsComponent implements OnInit {
     })
 
   }
-  // buscaBots() {
-  //   this.cors.get('Bots/ObtenerDataBots').then((response) => {
+  buscaBots() {
+    this.cors.get('Bots/getBots').then((response) => {
 
-  //     // console.log(response);
-  //     this.dataSource = response
-  //     this.adddListeners()
+      // console.log(response);
+      if(response[0] == 'SIN INFO'){
+        this.dataSource = []
 
-  //   }).catch((error) => {
-  //     console.log(error);
-  //     this.showToastError(`No se logro traer el listado de Robots`)
-  //   })
-  // }
+      }else{
+        this.dataSource = response
+
+      }
+      this.adddListeners()
+
+    }).catch((error) => {
+      console.log(error);
+      this.showToastError(`No se logro traer el listado de Robots`)
+    })
+  }
 
   // getDataStatsBots(){
   //   // console.log("stats bots")

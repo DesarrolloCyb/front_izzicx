@@ -35,10 +35,14 @@ export class RobotsNuevoComponent implements OnInit {
   
 
   getCats() {
-    this.cors.get('Bots/ObtenerListProcess').then((response) => {
-      console.log(response);
-      this.processArr = response
+    this.cors.get('Bots/getCatProcesos').then((response) => {
+      if(response[0] == 'SIN INFO'){
+        this.processArr = [];
+      }else{
+        this.processArr = response
+      }
     }).catch((error) => {
+      console.log(error)
 
     })
   }
@@ -46,9 +50,11 @@ export class RobotsNuevoComponent implements OnInit {
     this.guardando = true
     this.formNuevoBot.markAllAsTouched()
     if (this.formNuevoBot.valid) {
-      this.cors.post('Bots/GuardarDataBots', this.formNuevoBot.value).then((response) => {
-        console.log("aca");
-
+      this.formNuevoBot.patchValue({
+        procesoId:`${this.formNuevoBot.value.procesoId}`
+      });      
+      console.log(this.formNuevoBot.value)
+      this.cors.post('Bots/GuardarBots', this.formNuevoBot.value).then((response) => {
         console.log(response);
         this.showToastSuccess('Maquina guardada correctamente.' );
         setTimeout(() => {

@@ -33,22 +33,49 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
     });
     this.getCats()
     this.routeSub = this.route.params.subscribe((params: any) => {
-      console.log(params);
+      // console.log(params);
 
       if (params['idRobot'] != undefined) {
         this.cors
-          .get(`Bots/${params['idRobot']}`)
+          .get(`Bots/getBot`,{
+            "id": params['idRobot']
+          })
           .then((response: any) => {
-            console.log("respuesta", response);
-            if (response.data.length > 0) {
-              for (const key in this.formNuevoBot.value ) {
-                this.formNuevoBot.controls[key].setValue(response.data[0][key])
-              }
-
+            console.log(response);
+            if (response.length > 0) {
+              this.cors.get(`Bots/getCatalogoEdit`,{
+                "id": response[0].id
+              })
+              .then((response1: any) => {
+                console.log(response1);
+                this.formNuevoBot.patchValue({
+                  ipEquipo: response[0].ipEquipo,
+                  procesoId: response1[0].name_process,
+                  comentarios: response[0].comentarios,
+                  hostName: response[0].hostName ,
+                  usuarioBot: response[0].usuarioBot,
+                  passwordBot: response[0].passwordBot,
+                  id: response[0].id,
+            
+                });
+  
+              })
+              .catch((error: any) => {
+                console.log(error);
+                // this.showToastError('No se encontraron datos de Robot')
+              });
+              this.formNuevoBot.patchValue({
+                ipEquipo: response[0].ipEquipo,
+                procesoId: response[0].procesoID,
+                comentarios: response[0].comentarios,
+                hostName: response[0].hostName ,
+                usuarioBot: response[0].usuarioBot,
+                passwordBot: response[0].passwordBot,
+                id: response[0].id,
+          
+              });
 
             }
-
-
           })
           .catch((error: any) => {
             console.log(error);
@@ -80,8 +107,8 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
     }
   }
   getCats() {
-    this.cors.get('Bots/ObtenerListProcess').then((response) => {
-      console.log(response);
+    this.cors.get('Bots/getCatProcesos').then((response) => {
+      // console.log(response);
       this.processArr = response
     }).catch((error) => {
 
