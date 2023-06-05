@@ -7,13 +7,15 @@ import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 import { ReporteComponent } from './reporte/reporte.component';
 import { SharedModule } from '@shared';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PantallaConsultaComponent } from './pantalla-consulta/pantalla-consulta.component';
 
 
 @NgModule({
   declarations: [
     BaseDatosAjustesComponent,
     EstadisticasComponent,
-    ReporteComponent
+    ReporteComponent,
+    PantallaConsultaComponent
   ],
   imports: [
     CommonModule,

@@ -299,6 +299,11 @@ export class MenuComponent implements OnInit {
           icon: 'pi pi-fw pi-chart-bar',
             routerLink: ['/ajustesYcambioServicio/BDajustes'],
           },
+          {
+            label: 'Consulta',
+            icon: 'pi pi-fw pi-exclamation-triangle',
+            routerLink: ['/ajustesYcambioServicio/consulta'],
+          },
           // {
           //   label: 'Estadísticas',
           //   icon: 'pi pi-fw pi-exclamation-triangle',

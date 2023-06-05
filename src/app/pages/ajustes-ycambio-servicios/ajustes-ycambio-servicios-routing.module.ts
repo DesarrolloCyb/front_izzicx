@@ -4,6 +4,7 @@ import { LayoutComponent } from 'app/_shared/layout/layout/layout.component';
 import { BaseDatosAjustesComponent } from './base-datos-ajustes/base-datos-ajustes.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 import { ReporteComponent } from './reporte/reporte.component';
+import { PantallaConsultaComponent } from './pantalla-consulta/pantalla-consulta.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,12 @@ const routes: Routes = [
     data: { breadcrumb: 'Reportes' },
     component: LayoutComponent,
     children: [{ path: '', component: ReporteComponent }],
+  },
+  {
+    path: 'consulta', 
+    data: { breadcrumb: 'Pantalla Consulta' },
+    component: LayoutComponent,
+    children: [{ path: '', component: PantallaConsultaComponent }],
   },
 
 ];
