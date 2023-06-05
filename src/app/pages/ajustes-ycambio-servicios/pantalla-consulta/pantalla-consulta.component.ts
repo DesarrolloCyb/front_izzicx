@@ -27,8 +27,13 @@ export class PantallaConsultaComponent implements OnInit {
     this.loading= true;
     this.cors.get('AjustesCambiosServicios/getAjustesCambioServicioInfo')
     .then((response)=>{
-      // console.log(response)
-      this.tabla=response;
+      console.log(response)
+      if(response[0]=='SIN INFO'){
+        this.tabla=[];
+
+      }else{
+        this.tabla=response;
+      }
     })
     .catch((err)=>{
       console.log(err)

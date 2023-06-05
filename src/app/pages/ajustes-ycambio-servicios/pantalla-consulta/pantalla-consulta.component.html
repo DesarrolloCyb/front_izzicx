@@ -23,23 +23,23 @@
                         </div>
                     </th>
                     <th>
-                        <div class="flex justify-content-between align-items-center">
+                        <div style="width: 100px;" class="flex justify-content-center align-items-center">
                             Caso de Negocio
 
                         </div>
                     </th>
-                    <th>
-                        <div class="flex justify-content-between align-items-center">
+                    <!-- <th>
+                        <div style="width: 150px;" class="flex justify-content-center align-items-center">
                             Estado
                         </div>
-                    </th>
+                    </th> -->
                     <th>
-                        <div class="flex justify-content-between align-items-center">
+                        <div style="width: 100px;" class="flex justify-content-center align-items-center">
                             Fecha Compleltado
                         </div>
                     </th>
                     <th>
-                      <div class="flex justify-content-between align-items-center">
+                      <div style="width: 100px;" class="flex justify-content-center align-items-center">
                           Fecha Vencimiento
                       </div>
                     </th>
@@ -47,20 +47,20 @@
                       <div class="flex justify-content-between align-items-center">
                           Motivo
                       </div>
-                    </th>
-                    <th>
-                      <div class="flex justify-content-between align-items-center">
-                          Motivo Cliente
-                      </div>
                     </th> -->
                     <th>
-                        <div class="flex justify-content-between align-items-center">
+                      <div class="flex justify-content-center align-items-center">
+                          Motivo Cliente
+                      </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-center align-items-center">
                             Procesando
                         </div>
                       </th>
 
                       <th>
-                        <div class="flex justify-content-between align-items-center">
+                        <div class="flex justify-content-center align-items-center">
                             Estatus
                         </div>
                       </th>
@@ -70,31 +70,31 @@
             </ng-template>
             <ng-template pTemplate="body" let-item let-i="rowIndex">
                 <tr>
-                    <td>
+                    <td class="text-center">
                       {{item.cuenta}}
                     </td>
-                    <td>
+                    <td class="text-center">
                         {{item.casoNegocio}}
                     </td>
-                    <td>
+                    <!-- <td>
                         {{item.estado}}
-                    </td>
-                    <td>
+                    </td> -->
+                    <td class="text-center">
                        {{dateFormat(item.fechaCompletado)}}
                     </td>
-                    <td>
+                    <td class="text-center">
                       {{dateFormat(item.fechaVencimiento)}}
                     </td>
                     <!-- <td>
                       {{item.motivo}}
-                    </td>
-                    <td>
-                      {{item.motivoCliente}}
                     </td> -->
-                    <td>
-                        {{item.procesando}}
+                    <td class="text-center">
+                      {{item.motivoCliente}}
                     </td>
-                    <td>
+                    <td class="text-center">
+                        {{item.procesando == "1" ?"SI" :"NO"}}
+                    </td>
+                    <td Class="text-center">
                         {{item.status}}
                     </td>
     
