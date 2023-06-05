@@ -120,7 +120,7 @@ export class BasesCanceladasComponent implements OnInit {
 
             var excelNumber = this.ExcelData[key]["Creado"];
             var date = new Date((excelNumber - 25569) * 86400 * 1000);
-            let a = moment(date).format('DD-MM-yyyy HH:mm:ss');
+            let a = moment(date).format('yyyy-MM-DD HH:mm:ss');
             this.ExcelData[key]["Creado"]=a;
 
             delete this.ExcelData[key][" Mensualidad total "];

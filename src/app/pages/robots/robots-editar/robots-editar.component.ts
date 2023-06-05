@@ -41,16 +41,16 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
             "id": params['idRobot']
           })
           .then((response: any) => {
-            console.log(response);
+            // console.log(response);
             if (response.length > 0) {
               this.cors.get(`Bots/getCatalogoEdit`,{
                 "id": response[0].id
               })
               .then((response1: any) => {
-                console.log(response1);
+                // console.log(response1);
                 this.formNuevoBot.patchValue({
                   ipEquipo: response[0].ipEquipo,
-                  procesoId: response1[0].name_process,
+                  procesoId: response1[0].id,
                   comentarios: response[0].comentarios,
                   hostName: response[0].hostName ,
                   usuarioBot: response[0].usuarioBot,
@@ -64,16 +64,16 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
                 console.log(error);
                 // this.showToastError('No se encontraron datos de Robot')
               });
-              this.formNuevoBot.patchValue({
-                ipEquipo: response[0].ipEquipo,
-                procesoId: response[0].procesoID,
-                comentarios: response[0].comentarios,
-                hostName: response[0].hostName ,
-                usuarioBot: response[0].usuarioBot,
-                passwordBot: response[0].passwordBot,
-                id: response[0].id,
+              // this.formNuevoBot.patchValue({
+              //   ipEquipo: response[0].ipEquipo,
+              //   procesoId: response[0].procesoID,
+              //   comentarios: response[0].comentarios,
+              //   hostName: response[0].hostName ,
+              //   usuarioBot: response[0].usuarioBot,
+              //   passwordBot: response[0].passwordBot,
+              //   id: response[0].id,
           
-              });
+              // });
 
             }
           })
@@ -90,8 +90,10 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
     this.guardando = true
     this.formNuevoBot.markAllAsTouched()
     if (this.formNuevoBot.valid) {
-      this.cors.put(`Bots/${this.formNuevoBot.value.id}`, this.formNuevoBot.value).then((response) => {
-        console.log("aca");
+      this.formNuevoBot.patchValue({
+        procesoId: this.formNuevoBot.value.procesoID,  
+      });
+      this.cors.put(`Bots/ActualizarBots?id=${this.formNuevoBot.value.id}`, this.formNuevoBot.value).then((response) => {
 
         console.log(response);
         this.showToastSuccess('Datos Guardados')
