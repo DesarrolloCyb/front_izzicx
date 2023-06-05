@@ -13,6 +13,7 @@ import { Table } from 'primeng/table';
 })
 export class PantallaConsultaComponent implements OnInit {
   tabla:any[]=[];
+  stats:any[]=[];
   loading:boolean=false;
   constructor(
     private cors: CorsService,
@@ -20,14 +21,15 @@ export class PantallaConsultaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getTableAjustesyCambioServicio()
+    this.getTableAjustesyCambioServicio();
+    this.getStatsAjustesyCambioServicio();
   }
 
   getTableAjustesyCambioServicio(){
     this.loading= true;
     this.cors.get('AjustesCambiosServicios/getAjustesCambioServicioInfo')
     .then((response)=>{
-      console.log(response)
+      // console.log(response)
       if(response[0]=='SIN INFO'){
         this.tabla=[];
 
@@ -39,6 +41,22 @@ export class PantallaConsultaComponent implements OnInit {
       console.log(err)
     });
     this.loading= false;
+  }
+
+  getStatsAjustesyCambioServicio(){
+    this.cors.get('AjustesCambiosServicios/getStatsAjustesCambioServicio')
+    .then((response)=>{
+      console.log(response)
+      if(response[0]=='SIN INFO'){
+        this.stats=[];
+
+      }else{
+        this.stats=response;
+      }
+    })
+    .catch((err)=>{
+      console.log(err)
+    });
   }
 
   onGlobalFilter(table: Table, event: Event) {
