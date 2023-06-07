@@ -81,7 +81,11 @@ export class ReportesIzziDashComponent implements OnInit {
 
   getTipoReporte(){
     this.cors.get('ReportesIzzi/getTipoReportes').then((response) => {
-      this.reportes=response;
+      if(response[0]=='SIN INFO'){
+        this.reportes=[];
+      }else{
+        this.reportes=response;
+      }
     }).catch((error) => {
       console.log("Error",error)
     })

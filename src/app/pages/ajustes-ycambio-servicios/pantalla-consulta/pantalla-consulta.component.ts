@@ -55,7 +55,7 @@ export class PantallaConsultaComponent implements OnInit {
   getStatsAjustesyCambioServicio(){
     this.cors.get('AjustesCambiosServicios/getStatsAjustesCambioServicio')
     .then((response)=>{
-      console.log(response)
+      // console.log(response)
       if(response[0]=='SIN INFO'){
         this.stats=[];
 
