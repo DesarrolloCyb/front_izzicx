@@ -55,9 +55,10 @@ export class ReportesIzziDashComponent implements OnInit {
           "fecha1":fechaini,
           "fecha2":fechafin
         }
-        if(this.formReporte.value.tipoReporte =='Extraccion'){
-          console.log("Extraccion")
-          url = `ReportesIzzi/getReporteExtraccion`;
+        // console.log(a)
+        if(this.formReporte.value.tipoReporte =='Ajustes Cobranza'){
+          console.log("Ajustes Cobranza")
+          url = `ReportesIzzi/getReporteAjustesCasoNegocioCobranza`;
           para =`fecha1=${fechaini}&fecha2=${fechafin}`
           // console.log(`${url}?${para}`)
         }
@@ -68,6 +69,7 @@ export class ReportesIzziDashComponent implements OnInit {
   
         }).catch((error) => {
           console.log("Error",error)
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Intentalo mas tarde nuevamente!!!' });
         })
         this.formReporte.controls['tipoReporte'].reset();
         this.formReporte.controls['fechas'].reset();
