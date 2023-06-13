@@ -84,11 +84,11 @@ export class MenuComponent implements OnInit {
 		    icon: 'pi pi-fw pi-exclamation-triangle',
 		    routerLink: ['/ajustes/consulta'],
 		  },
-		  // {
-		  //   label: 'Reactivación',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/reactivacion'],
-		  // },
+		  {
+		    label: 'Parámetros',
+		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    routerLink: ['/ajustes/parametros'],
+		  },
 		  // {
 		  //   label: 'Servicios c/s costo',
 		  //   icon: 'pi pi-fw pi-exclamation-triangle',
@@ -127,6 +127,12 @@ export class MenuComponent implements OnInit {
 		    icon: 'pi pi-fw pi-exclamation-triangle',
 		    routerLink: ['/notDone/consulta'],
 		  },
+      {
+		    label: 'Parámetros',
+		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    routerLink: ['/notDone/parametros'],
+		  },
+
 		  // {
 		  //   label: 'Reactivación',
 		  //   icon: 'pi pi-fw pi-exclamation-triangle',

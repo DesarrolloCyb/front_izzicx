@@ -61,6 +61,16 @@ export class ReportesIzziDashComponent implements OnInit {
           url = `ReportesIzzi/getReporteAjustesCasoNegocioCobranza`;
           para =`fecha1=${fechaini}&fecha2=${fechafin}`
           // console.log(`${url}?${para}`)
+        }else if(this.formReporte.value.tipoReporte =='Depuracion OS'){
+          console.log("Depuracion OS")
+          url = `ReportesIzzi/getReporteDepuracionOS`;
+          para =`fecha1=${fechaini}&fecha2=${fechafin}`
+          // console.log(`${url}?${para}`)
+        }else if(this.formReporte.value.tipoReporte =='NotDone'){
+          console.log("NotDone")
+          url = `ReportesIzzi/getReporteAjustesNotDone`;
+          para =`fecha1=${fechaini}&fecha2=${fechafin}`
+          // console.log(`${url}?${para}`)
         }
         this.cors.get1(`${url}`,a).then((response) => {
           this.show = true;

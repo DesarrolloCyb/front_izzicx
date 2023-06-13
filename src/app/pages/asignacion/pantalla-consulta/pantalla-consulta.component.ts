@@ -16,12 +16,6 @@ export class PantallaConsultaComponent implements OnInit {
   msgs: Message[] = [];
   showtable:any;
   stats:any[]=[];
-  ajustes:any[]=[];
-  visible:boolean=false;
-  itemSeleccionado: any = {
-    tiempoAjuste:"",
-    valor:""
-  };
 
   constructor(
     private cors: CorsService,
@@ -32,7 +26,6 @@ export class PantallaConsultaComponent implements OnInit {
   ngOnInit(): void {
     this.getTableCasosNegocioCobranza();
     this.statsAjustesCasoNeogicoCobranza();
-    this.getTableAjustesCobranzaTiempo();
   }
 
   getTableCasosNegocioCobranza(){
@@ -78,43 +71,6 @@ export class PantallaConsultaComponent implements OnInit {
     })
   }
 
-  getTableAjustesCobranzaTiempo(){
-    this.cors.get('AjustesNotDone/getAjustesTiempoAjuste').then((response) => {
-      if(response[0]=='SIN INFO'){
-        this.ajustes=[];
-      }else{
-        this.ajustes=response;
-      }
-    }).catch((error) => {
-      console.log(error)
-    })
-
-  }
-
-  abrirDialogo(item: any) {
-    this.itemSeleccionado = item;
-    this.visible = true;
-  }
-  save(){
-    const regex=/^[0-9]+$/;
-    if(regex.test(this.itemSeleccionado.valor)){
-      this.cors.put(`AjustesNotDone/ActualizaAjustesTiempoAjuste?id=${this.itemSeleccionado.id}`,this.itemSeleccionado).then((response) => {
-        this.visible=false;
-        this.getTableAjustesCobranzaTiempo()
-      }).catch((error) => {
-        console.log(error)
-      })
-  
-    }else{
-      this.messageService.add({
-        key: 'tst',
-        severity: 'error',
-        summary: 'Solo se permiten Números',
-        detail: 'Intentalo nuevamentes',
-      });
-
-    }
-  }
-
+ 
 
 }
