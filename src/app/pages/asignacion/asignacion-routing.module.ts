@@ -4,6 +4,8 @@ import { LayoutComponent } from './../../_shared/layout/layout/layout.component'
 import { DashboardAsignacionComponent } from './dashboard-asignacion/dashboard-asignacion.component';
 import { PantallaConsultaComponent } from './pantalla-consulta/pantalla-consulta.component';
 import { ParametrosconfigComponent } from './parametrosconfig/parametrosconfig.component';
+import { SubirbaseSinValidacionComponent } from './subirbase-sin-validacion/subirbase-sin-validacion.component';
+import { ConsultaSinValidacionComponent } from './consulta-sin-validacion/consulta-sin-validacion.component';
 
 const routes: Routes = [
 	{
@@ -20,6 +22,16 @@ const routes: Routes = [
 		path: 'parametros',
 		component: LayoutComponent,
 		children: [{ path: '', component: ParametrosconfigComponent }],
+	},
+	{
+		path: 'baseSinValidacion',
+		component: LayoutComponent,
+		children: [{ path: '', component: SubirbaseSinValidacionComponent }],
+	},
+	{
+		path: 'consultaSinValidacion',
+		component: LayoutComponent,
+		children: [{ path: '', component: ConsultaSinValidacionComponent }],
 	},
 ];
 

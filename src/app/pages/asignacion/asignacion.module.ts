@@ -6,13 +6,17 @@ import { DashboardAsignacionComponent } from './dashboard-asignacion/dashboard-a
 import { SharedModule } from 'app/_shared/modules/shared/shared.module';
 import { PantallaConsultaComponent } from './pantalla-consulta/pantalla-consulta.component';
 import { ParametrosconfigComponent } from './parametrosconfig/parametrosconfig.component';
+import { SubirbaseSinValidacionComponent } from './subirbase-sin-validacion/subirbase-sin-validacion.component';
+import { ConsultaSinValidacionComponent } from './consulta-sin-validacion/consulta-sin-validacion.component';
 
 
 @NgModule({
   declarations: [
     DashboardAsignacionComponent,
     PantallaConsultaComponent,
-    ParametrosconfigComponent
+    ParametrosconfigComponent,
+    SubirbaseSinValidacionComponent,
+    ConsultaSinValidacionComponent
   ],
   imports: [
     CommonModule,

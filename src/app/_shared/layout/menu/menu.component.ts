@@ -89,6 +89,16 @@ export class MenuComponent implements OnInit {
 		    icon: 'pi pi-fw pi-exclamation-triangle',
 		    routerLink: ['/ajustes/parametros'],
 		  },
+      {
+		    label: 'Importar Base sin Validación',
+		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    routerLink: ['/ajustes/baseSinValidacion'],
+		  },
+      {
+		    label: 'Consultar Base sin Validacion',
+		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    routerLink: ['/ajustes/consultaSinValidacion'],
+		  },
 		  // {
 		  //   label: 'Servicios c/s costo',
 		  //   icon: 'pi pi-fw pi-exclamation-triangle',
