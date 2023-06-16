@@ -51,12 +51,13 @@ export class SubirbaseSinValidacionComponent implements OnInit {
         var workBook = XLSX.read(fileReader.result,{type:'binary',cellDates:true })
         var sheetNames =  workBook.SheetNames;
         this.ExcelData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]],{defval: ''});
-        // console.log(this.ExcelData)
+        console.log(this.ExcelData)
         let count=0;
         for(let [key,value] of Object.entries(this.ExcelData[0])){
           // console.log("Esto es cabezera",key)
           for(let i = 0 ; i<this.headers.length;i++){
-            if(key == this.headers[i]){
+            if(key.toUpperCase() == this.headers[i].toUpperCase()){
+              // console.log(this.headers[i])
               count++;
             }  
           }
@@ -75,7 +76,7 @@ export class SubirbaseSinValidacionComponent implements OnInit {
             summary: 'Exito!!!',
             detail: 'El archivo se a cargado completamente!!!',
           });
-          console.log(this.ExcelData)
+          // console.log(this.ExcelData)
           this.tabla=true;
           this.button=false;
         }else{
