@@ -23,6 +23,8 @@ export class SubirbaseSinValidacionComponent implements OnInit {
   ];
   button:boolean=true;
   tabla:boolean=false;
+  
+
 
   constructor(
     private cors: CorsService,
@@ -117,7 +119,10 @@ export class SubirbaseSinValidacionComponent implements OnInit {
     })
     this.tabla=false;
     this.button=true;
-    
+    const inputElement = document.getElementById("file") as HTMLInputElement;
+    if (inputElement) {
+      inputElement.value = "";
+    }
 
   }
   dateFormat(value:any){
