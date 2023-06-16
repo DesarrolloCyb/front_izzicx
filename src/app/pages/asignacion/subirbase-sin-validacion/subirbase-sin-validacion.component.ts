@@ -19,7 +19,7 @@ export class SubirbaseSinValidacionComponent implements OnInit {
     'Motivo ajuste',
     'Comentario ajuste',
     'Cantidad a ajustar',
-    'Tipo Aplicación',
+    'Tipo de Ajuste',
   ];
   button:boolean=true;
   tabla:boolean=false;
@@ -75,7 +75,7 @@ export class SubirbaseSinValidacionComponent implements OnInit {
             summary: 'Exito!!!',
             detail: 'El archivo se a cargado completamente!!!',
           });
-          // console.log(this.ExcelData)
+          console.log(this.ExcelData)
           this.tabla=true;
           this.button=false;
         }else{
