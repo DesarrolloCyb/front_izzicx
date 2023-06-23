@@ -6,6 +6,7 @@ import { DashboardDepuracionComponent } from './dashboard-depuracion/dashboard-d
 import { BasesCanceladasComponent } from './bases-canceladas/bases-canceladas.component';
 import { PantallaConsultaComponent } from './pantalla-consulta/pantalla-consulta.component';
 import { ReportesComponent } from './reportes/reportes.component';
+import { PrefijosComponent } from './prefijos/prefijos.component';
 
 const routes: Routes = [
 	{
@@ -32,6 +33,11 @@ const routes: Routes = [
 		path: 'reporte',
 		component: LayoutComponent,
 		children: [{ path: '', component: ReportesComponent }],
+	},
+	{
+		path: 'prefijos',
+		component: LayoutComponent,
+		children: [{ path: '', component: PrefijosComponent }],
 	},
 ];
 

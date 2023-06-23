@@ -33,7 +33,7 @@ export class MenuComponent implements OnInit {
         {
           label: 'Home',
         //   icon: 'pi pi-fw pi-filter',
-          icon: 'pi pi-fw pi-file-o',
+          icon: 'pi pi-fw pi-arrow-up-right',
           routerLink: ['/extraccion'],
         },
         // {
@@ -196,11 +196,11 @@ export class MenuComponent implements OnInit {
 		    icon: 'pi pi-fw pi-exclamation-triangle',
 		    routerLink: ['/depuracion/consulta'],
 		  },
-		  // {
-		  //   label: 'Reporte',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/depuracion/reporte'],
-		  // },
+		  {
+		    label: 'Prefijos de Marcación',
+		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    routerLink: ['/depuracion/prefijos'],
+		  },
 		  // {
 		  //   label: 'Reembolso',
 		  //   icon: 'pi pi-fw pi-exclamation-triangle',

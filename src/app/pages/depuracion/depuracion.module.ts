@@ -10,6 +10,7 @@ import { SafeUrlPipe } from './safeUrl.pipe';
 import { BasesCanceladasComponent } from './bases-canceladas/bases-canceladas.component';
 import { PantallaConsultaComponent } from './pantalla-consulta/pantalla-consulta.component';
 import { ReportesComponent } from './reportes/reportes.component';
+import { PrefijosComponent } from './prefijos/prefijos.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ReportesComponent } from './reportes/reportes.component';
     SafeUrlPipe,
     BasesCanceladasComponent,
     PantallaConsultaComponent,
-    ReportesComponent
+    ReportesComponent,
+    PrefijosComponent
   ],
   imports: [
     CommonModule,
