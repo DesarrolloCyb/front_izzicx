@@ -281,7 +281,7 @@ key="tst"></p-toast>
     </div>
     
     <ng-template pTemplate="footer" class="justify-content-between">
-        <p-button (click)="visible1 = false" label="Cerrar" styleClass="p-button-text"></p-button>
+        <p-button (click)="visible1 = false;this.new={}" label="Cerrar" styleClass="p-button-text"></p-button>
         <p-button icon="pi pi-save" (click)="saveNuevo()"  styleClass="p-button-text"></p-button>
     </ng-template>
     </p-dialog>
