@@ -20,6 +20,7 @@ export class ReportesIzziDashComponent implements OnInit {
   reportes:any = [];
   url1:string='';
   show:boolean=false;
+  button:boolean=false;
 
   constructor(
     private cors: CorsService,
@@ -46,6 +47,7 @@ export class ReportesIzziDashComponent implements OnInit {
       message: '¿Los datos son correctos?',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
+        this.button=true;
         // console.log(this.formReporte)
         let fechaini = moment(this.formReporte.value.fechas[0]).format('YYYY-MM-DD');
         let fechafin = moment(this.formReporte.value.fechas[1]).format('YYYY-MM-DD');
@@ -71,6 +73,11 @@ export class ReportesIzziDashComponent implements OnInit {
           url = `ReportesIzzi/getReporteAjustesNotDone`;
           para =`fecha1=${fechaini}&fecha2=${fechafin}`
           // console.log(`${url}?${para}`)
+        }else if(this.formReporte.value.tipoReporte =='Ajustes Cambio Servicio'){
+          console.log("Ajustes Cambio Servicio")
+          url = `ReportesIzzi/getReporteAjustesCambioServicios`;
+          para =`fecha1=${fechaini}&fecha2=${fechafin}`
+          // console.log(`${url}?${para}`)
         }
         this.cors.get1(`${url}`,a).then((response) => {
           this.show = true;
@@ -84,11 +91,13 @@ export class ReportesIzziDashComponent implements OnInit {
         this.formReporte.controls['tipoReporte'].reset();
         this.formReporte.controls['fechas'].reset();
         this.show = false;
-        },
+        this.button=false;
+      },
       reject: () => {
-          this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'Reporte Cancelado' });
+        this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'Reporte Cancelado' });
       }
     });
+    
   }
 
   getTipoReporte(){

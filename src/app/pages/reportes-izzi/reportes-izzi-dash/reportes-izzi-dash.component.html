@@ -20,7 +20,7 @@
 
             <div class="col-12 md:col-4">
                 <p-toast></p-toast>
-                <button (click)="confirm2($event)" pButton icon="pi pi-check" label="Confirmar"></button>
+                <button (click)="confirm2($event)" pButton icon="pi pi-check" label="Confirmar" [loading]="button"></button>
                 <p-confirmPopup key="confirm2"></p-confirmPopup>
             </div>
             <div *ngIf="show" style="display: none;">
