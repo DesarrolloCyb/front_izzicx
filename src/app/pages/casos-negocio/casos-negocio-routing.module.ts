@@ -4,6 +4,10 @@ import { LayoutComponent } from './../../_shared/layout/layout/layout.component'
 import { DashboardCasosNegocioComponent } from './dashboard-casos-negocio/dashboard-casos-negocio.component';
 import { PantallaConsultaComponent } from './pantalla-consulta/pantalla-consulta.component';
 import { ParametrosconfigComponent } from './parametrosconfig/parametrosconfig.component';
+import { CancelacionSinValidacionComponent } from './cancelacion-sin-validacion/cancelacion-sin-validacion.component';
+import { CasosNegocioSinValidacionComponent } from './casos-negocio-sin-validacion/casos-negocio-sin-validacion.component';
+import { ConsultacancelacionSinValidacionComponent } from './consultacancelacion-sin-validacion/consultacancelacion-sin-validacion.component';
+import { ConsultacasosNegocioSinValidacionComponent } from './consultacasos-negocio-sin-validacion/consultacasos-negocio-sin-validacion.component';
 
 const routes: Routes = [
 	{
@@ -21,6 +25,27 @@ const routes: Routes = [
 		component: LayoutComponent,
 		children: [{ path: '', component: ParametrosconfigComponent }],
 	},
+	{
+		path: 'cancelacionSinValidacion',
+		component: LayoutComponent,
+		children: [{ path: '', component: CancelacionSinValidacionComponent }],
+	},
+	{
+		path: 'CasosNegocioSinValidacion',
+		component: LayoutComponent,
+		children: [{ path: '', component: CasosNegocioSinValidacionComponent }],
+	},
+	{
+		path: 'consultaCancelacionSinValidacion',
+		component: LayoutComponent,
+		children: [{ path: '', component: ConsultacancelacionSinValidacionComponent }],
+	},
+	{
+		path: 'consultaCasosNegocioSinValidacion',
+		component: LayoutComponent,
+		children: [{ path: '', component: ConsultacasosNegocioSinValidacionComponent }],
+	},
+
 ];
 
 @NgModule({

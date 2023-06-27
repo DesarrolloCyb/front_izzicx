@@ -5,54 +5,28 @@ import * as moment from 'moment';
 import * as XLSX from 'xlsx';
 
 @Component({
-  selector: 'dashboard-casos-negocio',
-  templateUrl: './dashboard-casos-negocio.component.html',
-  styleUrls: ['./dashboard-casos-negocio.component.scss']
+  selector: 'casos-negocio-sin-validacion',
+  templateUrl: './casos-negocio-sin-validacion.component.html',
+  styleUrls: ['./casos-negocio-sin-validacion.component.scss']
 })
-export class DashboardCasosNegocioComponent implements OnInit {
+export class CasosNegocioSinValidacionComponent implements OnInit {
   usuario: any = JSON.parse(localStorage.getItem("userData") || "{}")
   msgs: Message[] = [];
   ExcelData:any=[];
   headers:string[]=[
-    'CIUDAD',
-    'COMENTARIOS',
-    'CREADO_POR',
-    'CUENTA',
-    'DIRECCION',
-    'ESTADO_ORDEN',
-    'FECHA_APERTURA',
-    'FECHA_SOLICITADA',
-    'HUB',
-    'MOTIVO_CANCELACION',
-    'MOTIVO_ORDEN',
-    'MOTIVO_REPROGRAMACION',
-    'NOMBRE_CLIENTE',
-    'NUMERO_ORDEN',
-    'NUM_REPRO',
-    'PAQUETE',
-    'PERFIL_PAGO',
-    'PLAZA',
-    'REFERIDO',
-    'RPT',
-    'SITUACION_ANTICIPO',
-    'SUBTIPO_CLIENTE',
-    'SUBTIPO_ORDEN',
-    'TECNICO',
-    'TELEFONO',
-    'TIPO_CLIENTE',
-    'TIPO_ORDEN',
-    'ULTIMA_MOD_POR',
-    'VENDEDOR',
-    'RESULTADO_LLAMADA'
+    'Categoria',
+    'Cuenta',
+    'Motivo Cliente',
+    'Motivos',
+    'Solución',
+    'Submotivo'
   ];
   button:boolean=true;
   tabla:boolean=false;
 
-
   constructor(
     private cors: CorsService,
-    private messageService: MessageService,
-
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -84,20 +58,18 @@ export class DashboardCasosNegocioComponent implements OnInit {
           for(let i = 0 ; i<this.headers.length;i++){
             if(key == this.headers[i]){
               count++;
+              // console.log(key)
+              // console.log(this.headers[i])
             }
           }
         }
-        if(count == 30){ 
+        if(count == 6){ 
           Object.keys(this.ExcelData).forEach(key => {
             this.ExcelData[key]["Status"]='Pendiente';
             this.ExcelData[key]["Cve_usuario"]=this.usuario.email;
             this.ExcelData[key]["Procesando"]="0";
             this.ExcelData[key]["IP"]="";
             this.ExcelData[key]["fechaCaptura"]=moment(Date.now()).format('yyyy-MM-DD HH:mm:ss');
-            let a = moment(this.ExcelData[key]["FECHA_APERTURA"]).format('yyyy-MM-DD HH:mm:ss');
-            let b = moment(this.ExcelData[key]["FECHA_SOLICITADA"]).format('yyyy-MM-DD HH:mm:ss');
-            this.ExcelData[key]["FECHA_APERTURA"]=a;
-            this.ExcelData[key]["FECHA_SOLICITADA"]=b;
           });
           this.messageService.add({
             key: 'tst',
@@ -122,7 +94,7 @@ export class DashboardCasosNegocioComponent implements OnInit {
   }
 
   saveExcel() {
-    this.cors.post('AjustesNotDone/InsertarBasesNotDone',this.ExcelData).then((response) => {
+    this.cors.post('AjustesNotDone/InsertarBaseDatosCasosNegocioSinValidacion',this.ExcelData).then((response) => {
       // console.log(response)
       this.messageService.add({
         key: 'tst',
@@ -154,9 +126,6 @@ export class DashboardCasosNegocioComponent implements OnInit {
       return ""
     }
   }
-
-
-
 
 
 

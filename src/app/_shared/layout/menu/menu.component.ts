@@ -142,17 +142,27 @@ export class MenuComponent implements OnInit {
 		    icon: 'pi pi-fw pi-exclamation-triangle',
 		    routerLink: ['/notDone/parametros'],
 		  },
+		  {
+		    label: 'Cancelación Sin Validación',
+		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    routerLink: ['/notDone/cancelacionSinValidacion'],
+		  },
+      {
+		    label: 'Consulta Cancelación Sin Validación',
+		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    routerLink: ['/notDone/consultaCancelacionSinValidacion'],
+		  },
+		  {
+		    label: 'Casos de Negocio Sin Validación ',
+		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    routerLink: ['/notDone/CasosNegocioSinValidacion'],
+		  },
+      {
+		    label: 'Consulta Casos de Negocio Sin Validación ',
+		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    routerLink: ['/notDone/consultaCasosNegocioSinValidacion'],
+		  },
 
-		  // {
-		  //   label: 'Reactivación',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/reactivacion'],
-		  // },
-		  // {
-		  //   label: 'Servicios c/s costo',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/servicioscosto'],
-		  // },
 		  // {
 		  //   label: 'Reembolso',
 		  //   icon: 'pi pi-fw pi-exclamation-triangle',
