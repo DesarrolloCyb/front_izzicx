@@ -33,7 +33,7 @@ export class MenuComponent implements OnInit {
         {
           label: 'Home',
         //   icon: 'pi pi-fw pi-filter',
-          icon: 'pi pi-fw pi-arrow-up-right',
+          icon: 'pi pi-fw pi-external-link',
           routerLink: ['/extraccion'],
         },
         // {
@@ -76,27 +76,27 @@ export class MenuComponent implements OnInit {
 		items: [
 		  {
 			label: 'Importar Casos de Negocio Cobranza',
-			icon: 'pi pi-fw pi-check-square',
+			icon: 'pi pi-fw pi-database',
 		    routerLink: ['/ajustes'],
 		  },
 		  {
 		    label: 'Consulta registros de ajustes',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-search',
 		    routerLink: ['/ajustes/consulta'],
 		  },
 		  {
 		    label: 'Parámetros',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-cog',
 		    routerLink: ['/ajustes/parametros'],
 		  },
       {
 		    label: 'Importar Base sin Validación',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-database',
 		    routerLink: ['/ajustes/baseSinValidacion'],
 		  },
       {
 		    label: 'Consultar Base sin Validacion',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-search',
 		    routerLink: ['/ajustes/consultaSinValidacion'],
 		  },
 		  // {
@@ -129,37 +129,37 @@ export class MenuComponent implements OnInit {
 		items: [
 		  {
 			label: 'Importar Bases NotDone',
-			icon: 'pi pi-fw pi-briefcase',
+			icon: 'pi pi-fw pi-database',
 		    routerLink: ['/notDone'],
 		  },
 		  {
 		    label: 'Consulta Registros NotDone',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-search',
 		    routerLink: ['/notDone/consulta'],
 		  },
       {
 		    label: 'Parámetros',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-cog',
 		    routerLink: ['/notDone/parametros'],
 		  },
 		  {
 		    label: 'Cancelación Sin Validación',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-database',
 		    routerLink: ['/notDone/cancelacionSinValidacion'],
 		  },
       {
 		    label: 'Consulta Cancelación Sin Validación',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-search',
 		    routerLink: ['/notDone/consultaCancelacionSinValidacion'],
 		  },
 		  {
 		    label: 'Casos de Negocio Sin Validación ',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-database',
 		    routerLink: ['/notDone/CasosNegocioSinValidacion'],
 		  },
       {
 		    label: 'Consulta Casos de Negocio Sin Validación ',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-search',
 		    routerLink: ['/notDone/consultaCasosNegocioSinValidacion'],
 		  },
 
@@ -188,27 +188,27 @@ export class MenuComponent implements OnInit {
 		items: [
 		  {
 			label: 'Extracción',
-			icon: 'pi pi-fw pi-folder-open',
+			icon: 'pi pi-fw pi-external-link',
 		    routerLink: ['/depuracion'],
 		  },
       {
         label: 'Bases depuradas',
-        icon: 'pi pi-fw pi-folder-open',
+        icon: 'pi pi-fw pi-list',
           routerLink: ['/depuracion/bases'],
       },
 		  {
 		    label: 'Bases Cancelación OS',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-database',
 		    routerLink: ['/depuracion/basesCanceladas'],
 		  },
 		  {
 		    label: 'Pantalla Consulta',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-search',
 		    routerLink: ['/depuracion/consulta'],
 		  },
 		  {
 		    label: 'Prefijos de Marcación',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-phone',
 		    routerLink: ['/depuracion/prefijos'],
 		  },
 		  // {
@@ -279,7 +279,7 @@ export class MenuComponent implements OnInit {
       items: [
         {
         label: 'Dashboard',
-        icon: 'pi pi-fw pi-folder-open',
+        icon: 'pi pi-fw pi-book',
           routerLink: ['/reportes'],
         },
         // {
@@ -322,12 +322,12 @@ export class MenuComponent implements OnInit {
         items: [
           {
           label: 'Base de Datos Ajustes',
-          icon: 'pi pi-fw pi-chart-bar',
+          icon: 'pi pi-fw pi-database',
             routerLink: ['/ajustesYcambioServicio/BDajustes'],
           },
           {
             label: 'Consulta',
-            icon: 'pi pi-fw pi-exclamation-triangle',
+            icon: 'pi pi-fw pi-search',
             routerLink: ['/ajustesYcambioServicio/consulta'],
           },
           // {
