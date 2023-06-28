@@ -21,7 +21,6 @@ export class MenuComponent implements OnInit {
           icon: 'pi pi-fw pi-home',
           routerLink: ['/home'],
         }
-
       ]
     },
     {
@@ -74,31 +73,45 @@ export class MenuComponent implements OnInit {
 		icon: 'pi pi-fw pi-compass',
 	  //   routerLink: ['/capturas'],
 		items: [
-		  {
-			label: 'Importar Casos de Negocio Cobranza',
-			icon: 'pi pi-fw pi-database',
-		    routerLink: ['/ajustes'],
-		  },
-		  {
-		    label: 'Consulta registros de ajustes',
-		    icon: 'pi pi-fw pi-search',
-		    routerLink: ['/ajustes/consulta'],
-		  },
-		  {
-		    label: 'Parámetros',
-		    icon: 'pi pi-fw pi-cog',
-		    routerLink: ['/ajustes/parametros'],
-		  },
       {
-		    label: 'Importar Base sin Validación',
-		    icon: 'pi pi-fw pi-database',
-		    routerLink: ['/ajustes/baseSinValidacion'],
-		  },
+        label: 'Con Validación',
+        // icon: 'pi pi-fw pi-database',
+        // routerLink: ['/ajustes'],
+        items:[
+          {
+          label: 'Importar Casos de Negocio Cobranza',
+          icon: 'pi pi-fw pi-database',
+          routerLink: ['/ajustes'],
+          },
+          {
+            label: 'Consulta registros de ajustes',
+            icon: 'pi pi-fw pi-search',
+            routerLink: ['/ajustes/consulta'],
+          },
+          {
+            label: 'Parámetros',
+            icon: 'pi pi-fw pi-cog',
+            routerLink: ['/ajustes/parametros'],
+          }
+        ]
+      }, 
       {
-		    label: 'Consultar Base sin Validacion',
-		    icon: 'pi pi-fw pi-search',
-		    routerLink: ['/ajustes/consultaSinValidacion'],
-		  },
+		    label: 'Sin Validación',
+		    // icon: 'pi pi-fw pi-database',
+		    // routerLink: ['/ajustes/baseSinValidacion'],
+        items:[
+          {
+            label: 'Importar Base sin Validación',
+            icon: 'pi pi-fw pi-database',
+            routerLink: ['/ajustes/baseSinValidacion'],
+          },
+          {
+            label: 'Consultar Base sin Validacion',
+            icon: 'pi pi-fw pi-search',
+            routerLink: ['/ajustes/consultaSinValidacion'],
+          }
+        ]
+		  }, 
 		  // {
 		  //   label: 'Servicios c/s costo',
 		  //   icon: 'pi pi-fw pi-exclamation-triangle',
@@ -127,41 +140,56 @@ export class MenuComponent implements OnInit {
 		// icon: 'pi pi-fw pi-compass',
 	  //   routerLink: ['/capturas'],
 		items: [
-		  {
-			label: 'Importar Bases NotDone',
-			icon: 'pi pi-fw pi-database',
-		    routerLink: ['/notDone'],
-		  },
-		  {
-		    label: 'Consulta Registros NotDone',
-		    icon: 'pi pi-fw pi-search',
-		    routerLink: ['/notDone/consulta'],
-		  },
       {
-		    label: 'Parámetros',
-		    icon: 'pi pi-fw pi-cog',
-		    routerLink: ['/notDone/parametros'],
-		  },
-		  {
-		    label: 'Cancelación Sin Validación',
-		    icon: 'pi pi-fw pi-database',
-		    routerLink: ['/notDone/cancelacionSinValidacion'],
-		  },
+        label: 'Con Validación',
+        // icon: 'pi pi-fw pi-database',
+        // routerLink: ['/notDone'],
+        items:[
+          {
+            label: 'Importar Bases NotDone',
+            icon: 'pi pi-fw pi-database',
+              routerLink: ['/notDone'],
+            },
+            {
+              label: 'Consulta Registros NotDone',
+              icon: 'pi pi-fw pi-search',
+              routerLink: ['/notDone/consulta'],
+            },
+            {
+              label: 'Parámetros',
+              icon: 'pi pi-fw pi-cog',
+              routerLink: ['/notDone/parametros'],
+            },
+        ]
+      },
       {
-		    label: 'Consulta Cancelación Sin Validación',
-		    icon: 'pi pi-fw pi-search',
-		    routerLink: ['/notDone/consultaCancelacionSinValidacion'],
+		    label: 'Sin Validación',
+		    // icon: 'pi pi-fw pi-database',
+		    // routerLink: ['/notDone/cancelacionSinValidacion'],
+        items:[
+          {
+            label: 'Cancelación Sin Validación',
+            icon: 'pi pi-fw pi-database',
+            routerLink: ['/notDone/cancelacionSinValidacion'],
+          },
+          {
+            label: 'Consulta Cancelación Sin Validación',
+            icon: 'pi pi-fw pi-search',
+            routerLink: ['/notDone/consultaCancelacionSinValidacion'],
+          },
+          {
+            label: 'Casos de Negocio Sin Validación ',
+            icon: 'pi pi-fw pi-database',
+            routerLink: ['/notDone/CasosNegocioSinValidacion'],
+          },
+          {
+            label: 'Consulta Casos de Negocio Sin Validación ',
+            icon: 'pi pi-fw pi-search',
+            routerLink: ['/notDone/consultaCasosNegocioSinValidacion'],
+          },
+        ]
 		  },
-		  {
-		    label: 'Casos de Negocio Sin Validación ',
-		    icon: 'pi pi-fw pi-database',
-		    routerLink: ['/notDone/CasosNegocioSinValidacion'],
-		  },
-      {
-		    label: 'Consulta Casos de Negocio Sin Validación ',
-		    icon: 'pi pi-fw pi-search',
-		    routerLink: ['/notDone/consultaCasosNegocioSinValidacion'],
-		  },
+
 
 		  // {
 		  //   label: 'Reembolso',
