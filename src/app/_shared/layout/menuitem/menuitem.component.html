@@ -15,7 +15,7 @@
 		<i [ngClass]="item.icon" style="color: #666666; font-size: 2rem;"
 			class="layout-menuitem-icon"></i>
 		<span class="layout-menuitem-text">{{ item.label }}</span>
-		<i *ngIf="item.items"
+		<i *ngIf="item.items" style="color: orange;"
 			class="pi pi-fw pi-angle-down layout-submenu-toggler"></i>
 	</a>
 	<a *ngIf="item.routerLink && !item.items && item.visible !== false"
@@ -37,9 +37,9 @@
 		tabindex="0"
 		pRipple>
 		<i [ngClass]="item.icon"
-			class="layout-menuitem-icon" style="color: #666666; font-size: 2rem;"></i>
+			class="layout-menuitem-icon" style="color: orange; font-size: 2rem;"></i>
 		<span class="layout-menuitem-text">{{ item.label }}</span>
-		<i *ngIf="item.items"
+		<i *ngIf="item.items" 
 			class="pi pi-fw pi-angle-down layout-submenu-toggler"></i>
 	</a>
 
