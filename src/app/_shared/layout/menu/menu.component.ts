@@ -484,6 +484,7 @@ export class MenuComponent implements OnInit {
       "Depuracion":['home','depuracion','reportes'],
       "Ajustes":['home','ajustesYcambioServicio','reportes'],
       "AjustesNotDone":['home','notDone','reportes'],
+      "testAjustes1":['home','ajustes','reportes'],
       //   "SUPERVISOR TROUBLESHOOTING CELULAR":['capturasA','home','reportes'],
     //   "ESPECIALISTA TROUBLESHOOTING CELULAR":['capturasA'],
     //   "SUPERVISOR CALL CENTER REPARACIONES":['capturasA','home','reportes'],

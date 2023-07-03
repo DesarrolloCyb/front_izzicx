@@ -31,7 +31,7 @@ export class AuthComponent {
     onSignIn() {
         this.formLogin.markAllAsTouched();
         if(this.formLogin.valid){
-            if((this.formLogin.value.email =='admin' && this.formLogin.value.pWd =='admin_2023') || (this.formLogin.value.email =='usuario1' && this.formLogin.value.pWd =='usuario1_2023') || (this.formLogin.value.email =='testExtraccion' && this.formLogin.value.pWd =='testExtraccion_2023') || (this.formLogin.value.email =='testDepuracion' && this.formLogin.value.pWd =='testDepuracion_2023') || (this.formLogin.value.email =='testAjustes' && this.formLogin.value.pWd =='testAjustes_2023') || (this.formLogin.value.email =='testAjustesNotDone' && this.formLogin.value.pWd =='testAjustesNotDone_2023')){
+            if((this.formLogin.value.email =='admin' && this.formLogin.value.pWd =='admin_2023') || (this.formLogin.value.email =='usuario1' && this.formLogin.value.pWd =='usuario1_2023') || (this.formLogin.value.email =='testExtraccion' && this.formLogin.value.pWd =='testExtraccion_2023') || (this.formLogin.value.email =='testDepuracion' && this.formLogin.value.pWd =='testDepuracion_2023') || (this.formLogin.value.email =='testAjustes' && this.formLogin.value.pWd =='testAjustes_2023') || (this.formLogin.value.email =='testAjustesNotDone' && this.formLogin.value.pWd =='testAjustesNotDone_2023') || (this.formLogin.value.email =='testAjustes1' && this.formLogin.value.pWd =='testAjustes1_2023')){
                 let a=null;
                 if(this.formLogin.value.email =='admin'){
                     a={
@@ -74,6 +74,13 @@ export class AuthComponent {
                         "firstName":"AjustesNotDone",
                         "lastName":"AjustesNotDone",
                         "email":"AjustesNotDone@test.com"
+                    }
+                }else if(this.formLogin.value.email =='testAjustes1'){ //reporte Depuracion
+                    a={
+                        "role":"testAjustes1",
+                        "firstName":"testAjustes1",
+                        "lastName":"testAjustes1",
+                        "email":"testAjustes1@test.com"
                     }
                 }
                 

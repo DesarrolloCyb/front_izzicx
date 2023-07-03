@@ -1,6 +1,6 @@
 <ng-container>
 	<div *ngIf="root && item.visible !== false"
-		class="layout-menuitem-root-text" style="color:#E80084">
+		class="layout-menuitem-root-text" style="color:#E80084;font-size: 1.3rem;">
 		{{ item.label }}
 	</div>
 	<a *ngIf="(!item.routerLink || item.items) && item.visible !== false"
