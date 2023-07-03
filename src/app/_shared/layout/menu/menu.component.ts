@@ -354,20 +354,20 @@ export class MenuComponent implements OnInit {
             routerLink: ['/ajustesYcambioServicio/BDajustes'],
           },
           {
-            label: 'Consulta',
+            label: 'Consulta Ajustes',
             icon: 'pi pi-fw pi-search',
             routerLink: ['/ajustesYcambioServicio/consulta'],
           },
-          // {
-          //   label: 'Estadísticas',
-          //   icon: 'pi pi-fw pi-exclamation-triangle',
-          //   routerLink: ['/ajustesYcambioServicio/estadisticas'],
-          // },
-          // {
-          //   label: 'Reporte',
-          //   icon: 'pi pi-fw pi-exclamation-triangle',
-          //   routerLink: ['/ajustesYcambioServicio/reporte'],
-          // },
+          {
+            label: 'Migraciones Lineales',
+            icon: 'pi pi-fw pi-database',
+            routerLink: ['/ajustesYcambioServicio/migracionesLineales'],
+          },
+          {
+            label: 'Consulta Migraciones Lineales',
+            icon: 'pi pi-fw pi-search',
+            routerLink: ['/ajustesYcambioServicio/consultaMigracionesLineales'],
+          },
           // {
           //   label: 'Servicios c/s costo',
           //   icon: 'pi pi-fw pi-exclamation-triangle',
@@ -483,7 +483,7 @@ export class MenuComponent implements OnInit {
       "Extraccion":['home','extraccion'],
       "Depuracion":['home','depuracion','reportes'],
       "Ajustes":['home','ajustesYcambioServicio','reportes'],
-      "AjustesNotDone":['home','ajustes','notDone','reportes'],
+      "AjustesNotDone":['home','notDone','reportes'],
       //   "SUPERVISOR TROUBLESHOOTING CELULAR":['capturasA','home','reportes'],
     //   "ESPECIALISTA TROUBLESHOOTING CELULAR":['capturasA'],
     //   "SUPERVISOR CALL CENTER REPARACIONES":['capturasA','home','reportes'],

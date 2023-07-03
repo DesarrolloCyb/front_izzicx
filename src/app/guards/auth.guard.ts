@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
     "Extraccion":['home','extraccion'],
     "Depuracion":['home','depuracion','reportes'],
     "Ajustes":['home','ajustesYcambioServicio','reportes'],
-    "AjustesNotDone":['home','ajustes','notDone','reportes'],
+    "AjustesNotDone":['home','notDone','reportes'],
     //   "ESPECIALISTA TROUBLESHOOTING CELULAR":['capturasAtc'],
     //   "SUPERVISOR CALL CENTER REPARACIONES":['capturasAtc','home','reportes'],
     //   "EJECUTIVO ATENCION PREPAGO":['capturasAtc'],

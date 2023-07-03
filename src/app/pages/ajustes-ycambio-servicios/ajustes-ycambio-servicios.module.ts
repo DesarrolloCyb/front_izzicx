@@ -8,6 +8,8 @@ import { ReporteComponent } from './reporte/reporte.component';
 import { SharedModule } from '@shared';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PantallaConsultaComponent } from './pantalla-consulta/pantalla-consulta.component';
+import { MigracionesLinealesComponent } from './migraciones-lineales/migraciones-lineales.component';
+import { ConsultaMigracionesComponent } from './consulta-migraciones/consulta-migraciones.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { PantallaConsultaComponent } from './pantalla-consulta/pantalla-consulta
     BaseDatosAjustesComponent,
     EstadisticasComponent,
     ReporteComponent,
-    PantallaConsultaComponent
+    PantallaConsultaComponent,
+    MigracionesLinealesComponent,
+    ConsultaMigracionesComponent
   ],
   imports: [
     CommonModule,
