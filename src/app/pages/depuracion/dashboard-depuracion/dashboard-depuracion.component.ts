@@ -21,7 +21,9 @@ export class DashboardDepuracionComponent implements OnInit {
 	url1:any;
 	archivoSeleccionado:string="";
 	loading2:boolean=false;
-	time:any;
+	time:any=null;
+	timeCI:any=null;
+	timeCF:any=null;
 	nuevo:boolean=false;
   
   
@@ -37,6 +39,7 @@ export class DashboardDepuracionComponent implements OnInit {
 	visualizarHorarios(){
 		this.cors.get('EjecucionDepuracion/getHoursDepuracion')
 		.then((response) => {
+			// console.log(response)
 
 		  if(response[0]=="SIN INFO"){
 			this.horarios = [];
@@ -73,10 +76,23 @@ export class DashboardDepuracionComponent implements OnInit {
 	changeTime2(event:any){
 		this.time = moment(event).format('HH:mm:00 a');
 	}
+	changeTime3(event:any){
+		this.timeCI = moment(event).format('HH:mm:00 a');
+	}
+
+	changeTime4(event:any){
+		this.timeCF = moment(event).format('HH:mm:00 a');
+	}
+
 	enviar(){
+		let filt = this.horarios.filter(item=>{
+			return item.id == this.first
+		});
 		let a ={
 			"id":this.first,
-			"horario":this.second
+			"horario":this.second,
+			"corteInicio":filt[0].corteInicio,
+			"corteFin":filt[0].corteFin
 		}
 		this.cors.put(`EjecucionDepuracion/ActualizaHoursDepuracion?id=${this.first}`,a)
 		.then((response) => {
@@ -217,8 +233,12 @@ export class DashboardDepuracionComponent implements OnInit {
 	}
 
 	add(){
-		if(this.time != undefined){
-			this.cors.post(`EjecucionDepuracion/GuardarHoursDepuracion`,{"horario":this.time})
+		if(this.time != null && this.timeCI != null && this.timeCF!=null){
+			this.cors.post(`EjecucionDepuracion/GuardarHoursDepuracion`,{
+				"horario":this.time,
+				"corteInicio":this.timeCI,
+				"corteFin":this.timeCF,
+			})
 			.then((response) => {
 			  this.messageService.add({
 				key: 'tst',
@@ -227,26 +247,28 @@ export class DashboardDepuracionComponent implements OnInit {
 				detail: 'Hora guardada',
 			  });
 			this.visualizarHorarios();
-			this.time=null;
-			this.nuevo=false;
 			})
 			.catch((error) => {
-			console.log(error)
-			//   this.messageService.add({
-			// 	key:'tst',
-			// 	severity: 'error',
-			// 	summary: 'No se logro guardar',
-			// 	detail: 'Intenta Nuevamente!!!',
-			//   });
-			});	
-		}else{
-			this.messageService.add({
-				key:'tst',
-				severity: 'error',
-				summary: 'Falta agregar una hora!',
-				detail: 'Intenta Nuevamente!!!',
+				console.log(error)
+				this.messageService.add({
+					key:'tst',
+					severity: 'error',
+					summary: 'No se logro guardar',
+					detail: 'Intenta Nuevamente!!!',
+				});
 			});
-		}
+			this.time=null;
+			this.timeCI=null;
+			this.timeCF=null;
+			this.nuevo=false;
+		}else{
+				this.messageService.add({
+					key:'tst',
+					severity: 'error',
+					summary: 'Falta agregar un parametros!',
+					detail: 'Intenta Nuevamente!!!',
+				});
+			}
 	}
 	
 
