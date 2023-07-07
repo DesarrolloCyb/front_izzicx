@@ -35,53 +35,509 @@
 </div>
 
 <div class="card">
-    <p-panel header="Consulta las Bases Canceladas" class="line-height-12 m-0" >
+    <p-panel header="Consulta las Bases Canceladas " class="line-height-12 m-0" >
         <div class="container">
-            <form [formGroup]="formBusqueda" class="flex align-items-center justify-content-center">
-                <div class="p-fluid p-formgrid grid">
-                    <div class="field col-12 md:col-12">
-                        <span class="p-float-label">
-                            <input
-                            type="text"
-                            pInputText
-                            formControlName="cuenta"
-                            >
-                            <label>Número de Orden</label>
-                        </span>
-                    </div>
-                    <div class="col-12 text-center">
-                        <button
-                        (click)="buscar()"
-                        pButton
-                        label="Buscar"
-                        style="width:auto; color: white;background-color: #FF69B4; border-color: #FFC0CB;"></button>      
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="container" style="padding-top: 2rem;">
-            <div class="row">
-                <div >
-                    <div class="p-fluid p-formgrid grid p-2">
-                        <div  *ngFor="let item1 of consulta | keyvalue" style="padding-right: 1rem;" class="field col-12 md:col-4">
-                            <!-- <input class="field col-12 md:col-4" type="text" [value]="item.value"> -->
-                            <label>{{primeraLetraMayuscula(item1.key)}}</label>
-                                <span class="p-float-label" >
-                                    <input
-                                    type="text"
-                                    pInputText
-                                    [value]="item1.value"
-                                    style="width: 100%;"
-                                    readonly
-                                    >
-                                </span>
-                                <br>
-                                <br>
-                                <br>
+            <p-tabView>
+                <p-tabPanel header="CANCELACION CC" >
+                    <div class="row">
+                        <div class="cols">
+                          <div class="card">
+                            <p-table #dt1 [value]="cc" dataKey="id" [rows]="50" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
+                                styleClass="p-datatable-gridlines" [paginator]="true"
+                                [globalFilterFields]="['cuenta','cve_usuario','estado','hub','lead_id','nodo','numOrden','source','status','tipo']" responsiveLayout="scroll">
+                                <ng-template pTemplate="caption">
+                                    <div class="flex justify-content-center flex-column sm:flex-row">
+                    
+                                        <span class="p-input-icon-left mb-2">
+                                            <i class="pi pi-search"></i>
+                                            <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar"
+                                            class="w-full" />
+                                        </span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>
+                                          <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                                              Número de Orden
+                                          </div>
+                                        </th>
+                                        <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                Cuenta
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                CN generado
+                    
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                Compañia
+                                            </div>
+                                        </th>
+                                        <th>
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                              Usuario
+                                          </div>
+                                        </th>
+                                        <th>
+                                          <div class="flex justify-content-center align-items-center">
+                                              Estado
+                                          </div>
+                                        </th>
+                                        <th>
+                                          <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                                              Fecha de Carga
+                                          </div>
+                                        </th>
+                                        <th>
+                                            <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                                                Fecha Completado
+                                            </div>
+                                          </th>
+                    
+                                          <th>
+                                            <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                                                Fecha Creado
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                                                Fecha Hora de Cierre
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Hub
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                IP
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Lead_id
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Motivo Orden
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Nodo
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Procesando
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Source
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Estatus
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Tipo
+                                            </div>
+                                          </th>     
+                                          <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                Comentarios
+                    
+                                            </div>
+                                        </th>                 
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                    <tr>
+                                        <td class="text-center">
+                                            {{item.numOrden}}
+                                        </td>
+                                        <td class="text-center">
+                                           {{item.cuenta}}
+                                        </td>
+                                        <td class="text-center">
+                                          {{item.cn_generado}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.compania}}
+                                        </td>
+                                        <td class="text-center">
+                                          {{item.cve_usuario}}
+                                        </td>
+                                        <td class="text-center">
+                                          {{item.estado}}
+                                        </td>
+                                        <td class="text-center">
+                                          {{dateFormat(item.fechaCarga)}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{dateFormat(item.fechaCompletado)}}
+                                        </td>
+
+                                        <td class="text-center">
+                                            {{dateFormat(item.fechaCreado)}}
+                                        </td>
+
+                                        <td class="text-center">
+                                            {{dateFormat(item.fechaHoraCierre)}}
+                                        </td>
+
+                                        <td class="text-center">
+                                            {{item.hub}}
+                                        </td>
+                                        
+                                        <td class="text-center">
+                                            {{item.ip}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.lead_id}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.motivoOrden}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.nodo}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.procesando == "1" ?"SI" :"NO"}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.source}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.status}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.tipo}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.comentarios}}
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">Sin Datos para Mostrar.</td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="loadingbody">
+                                    <tr>
+                                        <td colspan="7">Cargando Datos, espere...</td>
+                                    </tr>
+                    
+                                </ng-template>
+                                <ng-template pTemplate="paginatorleft" let-state>
+                                    Mostrando {{(state.page  * state.rows) + 1}} a {{state.rows * (state.page + 1)}} de {{state.totalRecords}} registros.
+                              </ng-template>
+                            </p-table>
+                          </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </p-tabPanel>
+                <p-tabPanel header="CANCELACION EXT">
+                    <div class="row">
+                        <div class="cols">
+                          <div class="card">
+                            <p-table #dt1 [value]="ext" dataKey="id" [rows]="50" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
+                                styleClass="p-datatable-gridlines" [paginator]="true"
+                                [globalFilterFields]="['compania','cuenta','ip','hub','lead_id','nodo','numOrden','source','status','tipo','user_registro','usuario_creo']" responsiveLayout="scroll">
+                                <ng-template pTemplate="caption">
+                                    <div class="flex justify-content-center flex-column sm:flex-row">
+                    
+                                        <span class="p-input-icon-left mb-2">
+                                            <i class="pi pi-search"></i>
+                                            <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar"
+                                            class="w-full" />
+                                        </span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>
+                                            <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                                                Número de Orden
+                                            </div>
+                                        </th>
+                                        <th>
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                              Cuenta
+                                          </div>
+                                        </th>
+                                        <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                CN generado
+                    
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                Compañia
+                                            </div>
+                                        </th>
+                                        <!-- <th>
+                                          <div class="flex justify-content-center align-items-center">
+                                              Usuario
+                                          </div>
+                                        </th> -->
+                                        <th>
+                                          <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                                              Fecha Completado
+                                          </div>
+                                        </th>
+                                        <th>
+                                            <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                                                Fecha Creado
+                                            </div>
+                                          </th>
+                    
+                                          <th>
+                                            <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                                                Fecha Hora de Cierre
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                                                Fecha Técnico
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Hub
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                IP
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                lead_id
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                                                Motivo Orden
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Nodo
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Nombre Contacto
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Procesando
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div class="flex justify-content-center align-items-center">
+                                                Quien Responde
+                                            </div>
+                                          </th>     
+                                          <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                Región
+                    
+                                            </div>
+                                          </th>    
+                                          <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                RPT
+                    
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                Source
+                    
+                                            </div>
+                                          </th>    
+                                          <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                Estatus
+                    
+                                            </div>
+                                          </th> 
+                                          <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                Time Carga
+                    
+                                            </div>
+                                          </th>   
+                                          <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                Tipo
+                    
+                                            </div>
+                                          </th>   
+                                          <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                Transferir
+                    
+                                            </div>
+                                          </th>      
+                                          <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                Usuario Registro
+                                                
+                                            </div>
+                                          </th>     
+                                          <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                Usuario Creo
+                    
+                                            </div>
+                                          </th> 
+                                          <th>
+                                            <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                                                Comentarios
+                                            </div>
+                                          </th>
+                                          <th>
+                                            <div style="width: 100px;" class="flex justify-content-center align-items-center">
+                                                Comentarios Ciber
+                                            </div>
+                                        </th>  
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                    <tr>
+                                        <td class="text-center">
+                                            {{item.numOrden }}
+                                        </td>
+                                        <td class="text-center">
+                                          {{item.cuenta}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.cn_generado}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.compania}}
+                                        </td>
+                                        <!-- <td class="text-center">
+                                            {{item.cve_usuario}}
+                                        </td> -->
+                                        <td class="text-center">
+                                          {{dateFormat(item.fechaCompletado)}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{dateFormat(item.fechaCreado)}} 
+                                        </td>
+
+                                        <td class="text-center">
+                                            {{dateFormat(item.fechaHoraCierre)}}
+                                        </td>
+
+                                        <td class="text-center">
+                                            {{dateFormat(item.fechaTecnico)}}
+                                        </td>
+
+                                        <td class="text-center">
+                                            {{item.hub}}
+                                        </td>
+                                        
+                                        <td class="text-center">
+                                            {{item.ip}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.lead_id}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.motivoOrden}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.nodo}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.nombreContacto}}
+                                        </td>
+                                        
+                                        <td class="text-center">
+                                            {{item.procesando == "1" ?"SI" :"NO"}}
+                                        </td>
+                                        
+                                        <td class="text-center">
+                                            {{item.quienResponde}}
+                                        </td>
+                                        
+                                        <td class="text-center">
+                                            {{item.region}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.rpt}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.source}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.status}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{dateFormat(item.time_carga)}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.tipo}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.transferir}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.user_registro}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.usuario_creo}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.comentarios}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{item.comentariosCyber}}
+                                        </td>
+                                        
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">Sin Datos para Mostrar.</td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="loadingbody">
+                                    <tr>
+                                        <td colspan="7">Cargando Datos, espere...</td>
+                                    </tr>
+                    
+                                </ng-template>
+                                <ng-template pTemplate="paginatorleft" let-state>
+                                    Mostrando {{(state.page  * state.rows) + 1}} a {{state.rows * (state.page + 1)}} de {{state.totalRecords}} registros.
+                              </ng-template>
+                            </p-table>
+                          </div>
+                        </div>
+                      </div>
+                </p-tabPanel>
+            </p-tabView>
+
         </div>
     </p-panel>
 </div> 

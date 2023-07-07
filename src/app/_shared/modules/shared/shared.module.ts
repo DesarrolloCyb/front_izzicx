@@ -54,6 +54,7 @@ import { TimelineModule } from 'primeng/timeline';
 import { CardModule } from 'primeng/card';
 import {FileUploadModule} from 'primeng/fileupload';
 import { ToolbarModule } from 'primeng/toolbar';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   imports: [ButtonModule,NgxMaskModule.forRoot(),],
@@ -120,6 +121,7 @@ import { ToolbarModule } from 'primeng/toolbar';
     CardModule,
 	FileUploadModule,
   ToolbarModule,
+  TabViewModule,
     //
 
     OnlyAlphabetsDirective,

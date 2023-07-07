@@ -111,7 +111,7 @@ export class BasesCanceladasComponent implements OnInit {
             // this.ExcelData[key]["fecha_hora_cierre"]=null;
             // this.ExcelData[key]["cn_generado"]=null;
             // this.ExcelData[key]["FechaCompletado"]=null;
-            this.ExcelData[key]["Fecha_Carga"]=moment(Date.now()).format('yyyy-MM-DD hh:mm:ss');
+            this.ExcelData[key]["Fecha_Carga"]=moment(Date.now()).format('yyyy-MM-DD HH:mm:ss');
             let aa =`${this.ExcelData[key]["Nº de cuenta"]}`;
             this.ExcelData[key]["Nº de cuenta"]=aa;
 

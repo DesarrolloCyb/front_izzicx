@@ -98,6 +98,7 @@ export class ReportesIzziDashComponent implements OnInit {
       }
     });
     
+    
   }
 
   getTipoReporte(){
