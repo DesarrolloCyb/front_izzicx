@@ -22,6 +22,9 @@ export class ConsultaMigracionesComponent implements OnInit {
   ngOnInit(): void {
     this.getTablaMigracionesLineales();
     this.statsMigracionesLineales();
+    setInterval(()=>{
+      this.statsMigracionesLineales();
+    },10000);
   }
 
 

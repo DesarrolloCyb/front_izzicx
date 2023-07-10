@@ -22,6 +22,9 @@ export class ConsultacasosNegocioSinValidacionComponent implements OnInit {
   ngOnInit(): void {
     this.getTablaCasosNegocio();
     this.statsCasosNegocio();
+    setInterval(()=>{
+      this.statsCasosNegocio();
+    },10000);
   }
 
 

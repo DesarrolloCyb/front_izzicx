@@ -34,9 +34,12 @@ export class PantallaConsultaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.statsBasesDepuradas()
+    this.statsBasesDepuradas();
     this.getTableBasesDepuradasCC();
     this.getTableBasesDepuradasEXT();
+    setInterval(()=>{
+      this.statsBasesDepuradas();
+    },10000);
   }
 
   // buscar(){

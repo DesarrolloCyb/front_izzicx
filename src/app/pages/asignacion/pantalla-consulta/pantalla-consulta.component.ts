@@ -26,6 +26,9 @@ export class PantallaConsultaComponent implements OnInit {
   ngOnInit(): void {
     this.getTableCasosNegocioCobranza();
     this.statsAjustesCasoNeogicoCobranza();
+    setInterval(()=>{
+      this.statsAjustesCasoNeogicoCobranza();      
+    },10000);
   }
 
   getTableCasosNegocioCobranza(){

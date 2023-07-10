@@ -39,7 +39,7 @@ export class ReportesIzziDashComponent implements OnInit {
   ngOnInit(): void {
     this.getTipoReporte();
   }
-
+  
   confirm2(event: Event) {
     this.confirmationService.confirm({
       key: 'confirm2',
@@ -48,6 +48,7 @@ export class ReportesIzziDashComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.button=true;
+        
         // console.log(this.formReporte)
         let fechaini = moment(this.formReporte.value.fechas[0]).format('YYYY-MM-DD');
         let fechafin = moment(this.formReporte.value.fechas[1]).format('YYYY-MM-DD');
@@ -83,15 +84,16 @@ export class ReportesIzziDashComponent implements OnInit {
           this.show = true;
           this.url1 = `https://rpabackizzi.azurewebsites.net/${url}?${para}`;
           this.messageService.add({ severity: 'info', summary: 'Generando', detail: 'Se ha generado el reporte' });
-  
+          this.button=false;
+          
         }).catch((error) => {
           console.log("Error",error)
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Intentalo mas tarde nuevamente!!!' });
+          this.button=false;
         })
         this.formReporte.controls['tipoReporte'].reset();
         this.formReporte.controls['fechas'].reset();
         this.show = false;
-        this.button=false;
       },
       reject: () => {
         this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'Reporte Cancelado' });

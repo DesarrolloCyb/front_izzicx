@@ -28,6 +28,9 @@ export class PantallaConsultaComponent implements OnInit {
   ngOnInit(): void {
     this.getTableAjustesyCambioServicio();
     this.getStatsAjustesyCambioServicio();
+    setInterval(()=>{
+      this.getStatsAjustesyCambioServicio();
+    },10000);
   }
 
   getTableAjustesyCambioServicio(){

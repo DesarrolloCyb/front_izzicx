@@ -24,6 +24,9 @@ export class PantallaConsultaComponent implements OnInit {
   ngOnInit(): void {
     this.getTablaNotDone();
     this.statsNotDone();
+    setInterval(()=>{
+      this.statsNotDone();
+    },10000);
   }
 
   getTablaNotDone(){

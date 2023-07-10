@@ -24,6 +24,9 @@ export class ConsultaSinValidacionComponent implements OnInit {
   ngOnInit(): void {
     this.statsAjustesBasesSinValidacion();
     this.getTableAjustesBasesSinValidacion();
+    setInterval(()=>{
+      this.getTableAjustesBasesSinValidacion();
+    },10000);
   }
 
 
