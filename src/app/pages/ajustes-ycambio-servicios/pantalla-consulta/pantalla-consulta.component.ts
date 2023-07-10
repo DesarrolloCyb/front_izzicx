@@ -68,6 +68,15 @@ export class PantallaConsultaComponent implements OnInit {
         this.stats=[];
 
       }else{
+        for (let i = 0; i < response.length; i++) {
+          const jsonObject = response[i];
+          for (let key in jsonObject) {
+            if (jsonObject.hasOwnProperty(key) && typeof jsonObject[key] === "object" && !Array.isArray(jsonObject[key])) {
+              jsonObject[key] = 0;
+            }
+          }
+        }      
+  
         this.stats=response;
       }
     })
