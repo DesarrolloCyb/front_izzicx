@@ -37,7 +37,7 @@
         >
         <ng-template pTemplate="option" let-option>
           <div class="dropdown-option">
-            <span>{{ option.horario }}-{{option.corteInicio}}-{{option.corteFin}}</span>
+            <span> <pre>{{ option.horario }}      {{option.corteInicio}}      {{option.corteFin}}</pre> </span>
             <div class="option-buttons">
               <button type="button" (click)="eliminar(option.id);$event.stopPropagation()" style="background-color: #FF7987; color: white; border-radius: 0.5rem;border: 0;" > <i class="pi pi-trash custom-icon"></i></button>
             </div>
