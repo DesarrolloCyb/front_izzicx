@@ -92,9 +92,7 @@ export class RobotsComponent implements OnInit {
     this.items = [{
       label: 'Actualizar', icon: 'pi pi-refresh', command: () => {
 
-
-
-        this.router.navigate([`/robots/editar/${this.opcionToAction.id}`])
+        this.router.navigate([`/robots/editar/${this.opcionToAction.botId}`])
 
       }
     },
@@ -157,8 +155,12 @@ export class RobotsComponent implements OnInit {
     let dif = moment().diff(moment(fecha),'days')
     if (isNaN(dif)) {
       return ''
+    }else{
+      let di = 60;
+      let result = di-dif
+      
+      return result
     }
-    return dif
   }
   selection(item: any, index: any) {
 
@@ -189,7 +191,8 @@ export class RobotsComponent implements OnInit {
 
     // TODO ERik: servicio para actualizar recibes el idRegistro y el IDproceso
 
-
+    console.log(item)
+    console.log(process)
     this.confirmationService.confirm({
       key: 'changeProcess',
       message: 'Esta seguro que desea cambiar el proceso?',
@@ -266,7 +269,7 @@ export class RobotsComponent implements OnInit {
     this.cors.getCommand(`http://${item.ipEquipo}:9000/process?id=${idProceso}&name=${proceso?.name_process || ''}&userId=${this.usuarioInfo.userID}&userName=${this.usuarioInfo.firstName || ''} ${this.usuarioInfo.lastName || ''} - ${this.usuarioInfo.email || ''}`).then((response) => {
       this.service.add({ key: 'tst', severity: 'success', summary: 'Correcto!!!', detail: `Se envio el cambio de proceso del Robot ${item.ipEquipo}` });
       item.sendingProcess = false
-      this.cors.put(`Bots/${item.id}` , {
+      this.cors.put(`Bots/ActualizarBot?id=${item}` , {
         "id": item.id,
         "ipEquipo": item.ipEquipo,
         "hostName": item.hostName,

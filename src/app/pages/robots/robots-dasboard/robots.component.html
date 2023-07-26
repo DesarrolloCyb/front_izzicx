@@ -97,11 +97,11 @@
 
                         </div>
                     </th>
-                    <th>
+                    <!-- <th>
                         <div class="flex justify-content-between align-items-center">
                             IP
                         </div>
-                    </th>
+                    </th> -->
                     <th>
                         <div class="flex justify-content-between align-items-center">
                             Contraseña
@@ -133,13 +133,13 @@
             <ng-template pTemplate="body" let-item let-i="rowIndex">
                 <tr>
                     <td>
-                        {{item.hostName}}
+                        {{item.botHostName}}
                     </td>
-                    <td>
+                    <!-- <td>
                         {{item.ipEquipo}}
-                    </td>
+                    </td> -->
                     <td>
-                       <strong *ngIf="getDays(item.fechaActualizacion) >60" style="color:red">  <strong *ngIf="getDays(item.fechaActualizacion) < 60"></strong>{{getDays(item.fechaActualizacion)}}</strong>  dias
+                       <strong *ngIf="getDays(item.procesoFechaActualizacion) <= 10" style="color:red">  {{getDays(item.procesoFechaActualizacion)}}</strong> <strong *ngIf="getDays(item.procesoFechaActualizacion) > 10">{{getDays(item.procesoFechaActualizacion)}}</strong> dias
                     </td>
 
                     <td>

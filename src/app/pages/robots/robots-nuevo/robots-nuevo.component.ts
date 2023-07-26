@@ -22,11 +22,11 @@ export class RobotsNuevoComponent implements OnInit {
     private cors: CorsService) {
     this.formNuevoBot = this.formBuilder.group({
       // ipEquipo: [null, [Validators.required, Validators.pattern('(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')]],
-      procesoId: [null, Validators.required],
+      procesoBotId: [null, Validators.required],
       comentarios: [null, Validators.required],
       hostName: [null, Validators.required],
-      usuarioBot: [null, Validators.required],
-      passwordBot: [null, Validators.required],
+      // usuarioBot: [null, Validators.required],
+      // passwordBot: [null, Validators.required],
 
     });
     this.getCats()
@@ -36,7 +36,7 @@ export class RobotsNuevoComponent implements OnInit {
 
   getCats() {
     this.cors.get('Bots/getCatProcesos').then((response) => {
-      console.log(response)
+      // console.log(response)
       if(response[0] == 'SIN INFO'){
         this.processArr = [];
       }else{
@@ -51,12 +51,12 @@ export class RobotsNuevoComponent implements OnInit {
     this.guardando = true
     this.formNuevoBot.markAllAsTouched()
     if (this.formNuevoBot.valid) {
-      this.formNuevoBot.patchValue({
-        procesoId:`${this.formNuevoBot.value.procesoId}`
-      });      
-      console.log(this.formNuevoBot.value)
+      // this.formNuevoBot.patchValue({
+      //   procesoId:`${this.formNuevoBot.value.procesoId}`
+      // });      
+      // console.log(this.formNuevoBot.value)
       this.cors.post('Bots/GuardarBots', this.formNuevoBot.value).then((response) => {
-        console.log(response);
+        // console.log(response);
         this.showToastSuccess('Maquina guardada correctamente.' );
         setTimeout(() => {
           this.router.navigate(["/robots"])

@@ -13,8 +13,10 @@ import { Subscription } from 'rxjs';
 export class RobotsEditarComponent implements OnInit, OnDestroy {
   private routeSub: Subscription;
   formNuevoBot: UntypedFormGroup;
-  processArr: any[] = []
-  guardando: boolean = false
+  processArr: any[] = [];
+  guardando: boolean = false;
+  item:any;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -23,63 +25,33 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
     private formBuilder: UntypedFormBuilder,
     private cors: CorsService) {
     this.formNuevoBot = this.formBuilder.group({
-      ipEquipo: [null, [Validators.required, Validators.pattern('(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')]],
+      hostName: [null, Validators.required],
+      // ipEquipo: [null, [Validators.required, Validators.pattern('(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')]],
       procesoId: [null, Validators.required],
       comentarios: [null, Validators.required],
-      hostName: [null, Validators.required],
       usuarioBot: [null, Validators.required],
       passwordBot: [null, Validators.required],
-      id: [null, Validators.required],
+      // id: [null, Validators.required],
     });
     this.getCats()
     this.routeSub = this.route.params.subscribe((params: any) => {
       // console.log(params);
-
       if (params['idRobot'] != undefined) {
-        this.cors
-          .get(`Bots/getBot`,{
-            "id": params['idRobot']
-          })
+        this.cors.get(`Bots/getBotById/${params['idRobot']}`)
           .then((response: any) => {
             // console.log(response);
-            if (response.length > 0) {
-              this.cors.get(`Bots/getCatalogoEdit`,{
-                "id": response[0].id
-              })
-              .then((response1: any) => {
-                // console.log(response1);
-                this.formNuevoBot.patchValue({
-                  ipEquipo: response[0].ipEquipo,
-                  procesoId: response1[0].id,
-                  comentarios: response[0].comentarios,
-                  hostName: response[0].hostName ,
-                  usuarioBot: response[0].usuarioBot,
-                  passwordBot: response[0].passwordBot,
-                  id: response[0].id,
-            
-                });
-  
-              })
-              .catch((error: any) => {
-                console.log(error);
-                // this.showToastError('No se encontraron datos de Robot')
-              });
-              // this.formNuevoBot.patchValue({
-              //   ipEquipo: response[0].ipEquipo,
-              //   procesoId: response[0].procesoID,
-              //   comentarios: response[0].comentarios,
-              //   hostName: response[0].hostName ,
-              //   usuarioBot: response[0].usuarioBot,
-              //   passwordBot: response[0].passwordBot,
-              //   id: response[0].id,
-          
-              // });
+            this.item=response;
+            this.formNuevoBot.patchValue({
+              hostName:response.botHostName,
+              procesoId:response.botProcesoId,
+              comentarios:response.botComentarios,
+              passwordBot:response.procesoPassword,
+              usuarioBot:response.procesoUser
+            });
 
-            }
           })
           .catch((error: any) => {
             console.log(error);
-
             this.showToastError('No se encontraron datos de Robot')
           });
       }
@@ -89,11 +61,24 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
   guardarBot() {
     this.guardando = true
     this.formNuevoBot.markAllAsTouched()
+    // console.log(this.formNuevoBot.value)
+    let a ={
+      "id": this.item.botId,
+      "comentarios": this.formNuevoBot.controls['comentarios'].value,
+      "hostName": this.formNuevoBot.controls['hostName'].value,
+      "fechaActualizacion": null,
+      "procesoBotId": this.formNuevoBot.controls['procesoId'].value,
+      "procesoBot": {
+        "id": this.formNuevoBot.controls['procesoId'].value,
+        "name_process": null,
+        "usuario": null,
+        "password": this.formNuevoBot.controls['passwordBot'].value,
+        "update_At": null,
+        "status": null
+      }
+    }
     if (this.formNuevoBot.valid) {
-      this.formNuevoBot.patchValue({
-        procesoId: this.formNuevoBot.value.procesoID,  
-      });
-      this.cors.put(`Bots/ActualizarBots?id=${this.formNuevoBot.value.id}`, this.formNuevoBot.value).then((response) => {
+      this.cors.put(`Bots/ActualizarBot?id=${this.item.botId}`, a).then((response) => {
 
         console.log(response);
         this.showToastSuccess('Datos Guardados')
@@ -111,9 +96,22 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
   getCats() {
     this.cors.get('Bots/getCatProcesos').then((response) => {
       // console.log(response);
-      this.processArr = response
-    }).catch((error) => {
+      if(response[0] == 'SIN INFO'){
+        this.processArr = [];
+      }else{
+        for(var b=0;b<response.length;b++){
+          if(response[b].status == "1"){
+            let bb = {
+              id:response[b].id,
+              name_process:response[b].name_process
+            }
+            this.processArr.push(bb)
+          }
+        }
+      }
 
+    }).catch((error) => {
+      console.log(error)
     })
   }
   ngOnInit(): void {

@@ -101,15 +101,9 @@
                     </th>
                     <th>
                         <div class="flex justify-content-center align-items-center">
-                            Procesando
+                            Estado Ajuste
                         </div>
-                    </th>
-                    <th>
-                        <div class="flex justify-content-center align-items-center">
-                            IP
-                        </div>
-                    </th>
-                  
+                    </th>                  
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item let-i="rowIndex">
@@ -142,11 +136,8 @@
                       {{item.status}}
                     </td>
                     <td class="text-center">
-                        {{item.procesando}}
+                        {{item.estatusAjuste}}
                     </td>
-                    <td class="text-center">
-                        {{item.ip}}
-                    </td>    
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
