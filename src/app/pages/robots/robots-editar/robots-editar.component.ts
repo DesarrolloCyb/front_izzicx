@@ -39,7 +39,7 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
       if (params['idRobot'] != undefined) {
         this.cors.get(`Bots/getBotById/${params['idRobot']}`)
           .then((response: any) => {
-            console.log(response);
+            // console.log(response);
             this.item=response;
             this.formNuevoBot.patchValue({
               hostName:response.botHostName,
@@ -82,7 +82,7 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
       }
       this.cors.put(`Bots/ActualizarBot?id=${this.item.botId}`, a).then((response) => {
 
-        console.log(response);
+        // console.log(response);
         this.showToastSuccess('Datos Guardados')
         setTimeout(() => {
           this.router.navigate(["/robots"])

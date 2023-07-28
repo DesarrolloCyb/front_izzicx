@@ -265,34 +265,47 @@ export class RobotsComponent implements OnInit {
     let proceso = this.processArr.find(item => item.id == idProceso)
     console.log(proceso.name_process);
 
-
-    this.cors.getCommand(`http://${item.ipEquipo}:9000/process?id=${idProceso}&name=${proceso?.name_process || ''}&userId=${this.usuarioInfo.userID}&userName=${this.usuarioInfo.firstName || ''} ${this.usuarioInfo.lastName || ''} - ${this.usuarioInfo.email || ''}`).then((response) => {
-      this.service.add({ key: 'tst', severity: 'success', summary: 'Correcto!!!', detail: `Se envio el cambio de proceso del Robot ${item.ipEquipo}` });
+    this.cors.put(`Bots/ActualizarBotProcess?id=${item.botId}` , 
+    {
+      "id": item.botId,
+      "comentarios": null,
+      "hostName": null,
+      "ip": null,
+      "fechaActualizacion": null,
+      "created_at": null,
+      "procesoBotId": idProceso,
+      "procesoBot": {
+        "id": idProceso,
+        "name_process": null,
+        "usuario": null,
+        "password": null,
+        "update_At": null,
+        "status": null
+      }
+    }
+    ).then((response) => {
       item.sendingProcess = false
-      this.cors.put(`Bots/ActualizarBot?id=${item}` , {
-        "id": item.id,
-        "ipEquipo": item.ipEquipo,
-        "hostName": item.hostName,
-        "procesoId": idProceso,
-        "comentarios": item.comentarios
-      }).then((response) => {
-        item.sendingProcess = false
 
-        this.showToastSuccess(`Se guardo el cambio de proceso del Robot ${item.ipEquipo}`)
-      }).catch((error) => {
-        console.log(error);
-        item.sendingProcess = false
-
-        this.showToastError(`No se logro guardar el proceso del Robot ${item.ipEquipo}`)
-
-      })
-
+      this.showToastSuccess(`Se guardo el cambio de proceso del Robot ${item.botIp}`)
     }).catch((error) => {
       console.log(error);
       item.sendingProcess = false
-      this.showToastError(`No se logro enviar el proceso del Robot ${item.ipEquipo}`)
+      this.showToastError(`No se logro guardar el proceso del Robot ${item.botIp}`)
 
     })
+
+    // this.cors.getCommand(`http://${item.ipEquipo}:9000/process?id=${idProceso}&name=${proceso?.name_process || ''}&userId=${this.usuarioInfo.userID}&userName=${this.usuarioInfo.firstName || ''} ${this.usuarioInfo.lastName || ''} - ${this.usuarioInfo.email || ''}`).then((response) => {
+    //   this.service.add({ key: 'tst', severity: 'success', summary: 'Correcto!!!', detail: `Se envio el cambio de proceso del Robot ${item.ipEquipo}` });
+    //   item.sendingProcess = false
+
+
+    // }).catch((error) => {
+    //   console.log(error);
+    //   item.sendingProcess = false
+    //   this.showToastError(`No se logro enviar el proceso del Robot ${item.ipEquipo}`)
+
+    // })
+
   }
 
   adddListeners() {
