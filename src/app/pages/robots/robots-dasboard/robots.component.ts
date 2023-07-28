@@ -285,6 +285,7 @@ export class RobotsComponent implements OnInit {
     }
     ).then((response) => {
       item.sendingProcess = false
+      this.buscaBots()
 
       this.showToastSuccess(`Se guardo el cambio de proceso del Robot ${item.botIp}`)
     }).catch((error) => {
