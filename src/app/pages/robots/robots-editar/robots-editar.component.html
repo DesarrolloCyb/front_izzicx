@@ -40,7 +40,7 @@
         <span class="p-float-label">
           <input
             [ngClass]="{'ng-invalid ng-dirty': formNuevoBot.get('usuarioBot')?.errors != null && formNuevoBot.get('usuarioBot')?.touched == true}"
-            type="text" pInputText toUpperCase formControlName="usuarioBot">
+            type="text" pInputText formControlName="usuarioBot">
           <label>Usuario</label>
         </span>
 
@@ -50,7 +50,7 @@
         <span class="p-float-label">
           <input
             [ngClass]="{'ng-invalid ng-dirty': formNuevoBot.get('passwordBot')?.errors != null && formNuevoBot.get('passwordBot')?.touched == true}"
-            type="text" pInputText toUpperCase formControlName="passwordBot">
+            type="text" pInputText formControlName="passwordBot">
           <label>Password</label>
         </span>
 
