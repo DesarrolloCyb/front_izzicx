@@ -26,7 +26,8 @@ export class PantallaConsultaComponent implements OnInit {
     this.statsNotDone();
     setInterval(()=>{
       this.statsNotDone();
-    },10000);
+      this.getTablaNotDone();
+    },60000);
   }
 
   getTablaNotDone(){

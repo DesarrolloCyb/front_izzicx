@@ -4,10 +4,12 @@ import {
     HttpClient,
     HttpParams,
     HttpErrorResponse,
+    HttpHeaders
 } from '@angular/common/http';
 
 import 'rxjs/operators';
 import { environment } from 'environments/environment';
+import { timeout } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -40,11 +42,36 @@ export class CorsService {
         const params = new HttpParams({
             fromObject: dataGet,
         });
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            // Aquí agregamos los headers para evitar problemas de CORS
+            'Access-Control-Allow-Origin': 'https://rpabackizzi.azurewebsites.net/', // Reemplaza con el dominio de tu frontend
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          });
+
+        return this.httpClient
+            .get(`${environment.API_URL}${partUrl}?${params}`,{
+                headers:headers,
+                responseType:'blob'
+            })
+            // .pipe(
+            //     timeout(600000)
+            // )
+            .toPromise();
+    }
+    get2(partUrl: string, dataGet: any = {}): Promise<any> {
+        const params = new HttpParams({
+            fromObject: dataGet,
+        });
 
         return this.httpClient
             .get(`${environment.API_URL}${partUrl}?${params}`,{
                 responseType:'blob'
             })
+            // .pipe(
+            //     timeout(600000)
+            // )
             .toPromise();
     }
 

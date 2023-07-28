@@ -25,8 +25,9 @@ export class ConsultaSinValidacionComponent implements OnInit {
     this.statsAjustesBasesSinValidacion();
     this.getTableAjustesBasesSinValidacion();
     setInterval(()=>{
+      this.statsAjustesBasesSinValidacion();
       this.getTableAjustesBasesSinValidacion();
-    },10000);
+    },60000);
   }
 
 

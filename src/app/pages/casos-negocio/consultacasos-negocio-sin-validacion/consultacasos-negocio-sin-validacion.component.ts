@@ -24,7 +24,8 @@ export class ConsultacasosNegocioSinValidacionComponent implements OnInit {
     this.statsCasosNegocio();
     setInterval(()=>{
       this.statsCasosNegocio();
-    },10000);
+      this.getTablaCasosNegocio();
+    },60000);
   }
 
 

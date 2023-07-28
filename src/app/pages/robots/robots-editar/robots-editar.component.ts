@@ -26,7 +26,7 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
     private cors: CorsService) {
     this.formNuevoBot = this.formBuilder.group({
       hostName: [null, Validators.required],
-      // ipEquipo: [null, [Validators.required, Validators.pattern('(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')]],
+      ip: [null, [Validators.required, Validators.pattern('(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')]],
       procesoId: [null, Validators.required],
       comentarios: [null, Validators.required],
       usuarioBot: [null, Validators.required],
@@ -39,14 +39,15 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
       if (params['idRobot'] != undefined) {
         this.cors.get(`Bots/getBotById/${params['idRobot']}`)
           .then((response: any) => {
-            // console.log(response);
+            console.log(response);
             this.item=response;
             this.formNuevoBot.patchValue({
               hostName:response.botHostName,
               procesoId:response.botProcesoId,
               comentarios:response.botComentarios,
               passwordBot:response.procesoPassword,
-              usuarioBot:response.procesoUser
+              usuarioBot:response.procesoUser,
+              ip:response.botIp
             });
 
           })
@@ -62,22 +63,23 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
     this.guardando = true
     this.formNuevoBot.markAllAsTouched()
     // console.log(this.formNuevoBot.value)
-    let a ={
-      "id": this.item.botId,
-      "comentarios": this.formNuevoBot.controls['comentarios'].value,
-      "hostName": this.formNuevoBot.controls['hostName'].value,
-      "fechaActualizacion": null,
-      "procesoBotId": this.formNuevoBot.controls['procesoId'].value,
-      "procesoBot": {
-        "id": this.formNuevoBot.controls['procesoId'].value,
-        "name_process": null,
-        "usuario": null,
-        "password": this.formNuevoBot.controls['passwordBot'].value,
-        "update_At": null,
-        "status": null
-      }
-    }
     if (this.formNuevoBot.valid) {
+      let a ={
+        "id": this.item.botId,
+        "comentarios": this.formNuevoBot.controls['comentarios'].value,
+        "hostName": this.formNuevoBot.controls['hostName'].value,
+        "ip": null,
+        "fechaActualizacion": null,
+        "procesoBotId": this.formNuevoBot.controls['procesoId'].value,
+        "procesoBot": {
+          "id": this.formNuevoBot.controls['procesoId'].value,
+          "name_process": null,
+          "usuario": null,
+          "password": this.formNuevoBot.controls['passwordBot'].value,
+          "update_At": null,
+          "status": null
+        }
+      }
       this.cors.put(`Bots/ActualizarBot?id=${this.item.botId}`, a).then((response) => {
 
         console.log(response);
@@ -92,6 +94,7 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
         this.showToastError('No se lograron guardadar los datos de Robot')
       })
     }
+    this.guardando = false
   }
   getCats() {
     this.cors.get('Bots/getCatProcesos').then((response) => {

@@ -168,7 +168,7 @@ export class DashboardDepuracionComponent implements OnInit {
 		this.archivoSeleccionado = archivo;
 		this.loading2 = true;
 	
-		this.cors.get1(`EjecucionDepuracion/BajarExcelFTPExtraccionesDepuracion`,{
+		this.cors.get2(`EjecucionDepuracion/BajarExcelFTPExtraccionesDepuracion`,{
 		  "nombre":archivo
 		})
 		.then((response) => {

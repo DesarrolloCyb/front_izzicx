@@ -28,7 +28,8 @@ export class PantallaConsultaComponent implements OnInit {
     this.statsAjustesCasoNeogicoCobranza();
     setInterval(()=>{
       this.statsAjustesCasoNeogicoCobranza();      
-    },10000);
+      this.getTableCasosNegocioCobranza();
+    },60000);
   }
 
   getTableCasosNegocioCobranza(){

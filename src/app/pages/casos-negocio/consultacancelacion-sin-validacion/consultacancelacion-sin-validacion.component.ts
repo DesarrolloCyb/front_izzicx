@@ -24,7 +24,8 @@ export class ConsultacancelacionSinValidacionComponent implements OnInit {
     this.statsCancelacion();
     setInterval(()=>{
       this.statsCancelacion();
-    },10000);
+      this.getTablaCancelacion();
+    },60000);
 
   }
 

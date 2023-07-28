@@ -104,7 +104,12 @@
                     </th> -->
                     <th>
                         <div class="flex justify-content-between align-items-center">
-                            Contraseña
+                            Tiempo de Expiración
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            IP
                         </div>
                     </th>
                     <th>
@@ -141,6 +146,9 @@
                     <td>
                        <strong *ngIf="getDays(item.procesoFechaActualizacion) <= 10" style="color:red">  {{getDays(item.procesoFechaActualizacion)}}</strong> <strong *ngIf="getDays(item.procesoFechaActualizacion) > 10">{{getDays(item.procesoFechaActualizacion)}}</strong> dias
                     </td>
+                    <td>
+                        {{ item.botIp }}
+                     </td> 
 
                     <td>
 

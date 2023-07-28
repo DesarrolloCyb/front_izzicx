@@ -48,7 +48,7 @@ export class ReportesIzziDashComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.button=true;
-        this.show = false;
+        // this.show = false;
         // console.log(this.formReporte)
         let fechaini = moment(this.formReporte.value.fechas[0]).format('YYYY-MM-DD');
         let fechafin = moment(this.formReporte.value.fechas[1]).format('YYYY-MM-DD');
@@ -103,7 +103,7 @@ export class ReportesIzziDashComponent implements OnInit {
         })
         this.formReporte.controls['tipoReporte'].reset();
         this.formReporte.controls['fechas'].reset();
-        // this.show = false;
+        this.show = false;
       },
       reject: () => {
         this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'Reporte Cancelado' });
