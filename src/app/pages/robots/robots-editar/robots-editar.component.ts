@@ -68,13 +68,13 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
         "id": this.item.botId,
         "comentarios": this.formNuevoBot.controls['comentarios'].value,
         "hostName": this.formNuevoBot.controls['hostName'].value,
-        "ip": null,
+        "ip": this.formNuevoBot.controls['ip'],
         "fechaActualizacion": null,
         "procesoBotId": this.formNuevoBot.controls['procesoId'].value,
         "procesoBot": {
           "id": this.formNuevoBot.controls['procesoId'].value,
           "name_process": null,
-          "usuario": null,
+          "usuario": this.formNuevoBot.controls['usuarioBot'],
           "password": this.formNuevoBot.controls['passwordBot'].value,
           "update_At": null,
           "status": null
