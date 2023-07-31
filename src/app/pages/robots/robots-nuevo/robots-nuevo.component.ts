@@ -40,8 +40,15 @@ export class RobotsNuevoComponent implements OnInit {
       if(response[0] == 'SIN INFO'){
         this.processArr = [];
       }else{
-        this.processArr = response
-      }
+        for(var b=0;b<response.length;b++){
+          if(response[b].status == "1"){
+            let bb = {
+              id:response[b].id,
+              name_process:response[b].name_process
+            }
+            this.processArr.push(bb)
+          }
+        }      }
     }).catch((error) => {
       console.log(error)
 

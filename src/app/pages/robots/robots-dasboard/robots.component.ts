@@ -118,7 +118,7 @@ export class RobotsComponent implements OnInit {
   preguntarEliminar() {
     this.confirmationService.confirm({
       key: 'deleteBot',
-      message: `Esta seguro que desea eliminar el Robot <strong>${this.opcionToAction.hostName}</strong>(${this.opcionToAction.ipEquipo}) ?`,
+      message: `Esta seguro que desea eliminar el Robot <strong>${this.opcionToAction.botHostName}</strong>(${this.opcionToAction.botIp}) ?`,
       accept: () => {
         this.deleteMAquina()
 
@@ -177,13 +177,33 @@ export class RobotsComponent implements OnInit {
 
 
   deleteMAquina() {
-    this.cors.delete(`Bots/EliminarDataBots/${this.opcionToAction.id}`, this.opcionToAction).then((response) => {
+    console.log(this.opcionToAction)
+
+    this.cors.delete(`Bots/EliminarBot?id=${this.opcionToAction.botId}`, 
+      {
+        "id": this.opcionToAction.botId,
+        "comentarios": null,
+        "hostName": null,
+        "ip": null,
+        "fechaActualizacion": null,
+        "created_at": null,
+        "procesoBotId": this.opcionToAction.procesoId,
+        "procesoBot": {
+          "id": this.opcionToAction.procesoId,
+          "name_process": null,
+          "usuario": null,
+          "password": null,
+          "update_At": null,
+          "status": null
+        }
+      }
+    ).then((response) => {
       console.log(response);
       this.dataSource.splice(this.opcionIndex, 1)
-      this.showToastSuccess(`Se elimino el robot ${this.opcionToAction.hostName} correctamente.`)
+      this.showToastSuccess(`Se elimino el robot ${this.opcionToAction.botHostName} correctamente.`)
     }).catch((error) => {
       console.log(error);
-      this.showToastError(`No se logro eliminar el robot ${this.opcionToAction.hostName}`)
+      this.showToastError(`No se logro eliminar el robot ${this.opcionToAction.botHostName}`)
 
     })
   }
@@ -191,8 +211,8 @@ export class RobotsComponent implements OnInit {
 
     // TODO ERik: servicio para actualizar recibes el idRegistro y el IDproceso
 
-    console.log(item)
-    console.log(process)
+    // console.log(item)
+    // console.log(process)
     this.confirmationService.confirm({
       key: 'changeProcess',
       message: 'Esta seguro que desea cambiar el proceso?',
@@ -263,7 +283,7 @@ export class RobotsComponent implements OnInit {
     item.sendingProcess = true
 
     let proceso = this.processArr.find(item => item.id == idProceso)
-    console.log(proceso.name_process);
+    // console.log(proceso.name_process);
 
     this.cors.put(`Bots/ActualizarBotProcess?id=${item.botId}` , 
     {

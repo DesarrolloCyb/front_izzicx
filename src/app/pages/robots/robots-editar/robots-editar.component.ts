@@ -62,19 +62,18 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
   guardarBot() {
     this.guardando = true
     this.formNuevoBot.markAllAsTouched()
-    // console.log(this.formNuevoBot.value)
     if (this.formNuevoBot.valid) {
       let a ={
         "id": this.item.botId,
         "comentarios": this.formNuevoBot.controls['comentarios'].value,
         "hostName": this.formNuevoBot.controls['hostName'].value,
-        "ip": this.formNuevoBot.controls['ip'],
+        "ip": this.formNuevoBot.controls['ip'].value,
         "fechaActualizacion": null,
         "procesoBotId": this.formNuevoBot.controls['procesoId'].value,
         "procesoBot": {
           "id": this.formNuevoBot.controls['procesoId'].value,
           "name_process": null,
-          "usuario": this.formNuevoBot.controls['usuarioBot'],
+          "usuario": this.formNuevoBot.controls['usuarioBot'].value,
           "password": this.formNuevoBot.controls['passwordBot'].value,
           "update_At": null,
           "status": null
