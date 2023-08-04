@@ -35,11 +35,11 @@ export class MenuComponent implements OnInit {
           icon: 'pi pi-fw pi-external-link',
           routerLink: ['/extraccion'],
         },
-        // {
-        //   label: 'Solicitud de Cancelación',
-        //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturas/solicitud-cancelacion'],
-        // },
+        {
+          label: 'Extracciones Automatizadas',
+          icon: 'pi pi-fw pi-exclamation-triangle',
+          routerLink: ['/extraccion/automatizados'],
+        },
         // {
         //   label: 'Reactivación',
         //   icon: 'pi pi-fw pi-exclamation-triangle',
@@ -496,7 +496,7 @@ export class MenuComponent implements OnInit {
     //   "COORDINADOR ATENCION CC MX":['home','reportes'],
     //   "ASESOR ATENCION CC MX":['home','reportes'],
     //   "EJECUTIVO ATENCION A CLIENTE":['capturasA'],
-    //   "ASESOR RETENCION VETV":['home','reportes'],
+    //   "ASESOR RETENCION VETV":['home','reportes'],http://localhost:4200/extraccion
     //   "GERENTE RETENCION INBOUND":['home','capturasR','capturasA','robots','reportes','usuarios'],
     //   "SUPERVISOR RETENCION WEB":['home','capturasR','reportes'],
     //   "SUPERVISOR RETENCION INBOUND VETV":['home','capturasR','reportes'],

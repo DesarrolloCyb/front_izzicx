@@ -37,6 +37,17 @@ export class CorsService {
             // .get(`${environment.API_URL}${partUrl}`)
             .toPromise();
     }
+    get3(partUrl: string, dataGet: any = {}): Promise<any> {
+        const params = new HttpParams({
+            fromObject: dataGet,
+        });
+
+        return this.httpClient
+            .get(`http://192.168.61.19:2000/`)
+            // .get(`${environment.API_URL}${partUrl}`)
+            .toPromise();
+    }
+
 
     get1(partUrl: string, dataGet: any = {}): Promise<any> {
         const params = new HttpParams({

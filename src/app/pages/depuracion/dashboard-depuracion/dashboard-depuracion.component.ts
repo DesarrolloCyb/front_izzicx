@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { CorsService } from '@services';
 import * as moment from 'moment';
 moment.lang('es');
@@ -27,7 +28,7 @@ export class DashboardDepuracionComponent implements OnInit {
 	nuevo:boolean=false;
   
   
-	constructor(private cors: CorsService,private messageService: MessageService) {
+	constructor(private cors: CorsService,private messageService: MessageService,private http:HttpClient) {
 		
 	}
 
@@ -271,6 +272,15 @@ export class DashboardDepuracionComponent implements OnInit {
 			}
 	}
 	
-
+	async con(){
+		// http://192.168.61.19:2000/
+		this.cors.get3('')
+		.then((response) => {
+			console.log(response)
+		})
+		.catch((error) => {
+			console.log(error)
+		});
+	}
 
 }
