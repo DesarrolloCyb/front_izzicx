@@ -8,6 +8,7 @@ import { AutomatizadosComponent } from './automatizados/automatizados.component'
 import { SharedModule } from 'app/_shared/modules/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SafeUrlPipe } from './safeUrl.pipe';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SafeUrlPipe } from './safeUrl.pipe';
     ExtraccionRoutingModule,
 	  SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DividerModule
   ]
 })
 export class ExtraccionModule { }

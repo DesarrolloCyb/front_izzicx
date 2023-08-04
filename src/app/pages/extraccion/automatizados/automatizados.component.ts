@@ -23,6 +23,7 @@ export class AutomatizadosComponent implements OnInit {
   formExtraccion:UntypedFormGroup;
   spinner:boolean=false;
   datosExtraccion:any[]=[];
+  datosExtraccion2:any[]=[];
   loading: boolean = false
   show:boolean=false;
   url1:any;
@@ -87,8 +88,10 @@ export class AutomatizadosComponent implements OnInit {
 
   ngOnInit(): any {
     this.tablaExtraccion();
+    this.tablaExtraccion2();
     setInterval(() => {
       this.tablaExtraccion();
+      this.tablaExtraccion2();
     }, 5000);
     
   }
@@ -362,6 +365,43 @@ export class AutomatizadosComponent implements OnInit {
         }
         
         this.datosExtraccion = response;
+
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+      this.messageService.add({
+        key:'tst',
+        severity: 'error',
+        summary: 'No se logro mostrar los datos',
+        detail: 'Intenta Nuevamente!!!',
+      });
+    });
+  }
+
+  tablaExtraccion2(){
+    this.cors.get('Reporte/getmostrarTablaExtraccionAutomatizados2',{})
+    .then((response) => {
+      // console.log(response)
+      if(response[0] == "SIN INFO"){
+        // this.messageService.add({
+        //   key:'tst',
+        //   severity: 'error',
+        //   summary: 'No hay datos !!',
+        //   detail: 'Intenta Nuevamente!!!',
+        // });
+      }else{
+        // for(let i = 0 ; i<response.length;i++){
+        //   if(response[i].procesando && response[i].procesando=="1"){
+        //     response[i].procesando="Si"
+        //   }else{
+        //     response[i].procesando="No"
+        //   }
+        //   const jsonArray = JSON.parse(response[i].parametrosExtraccion);
+        //   response[i].parametrosExtraccion = jsonArray;
+        // }
+        
+        this.datosExtraccion2 = response;
 
       }
     })

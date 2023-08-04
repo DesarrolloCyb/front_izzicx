@@ -55,6 +55,7 @@ import { CardModule } from 'primeng/card';
 import {FileUploadModule} from 'primeng/fileupload';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TabViewModule } from 'primeng/tabview';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   imports: [ButtonModule,NgxMaskModule.forRoot(),],
@@ -122,6 +123,7 @@ import { TabViewModule } from 'primeng/tabview';
 	FileUploadModule,
   ToolbarModule,
   TabViewModule,
+  AccordionModule,
     //
 
     OnlyAlphabetsDirective,
