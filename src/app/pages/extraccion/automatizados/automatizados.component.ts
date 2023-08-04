@@ -481,8 +481,8 @@ export class AutomatizadosComponent implements OnInit {
     let nuevaH = moment(this.nuevaHora).format("HH:mm:00")
     let nuevaV = moment(this.nuevaHora).format("HH:mm")
     let a= null;
-    console.log("Viejo",viejo)
-    console.log("nuevo",nuevaV)
+    // console.log("Viejo",viejo)
+    // console.log("nuevo",nuevaV)
     if(nuevaV=='Fecha inválida'){
       let b = viejo.split(":");
       a=b[0];
@@ -490,10 +490,10 @@ export class AutomatizadosComponent implements OnInit {
       let b= nuevaV.split(":");
       a=b[0]
     }
-    console.log(a)
+    // console.log(a)
     this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramada`,{hora:a,id:this.id})
     .then((response) => {
-      console.log(response)
+      // console.log(response)
       let z=null;
       if(nuevaH == 'Fecha inválida'){
         z=viejo+":00"
@@ -517,7 +517,7 @@ export class AutomatizadosComponent implements OnInit {
           }
         )
           .then((response) => {
-            console.log(response)
+            // console.log(response)
             this.messageService.add({
               key:'tst',
               severity: 'success',
