@@ -149,35 +149,63 @@ export class AutomatizadosComponent implements OnInit {
       //   data.parametrosExtraccion =`[{"vencimiento":"${this.formExtraccion.controls['vencimiento'].value ? this.formExtraccion.controls['vencimiento'].value : ""}","FallaGeneralAsociada":"${this.formExtraccion.controls['FallaGeneralAsociada'].value ? this.formExtraccion.controls['FallaGeneralAsociada'].value :""}","categoria":"${this.formExtraccion.controls['categoria'].value ? this.formExtraccion.controls['categoria'].value :""}","motivo":"${this.formExtraccion.controls['motivo'].value ? this.formExtraccion.controls['motivo'].value :""}","subMotivo":"${this.formExtraccion.controls['subMotivo'].value ? this.formExtraccion.controls['subMotivo'].value :""}","solucion":"${this.formExtraccion.controls['solucion'].value ? this.formExtraccion.controls['solucion'].value:""}","tecnologia":"${this.formExtraccion.controls['tecnologia'].value ? this.formExtraccion.controls['tecnologia'].value:""}","estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value:""}","hub":"${this.formExtraccion.controls['hub'].value ? this.formExtraccion.controls['hub'].value:""}","rama":"${this.formExtraccion.controls['rama'].value ? this.formExtraccion.controls['rama'].value:""}","nodo":"${this.formExtraccion.controls['nodo'].value ? this.formExtraccion.controls['nodo'].value:""}","fiberDeep":"${this.formExtraccion.controls['fiberDeep'].value ? this.formExtraccion.controls['fiberDeep'].value:""}","fechaInicio":"${this.formExtraccion.controls['fechaInicio'].value ? this.dateFormat(this.formExtraccion.controls['fechaInicio'].value):""}","nombreHub":"${this.formExtraccion.controls['nombreHub'].value ? this.formExtraccion.controls['nombreHub'].value:""}","Incidente":"${this.formExtraccion.controls['Incidente'].value ? this.formExtraccion.controls['Incidente'].value:""}","numOrden":"${this.formExtraccion.controls['numOrden'].value ? this.formExtraccion.controls['numOrden'].value:""}"}]`;
       // }
       // console.log(data)
-      // console.log(this.formExtraccion)
-      this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizados',data)
+      // console.log(moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH"))
+
+      this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramada2`,{hora:moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH")})
       .then((response) => {
         // console.log(response)
-        this.messageService.add({
-          key: 'tst',
-          severity: 'success',
-          summary: 'Exito!!!',
-          detail: 'Datos guardados',
-        });
+        if(response[0] == 'SIN INFO'){
+          this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizados',data)
+            .then((response) => {
+              // console.log(response)
+              this.messageService.add({
+                key: 'tst',
+                severity: 'success',
+                summary: 'Exito!!!',
+                detail: 'Datos guardados',
+              });
+            })
+            .catch((error) => {
+              console.log(error)
+              this.messageService.add({
+                key:'tst',
+                severity: 'error',
+                summary: 'No se logro guardar',
+                detail: 'Intenta Nuevamente!!!',
+              });
+            });
+            
+            setTimeout(() => {
+              this.spinner = false;
+              this.tablaExtraccion();
+              this.reset()
+              // this.router.navigate(['/extraccion/visualizacion']);
+              
+            }, 3000);
+
+        }else{
+          this.spinner=false;
+          this.messageService.add({
+            key:'tst',
+            severity: 'error',
+            summary: 'Ya existe este horario!!',
+            detail: 'Intenta Nuevamente!!!',
+          });
+  
+        }
+      
+   
       })
       .catch((error) => {
         console.log(error)
         this.messageService.add({
           key:'tst',
           severity: 'error',
-          summary: 'No se logro guardar',
+          summary: 'No se logro editar!!',
           detail: 'Intenta Nuevamente!!!',
         });
       });
-      
-      setTimeout(() => {
-        this.spinner = false;
-        this.tablaExtraccion();
-        this.reset()
-        // this.router.navigate(['/extraccion/visualizacion']);
-        
-      }, 3000);
-      
+
     }else{
       
       this.messageService.add({
