@@ -127,7 +127,7 @@ export class AutomatizadosComponent implements OnInit {
         
         // var myObject = JSON.parse(data.parametrosExtraccion);
         // console.log(myObject)
-      }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Casos de negocio"){http://localhost:4200/
+      }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Casos de negocio"){
         // console.log("Casos de negocio")
         data.parametrosExtraccion =`[{"fechaApertura":">='${this.formExtraccion.controls['fechaApertura'].value ? this.dateFormatDate(this.formExtraccion.controls['fechaApertura'].value[0]):"null" }' AND <= '${this.formExtraccion.controls['fechaApertura'].value ? this.dateFormatDate(this.formExtraccion.controls['fechaApertura'].value[1]):"null"}'","estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","cuenta":"${this.formExtraccion.controls['cuenta'].value ? this.formExtraccion.controls['cuenta'].value :""}","medioContacto":"${this.formExtraccion.controls['medioContacto'].value ? this.formExtraccion.controls['medioContacto'].value :""}","casoNegocio":"${this.formExtraccion.controls['casoNegocio'].value ? this.formExtraccion.controls['casoNegocio'].value :""}","categoria":"${this.formExtraccion.controls['categoria'].value ? this.formExtraccion.controls['categoria'].value :""}","motivo":"${this.formExtraccion.controls['motivo'].value ? this.formExtraccion.controls['motivo'].value:""}","subMotivo":"${this.formExtraccion.controls['subMotivo'].value ? this.formExtraccion.controls['subMotivo'].value :""}","solucion":"${this.formExtraccion.controls['solucion'].value ? this.formExtraccion.controls['solucion'].value :""}","motivoCliente":"${this.formExtraccion.controls['motivoCliente'].value ? this.formExtraccion.controls['motivoCliente'].value :""}"}]`;
       }else if(this.formExtraccion.controls['tipoExtraccion'].value === "Actividades"){
@@ -361,12 +361,43 @@ export class AutomatizadosComponent implements OnInit {
             response[i].procesando="No"
           }
           if(response[i].parametrosExtraccion){
-            const modifiedString = response[i].parametrosExtraccion.replace(/"subMotivo":"(.*?)",/g, (match:any, p1:any) => {
+            const modifiedString = response[i].parametrosExtraccion
+            .replace(/"subMotivo":"(.*?)",/g, (match:any, p1:any) => {
               const modifiedSubMotivo = p1.replace(/"/g, '\\"');
               return `"subMotivo":"${modifiedSubMotivo}",`;
             }).replace(/"solucion":"(.*?)",/g, (match:any, p1:any) => {
               const modifiedSolucion = p1.replace(/"/g, '\\"');
               return `"solucion":"${modifiedSolucion}",`;
+            }).replace(/"estado":"(.*?)",/g, (match:any, p1:any) => {
+              const modifiedestado = p1.replace(/"/g, '\\"');
+              return `"estado":"${modifiedestado}",`;
+            }).replace(/"cuenta":"(.*?)",/g, (match:any, p1:any) => {
+              const modifiedcuenta = p1.replace(/"/g, '\\"');
+              return `"cuenta":"${modifiedcuenta}",`;
+            }).replace(/"medioContacto":"(.*?)",/g, (match:any, p1:any) => {
+              const modifiedmedioContacto = p1.replace(/"/g, '\\"');
+              return `"medioContacto":"${modifiedmedioContacto}",`;
+            }).replace(/"categoria":"(.*?)",/g, (match:any, p1:any) => {
+              const modifiedcategoria = p1.replace(/"/g, '\\"');
+              return `"categoria":"${modifiedcategoria}",`;
+            }).replace(/"motivo":"(.*?)",/g, (match:any, p1:any) => {
+              const modifiedmotivo = p1.replace(/"/g, '\\"');
+              return `"motivo":"${modifiedmotivo}",`;
+            }).replace(/"motivoCliente":"(.*?)",/g, (match:any, p1:any) => {
+              const modifiedmotivoCliente = p1.replace(/"/g, '\\"');
+              return `"motivoCliente":"${modifiedmotivoCliente}",`;
+            }).replace(/"tipo":"(.*?)",/g, (match:any, p1:any) => {
+              const modifiedtipo = p1.replace(/"/g, '\\"');
+              return `"tipo":"${modifiedtipo}",`;
+            }).replace(/"areaConocimiento":"(.*?)",/g, (match:any, p1:any) => {
+              const modifiedareaConocimiento = p1.replace(/"/g, '\\"');
+              return `"areaConocimiento":"${modifiedareaConocimiento}",`;
+            }).replace(/"compania":"(.*?)",/g, (match:any, p1:any) => {
+              const modifiedcompania = p1.replace(/"/g, '\\"');
+              return `"compania":"${modifiedcompania}",`;
+            }).replace(/"tipoOrden":"(.*?)",/g, (match:any, p1:any) => {
+              const modifiedtipoOrden = p1.replace(/"/g, '\\"');
+              return `"tipoOrden":"${modifiedtipoOrden}",`;
             });            
             let jsonArray = JSON.parse(modifiedString);
             // console.log(jsonArray)
