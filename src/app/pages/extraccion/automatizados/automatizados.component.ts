@@ -360,11 +360,23 @@ export class AutomatizadosComponent implements OnInit {
           }else{
             response[i].procesando="No"
           }
-          const jsonArray = JSON.parse(response[i].parametrosExtraccion);
-          response[i].parametrosExtraccion = jsonArray;
+          if(response[i].parametrosExtraccion){
+            const modifiedString = response[i].parametrosExtraccion.replace(/"subMotivo":"(.*?)",/g, (match:any, p1:any) => {
+              const modifiedSubMotivo = p1.replace(/"/g, '\\"');
+              return `"subMotivo":"${modifiedSubMotivo}",`;
+            }).replace(/"solucion":"(.*?)",/g, (match:any, p1:any) => {
+              const modifiedSolucion = p1.replace(/"/g, '\\"');
+              return `"solucion":"${modifiedSolucion}",`;
+            });            
+            let jsonArray = JSON.parse(modifiedString);
+            // console.log(jsonArray)
+            response[i].parametrosExtraccion = jsonArray;
+
+          }
         }
         
         this.datosExtraccion = response;
+        
 
       }
     })
