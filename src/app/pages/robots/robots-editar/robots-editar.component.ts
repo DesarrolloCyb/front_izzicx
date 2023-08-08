@@ -114,7 +114,7 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
 
     }).catch((error) => {
       console.log(error)
-    })
+    });
   }
   ngOnInit(): void {
   }
@@ -127,4 +127,23 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
   showToastError(mensaje: any) {
     this.service.add({ key: 'tst', severity: 'error', summary: 'Correcto!!', detail: mensaje, });
   }
+
+  changeProcess(item:any){
+    this.cors.get('Bots/getProcessOne',{
+      id:item
+    }).then((response) => {
+      // console.log(response);
+      this.formNuevoBot.patchValue({
+        usuarioBot:response.procesoUser,
+        passwordBot:response.procesoPassword,
+      });
+
+    }).catch((error) => {
+      console.log(error)
+    });
+
+  }
+
+
+
 }

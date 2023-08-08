@@ -97,13 +97,14 @@ export class RobotsComponent implements OnInit {
       }
     },
 
+    // {
+    //   label: 'ver Log', icon: 'pi pi-history', command: () => {
+
+
+    //     this.preguntarLog()
+    //   }
+    // }, 
     {
-      label: 'ver Log', icon: 'pi pi-history', command: () => {
-
-
-        this.preguntarLog()
-      }
-    }, {
       label: ' ', icon: ' '
     },
     {

@@ -71,10 +71,11 @@ export class RobotsNuevoComponent implements OnInit {
 
       }).catch((error) => {
         console.log(error);
-        this.guardando = false
+        // this.guardando = false
         this.showToastError('No se logro guardar, intente de nuevo.');
       })
     }
+    this.guardando = false
   }
   ngOnInit(): void {
 

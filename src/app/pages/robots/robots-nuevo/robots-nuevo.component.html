@@ -25,7 +25,7 @@
 
         <span class="p-float-label">
           <input
-            [ngClass]="{'ng-invalid ng-dirty': formNuevoBot.get('ipEquipo')?.errors != null && formNuevoBot.get('ipEquipo')?.touched == true}"
+            [ngClass]="{'ng-invalid ng-dirty': formNuevoBot.get('ip')?.errors != null && formNuevoBot.get('ip')?.touched == true}"
             type="text" pInputText [dropSpecialCharacters]="false" formControlName="ip" mask="IP">
           <label>Ip de Maquina</label>
 
@@ -58,7 +58,7 @@
 
       <div class="field col-12 md:col-6">
         <p-dropdown optionLabel="name_process" optionValue="id"
-          [ngClass]="{'ng-invalid ng-dirty': formNuevoBot.get('procesoId')?.errors != null && formNuevoBot.get('procesoId')?.touched == true}"
+          [ngClass]="{'ng-invalid ng-dirty': formNuevoBot.get('procesoBotId')?.errors != null && formNuevoBot.get('procesoBotId')?.touched == true}"
           [options]="processArr" [showClear]="true" placeholder="Proceso asignado" formControlName="procesoBotId">
         </p-dropdown>
       </div>

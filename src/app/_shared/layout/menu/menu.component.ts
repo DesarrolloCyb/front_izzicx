@@ -429,14 +429,24 @@ export class MenuComponent implements OnInit {
       routerLink: ['/robots'],
       items: [
         {
-          label: 'Actividad',
+          label: 'Actividad Robots',
           icon: 'pi pi-fw pi-tablet',
           routerLink: ['/robots/'],
         },
         {
-          label: 'Crear nuevo',
+          label: 'Crear nuevo Robot',
           icon: 'pi pi-fw pi-plus',
           routerLink: ['/robots/nuevo'],
+        },
+        {
+          label: 'Actividad Procesos',
+          icon: 'pi pi-fw pi-tablet',
+          routerLink: ['/robots/proceso'],
+        },
+        {
+          label: 'Crear nuevo Proceso',
+          icon: 'pi pi-fw pi-plus',
+          routerLink: ['/robots/proceso/nuevo'],
         },
       ]
     },

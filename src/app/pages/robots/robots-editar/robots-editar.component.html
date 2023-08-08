@@ -26,7 +26,7 @@
         <span class="p-float-label">
           <input
             [ngClass]="{'ng-invalid ng-dirty': formNuevoBot.get('ip')?.errors != null && formNuevoBot.get('ip')?.touched == true}"
-            type="text" pInputText [dropSpecialCharacters]="false" formControlName="ip" mask="IP">
+            type="text" pInputText [dropSpecialCharacters]="false" formControlName="ip" mask="IP" readonly>
           <label>Ip de Maquina</label>
 
 
@@ -40,7 +40,7 @@
         <span class="p-float-label">
           <input
             [ngClass]="{'ng-invalid ng-dirty': formNuevoBot.get('usuarioBot')?.errors != null && formNuevoBot.get('usuarioBot')?.touched == true}"
-            type="text" pInputText formControlName="usuarioBot">
+            type="text" pInputText formControlName="usuarioBot" readonly>
           <label>Usuario</label>
         </span>
 
@@ -50,7 +50,7 @@
         <span class="p-float-label">
           <input
             [ngClass]="{'ng-invalid ng-dirty': formNuevoBot.get('passwordBot')?.errors != null && formNuevoBot.get('passwordBot')?.touched == true}"
-            type="text" pInputText formControlName="passwordBot">
+            type="text" pInputText formControlName="passwordBot" readonly>
           <label>Password</label>
         </span>
 
@@ -59,7 +59,8 @@
       <div class="field col-12 md:col-6">
         <p-dropdown optionLabel="name_process" optionValue="id"
           [ngClass]="{'ng-invalid ng-dirty': formNuevoBot.get('procesoId')?.errors != null && formNuevoBot.get('procesoId')?.touched == true}"
-          [options]="processArr" [showClear]="true" placeholder="Proceso asignado" formControlName="procesoId">
+          [options]="processArr" [showClear]="true" placeholder="Proceso asignado" formControlName="procesoId" 
+          (onChange)="changeProcess($event.value)">
         </p-dropdown>
       </div>
 

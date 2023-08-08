@@ -12,6 +12,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RobotLogModalComponent } from './componentes/robot-log-modal/robot-log-modal.component';
 import { RobotsEditarComponent } from './robots-editar/robots-editar.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { ProcesosDashboardComponent } from './procesos-dashboard/procesos-dashboard.component';
+import { ProcesosNuevoComponent } from './procesos-nuevo/procesos-nuevo.component';
+import { ProcesosEditComponent } from './procesos-edit/procesos-edit.component';
 const config: SocketIoConfig = { url: environment.SCOCKET_URL };
 
 
@@ -20,7 +23,10 @@ const config: SocketIoConfig = { url: environment.SCOCKET_URL };
     RobotsComponent,
     RobotsNuevoComponent,
     RobotLogModalComponent,
-    RobotsEditarComponent
+    RobotsEditarComponent,
+    ProcesosDashboardComponent,
+    ProcesosNuevoComponent,
+    ProcesosEditComponent
   ],
   imports: [
     SharedModule,
