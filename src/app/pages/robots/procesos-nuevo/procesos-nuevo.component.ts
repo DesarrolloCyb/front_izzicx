@@ -52,9 +52,9 @@ export class ProcesosNuevoComponent implements OnInit {
   }
 
   guardarBot(){
-    this.guardando=true;
     this.formNuevoProceso.markAllAsTouched();
     if(this.formNuevoProceso.valid){
+      this.guardando=true;
       let a = `${this.formNuevoProceso.controls['status'].value}`;
       this.formNuevoProceso.patchValue({
         status:a

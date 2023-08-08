@@ -131,7 +131,7 @@
                         {{ item.password }}
                      </td> 
                      <td>
-                        {{ item.status }}
+                        {{ item.status == "1"?"Activo":"Desactivado" }}
                      </td> 
                     <td>
                         <p-splitButton label="Acciones" [model]="items" styleClass="p-button-text mr-2 mb-2"

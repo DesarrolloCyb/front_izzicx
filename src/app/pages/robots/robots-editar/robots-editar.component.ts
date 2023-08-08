@@ -60,9 +60,9 @@ export class RobotsEditarComponent implements OnInit, OnDestroy {
   }
 
   guardarBot() {
-    this.guardando = true
     this.formNuevoBot.markAllAsTouched()
     if (this.formNuevoBot.valid) {
+      this.guardando = true
       let a ={
         "id": this.item.botId,
         "comentarios": this.formNuevoBot.controls['comentarios'].value,
