@@ -9,11 +9,11 @@ import { Table } from 'primeng/table';
 
 
 @Component({
-  selector: 'automatizados',
-  templateUrl: './automatizados.component.html',
-  styleUrls: ['./automatizados.component.scss']
+  selector: 'prueba',
+  templateUrl: './prueba.component.html',
+  styleUrls: ['./prueba.component.scss']
 })
-export class AutomatizadosComponent implements OnInit {
+export class PruebaComponent implements OnInit {
   usuario: any = JSON.parse(localStorage.getItem("userData") || "{}")
   tipoExtraccion:string[]=[
     'Casos de negocio',
@@ -32,7 +32,8 @@ export class AutomatizadosComponent implements OnInit {
   modal:boolean=false;
   nuevaHora:string="";
   id:string="";
-  constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService) { 
+
+  constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService) {
     this.formExtraccion = this.formBuilder.group({
       tipoExtraccion: [null, Validators.required],
       fechaini: [null],
@@ -84,16 +85,16 @@ export class AutomatizadosComponent implements OnInit {
       horaProgramacion:[null]
 
     });
-  }
 
-  ngOnInit(): any {
+   }
+
+  ngOnInit(): void {
     this.tablaExtraccion();
     this.tablaExtraccion2();
     setInterval(() => {
-      this.tablaExtraccion();
+      // this.tablaExtraccion();
       this.tablaExtraccion2();
     }, 5000);
-    
   }
 
   reset(){
@@ -151,11 +152,11 @@ export class AutomatizadosComponent implements OnInit {
       // console.log(data)
       // console.log(moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH"))
 
-      this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramada2`,{hora:moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH")})
+      this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramada2Prueba`,{hora:moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH")})
       .then((response) => {
         // console.log(response)
         if(response[0] == 'SIN INFO'){
-          this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizados',data)
+          this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
             .then((response) => {
               // console.log(response)
               this.messageService.add({
@@ -371,7 +372,7 @@ export class AutomatizadosComponent implements OnInit {
   }
 
   tablaExtraccion(){
-    this.cors.get('Reporte/getmostrarTablaExtraccionAutomatizados',{})
+    this.cors.get('Reporte/getmostrarTablaExtraccionAutomatizadosPrueba',{})
     .then((response) => {
       // console.log(response)
       if(response[0] == "SIN INFO"){
@@ -419,6 +420,8 @@ export class AutomatizadosComponent implements OnInit {
                 return `"solucion":"${modifiedSolucion}",`;
               }).replace(/"motivoCliente":"(.*?)(?=}])/g, (match:any, p1:any) => {
                 const modifiedmotivoCliente = p1.replace(/"/g, "'");
+                console.log(match)
+                console.log(p1)
                 return `"motivoCliente":"${modifiedmotivoCliente}"`;
               });
             }else if(response[i].tipoExtraccion == "Actividades"){
@@ -456,10 +459,11 @@ export class AutomatizadosComponent implements OnInit {
                 return `"estado":"${modifiedestado}"`;
               });
             }
-          
+            // console.log(modifiedString)    
             let jsonArray = JSON.parse(modifiedString);
             // console.log(jsonArray)
             response[i].parametrosExtraccion = jsonArray;
+
           }
         }
         
@@ -480,7 +484,7 @@ export class AutomatizadosComponent implements OnInit {
   }
 
   tablaExtraccion2(){
-    this.cors.get('Reporte/getmostrarTablaExtraccionAutomatizados2',{})
+    this.cors.get('Reporte/getmostrarTablaExtraccionAutomatizados2Prueba',{})
     .then((response) => {
       // console.log(response)
       if(response[0] == "SIN INFO"){
@@ -563,7 +567,7 @@ export class AutomatizadosComponent implements OnInit {
 
   eliminar(item:any){
     
-    this.cors.delete(`Reporte/EliminarEjecucionExtraccionAutomatizados?id=${item.id}`,
+    this.cors.delete(`Reporte/EliminarEjecucionExtraccionAutomatizadosPrueba?id=${item.id}`,
       {
         "id": item.id,
         "tipoExtraccion": "string",
@@ -631,7 +635,7 @@ export class AutomatizadosComponent implements OnInit {
       a=b[0]
     }
     // console.log(a)
-    this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramada`,{hora:a,id:this.id})
+    this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramadaPrueba`,{hora:a,id:this.id})
     .then((response) => {
       // console.log(response)
       let z=null;
@@ -641,7 +645,7 @@ export class AutomatizadosComponent implements OnInit {
         z=nuevaH
       }
       if(response[0]=='SIN INFO'){
-        this.cors.put(`Reporte/ActualizaEjecucionExtraccionAutomatizadosHoraProgramada?id=${this.id}`,
+        this.cors.put(`Reporte/ActualizaEjecucionExtraccionAutomatizadosHoraProgramadaPrueba?id=${this.id}`,
           {
             "id": this.id,
             "tipoExtraccion": "string",
@@ -701,6 +705,9 @@ export class AutomatizadosComponent implements OnInit {
 
 
   }
+
+
+
 
 
 }

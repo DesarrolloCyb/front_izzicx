@@ -41,9 +41,9 @@ export class MenuComponent implements OnInit {
           routerLink: ['/extraccion/automatizados'],
         },
         // {
-        //   label: 'Reactivación',
+        //   label: 'prueba extraccion Automatizadas',
         //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturas/reactivacion'],
+        //   routerLink: ['/extraccion/prueba'],
         // },
         // {
         //   label: 'Servicios c/s costo',

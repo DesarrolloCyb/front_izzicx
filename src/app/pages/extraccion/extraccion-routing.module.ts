@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './../../_shared/layout/layout/layout.component';
 import { DashboardExtraccionComponent } from './dashboard-extraccion/dashboard-extraccion.component';
 import { AutomatizadosComponent } from './automatizados/automatizados.component';
+import { PruebaComponent } from './prueba/prueba.component';
 
 const routes: Routes = [
 	{
@@ -15,7 +16,11 @@ const routes: Routes = [
 		component: LayoutComponent,
 		children: [{ path: '', component: AutomatizadosComponent }],
 	},
-
+	{
+		path: 'prueba',
+		component: LayoutComponent,
+		children: [{ path: '', component: PruebaComponent }],
+	},
 
 ];
 
