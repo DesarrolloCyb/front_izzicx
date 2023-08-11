@@ -19,7 +19,8 @@ export class CasosNegocioSinValidacionComponent implements OnInit {
     'Motivo Cliente',
     'Motivos',
     'Solución',
-    'Submotivo'
+    'Submotivo',
+    'Comentarios'
   ];
   button:boolean=true;
   tabla:boolean=false;
@@ -63,7 +64,7 @@ export class CasosNegocioSinValidacionComponent implements OnInit {
             }
           }
         }
-        if(count == 6){ 
+        if(count == 7){ 
           Object.keys(this.ExcelData).forEach(key => {
             this.ExcelData[key]["Status"]='Pendiente';
             this.ExcelData[key]["Cve_usuario"]=this.usuario.email;

@@ -73,6 +73,12 @@
 
                         </div>
                     </th>
+                    <th>
+                        <div class="flex justify-content-center align-items-center">
+                            Comentarios
+
+                        </div>
+                    </th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item let-i="rowIndex">
@@ -94,7 +100,10 @@
                     </td>    
                     <td class="text-center">
                         {{item['Motivo Cliente']}}
-                    </td>       
+                    </td>   
+                    <td class="text-center">
+                        {{item['Comentarios']}}
+                    </td>      
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">

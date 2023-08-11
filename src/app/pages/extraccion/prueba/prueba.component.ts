@@ -707,7 +707,13 @@ export class PruebaComponent implements OnInit {
   }
 
 
+  prueba(){
+    console.log("prueba")
+    this.cors.getCommand(`http://192.168.49.87:2000`).then((response) => {
+      console.log(response)
 
+    })
+  }
 
 
 }
