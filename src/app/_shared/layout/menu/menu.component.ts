@@ -40,11 +40,11 @@ export class MenuComponent implements OnInit {
           icon: 'pi pi-fw pi-exclamation-triangle',
           routerLink: ['/extraccion/automatizados'],
         },
-        // {
-        //   label: 'prueba extraccion Automatizadas',
-        //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/extraccion/prueba'],
-        // },
+        {
+          label: 'prueba extraccion Automatizadas',
+          icon: 'pi pi-fw pi-exclamation-triangle',
+          routerLink: ['/extraccion/prueba'],
+        },
         // {
         //   label: 'Servicios c/s costo',
         //   icon: 'pi pi-fw pi-exclamation-triangle',

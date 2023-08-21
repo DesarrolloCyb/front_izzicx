@@ -32,6 +32,145 @@ export class PruebaComponent implements OnInit {
   modal:boolean=false;
   nuevaHora:string="";
   id:string="";
+  horas:any[]=[
+    {
+      label:"00:00:00",
+      value:0
+    },
+    {
+      label:"01:00:00",
+      value:1
+    },
+    {
+      label:"02:00:00",
+      value:2
+    },
+    {
+      label:"03:00:00",
+      value:3
+    },
+    {
+      label:"04:00:00",
+      value:4
+    },
+    {
+      label:"05:00:00",
+      value:5
+    },
+    {
+      label:"06:00:00",
+      value:6
+    },
+    {
+      label:"07:00:00",
+      value:7
+    },
+    {
+      label:"08:00:00",
+      value:8
+    },
+    {
+      label:"09:00:00",
+      value:9
+    },
+    {
+      label:"10:00:00",
+      value:10
+    },
+    {
+      label:"11:00:00",
+      value:11
+    },
+    {
+      label:"12:00:00",
+      value:12
+    },
+    {
+      label:"13:00:00",
+      value:13
+    },
+    {
+      label:"14:00:00",
+      value:14
+    },
+    {
+      label:"15:00:00",
+      value:15
+    },
+    {
+      label:"16:00:00",
+      value:16
+    },
+    {
+      label:"17:00:00",
+      value:17
+    },
+    {
+      label:"18:00:00",
+      value:18
+    },
+    {
+      label:"19:00:00",
+      value:19
+    },
+    {
+      label:"20:00:00",
+      value:20
+    },
+    {
+      label:"21:00:00",
+      value:21
+    },
+    {
+      label:"22:00:00",
+      value:22
+    },
+    {
+      label:"23:00:00",
+      value:23
+    },
+  ];
+  min:any[]=[];
+  categories: any[] = [
+    { name: 'Dias del Mes', key: 'DM' },
+    { name: 'Dias de la Semana', key: 'DS' },
+  ];
+  diasemanas:any[]=[
+    {
+      label:"Domingo",
+      value:1
+    },
+    {
+      label:"Lunes",
+      value:2
+    },
+    {
+      label:"Martes",
+      value:3
+    },
+    {
+      label:"Miercoles",
+      value:4
+    },
+    {
+      label:"Jueves",
+      value:5
+    },
+    {
+      label:"Viernes",
+      value:6
+    },
+    {
+      label:"Sabado",
+      value:7
+    },
+  ];
+  h="";
+  m="";
+  d="";
+  // texto:String=`Se ejecuta cada ${this.m} minutos a las ${this.h} los dias: ${this.d}`;
+
+  
 
   constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService) {
     this.formExtraccion = this.formBuilder.group({
@@ -82,9 +221,30 @@ export class PruebaComponent implements OnInit {
       nombreHub: [null],
       Incidente: [null],
 
-      horaProgramacion:[null]
+      horaProgramacion:[null],
+
+      hora:[null],
+      minuto:[null,Validators.required],
+      diasSemana:[null,Validators.required],
 
     });
+
+    for(let i=0;i<60;i++){
+      let a=null;
+      if(i<10){
+         a = {
+          label:`00:0${i}:00`,
+          value:i
+        }
+      }else{
+        a = {
+          label:`00:${i}:00`,
+          value:i
+        }
+      }
+      this.min.push(a);
+    }
+
 
    }
 
@@ -99,6 +259,9 @@ export class PruebaComponent implements OnInit {
 
   reset(){
     this.formExtraccion.reset()
+    this.d="";
+    this.h="";
+    this.m="";
   }
 
   Enviar(){
@@ -152,61 +315,62 @@ export class PruebaComponent implements OnInit {
       // console.log(data)
       // console.log(moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH"))
 
-      this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramada2Prueba`,{hora:moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH")})
-      .then((response) => {
-        // console.log(response)
-        if(response[0] == 'SIN INFO'){
-          this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
-            .then((response) => {
-              // console.log(response)
-              this.messageService.add({
-                key: 'tst',
-                severity: 'success',
-                summary: 'Exito!!!',
-                detail: 'Datos guardados',
-              });
-            })
-            .catch((error) => {
-              console.log(error)
-              this.messageService.add({
-                key:'tst',
-                severity: 'error',
-                summary: 'No se logro guardar',
-                detail: 'Intenta Nuevamente!!!',
-              });
-            });
+      // this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramada2Prueba`,{hora:moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH")})
+      // .then((response) => {
+      //   // console.log(response)
+      //   if(response[0] == 'SIN INFO'){
+      //     this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
+      //       .then((response) => {
+      //         // console.log(response)
+      //         this.messageService.add({
+      //           key: 'tst',
+      //           severity: 'success',
+      //           summary: 'Exito!!!',
+      //           detail: 'Datos guardados',
+      //         });
+      //       })
+      //       .catch((error) => {
+      //         console.log(error)
+      //         this.messageService.add({
+      //           key:'tst',
+      //           severity: 'error',
+      //           summary: 'No se logro guardar',
+      //           detail: 'Intenta Nuevamente!!!',
+      //         });
+      //       });
             
-            setTimeout(() => {
-              this.spinner = false;
-              this.tablaExtraccion();
-              this.reset()
-              // this.router.navigate(['/extraccion/visualizacion']);
+      //       setTimeout(() => {
+      //         this.spinner = false;
+      //         this.tablaExtraccion();
+      //         this.reset()
+      //         // this.router.navigate(['/extraccion/visualizacion']);
               
-            }, 3000);
+      //       }, 3000);
 
-        }else{
-          this.spinner=false;
-          this.messageService.add({
-            key:'tst',
-            severity: 'error',
-            summary: 'Ya existe este horario!!',
-            detail: 'Intenta Nuevamente!!!',
-          });
+      //   }else{
+      //     this.spinner=false;
+      //     this.messageService.add({
+      //       key:'tst',
+      //       severity: 'error',
+      //       summary: 'Ya existe este horario!!',
+      //       detail: 'Intenta Nuevamente!!!',
+      //     });
   
-        }
+      //   }
       
    
-      })
-      .catch((error) => {
-        console.log(error)
-        this.messageService.add({
-          key:'tst',
-          severity: 'error',
-          summary: 'No se logro editar!!',
-          detail: 'Intenta Nuevamente!!!',
-        });
-      });
+      // })
+      // .catch((error) => {
+      //   console.log(error)
+      //   this.messageService.add({
+      //     key:'tst',
+      //     severity: 'error',
+      //     summary: 'No se logro editar!!',
+      //     detail: 'Intenta Nuevamente!!!',
+      //   });
+      // });
 
+      
     }else{
       
       this.messageService.add({
@@ -217,7 +381,35 @@ export class PruebaComponent implements OnInit {
       });
       
     }
+    let regexCron=null;
+    let horas =null;
+    let minuto = null;
+    let diasS=null;
+    if(this.formExtraccion.controls['hora'].value && this.formExtraccion.controls['hora'].value.length>0 && this.formExtraccion.controls['hora'].value.length<=23){
+      horas=this.formExtraccion.controls['hora'].value.join(',');
+    }else if(this.formExtraccion.controls['hora'].value && this.formExtraccion.controls['hora'].value.length == 24){
+      horas="*";
+    }
+    if(this.formExtraccion.controls['minuto'].value != null){
+      minuto=this.formExtraccion.controls['minuto'].value;
+    }
+    if(this.formExtraccion.controls['diasSemana'].value && this.formExtraccion.controls['diasSemana'].value.length >0 && this.formExtraccion.controls['diasSemana'].value.length <=6){
+      diasS = this.formExtraccion.controls['diasSemana'].value.join(',');
+    }else if(this.formExtraccion.controls['diasSemana'].value && this.formExtraccion.controls['diasSemana'].value.length == 7){
+      diasS ="*";
+    }
 
+    if(this.formExtraccion.controls['hora'].value==null || this.formExtraccion.controls['hora'].value.length ==0){
+      regexCron = `0 0/${minuto} * ? * ${diasS}`;
+      
+    }else{
+      
+      regexCron = `0 ${minuto} ${horas?horas:"*"} ? * ${diasS}`;
+    }
+    console.log(this.formExtraccion.value)
+    console.log(regexCron)
+    
+    
 
 
 
@@ -705,7 +897,118 @@ export class PruebaComponent implements OnInit {
 
 
   }
+  
 
+  getDiaLabel(selectedValue: number): string {
+    const selectedDay = this.diasemanas.find((dia) => dia.value === selectedValue);
+    return selectedDay ? selectedDay.label : '';
+  }
+  getHoraLabel(selectedValue: string): string {
+    const selectedHora = this.horas.find((hora) => hora.value === selectedValue);
+    return selectedHora ? selectedHora.label : '';
+  }
+
+  getMinutoLabel(selectedValue: string): string {
+    const selectedHora = this.min.find((hora) => hora.value === selectedValue);
+    return selectedHora ? selectedHora.label : '';
+  }
+
+  cambioHora(event:any){
+    // console.log(event)
+    let a="";
+    if(event.length==0){
+      this.h="";
+    }else if(event.length==1){
+      if(event[0] == 0){
+        a+=`24am`
+      }else if(event[0] >=1 && event[0] <=11){
+        a+=`${event[0]}am`;
+      }else if(event[0] >=12 && event[0] <=23){
+        a+=`${event[0]}pm`;
+      }
+      this.h=a;
+    }else if(event.length >1){
+      for(let i = 0 ; i< event.length;i++){
+        // console.log(this.getHoraLabel(event[i]))
+        if(event[i] == 0){
+          a+=`24am, `
+        }else if(event[i] >=1 && event[i] <=11){
+          a+=`${event[i]}am, `;
+        }else if(event[i] >=12 && event[i] <=23){
+          a+=`${event[i]}pm, `;
+        }
+        
+      }
+      let b = a.substring(0, a.length - 2);
+      // console.log(b)
+      this.h=b;
+      
+    }
+  }
+
+  cambioDias(event:any){
+    // console.log(event)
+    let a ="";
+    if(event.length==0){
+      a="";
+    }else if(event.length==1){
+        a = `${this.getDiaLabel(event[0])}`;
+    }else if(event.length>1){
+      
+      for(let i =0;i<event.length;i++){
+        if(i==event.length-1){
+          a+=`${this.getDiaLabel(event[i])}`;
+        }else{
+          a+=`${this.getDiaLabel(event[i])}, `;
+
+        }
+      }
+    }
+    this.d=a;
+  }
+
+  cambioMin(event:any){
+    if(event <9){
+      this.m=`0${event}`;
+    }else{
+      this.m=event;
+
+    }
+  }
+
+  getTexto(): string {
+    if(this.formExtraccion.controls['hora'].value && this.formExtraccion.controls['hora'].value.length>0 && (this.formExtraccion.controls['minuto'].value || this.formExtraccion.controls['minuto'].value==0)){
+      let a="";
+        for(let i = 0 ; i< this.formExtraccion.controls['hora'].value.length;i++){
+          // console.log(this.getHoraLabel(event[i]))
+          if(this.formExtraccion.controls['hora'].value[i] == 0){
+            a+=`24:${this.m}am, `
+          }else if(this.formExtraccion.controls['hora'].value[i] >=1 && this.formExtraccion.controls['hora'].value[i] <=11){
+            if(this.formExtraccion.controls['hora'].value[i] >=1 && this.formExtraccion.controls['hora'].value[i] <10){
+              a+=`0${this.formExtraccion.controls['hora'].value[i]}:${this.m}am, `;
+
+            }else{
+              a+=`${this.formExtraccion.controls['hora'].value[i]}:${this.m}am, `;
+            }
+          }else if(this.formExtraccion.controls['hora'].value[i] >=12 && this.formExtraccion.controls['hora'].value[i] <=23){
+            a+=`${this.formExtraccion.controls['hora'].value[i]}:${this.m}pm, `;
+          }
+          
+        }
+        this.h=a.substring(0,a.length-2);
+      return `Se ejecuta a las <strong>${this.h}</strong> los días: <strong>${this.d}</strong>`;
+      
+    }
+    if( this.formExtraccion.controls['minuto'].value){
+      return `Se ejecuta cada <strong>${this.m}</strong> minutos los días: <strong>${this.d}</strong>`;
+
+    }else if( this.formExtraccion.controls['minuto'].value ==0){
+      return `Se ejecuta cada minuto los días: <strong>${this.d}</strong>`;
+
+    }
+      return "";
+  
+  }
 
   prueba(){
     console.log("prueba")

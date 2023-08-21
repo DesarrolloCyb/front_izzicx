@@ -526,10 +526,77 @@
                       <label>Hora Programación</label>
                     </span>
                   </div>
+
+                  <div class="field col-12"></div>
+                  <div class="col-12" style="white-space: pre-line;" >
+                    <span [innerHTML]="getTexto()"></span>
+                  </div>
+                  <div class="field col-12"></div>
+                  <div class="field col-12 md:col-4" >
+                    <p-multiSelect (onChange)="cambioHora($event.value)"  [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('hora')?.errors != null && formExtraccion.get('hora')?.touched == true}"
+                      [options]="horas" formControlName="hora" defaultLabel="Selecciona una Hora" optionValue="value" optionLabel="label" >
+                      <ng-template let-value pTemplate="selectedItems">
+                          <div class="flex align-items-center gap-2" *ngFor="let option of formExtraccion.controls['hora'].value">
+                              {{ getHoraLabel(option) }}
+                          </div>
+                          <div *ngIf="!formExtraccion.controls['hora'].value || formExtraccion.controls['hora'].value.length === 0">Selecciona Hora</div>
+                      </ng-template>
+                      <ng-template let-country pTemplate="item">
+                          <div class="flex align-items-center gap-2">
+                              <div>{{ country.label }}</div>
+                          </div>
+                      </ng-template>
+                    </p-multiSelect>
+                  </div>
+                  <div class="field col-12 md:col-4" >
+                    <!-- <p-multiSelect  [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('minuto')?.errors != null && formExtraccion.get('minuto')?.touched == true}"
+                      [options]="min" formControlName="minuto" defaultLabel="Selecciona Minutos" optionValue="value" optionLabel="label" >
+                      <ng-template let-value pTemplate="selectedItems">
+                          <div class="flex align-items-center gap-2" *ngFor="let option of formExtraccion.controls['minuto'].value">
+                              <div>{{ getMinutoLabel(option) }}</div>
+                          </div>
+                          <div *ngIf="!formExtraccion.controls['minuto'].value || formExtraccion.controls['minuto'].value.length === 0">Selecciona Minutos</div>
+                      </ng-template>
+                      <ng-template let-country pTemplate="item">
+                          <div class="flex align-items-center gap-2">
+                              <div>{{ country.label }}</div>
+                          </div>
+                      </ng-template>
+                    </p-multiSelect> -->
+
+                    <p-dropdown (onChange)="cambioMin($event.value)" placeholder="Selecciona Minutos" [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('minuto')?.errors != null && formExtraccion.get('minuto')?.touched == true}" 
+                      [options]="min" optionValue="value" optionLabel="label" formControlName="minuto"
+                    ></p-dropdown>
+
+                  </div>
+          
+            
+                  <div class="field col-12 md:col-4">
+                    <p-multiSelect (onChange)="cambioDias($event.value)" [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('diasSemana')?.errors != null && formExtraccion.get('diasSemana')?.touched == true}"
+                      [options]="diasemanas" formControlName="diasSemana" defaultLabel="Selecciona dia de la Semana" optionValue="value" optionLabel="label" >
+                      <ng-template let-value pTemplate="selectedItems">
+                          <div class="flex align-items-center gap-2" *ngFor="let option of formExtraccion.controls['diasSemana'].value">
+                              <div>{{ getDiaLabel(option) }}</div>
+                          </div>
+                          <div *ngIf="!formExtraccion.controls['diasSemana'].value || formExtraccion.controls['diasSemana'].value.length === 0">Selecciona dia de la Semana</div>
+                      </ng-template>
+                      <ng-template let-country pTemplate="item">
+                          <div class="flex align-items-center gap-2">
+                              <div>{{ country.label }}</div>
+                          </div>
+                      </ng-template>
+                    </p-multiSelect>
+                  </div>
+
+
+
+
+
+
     
                   
     
-    
+                  
                   <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
                     <span class="p-float-label">
                         <input
@@ -554,6 +621,7 @@
     
                       
                   <div class="col-12"></div>
+                 
                   <!-- <div class="field col-12 md:col-6">
                       <span class="p-float-label">
                           <p-calendar
