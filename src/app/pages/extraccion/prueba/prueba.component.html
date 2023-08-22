@@ -510,14 +510,8 @@
                     </span>
                   </div>
     
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Actividades' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
+                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Actividades' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
                     <span class="p-float-label">
-                      <!-- <input
-                      type="text"
-                      pInputText
-                      [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('horaProgramacion')?.errors != null && formExtraccion.get('horaProgramacion')?.touched == true}"
-                      formControlName="horaProgramacion"
-                      > -->
                       <p-calendar   [showClear]="true" placeholder="Hora de Programación" [timeOnly]="true" hourFormat="24" inputId="timeonly"
                         [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('horaProgramacion')?.errors != null && formExtraccion.get('horaProgramacion')?.touched == true}"
                         formControlName="horaProgramacion"
@@ -525,7 +519,7 @@
     
                       <label>Hora Programación</label>
                     </span>
-                  </div>
+                  </div> -->
 
                   <div class="field col-12"></div>
                   <div class="col-12" style="white-space: pre-line;" >
@@ -785,8 +779,9 @@
                           <td class="text-center">
                             {{item.fechaExtraccion ? dateFormat(item.fechaExtraccion):""}}
                           </td>
-                          <td class="text-center">
-                              {{item.horaProgramacion}}
+                          <td class="text-center" style="white-space: pre-line;">
+                              <!-- {{item.horaProgramacion}} -->
+                              <span [innerHTML]="item.horaProgramacion"></span>
                           </td>
                           <td class="text-left" >
                               <ng-container *ngFor="let parametro of item.parametrosExtraccion">
@@ -882,7 +877,7 @@
                       </div>
                     </th>
                     <th>
-                      <div class="flex justify-content-center align-items-center">
+                      <div class="flex justify-content-center align-items-center" style="white-space: pre-line;">
                           Hora Programación
                       </div>
                     </th>

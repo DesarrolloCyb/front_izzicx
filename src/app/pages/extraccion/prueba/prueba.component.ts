@@ -169,14 +169,12 @@ export class PruebaComponent implements OnInit {
   m="";
   d="";
   // texto:String=`Se ejecuta cada ${this.m} minutos a las ${this.h} los dias: ${this.d}`;
-
+  num:number=0;
   
 
   constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService) {
     this.formExtraccion = this.formBuilder.group({
       tipoExtraccion: [null, Validators.required],
-      fechaini: [null],
-      fechafin: [null],
 
       estado: [null],
       tipo: [null],
@@ -252,7 +250,7 @@ export class PruebaComponent implements OnInit {
     this.tablaExtraccion();
     this.tablaExtraccion2();
     setInterval(() => {
-      // this.tablaExtraccion();
+      this.tablaExtraccion();
       this.tablaExtraccion2();
     }, 5000);
   }
@@ -266,6 +264,7 @@ export class PruebaComponent implements OnInit {
 
   Enviar(){
     this.formExtraccion.markAllAsTouched();
+    console.log(this.formExtraccion)
     if(this.formExtraccion.valid){
       this.spinner = true;
       let data ={
@@ -274,15 +273,14 @@ export class PruebaComponent implements OnInit {
         "tipoExtraccion":`${this.formExtraccion.controls['tipoExtraccion'].value}`,
         "fechaCompletado": null,
         "status": "",
-        "fechaCaptura": null,
         "ip": "",
         "parametrosExtraccion":"",
-        "fechaInicial":null,
-        "fechaFinal":null,
         "procesando": "",
         "fechaExtraccion": null,
         "archivo": "",
-        "horaProgramacion": moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH:mm:00")
+        "horaProgramacion": "",
+        "nombreCron":`${this.formExtraccion.controls['tipoExtraccion'].value}_${this.num}`,
+        "scheduleExpression":""
       };
       if(this.formExtraccion.controls['tipoExtraccion'].value === "Cuenta"){
         // console.log("Esto es Cuenta")
@@ -313,39 +311,67 @@ export class PruebaComponent implements OnInit {
       //   data.parametrosExtraccion =`[{"vencimiento":"${this.formExtraccion.controls['vencimiento'].value ? this.formExtraccion.controls['vencimiento'].value : ""}","FallaGeneralAsociada":"${this.formExtraccion.controls['FallaGeneralAsociada'].value ? this.formExtraccion.controls['FallaGeneralAsociada'].value :""}","categoria":"${this.formExtraccion.controls['categoria'].value ? this.formExtraccion.controls['categoria'].value :""}","motivo":"${this.formExtraccion.controls['motivo'].value ? this.formExtraccion.controls['motivo'].value :""}","subMotivo":"${this.formExtraccion.controls['subMotivo'].value ? this.formExtraccion.controls['subMotivo'].value :""}","solucion":"${this.formExtraccion.controls['solucion'].value ? this.formExtraccion.controls['solucion'].value:""}","tecnologia":"${this.formExtraccion.controls['tecnologia'].value ? this.formExtraccion.controls['tecnologia'].value:""}","estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value:""}","hub":"${this.formExtraccion.controls['hub'].value ? this.formExtraccion.controls['hub'].value:""}","rama":"${this.formExtraccion.controls['rama'].value ? this.formExtraccion.controls['rama'].value:""}","nodo":"${this.formExtraccion.controls['nodo'].value ? this.formExtraccion.controls['nodo'].value:""}","fiberDeep":"${this.formExtraccion.controls['fiberDeep'].value ? this.formExtraccion.controls['fiberDeep'].value:""}","fechaInicio":"${this.formExtraccion.controls['fechaInicio'].value ? this.dateFormat(this.formExtraccion.controls['fechaInicio'].value):""}","nombreHub":"${this.formExtraccion.controls['nombreHub'].value ? this.formExtraccion.controls['nombreHub'].value:""}","Incidente":"${this.formExtraccion.controls['Incidente'].value ? this.formExtraccion.controls['Incidente'].value:""}","numOrden":"${this.formExtraccion.controls['numOrden'].value ? this.formExtraccion.controls['numOrden'].value:""}"}]`;
       // }
       // console.log(data)
-      // console.log(moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH"))
-
+      let regexCron=null;
+      let horas =null;
+      let minuto = null;
+      let diasS=null;
+      if(this.formExtraccion.controls['hora'].value && this.formExtraccion.controls['hora'].value.length>0 && this.formExtraccion.controls['hora'].value.length<=23){
+        horas=this.formExtraccion.controls['hora'].value.join(',');
+      }else if(this.formExtraccion.controls['hora'].value && this.formExtraccion.controls['hora'].value.length == 24){
+        horas="*";
+      }
+      if(this.formExtraccion.controls['minuto'].value != null){
+        minuto=this.formExtraccion.controls['minuto'].value;
+      }
+      if(this.formExtraccion.controls['diasSemana'].value && this.formExtraccion.controls['diasSemana'].value.length >0 && this.formExtraccion.controls['diasSemana'].value.length <=6){
+        diasS = this.formExtraccion.controls['diasSemana'].value.join(',');
+      }else if(this.formExtraccion.controls['diasSemana'].value && this.formExtraccion.controls['diasSemana'].value.length == 7){
+        diasS ="*";
+      }
+  
+      if(this.formExtraccion.controls['hora'].value==null || this.formExtraccion.controls['hora'].value.length ==0){
+        regexCron = `0 0/${minuto} * ? * ${diasS}`;
+        
+      }else{
+        
+        regexCron = `0 ${minuto} ${horas?horas:"*"} ? * ${diasS}`;
+      }
+      data.scheduleExpression=regexCron;
+      data.horaProgramacion = this.getTexto();
+  
       // this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramada2Prueba`,{hora:moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH")})
       // .then((response) => {
       //   // console.log(response)
       //   if(response[0] == 'SIN INFO'){
-      //     this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
-      //       .then((response) => {
-      //         // console.log(response)
-      //         this.messageService.add({
-      //           key: 'tst',
-      //           severity: 'success',
-      //           summary: 'Exito!!!',
-      //           detail: 'Datos guardados',
-      //         });
-      //       })
-      //       .catch((error) => {
-      //         console.log(error)
-      //         this.messageService.add({
-      //           key:'tst',
-      //           severity: 'error',
-      //           summary: 'No se logro guardar',
-      //           detail: 'Intenta Nuevamente!!!',
-      //         });
-      //       });
+          this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
+            .then((response) => {
+              // console.log(response)
+              this.messageService.add({
+                key: 'tst',
+                severity: 'success',
+                summary: 'Exito!!!',
+                detail: 'Datos guardados',
+              });
+              this.num++;
+              this.reset()
+              setTimeout(() => {
+                this.spinner = false;
+                this.tablaExtraccion();
+                this.reset()
+                // this.router.navigate(['/extraccion/visualizacion']);
+                
+              }, 3000);
+            })
+            .catch((error) => {
+              console.log(error)
+              this.messageService.add({
+                key:'tst',
+                severity: 'error',
+                summary: 'No se logro guardar',
+                detail: 'Intenta Nuevamente!!!',
+              });
+            });
             
-      //       setTimeout(() => {
-      //         this.spinner = false;
-      //         this.tablaExtraccion();
-      //         this.reset()
-      //         // this.router.navigate(['/extraccion/visualizacion']);
-              
-      //       }, 3000);
 
       //   }else{
       //     this.spinner=false;
@@ -381,39 +407,7 @@ export class PruebaComponent implements OnInit {
       });
       
     }
-    let regexCron=null;
-    let horas =null;
-    let minuto = null;
-    let diasS=null;
-    if(this.formExtraccion.controls['hora'].value && this.formExtraccion.controls['hora'].value.length>0 && this.formExtraccion.controls['hora'].value.length<=23){
-      horas=this.formExtraccion.controls['hora'].value.join(',');
-    }else if(this.formExtraccion.controls['hora'].value && this.formExtraccion.controls['hora'].value.length == 24){
-      horas="*";
-    }
-    if(this.formExtraccion.controls['minuto'].value != null){
-      minuto=this.formExtraccion.controls['minuto'].value;
-    }
-    if(this.formExtraccion.controls['diasSemana'].value && this.formExtraccion.controls['diasSemana'].value.length >0 && this.formExtraccion.controls['diasSemana'].value.length <=6){
-      diasS = this.formExtraccion.controls['diasSemana'].value.join(',');
-    }else if(this.formExtraccion.controls['diasSemana'].value && this.formExtraccion.controls['diasSemana'].value.length == 7){
-      diasS ="*";
-    }
-
-    if(this.formExtraccion.controls['hora'].value==null || this.formExtraccion.controls['hora'].value.length ==0){
-      regexCron = `0 0/${minuto} * ? * ${diasS}`;
-      
-    }else{
-      
-      regexCron = `0 ${minuto} ${horas?horas:"*"} ? * ${diasS}`;
-    }
-    console.log(this.formExtraccion.value)
-    console.log(regexCron)
     
-    
-
-
-
-
   }
 
   onGlobalFilter(table: Table, event: Event) {
@@ -503,8 +497,8 @@ export class PruebaComponent implements OnInit {
       // this.formExtraccion.get('subMotivo')?.updateValueAndValidity();
       // this.formExtraccion.get('solucion')?.setValidators([Validators.required]);
       // this.formExtraccion.get('solucion')?.updateValueAndValidity();
-      this.formExtraccion.get('horaProgramacion')?.setValidators([Validators.required]);
-      this.formExtraccion.get('horaProgramacion')?.updateValueAndValidity();
+      // this.formExtraccion.get('horaProgramacion')?.setValidators([Validators.required]);
+      // this.formExtraccion.get('horaProgramacion')?.updateValueAndValidity();
 
 
     }else if(event.value ==="Actividades"){
@@ -514,8 +508,8 @@ export class PruebaComponent implements OnInit {
       // this.formExtraccion.get('areaConocimiento')?.updateValueAndValidity();
       // this.formExtraccion.get('fechaAsignacion')?.setValidators([Validators.required]);
       // this.formExtraccion.get('fechaAsignacion')?.updateValueAndValidity();
-      this.formExtraccion.get('horaProgramacion')?.setValidators([Validators.required]);
-      this.formExtraccion.get('horaProgramacion')?.updateValueAndValidity();
+      // this.formExtraccion.get('horaProgramacion')?.setValidators([Validators.required]);
+      // this.formExtraccion.get('horaProgramacion')?.updateValueAndValidity();
 
 
     }else if(event.value ==="Ordenes de servicio"){
@@ -529,8 +523,8 @@ export class PruebaComponent implements OnInit {
       // this.formExtraccion.get('asignada')?.updateValueAndValidity();
       // this.formExtraccion.get('estado')?.setValidators([Validators.required]);
       // this.formExtraccion.get('estado')?.updateValueAndValidity();
-      this.formExtraccion.get('horaProgramacion')?.setValidators([Validators.required]);
-      this.formExtraccion.get('horaProgramacion')?.updateValueAndValidity();
+      // this.formExtraccion.get('horaProgramacion')?.setValidators([Validators.required]);
+      // this.formExtraccion.get('horaProgramacion')?.updateValueAndValidity();
 
 
     }
