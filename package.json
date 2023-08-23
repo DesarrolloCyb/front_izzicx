@@ -31,6 +31,7 @@
     "file-saver": "^2.0.5",
     "https-proxy-agent": "^5.0.1",
     "moment": "^2.29.4",
+    "nanoid": "^4.0.2",
     "ngx-mask": "^14.2.3",
     "ngx-socket-io": "^4.3.1",
     "primeflex": "^3.2.1",

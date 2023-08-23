@@ -7,6 +7,10 @@ import { Message, MessageService } from 'primeng/api';
 import { CorsService } from '@services';
 import { Table } from 'primeng/table';
 
+import { HttpClient } from '@angular/common/http';
+
+import { nanoid } from 'nanoid';
+
 
 @Component({
   selector: 'prueba',
@@ -172,7 +176,7 @@ export class PruebaComponent implements OnInit {
   num:number=0;
   
 
-  constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService) {
+  constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService, private http: HttpClient) {
     this.formExtraccion = this.formBuilder.group({
       tipoExtraccion: [null, Validators.required],
 
@@ -267,6 +271,7 @@ export class PruebaComponent implements OnInit {
     console.log(this.formExtraccion)
     if(this.formExtraccion.valid){
       this.spinner = true;
+      const randomId = nanoid();
       let data ={
         "id": 0,
         "cve_usuario": `${this.usuario.email}`,
@@ -279,8 +284,8 @@ export class PruebaComponent implements OnInit {
         "fechaExtraccion": null,
         "archivo": "",
         "horaProgramacion": "",
-        "nombreCron":`${this.formExtraccion.controls['tipoExtraccion'].value}_${this.num}`,
-        "scheduleExpression":""
+        "nombreCron":`${this.formExtraccion.controls['tipoExtraccion'].value}_${randomId}`,
+        "scheduleExpression":"",
       };
       if(this.formExtraccion.controls['tipoExtraccion'].value === "Cuenta"){
         // console.log("Esto es Cuenta")
@@ -338,14 +343,32 @@ export class PruebaComponent implements OnInit {
       }
       data.scheduleExpression=regexCron;
       data.horaProgramacion = this.getTexto();
-  
-      // this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramada2Prueba`,{hora:moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH")})
-      // .then((response) => {
-      //   // console.log(response)
-      //   if(response[0] == 'SIN INFO'){
+
+      const post = {
+        data: data
+      }
+
+       /* FLASK */
+      this.http.post('http://192.168.51.199:310/programar', post).subscribe(
+        (res: any) => {
+          console.log(res)
+        },
+        (err: any) => {
+          console.log(err)
+        }
+      )
+
+      this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramada2Prueba`,{hora:moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH")})
+      .then((response) => {
+
+
+        // console.log(response)
+        if(response[0] == 'SIN INFO'){
           this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
             .then((response) => {
-              // console.log(response)
+
+
+
               this.messageService.add({
                 key: 'tst',
                 severity: 'success',
@@ -373,28 +396,28 @@ export class PruebaComponent implements OnInit {
             });
             
 
-      //   }else{
-      //     this.spinner=false;
-      //     this.messageService.add({
-      //       key:'tst',
-      //       severity: 'error',
-      //       summary: 'Ya existe este horario!!',
-      //       detail: 'Intenta Nuevamente!!!',
-      //     });
+        }else{
+          this.spinner=false;
+          this.messageService.add({
+            key:'tst',
+            severity: 'error',
+            summary: 'Ya existe este horario!!',
+            detail: 'Intenta Nuevamente!!!',
+          });
   
-      //   }
+        }
       
    
-      // })
-      // .catch((error) => {
-      //   console.log(error)
-      //   this.messageService.add({
-      //     key:'tst',
-      //     severity: 'error',
-      //     summary: 'No se logro editar!!',
-      //     detail: 'Intenta Nuevamente!!!',
-      //   });
-      // });
+      })
+      .catch((error) => {
+        console.log(error)
+        this.messageService.add({
+          key:'tst',
+          severity: 'error',
+          summary: 'No se logro editar!!',
+          detail: 'Intenta Nuevamente!!!',
+        });
+      });
 
       
     }else{
@@ -606,8 +629,8 @@ export class PruebaComponent implements OnInit {
                 return `"solucion":"${modifiedSolucion}",`;
               }).replace(/"motivoCliente":"(.*?)(?=}])/g, (match:any, p1:any) => {
                 const modifiedmotivoCliente = p1.replace(/"/g, "'");
-                console.log(match)
-                console.log(p1)
+                // console.log(match)
+                // console.log(p1)
                 return `"motivoCliente":"${modifiedmotivoCliente}"`;
               });
             }else if(response[i].tipoExtraccion == "Actividades"){
@@ -752,48 +775,59 @@ export class PruebaComponent implements OnInit {
 	}
 
   eliminar(item:any){
-    
-    this.cors.delete(`Reporte/EliminarEjecucionExtraccionAutomatizadosPrueba?id=${item.id}`,
-      {
-        "id": item.id,
-        "tipoExtraccion": "string",
-        "fechaExtraccion": "2023-08-03T23:49:10.217Z",
-        "parametrosExtraccion": "string",
-        "archivo": "string",
-        "cve_usuario": "string",
-        "fechaCompletado": "2023-08-03T23:49:10.217Z",
-        "status": "string",
-        "procesando": "string",
-        "ip": "string",
-        "horaProgramacion": "string"
+    console.log(item);
+
+    /* FLASK */
+    this.http.post('http://192.168.51.199:310/eliminar', {data: item}).subscribe(
+      (res: any) => {
+        console.log(res);
+      },
+      (err: any) => {
+        console.log(err);
       }
-      )
-    .then((response) => {
-      let index = this.datosExtraccion.indexOf(item);
-      if(index !== -1){
-        this.datosExtraccion = this.datosExtraccion.slice(0, index).concat(this.datosExtraccion.slice(index + 1));
-      }
+    )
+
+    // this.cors.delete(`Reporte/EliminarEjecucionExtraccionAutomatizadosPrueba?id=${item.id}`,
+    //   {
+    //     "id": item.id,
+    //     "tipoExtraccion": "string",
+    //     "fechaExtraccion": "2023-08-03T23:49:10.217Z",
+    //     "parametrosExtraccion": "string",
+    //     "archivo": "string",
+    //     "cve_usuario": "string",
+    //     "fechaCompletado": "2023-08-03T23:49:10.217Z",
+    //     "status": "string",
+    //     "procesando": "string",
+    //     "ip": "string",
+    //     "horaProgramacion": "string"
+    //   }
+    //   )
+    // .then((response) => {
+    //   let index = this.datosExtraccion.indexOf(item);
+    //   if(index !== -1){
+    //     this.datosExtraccion = this.datosExtraccion.slice(0, index).concat(this.datosExtraccion.slice(index + 1));
+    //   }
       
-      this.messageService.add({
-        key:'tst',
-        severity: 'success',
-        summary: 'Se elimino el registro!!',
-        detail: 'Con exito!!',
-      });  
-      this.datosExtraccion.slice(1,response);
+    //   this.messageService.add({
+    //     key:'tst',
+    //     severity: 'success',
+    //     summary: 'Se elimino el registro!!',
+    //     detail: 'Con exito!!',
+    //   });  
+    //   this.datosExtraccion.slice(1,response);
         
-        this.tablaExtraccion()
+    //     this.tablaExtraccion()
       
-    })
-    .catch((error) => {
-      console.log(error)
-      this.messageService.add({
-        key:'tst',
-        severity: 'error',
-        summary: 'No se logro eliminar!!',
-        detail: 'Intenta Nuevamente!!!',
-      });
-    });
+    // })
+    // .catch((error) => {
+    //   console.log(error)
+    //   this.messageService.add({
+    //     key:'tst',
+    //     severity: 'error',
+    //     summary: 'No se logro eliminar!!',
+    //     detail: 'Intenta Nuevamente!!!',
+    //   });
+    // });
 
   }
 
