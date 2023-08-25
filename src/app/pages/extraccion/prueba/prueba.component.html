@@ -791,13 +791,13 @@
                               </ng-container>
                           </td>
                           <td class="text-center button-container" >
-                              <button
+                              <!-- <button
                                   type="button"
                                   pButton
                                   label="Editar"
                                   style="margin-bottom: 1rem;width:8rem;background-color: #FFC300;border: 0;"
                                   (click)="editar(item)"
-                              ></button>&nbsp;
+                              ></button>&nbsp; -->
                               <button
                                   type="button"
                                   pButton
@@ -905,8 +905,9 @@
                     <td class="text-center">
                       {{item.status}}
                     </td> 
-                    <td class="text-center">
-                      {{item.horaProgramacion}}
+                    <td class="text-center" style="white-space: pre-line;">
+                      <!-- {{item.horaProgramacion}} -->
+                      <span [innerHTML]="item.horaProgramacion"></span>
                     </td>
                     <td *ngIf="item.archivo" class="text-center">
                     <!-- {{item.archivo}} -->
@@ -960,4 +961,3 @@
 </p-dialog>
 
 
-<button pButton  style="background-color: #FFC300;border: 0;" label="Prueba" (click)="prueba()" ></button>

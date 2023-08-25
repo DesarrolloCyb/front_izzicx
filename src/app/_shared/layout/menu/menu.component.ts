@@ -35,13 +35,13 @@ export class MenuComponent implements OnInit {
           icon: 'pi pi-fw pi-external-link',
           routerLink: ['/extraccion'],
         },
+        // {
+        //   label: 'Extracciones Automatizadas',
+        //   icon: 'pi pi-fw pi-exclamation-triangle',
+        //   routerLink: ['/extraccion/automatizados'],
+        // },
         {
-          label: 'Extracciones Automatizadas',
-          icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/extraccion/automatizados'],
-        },
-        {
-          label: 'prueba extraccion Automatizadas',
+          label: 'Extraccion Automatizadas',
           icon: 'pi pi-fw pi-exclamation-triangle',
           routerLink: ['/extraccion/prueba'],
         },
