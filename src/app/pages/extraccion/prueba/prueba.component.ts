@@ -342,10 +342,13 @@ export class PruebaComponent implements OnInit {
       }
       data.scheduleExpression=regexCron;
       data.horaProgramacion = this.getTexto();
-
+      
+      data.procesando="0";
+      data.status="Pendiente";
       const post = {
         data: data
       }
+
 
       this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
         .then((response) => {
