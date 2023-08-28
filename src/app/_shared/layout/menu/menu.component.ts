@@ -43,7 +43,7 @@ export class MenuComponent implements OnInit {
         {
           label: 'Extraccion Automatizadas',
           icon: 'pi pi-fw pi-exclamation-triangle',
-          routerLink: ['/extraccion/prueba'],
+          routerLink: ['/extraccion/automatizados'],
         },
         // {
         //   label: 'Servicios c/s costo',
