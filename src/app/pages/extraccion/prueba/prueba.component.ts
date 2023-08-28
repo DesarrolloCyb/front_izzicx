@@ -9,6 +9,9 @@ import { Table } from 'primeng/table';
 
 import { HttpClient } from '@angular/common/http';
 
+/* Peticiones cron */
+import { CronService } from 'app/_services/cron.service';
+
 import { nanoid } from 'nanoid';
 
 
@@ -174,7 +177,7 @@ export class PruebaComponent implements OnInit {
   d="";
   
 
-  constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService, private http: HttpClient) {
+  constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService, private http: HttpClient, private cron: CronService) {
     this.formExtraccion = this.formBuilder.group({
       tipoExtraccion: [null, Validators.required],
 
@@ -364,15 +367,7 @@ export class PruebaComponent implements OnInit {
             this.tablaExtraccion();
             this.reset()
             /* FLASK */
-            this.http.post('https://izzicron.pagekite.me/programar', post).subscribe(
-              (res: any) => {
-                console.log(res)
-              },
-              (err: any) => {
-                console.log(err)
-              }
-            );
-            // this.http.post('http://192.168.51.199:2000/programar', post).subscribe(
+            // this.http.post('https://izzicron.pagekite.me/programar', post).subscribe(
             //   (res: any) => {
             //     console.log(res)
             //   },
@@ -380,6 +375,14 @@ export class PruebaComponent implements OnInit {
             //     console.log(err)
             //   }
             // );
+            this.cron.post('programar', post).subscribe(
+              (res: any) => {
+                console.log(res)
+              },
+              (err: any) => {
+                console.log(err)
+              }
+            );
 
 
             
@@ -817,16 +820,7 @@ export class PruebaComponent implements OnInit {
         detail: 'Con exito!!',
       });  
         /* FLASK */
-        this.http.post('https://izzicron.pagekite.me/eliminar', {data: item}).subscribe(
-          (res: any) => {
-            console.log(res);
-          },
-          (err: any) => {
-            console.log(err);
-          }
-        )
-
-        // this.http.post('http://192.168.51.199:2000/eliminar', {data: item}).subscribe(
+        // this.http.post('https://izzicron.pagekite.me/eliminar', {data: item}).subscribe(
         //   (res: any) => {
         //     console.log(res);
         //   },
@@ -834,6 +828,15 @@ export class PruebaComponent implements OnInit {
         //     console.log(err);
         //   }
         // )
+
+        this.cron.post('eliminar', {data: item}).subscribe(
+          (res: any) => {
+            console.log(res);
+          },
+          (err: any) => {
+            console.log(err);
+          }
+        )
 
     })
     .catch((error) => {
