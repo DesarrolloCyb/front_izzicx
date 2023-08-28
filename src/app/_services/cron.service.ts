@@ -8,7 +8,7 @@ export class CronService {
 
   private insecureHttpClient: HttpClient;
   
-  private cronApi: string = 'http://192.168.51.199:2000/';
+  private cronApi: string = 'https://192.168.51.199:5000/';
 
   constructor(private httpBackend: HttpBackend) {
     this.insecureHttpClient = new HttpClient(this.httpBackend);
