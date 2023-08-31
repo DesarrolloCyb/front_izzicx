@@ -361,20 +361,38 @@ export class PruebaComponent implements OnInit {
             summary: 'Exito!!!',
             detail: 'Datos guardados',
           });
-          this.reset()
+
+          this.cors.post('Reporte/agregarNuevoCron',data)
+          .then((response) => {
+            console.log(response)
+            
+  
+  
+          })
+          .catch((error) => {
+            console.log(error)
+            this.messageService.add({
+              key:'tst',
+              severity: 'error',
+              summary: 'No se logro guardar el Cron',
+              detail: 'Intenta Nuevamente!!!',
+            });
+          });
+
           setTimeout(() => {
+            this.reset()
             this.spinner = false;
             this.tablaExtraccion();
             this.reset()
             /* FLASK */
-            this.http.post('https://izzicron.pagekite.me/programar', post).subscribe(
-              (res: any) => {
-                console.log(res)
-              },
-              (err: any) => {
-                console.log(err)
-              }
-            );
+            // this.http.post('https://izzicron.pagekite.me/programar', post).subscribe(
+            //   (res: any) => {
+            //     console.log(res)
+            //   },
+            //   (err: any) => {
+            //     console.log(err)
+            //   }
+            // );
             // this.cron.post('programar', post).subscribe(
             //   (res: any) => {
             //     console.log(res)
@@ -820,14 +838,30 @@ export class PruebaComponent implements OnInit {
         detail: 'Con exito!!',
       });  
         /* FLASK */
-        this.http.post('https://izzicron.pagekite.me/eliminar', {data: item}).subscribe(
-          (res: any) => {
-            console.log(res);
-          },
-          (err: any) => {
-            console.log(err);
-          }
-        )
+        // this.http.post('https://izzicron.pagekite.me/eliminar', {data: item}).subscribe(
+        //   (res: any) => {
+        //     console.log(res);
+        //   },
+        //   (err: any) => {
+        //     console.log(err);
+        //   }
+        // )
+        this.cors.post('Reporte/eliminarCron',item)
+        .then((response) => {
+
+          console.log(response)
+
+
+        })
+        .catch((error) => {
+          console.log(error)
+          this.messageService.add({
+            key:'tst',
+            severity: 'error',
+            summary: 'No se logro eliminar el Cron',
+            detail: 'Intenta Nuevamente!!!',
+          });
+        });
 
         // this.cron.post('eliminar', {data: item}).subscribe(
         //   (res: any) => {

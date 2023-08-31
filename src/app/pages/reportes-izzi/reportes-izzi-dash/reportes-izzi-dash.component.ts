@@ -126,8 +126,8 @@ export class ReportesIzziDashComponent implements OnInit {
           headers:headers,  
           responseType: 'arraybuffer',
             observe: 'response'
-          }).toPromise();
-          console.log(response)
+          }).toPromise(); 
+          // console.log(response)
           const blob = new Blob([response.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
           const link = document.createElement('a');
 
@@ -137,7 +137,8 @@ export class ReportesIzziDashComponent implements OnInit {
           
           URL.revokeObjectURL(link.href);
           link.innerHTML='';
-          
+          this.messageService.add({ severity: 'info', summary: 'Generando', detail: 'Se ha generado el reporte' });
+
         } catch (error) {
           console.log(error)
         }
