@@ -6,6 +6,7 @@ import { CorsService } from '@services';
 import { Message, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ThisReceiver } from '@angular/compiler';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 
@@ -30,7 +31,7 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
   loading2:boolean=false;
 
 
-  constructor(private messageService: MessageService,private formBuilder: UntypedFormBuilder,private cors: CorsService) { 
+  constructor(private httpClient: HttpClient,private messageService: MessageService,private formBuilder: UntypedFormBuilder,private cors: CorsService) { 
     this.formReporte = this.formBuilder.group({
       reporte: [null, Validators.required],
       fechaini: [null],
@@ -181,17 +182,66 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
 
-  descargarArchivo(archivo:string){
+  async descargarArchivo(archivo:string){
     this.archivoSeleccionado = archivo;
     this.loading2 = true;
-    this.cors.get1(`Reporte/BajarExcelFTPReporteFidelizacion`,{
-      "nombre":archivo
-    })
-    .then((response) => {
-      // console.log(response)
-      this.show = true;
-      this.url1 = `https://rpabackizzi.azurewebsites.net/Reporte/BajarExcelFTPReporteFidelizacion?nombre=${archivo}`;
+    // this.cors.get1(`Reporte/BajarExcelFTPReporteFidelizacion`,{
+    //   "nombre":archivo
+    // })
+    // .then((response) => {
+    //   // console.log(response)
+    //   this.show = true;
+    //   this.url1 = `https://rpabackizzi.azurewebsites.net/Reporte/BajarExcelFTPReporteFidelizacion?nombre=${archivo}`;
       
+    //   setTimeout(()=> {
+    //     this.loading2 = false;
+    //     this.archivoSeleccionado = '';
+    //     this.messageService.add({
+    //       key:'tst',
+    //       severity: 'success',
+    //       summary: 'Se descargo el archivo',
+    //       detail: 'Con exito!!',
+    //     });
+    //   }, 25000);
+      
+      
+    // })
+    // .catch((error) => {
+    //   console.log(error)
+    //   this.messageService.add({
+    //     key:'tst',
+    //     severity: 'error',
+    //     summary: 'No se logro descargar',
+    //     detail: 'Intenta Nuevamente!!!',
+    //   });
+    //   this.loading2 = false;
+    //   this.archivoSeleccionado = '';
+    // });
+
+    try {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Aquí agregamos los headers para evitar problemas de CORS
+        'Access-Control-Allow-Origin': 'https://rpabackizzi.azurewebsites.net/', // Reemplaza con el dominio de tu frontend
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      });
+      const response: any = await this.httpClient.get(`https://rpabackizzi.azurewebsites.net/Reporte/BajarExcelFTPReporteFidelizacion?nombre=${archivo}`, {
+      headers:headers,  
+      responseType: 'arraybuffer',
+        observe: 'response'
+      }).toPromise(); 
+      // console.log(response)
+      const blob = new Blob([response.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      const link = document.createElement('a');
+
+      link.href= URL.createObjectURL(blob);
+      link.download = `${archivo}`;
+      link.click();
+      
+      URL.revokeObjectURL(link.href);
+      link.innerHTML='';
+      // this.messageService.add({ severity: 'info', summary: 'Generando', detail: 'Se ha generado el reporte' });
       setTimeout(()=> {
         this.loading2 = false;
         this.archivoSeleccionado = '';
@@ -201,21 +251,18 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
           summary: 'Se descargo el archivo',
           detail: 'Con exito!!',
         });
-      }, 25000);
-      
-      
-    })
-    .catch((error) => {
+      }, 5000);
+
+    } catch (error) {
       console.log(error)
-      this.messageService.add({
-        key:'tst',
-        severity: 'error',
-        summary: 'No se logro descargar',
-        detail: 'Intenta Nuevamente!!!',
-      });
-      this.loading2 = false;
-      this.archivoSeleccionado = '';
-    });
+    }
+
+
+
+
+
+
+
     this.show=false
 
     

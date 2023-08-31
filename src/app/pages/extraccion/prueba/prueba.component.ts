@@ -7,7 +7,7 @@ import { Message, MessageService } from 'primeng/api';
 import { CorsService } from '@services';
 import { Table } from 'primeng/table';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 /* Peticiones cron */
 import { CronService } from 'app/_services/cron.service';
@@ -177,7 +177,7 @@ export class PruebaComponent implements OnInit {
   d="";
   
 
-  constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService, private http: HttpClient, private cron: CronService) {
+  constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService, private http: HttpClient, private cron: CronService,private httpClient: HttpClient) {
     this.formExtraccion = this.formBuilder.group({
       tipoExtraccion: [null, Validators.required],
 
@@ -757,18 +757,68 @@ export class PruebaComponent implements OnInit {
     });
   }
 
-  descargarArchivo(archivo:string){
+  async descargarArchivo(archivo:string){
     this.archivoSeleccionado = archivo;
 		this.loading2 = true;
 
-    this.cors.get1(`Reporte/BajarExtraccionExcelFTP`,{
-      "nombre":archivo
-    })
-    .then((response) => {
-      // console.log(response)
-      this.show = true;
-      this.url1 = `https://rpabackizzi.azurewebsites.net/Reporte/BajarExtraccionExcelFTP?nombre=${archivo}`;
+    // this.cors.get1(`Reporte/BajarExtraccionExcelFTP`,{
+    //   "nombre":archivo
+    // })
+    // .then((response) => {
+    //   // console.log(response)
+    //   this.show = true;
+    //   this.url1 = `https://rpabackizzi.azurewebsites.net/Reporte/BajarExtraccionExcelFTP?nombre=${archivo}`;
 
+    //   setTimeout(()=> {
+    //     this.loading2 = false;
+    //     this.archivoSeleccionado = '';
+    //     this.messageService.add({
+    //       key:'tst',
+    //       severity: 'success',
+    //       summary: 'Se descargo el archivo',
+    //       detail: 'Con exito!!',
+    //       });
+    //     }, 5000);
+  
+      
+    // })
+    // .catch((error) => {
+    //   console.log(error)
+    //   this.messageService.add({
+    //     key:'tst',
+    //     severity: 'error',
+    //     summary: 'No se logro descargar',
+    //     detail: 'Intenta Nuevamente!!!',
+    //   });
+    //   this.loading2 = false;
+    //   this.archivoSeleccionado = '';
+
+    // });
+
+    try {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Aquí agregamos los headers para evitar problemas de CORS
+        'Access-Control-Allow-Origin': 'https://rpabackizzi.azurewebsites.net/', // Reemplaza con el dominio de tu frontend
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      });
+      const response: any = await this.httpClient.get(`https://rpabackizzi.azurewebsites.net/Reporte/BajarExtraccionExcelFTP?nombre=${archivo}`, {
+      headers:headers,  
+      responseType: 'arraybuffer',
+        observe: 'response'
+      }).toPromise(); 
+      // console.log(response)
+      const blob = new Blob([response.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      const link = document.createElement('a');
+
+      link.href= URL.createObjectURL(blob);
+      link.download = `${archivo}`;
+      link.click();
+      
+      URL.revokeObjectURL(link.href);
+      link.innerHTML='';
+      // this.messageService.add({ severity: 'info', summary: 'Generando', detail: 'Se ha generado el reporte' });
       setTimeout(()=> {
         this.loading2 = false;
         this.archivoSeleccionado = '';
@@ -779,21 +829,16 @@ export class PruebaComponent implements OnInit {
           detail: 'Con exito!!',
           });
         }, 5000);
-  
-      
-    })
-    .catch((error) => {
-      console.log(error)
-      this.messageService.add({
-        key:'tst',
-        severity: 'error',
-        summary: 'No se logro descargar',
-        detail: 'Intenta Nuevamente!!!',
-      });
-      this.loading2 = false;
-      this.archivoSeleccionado = '';
 
-    });
+    } catch (error) {
+      console.log(error)
+    }
+
+
+
+
+
+
     this.show=false;
 
   }
