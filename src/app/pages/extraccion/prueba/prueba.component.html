@@ -128,6 +128,67 @@
                         <label>Categoría</label>
                     </span>
                   </div>
+
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
+                    <p-dropdown
+                    [options]="mo"
+                    [showClear]="true"
+                    placeholder="Motivo"
+                    formControlName="motivo"
+                    class="custom-dropdown"
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivo')?.errors != null && formExtraccion.get('motivo')?.touched == true}"
+                    
+                    >
+                    </p-dropdown>
+                  </div>
+<!--                   
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ACLARACION DE ESTADO DE CUENTA'">
+                    <p-dropdown
+                    [options]="[
+                      'AJUSTE TEMP PAGO NO APLICADO',
+                      'REEMBOLSO PA',
+                      'ACLARACION DE PAGO',
+                      'AJUSTE FACTURACION',
+                      'AJUSTE REQUIERE AUTORIZACION',
+                      'IZZI APP - PAGOS NO APLICADOS',
+                      'INCONSISTENCIA EN FACTURACION',
+                      'REEMBOLSO',
+                      'TRASPASO/PAGO NO APLICADO'
+                    ]"
+                    [showClear]="true"
+                    placeholder="SubMotivo"
+                    formControlName="subMotivo"
+                    class="custom-dropdown"
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('subMotivo')?.errors != null && formExtraccion.get('subMotivo')?.touched == true}"
+                    
+                    >
+                    </p-dropdown>
+                  </div>
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ACLARACION DE ESTADO DE CUENTA'">
+                    <p-dropdown
+                    [options]="[
+                      'AJUSTE TEMP PAGO NO APLICADO',
+                      'REEMBOLSO PA',
+                      'ACLARACION DE PAGO',
+                      'AJUSTE FACTURACION',
+                      'AJUSTE REQUIERE AUTORIZACION',
+                      'IZZI APP - PAGOS NO APLICADOS',
+                      'INCONSISTENCIA EN FACTURACION',
+                      'REEMBOLSO',
+                      'TRASPASO/PAGO NO APLICADO'
+                    ]"
+                    [showClear]="true"
+                    placeholder="Solucion"
+                    formControlName="solucion"
+                    class="custom-dropdown"
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('solucion')?.errors != null && formExtraccion.get('solucion')?.touched == true}"
+                    
+                    >
+                    </p-dropdown>
+                  </div> -->
+
+
+
     
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Fallas generales'">
                     <span class="p-float-label">
@@ -647,6 +708,7 @@
                       </span>
                     </div> -->
               </div>
+              <br><br><br><br><br>
               <!-- BOTON DE EJECUCION -->
               <div class="col lg:col-12">
           

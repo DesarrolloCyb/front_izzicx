@@ -175,7 +175,136 @@ export class PruebaComponent implements OnInit {
   h="";
   m="";
   d="";
-  
+
+  mo:string[]=[
+    'ACLARACION DE ESTADO DE CUENTA',
+    'AL COLGAR SE REGRESA LLAMADA',
+    'ALT APROVISIONAMIENTO I',
+    'ALT APROVISIONAMIENTO T',
+    'ALT SOPORTE I',
+    'ALT SOPORTE T',
+    'AMPLIACION DE RED',
+    'APLICACIONES',
+    'APROVISIONAMIENTO LEGOS',
+    'APROVISIONAMIENTO ONTLEGOS',
+    'APROVISIONAMIENTO Y SISTEMAS I', 
+    'APROVISIONAMIENTO Y SISTEMAS T',
+    'ASISTENCIA CALL CENTER',
+    'ASISTENCIA DR WIFI',
+    'ATENCION A INCONSISTENCIAS',
+    'ATENCION A SOLUCION EXPRESS',
+    'BENEFIZZIOS',
+    'BURO DE CREDITO',
+    'CAJERO AUTOMATICO',
+    'CAMBIO D DOMICILIO INTERCIUDAD',
+    'CAMBIO DE ACCESORIOS CR',
+    'CAMBIO DE ACCESORIOS E',
+    'CAMBIO DE DOMICILIO',
+    'CAMBIO DE DROP TELECABLE',
+    'CAMBIO DE EQUIPO',
+    'CANCELACION DE SERVICIO',
+    'CAPTURA DE VENTA',
+    'CHAT',
+    'COBERTURA',
+    'COLLECTION ANALOGO',
+    'COMPLEMENTO',
+    'CONFIG CM / EMTA',
+    'CONFIG CM / EMTA / ONT',
+    'CONFIG EMTA / ONT /SOP DISPOSITIVO',
+    'CONFIG EMTA/SOP DISPOSITIVO',
+    'CONFIG FUNCIONES INTERACTIVAS',
+    'CONFIRMACION',
+    'CORRECCION DE ORDEN',
+    'CUENTA EN REVISION',
+    'CUENTAS CONCENTRADAS AXTEL',
+    'DEGRADACION',
+    'ECONOMICO',
+    'ENCUESTA REGULAR',
+    'FACTURACION',
+    'FALLA SERVICIOS DIGITALES',
+    'FALLAS TECNICAS',
+    'GESTION DE CAMPAÑAS',
+    'GESTION DE RECUPERACION',
+    'GESTORIA DE COBRANZA',
+    'HEAVY USER',
+    'INBOUND',
+    'INCONFORMIDAD IFT',
+    'INCONSISTENCIA DETECTADA S',
+    'INFO DE PROGRAMACION',
+    'INFO DEL PRODUCTO',
+    'INFO GENERAL',
+    'INFO GENERAL DEL PRODUCTO',
+    'INFO GENERAL DEL SERV',
+    'INFO SERV INTERNET',
+    'INFO SERV TELEFONIA',
+    'INTERNET VOLTE',
+    'IVR',
+    'izzi mx',
+    'LINEA IZZI APP',
+    'MAIL',
+    'MALA CALIDAD DE VOZ',
+    'MALA CALIDAD EN AUDIO',
+    'MALA CALIDAD EN VIDEO',
+    'MALA CALIDAD TV EN VIVO',
+    'MIGRACION HOTEL',
+    'MOD AL CONTRATO',
+    'NAVEGACION LENTA',
+    'NEGOCIO',
+    'NEGOCIO NR',
+    'NETFLIX',
+    'NO RECIBE O TERMINA LLAMADAS',
+    'ORDEN CON ERROR',
+    'OUTBOUND',
+    'OUTBOUND GN',
+    'OUTBOUND T',
+    'PANTALLA EN NEGRO',
+    'POST VENTA BESTEL',
+    'PRECONCILIACION PROFECO',
+    'PROB CON GUIA',
+    'PROB DE APPS EN DECO',
+    'PROB DE AUDIO TV EN VIVO',
+    'PROB EN CONTROL REMOTO',
+    'PROB EN DECODIFICADOR',
+    'PROB SERVICIO VOD',
+    'PROBLEMAS CON AUDIO',
+    'PROBLEMAS DE CONTENIDO',
+    'PRODUCTO/COMPETENCIA',
+    'PROMOCION ACTIVOS',
+    'PROMOCION INACTIVOS',
+    'QUEJAS',
+    'QUEJAS POR MAL SERVICIO',
+    'QUEJAS PROFECO',
+    'REACTIVACION RETENCION',
+    'REALIZA CONTRATACION',
+    'RECLAMOS',
+    'REVISION DE VENTA',
+    'SE CORTA LLAMADA',
+    'SEGUIMIENTO NOT_ DONE',
+    'SEGUIMIENTOS ESPECIALES',
+    'SEGUIMIENTOS ESPECIALES CODI',
+    'SIN NAVEGACION',
+    'SIN SEÑAL',
+    'SIN SEÑAL TV EN VIVO',
+    'SIN SEÑAL UNO O MAS CANALES',
+    'SIN SERVICIO',
+    'SIN TONO/PERDIDA CONSTANTE',
+    'SOLICITUD DE SOPORTE MA',
+    'SOPORTE PPV / IPPV',
+    'SOPORTE PYME',
+    'SUC ACLARACION-EDO DE CTA',
+    'SUSPENSION DEL SERVICIO',
+    'SUSPENSION TEMPORAL',
+    'TRAFICO NO TERMINADO',
+    'TRANSFERENCIA',
+    'VENTA EN SOLUCIONES',
+    'VENTA NO INGRESADA',
+    'VENTA NUEVA',
+    'VENTA RECHAZADA',
+    'VIDEO',
+    'VISITAS TECNICAS',
+    'WIFI HOME'
+  ];
+
 
   constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService, private http: HttpClient, private cron: CronService,private httpClient: HttpClient) {
     this.formExtraccion = this.formBuilder.group({
@@ -354,20 +483,17 @@ export class PruebaComponent implements OnInit {
 
 
       this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
-        .then((response) => {
-          this.messageService.add({
-            key: 'tst',
-            severity: 'success',
-            summary: 'Exito!!!',
-            detail: 'Datos guardados',
-          });
+      .then((response) => {
+        this.messageService.add({
+          key: 'tst',
+          severity: 'success',
+          summary: 'Exito!!!',
+          detail: 'Datos guardados',
+        });
 
           this.cors.post('Reporte/agregarNuevoCron',data)
           .then((response) => {
             console.log(response)
-            
-  
-  
           })
           .catch((error) => {
             console.log(error)
@@ -401,20 +527,22 @@ export class PruebaComponent implements OnInit {
             //     console.log(err)
             //   }
             // );
-
-
+    
+    
             
           }, 3000);
-        })
-        .catch((error) => {
-          console.log(error)
-          this.messageService.add({
-            key:'tst',
-            severity: 'error',
-            summary: 'No se logro guardar',
-            detail: 'Intenta Nuevamente!!!',
-          });
+
+
+      })
+      .catch((error) => {
+        console.log(error)
+        this.messageService.add({
+          key:'tst',
+          severity: 'error',
+          summary: 'No se logro guardar',
+          detail: 'Intenta Nuevamente!!!',
         });
+      });
 
       // this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramada2Prueba`,{hora:moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH")})
       // .then((response) => {
