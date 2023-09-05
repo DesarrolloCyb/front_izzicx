@@ -480,8 +480,7 @@ export class PruebaComponent implements OnInit {
       const post = {
         data: data
       }
-
-
+      
       this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
       .then((response) => {
         this.messageService.add({
@@ -491,9 +490,9 @@ export class PruebaComponent implements OnInit {
           detail: 'Datos guardados',
         });
 
-          this.cors.post('Reporte/agregarNuevoCron',data)
-          .then((response) => {
-            console.log(response)
+        this.cors.post('Reporte/agregarNuevoCron',data)
+        .then((response) => {
+          console.log(response)
           })
           .catch((error) => {
             console.log(error)
