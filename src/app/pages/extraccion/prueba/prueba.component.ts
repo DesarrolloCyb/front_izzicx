@@ -13,6 +13,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CronService } from 'app/_services/cron.service';
 
 import { nanoid } from 'nanoid';
+import * as XLSX from 'xlsx';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class PruebaComponent implements OnInit {
     'Actividades',
     'Ordenes de servicio',
   ]; 
+  ExcelData:any=[];
   formExtraccion:UntypedFormGroup;
   spinner:boolean=false;
   datosExtraccion:any[]=[];
@@ -175,135 +177,139 @@ export class PruebaComponent implements OnInit {
   h="";
   m="";
   d="";
+  mo:any[]=[];
+  submo:any[]=[];
+  solu:any[]=[];
+  moClien:any[]=[];
 
-  mo:string[]=[
-    'ACLARACION DE ESTADO DE CUENTA',
-    'AL COLGAR SE REGRESA LLAMADA',
-    'ALT APROVISIONAMIENTO I',
-    'ALT APROVISIONAMIENTO T',
-    'ALT SOPORTE I',
-    'ALT SOPORTE T',
-    'AMPLIACION DE RED',
-    'APLICACIONES',
-    'APROVISIONAMIENTO LEGOS',
-    'APROVISIONAMIENTO ONTLEGOS',
-    'APROVISIONAMIENTO Y SISTEMAS I', 
-    'APROVISIONAMIENTO Y SISTEMAS T',
-    'ASISTENCIA CALL CENTER',
-    'ASISTENCIA DR WIFI',
-    'ATENCION A INCONSISTENCIAS',
-    'ATENCION A SOLUCION EXPRESS',
-    'BENEFIZZIOS',
-    'BURO DE CREDITO',
-    'CAJERO AUTOMATICO',
-    'CAMBIO D DOMICILIO INTERCIUDAD',
-    'CAMBIO DE ACCESORIOS CR',
-    'CAMBIO DE ACCESORIOS E',
-    'CAMBIO DE DOMICILIO',
-    'CAMBIO DE DROP TELECABLE',
-    'CAMBIO DE EQUIPO',
-    'CANCELACION DE SERVICIO',
-    'CAPTURA DE VENTA',
-    'CHAT',
-    'COBERTURA',
-    'COLLECTION ANALOGO',
-    'COMPLEMENTO',
-    'CONFIG CM / EMTA',
-    'CONFIG CM / EMTA / ONT',
-    'CONFIG EMTA / ONT /SOP DISPOSITIVO',
-    'CONFIG EMTA/SOP DISPOSITIVO',
-    'CONFIG FUNCIONES INTERACTIVAS',
-    'CONFIRMACION',
-    'CORRECCION DE ORDEN',
-    'CUENTA EN REVISION',
-    'CUENTAS CONCENTRADAS AXTEL',
-    'DEGRADACION',
-    'ECONOMICO',
-    'ENCUESTA REGULAR',
-    'FACTURACION',
-    'FALLA SERVICIOS DIGITALES',
-    'FALLAS TECNICAS',
-    'GESTION DE CAMPAÑAS',
-    'GESTION DE RECUPERACION',
-    'GESTORIA DE COBRANZA',
-    'HEAVY USER',
-    'INBOUND',
-    'INCONFORMIDAD IFT',
-    'INCONSISTENCIA DETECTADA S',
-    'INFO DE PROGRAMACION',
-    'INFO DEL PRODUCTO',
-    'INFO GENERAL',
-    'INFO GENERAL DEL PRODUCTO',
-    'INFO GENERAL DEL SERV',
-    'INFO SERV INTERNET',
-    'INFO SERV TELEFONIA',
-    'INTERNET VOLTE',
-    'IVR',
-    'izzi mx',
-    'LINEA IZZI APP',
-    'MAIL',
-    'MALA CALIDAD DE VOZ',
-    'MALA CALIDAD EN AUDIO',
-    'MALA CALIDAD EN VIDEO',
-    'MALA CALIDAD TV EN VIVO',
-    'MIGRACION HOTEL',
-    'MOD AL CONTRATO',
-    'NAVEGACION LENTA',
-    'NEGOCIO',
-    'NEGOCIO NR',
-    'NETFLIX',
-    'NO RECIBE O TERMINA LLAMADAS',
-    'ORDEN CON ERROR',
-    'OUTBOUND',
-    'OUTBOUND GN',
-    'OUTBOUND T',
-    'PANTALLA EN NEGRO',
-    'POST VENTA BESTEL',
-    'PRECONCILIACION PROFECO',
-    'PROB CON GUIA',
-    'PROB DE APPS EN DECO',
-    'PROB DE AUDIO TV EN VIVO',
-    'PROB EN CONTROL REMOTO',
-    'PROB EN DECODIFICADOR',
-    'PROB SERVICIO VOD',
-    'PROBLEMAS CON AUDIO',
-    'PROBLEMAS DE CONTENIDO',
-    'PRODUCTO/COMPETENCIA',
-    'PROMOCION ACTIVOS',
-    'PROMOCION INACTIVOS',
-    'QUEJAS',
-    'QUEJAS POR MAL SERVICIO',
-    'QUEJAS PROFECO',
-    'REACTIVACION RETENCION',
-    'REALIZA CONTRATACION',
-    'RECLAMOS',
-    'REVISION DE VENTA',
-    'SE CORTA LLAMADA',
-    'SEGUIMIENTO NOT_ DONE',
-    'SEGUIMIENTOS ESPECIALES',
-    'SEGUIMIENTOS ESPECIALES CODI',
-    'SIN NAVEGACION',
-    'SIN SEÑAL',
-    'SIN SEÑAL TV EN VIVO',
-    'SIN SEÑAL UNO O MAS CANALES',
-    'SIN SERVICIO',
-    'SIN TONO/PERDIDA CONSTANTE',
-    'SOLICITUD DE SOPORTE MA',
-    'SOPORTE PPV / IPPV',
-    'SOPORTE PYME',
-    'SUC ACLARACION-EDO DE CTA',
-    'SUSPENSION DEL SERVICIO',
-    'SUSPENSION TEMPORAL',
-    'TRAFICO NO TERMINADO',
-    'TRANSFERENCIA',
-    'VENTA EN SOLUCIONES',
-    'VENTA NO INGRESADA',
-    'VENTA NUEVA',
-    'VENTA RECHAZADA',
-    'VIDEO',
-    'VISITAS TECNICAS',
-    'WIFI HOME'
-  ];
+  // mo:string[]=[
+  //   'ACLARACION DE ESTADO DE CUENTA',
+  //   'AL COLGAR SE REGRESA LLAMADA',
+  //   'ALT APROVISIONAMIENTO I',
+  //   'ALT APROVISIONAMIENTO T',
+  //   'ALT SOPORTE I',
+  //   'ALT SOPORTE T',
+  //   'AMPLIACION DE RED',
+  //   'APLICACIONES',
+  //   'APROVISIONAMIENTO LEGOS',
+  //   'APROVISIONAMIENTO ONTLEGOS',
+  //   'APROVISIONAMIENTO Y SISTEMAS I', 
+  //   'APROVISIONAMIENTO Y SISTEMAS T',
+  //   'ASISTENCIA CALL CENTER',
+  //   'ASISTENCIA DR WIFI',
+  //   'ATENCION A INCONSISTENCIAS',
+  //   'ATENCION A SOLUCION EXPRESS',
+  //   'BENEFIZZIOS',
+  //   'BURO DE CREDITO',
+  //   'CAJERO AUTOMATICO',
+  //   'CAMBIO D DOMICILIO INTERCIUDAD',
+  //   'CAMBIO DE ACCESORIOS CR',
+  //   'CAMBIO DE ACCESORIOS E',
+  //   'CAMBIO DE DOMICILIO',
+  //   'CAMBIO DE DROP TELECABLE',
+  //   'CAMBIO DE EQUIPO',
+  //   'CANCELACION DE SERVICIO',
+  //   'CAPTURA DE VENTA',
+  //   'CHAT',
+  //   'COBERTURA',
+  //   'COLLECTION ANALOGO',
+  //   'COMPLEMENTO',
+  //   'CONFIG CM / EMTA',
+  //   'CONFIG CM / EMTA / ONT',
+  //   'CONFIG EMTA / ONT /SOP DISPOSITIVO',
+  //   'CONFIG EMTA/SOP DISPOSITIVO',
+  //   'CONFIG FUNCIONES INTERACTIVAS',
+  //   'CONFIRMACION',
+  //   'CORRECCION DE ORDEN',
+  //   'CUENTA EN REVISION',
+  //   'CUENTAS CONCENTRADAS AXTEL',
+  //   'DEGRADACION',
+  //   'ECONOMICO',
+  //   'ENCUESTA REGULAR',
+  //   'FACTURACION',
+  //   'FALLA SERVICIOS DIGITALES',
+  //   'FALLAS TECNICAS',
+  //   'GESTION DE CAMPAÑAS',
+  //   'GESTION DE RECUPERACION',
+  //   'GESTORIA DE COBRANZA',
+  //   'HEAVY USER',
+  //   'INBOUND',
+  //   'INCONFORMIDAD IFT',
+  //   'INCONSISTENCIA DETECTADA S',
+  //   'INFO DE PROGRAMACION',
+  //   'INFO DEL PRODUCTO',
+  //   'INFO GENERAL',
+  //   'INFO GENERAL DEL PRODUCTO',
+  //   'INFO GENERAL DEL SERV',
+  //   'INFO SERV INTERNET',
+  //   'INFO SERV TELEFONIA',
+  //   'INTERNET VOLTE',
+  //   'IVR',
+  //   'izzi mx',
+  //   'LINEA IZZI APP',
+  //   'MAIL',
+  //   'MALA CALIDAD DE VOZ',
+  //   'MALA CALIDAD EN AUDIO',
+  //   'MALA CALIDAD EN VIDEO',
+  //   'MALA CALIDAD TV EN VIVO',
+  //   'MIGRACION HOTEL',
+  //   'MOD AL CONTRATO',
+  //   'NAVEGACION LENTA',
+  //   'NEGOCIO',
+  //   'NEGOCIO NR',
+  //   'NETFLIX',
+  //   'NO RECIBE O TERMINA LLAMADAS',
+  //   'ORDEN CON ERROR',
+  //   'OUTBOUND',
+  //   'OUTBOUND GN',
+  //   'OUTBOUND T',
+  //   'PANTALLA EN NEGRO',
+  //   'POST VENTA BESTEL',
+  //   'PRECONCILIACION PROFECO',
+  //   'PROB CON GUIA',
+  //   'PROB DE APPS EN DECO',
+  //   'PROB DE AUDIO TV EN VIVO',
+  //   'PROB EN CONTROL REMOTO',
+  //   'PROB EN DECODIFICADOR',
+  //   'PROB SERVICIO VOD',
+  //   'PROBLEMAS CON AUDIO',
+  //   'PROBLEMAS DE CONTENIDO',
+  //   'PRODUCTO/COMPETENCIA',
+  //   'PROMOCION ACTIVOS',
+  //   'PROMOCION INACTIVOS',
+  //   'QUEJAS',
+  //   'QUEJAS POR MAL SERVICIO',
+  //   'QUEJAS PROFECO',
+  //   'REACTIVACION RETENCION',
+  //   'REALIZA CONTRATACION',
+  //   'RECLAMOS',
+  //   'REVISION DE VENTA',
+  //   'SE CORTA LLAMADA',
+  //   'SEGUIMIENTO NOT_ DONE',
+  //   'SEGUIMIENTOS ESPECIALES',
+  //   'SEGUIMIENTOS ESPECIALES CODI',
+  //   'SIN NAVEGACION',
+  //   'SIN SEÑAL',
+  //   'SIN SEÑAL TV EN VIVO',
+  //   'SIN SEÑAL UNO O MAS CANALES',
+  //   'SIN SERVICIO',
+  //   'SIN TONO/PERDIDA CONSTANTE',
+  //   'SOLICITUD DE SOPORTE MA',
+  //   'SOPORTE PPV / IPPV',
+  //   'SOPORTE PYME',
+  //   'SUC ACLARACION-EDO DE CTA',
+  //   'SUSPENSION DEL SERVICIO',
+  //   'SUSPENSION TEMPORAL',
+  //   'TRAFICO NO TERMINADO',
+  //   'TRANSFERENCIA',
+  //   'VENTA EN SOLUCIONES',
+  //   'VENTA NO INGRESADA',
+  //   'VENTA NUEVA',
+  //   'VENTA RECHAZADA',
+  //   'VIDEO',
+  //   'VISITAS TECNICAS',
+  //   'WIFI HOME'
+  // ];
 
 
   constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService, private http: HttpClient, private cron: CronService,private httpClient: HttpClient) {
@@ -376,7 +382,12 @@ export class PruebaComponent implements OnInit {
       }
       this.min.push(a);
     }
-
+    this.cors.get('Reporte/getMostrarCatalogoExtraccionAutomatizadasMotivo').then((response) => {
+      // console.log(response)
+      this.mo=response;
+    }).catch((error) => {
+      console.log(error)
+    })
 
    }
 
@@ -1270,6 +1281,90 @@ export class PruebaComponent implements OnInit {
       console.log(response)
 
     })
+  }
+
+  // readExcel(event:any){
+  //   let file = event.target.files[0];
+  //   let ultimo = file.name.split('.');
+  //   if(ultimo[ultimo.length-1] != 'xlsx'){
+  //      this.messageService.add({
+  //       key: 'tst',
+  //       severity: 'error',
+  //       summary: 'La extensión del archivo es incorrecta',
+  //       detail: 'Ingresa un archivo con extensión XLSX!!',
+  //     });
+  //   }else if(ultimo[ultimo.length-1] == 'xlsx'){
+  //     let fileReader = new FileReader();
+  //     var pattern = /[\^*@!"#$%&/()=?¡!¿'\\]/gi;
+     
+
+  //     fileReader.readAsBinaryString(file);
+  //     fileReader.onload= (e)=>{
+  //       // var workBook = XLSX.read(fileReader.result,{type:'binary',cellDates:true, raw: true })
+  //       var workBook = XLSX.read(fileReader.result,{type:'binary',cellDates:true })
+  //       var sheetNames =  workBook.SheetNames;
+  //       this.ExcelData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]],{defval: ''});
+        
+  //       Object.keys(this.ExcelData).forEach(key => {
+  //         var cadenaReemplazada = this.ExcelData[key]["Motivos del cliente"].replace(/\r\n/g, ',');
+  //         this.ExcelData[key]["Motivos del cliente"]=cadenaReemplazada;
+      
+  //       });   
+  //       console.log(this.ExcelData)
+  //       this.cors.post('Reporte/InsertarBasescatalagoEjecucionExtraccionAutomatizadas',this.ExcelData).then((response) => {
+  //         console.log(response)
+  //         this.messageService.add({
+  //           key: 'tst',
+  //           severity: 'success',
+  //           summary: 'Excel Importado',
+  //           detail: 'Correctamente!!',
+  //         }); 
+  //       }).catch((error) => {
+  //         console.log(error)
+  //         // this.spinner=false;
+  //         this.messageService.add({
+  //           key: 'tst',
+  //           severity: 'error',
+  //           summary: 'Ocurrio un Erro intentalo nuevamente',
+  //           detail: 'Intenta nuevamente!!!',
+  //         });
+  //       })
+
+    
+  //     }
+  //   }
+
+  // }
+  cambioMotivo(item:any){
+    this.cors.get(`Reporte/getMostrarCatalogoExtraccionAutomatizadasSubmotivoSolucion`,{motivo1:item}).then((response) => {
+      this.submo = response[0].submotivo;
+      this.solu = response[0].solucion;
+    }).catch((error) => {
+      console.log(error)
+    });
+    this.formExtraccion.get('subMotivo')?.patchValue(null);
+    this.formExtraccion.get('solucion')?.patchValue(null);
+  }
+  
+  cambioSubmotivo(){
+    this.formExtraccion.get('solucion')?.patchValue(null);
+    
+  }
+  cambioSolucion(){
+    if(this.formExtraccion.controls['motivo'].value != null && this.formExtraccion.controls['subMotivo'].value != null && this.formExtraccion.controls['solucion'].value != null){
+      this.cors.get(`Reporte/getMostrarCatalogoExtraccionAutomatizadasMotivoCliente`,{
+        motivo1:this.formExtraccion.controls['motivo'].value,
+        submotivo:this.formExtraccion.controls['subMotivo'].value,
+        solucion:this.formExtraccion.controls['solucion'].value
+      }).then((response) => {
+        // console.log(response)
+        let a = response[0].motivoCliente[0]
+        this.moClien = a.split(',');
+      }).catch((error) => {
+        console.log(error)
+      });
+  
+    }
   }
 
 

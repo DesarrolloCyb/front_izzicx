@@ -132,8 +132,7 @@
 
 
 
-                  <!-- aqui  motivo caso de negocio inicio    -->
-                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
                     <p-dropdown
                     [options]="mo"
                     [showClear]="true"
@@ -141,66 +140,37 @@
                     formControlName="motivo"
                     class="custom-dropdown"
                     [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivo')?.errors != null && formExtraccion.get('motivo')?.touched == true}"
-                    
+                    (onChange)="cambioMotivo($event.value)"
                     >
                     </p-dropdown>
-                  </div> -->
-
-                  <!-- ACLARACION DE ESTADO DE CUENTA INICIO-->
-                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ACLARACION DE ESTADO DE CUENTA'">
+                  </div>
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value != null">
                     <p-dropdown
-                    [options]="[
-                      'AJUSTE TEMP PAGO NO APLICADO',
-                      'REEMBOLSO PA',
-                      'ACLARACION DE PAGO',
-                      'AJUSTE FACTURACION',
-                      'AJUSTE REQUIERE AUTORIZACION',
-                      'IZZI APP - PAGOS NO APLICADOS',
-                      'INCONSISTENCIA EN FACTURACION',
-                      'REEMBOLSO',
-                      'TRASPASO/PAGO NO APLICADO'
-                    ]"
+                    [options]="submo"
                     [showClear]="true"
                     placeholder="SubMotivo"
                     formControlName="subMotivo"
                     class="custom-dropdown"
                     [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('subMotivo')?.errors != null && formExtraccion.get('subMotivo')?.touched == true}"
-                    
+                    (onChange)="cambioSubmotivo()"
                     >
                     </p-dropdown>
                   </div>
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ACLARACION DE ESTADO DE CUENTA'">
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value != null && formExtraccion.controls['subMotivo'].value != null  ">
                     <p-dropdown
-                    [options]="[
-                      'SE CANALIZA AREA CORRESP',
-                      'EN ESPERA DE COMPROBANTE',
-                      'APLICA AJUSTE',
-                      'SE CANALIZA A BACK OFFICE',
-                      'SE APLICA REEMBOLSO',
-                    ]"
+                    [options]="solu"
                     [showClear]="true"
-                    placeholder="Solucion"
+                    placeholder="Solución"
                     formControlName="solucion"
                     class="custom-dropdown"
                     [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('solucion')?.errors != null && formExtraccion.get('solucion')?.touched == true}"
-                    
+                    (onChange)="cambioSolucion()"
                     >
                     </p-dropdown>
                   </div>
-
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ACLARACION DE ESTADO DE CUENTA' && formExtraccion.controls['subMotivo'].value == 'ACLARACION DE PAGO' && formExtraccion.controls['solucion'].value == 'EN ESPERA DE COMPROBANTE'">
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value != null && formExtraccion.controls['subMotivo'].value != null && formExtraccion.controls['solucion'].value != null">
                     <p-dropdown
-                    [options]="[
-                      
-                      'APP',
-                      'BANCOS',
-                      'CAJERO AUTOMATICO',
-                      'DOMICILIACION',
-                      'EN LINEA',
-                      'IVR',
-                      'SUCURSAL',
-                      'TIENDAS CONVENIO'
-                    ]"
+                    [options]="moClien"
                     [showClear]="true"
                     placeholder="Motivo Cliente"
                     formControlName="motivoCliente"
@@ -210,242 +180,10 @@
                     >
                     </p-dropdown>
                   </div>
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ACLARACION DE ESTADO DE CUENTA' && formExtraccion.controls['subMotivo'].value == 'AJUSTE FACTURACION' && formExtraccion.controls['solucion'].value == 'APLICA AJUSTE'">
-                    <p-dropdown
-                    [options]="[
-                    'VIX+',
-                    'CAMBIO DE DOMICILIO',
-                    'CANCELACION NO APLICADA',
-                    'CARGO EXTEMPORANEO',
-                    'CARGOS UNICOS',
-                    'CONVENIO COBRANZA',
-                    'ERROR DE CAPTURA/EMPLEADA',
-                    'ERROR EN FACTURACION',
-                    'FALLAS EN EL SERVICIO',
-                    'PROMOCIONES',
-                    'RETENCION'                    
-                    ]"
-                    [showClear]="true"
-                    placeholder="Motivo Cliente"
-                    formControlName="motivoCliente"
-                    class="custom-dropdown"
-                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivoCliente')?.errors != null && formExtraccion.get('motivoCliente')?.touched == true}"
-                    
-                    >
-                    </p-dropdown>
-                  </div>
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ACLARACION DE ESTADO DE CUENTA' && formExtraccion.controls['subMotivo'].value == 'AJUSTE REQUIERE AUTORIZACION' && formExtraccion.controls['solucion'].value == 'SE CANALIZA A BACK OFFICE'">
-                    <p-dropdown
-                    [options]="[
-                    'ACTIVO NO INSTALADO',
-                    'AJUSTE ADMINISTRATIVO',
-                    'DAÑO/ROBO DOMICILIO',
-                    'AJUSTE ESPECIAL',
-                    'CONSUMO PPV',
-                    'CONSUMO VOD',
-                    'AJUSTE TEMPORAL',
-                    'CAD INTERCIUDAD',
-                    'LLAMADAS NO RECONOCIDAS',
-                    'EXCEDE MONTO',
-                    'GESTION DE COBRANZA',
-                    'ERROR EN FACTURACION',
-                    'COBRANZA POR ANTIGÜEDAD'                            
-                    ]"
-                    [showClear]="true"
-                    placeholder="Motivo Cliente"
-                    formControlName="motivoCliente"
-                    class="custom-dropdown"
-                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivoCliente')?.errors != null && formExtraccion.get('motivoCliente')?.touched == true}"
-                    
-                    >
-                    </p-dropdown>
-                  </div>
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ACLARACION DE ESTADO DE CUENTA' && formExtraccion.controls['subMotivo'].value == 'INCONSISTENCIA EN FACTURACION' && formExtraccion.controls['solucion'].value == 'SE CANALIZA A BACK OFFICE'">
-                    <p-dropdown
-                    [options]="[
-                    'SALDO PARTIDO 30-60 DIAS',
-                    'SALDO PARTIDO > 90 DIAS',
-                    'ITEMS CON PRECIOS INCORRECTOS'            
-                    ]"
-                    [showClear]="true"
-                    placeholder="Motivo Cliente"
-                    formControlName="motivoCliente"
-                    class="custom-dropdown"
-                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivoCliente')?.errors != null && formExtraccion.get('motivoCliente')?.touched == true}"
-                    
-                    >
-                    </p-dropdown>
-                  </div>
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ACLARACION DE ESTADO DE CUENTA' && formExtraccion.controls['subMotivo'].value == 'REEMBOLSO' && formExtraccion.controls['solucion'].value == 'SE APLICA REEMBOLSO'">
-                    <p-dropdown
-                    [options]="[
-                      'Devolución TV'
-                    ]"
-                    [showClear]="true"
-                    placeholder="Motivo Cliente"
-                    formControlName="motivoCliente"
-                    class="custom-dropdown"
-                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivoCliente')?.errors != null && formExtraccion.get('motivoCliente')?.touched == true}"
-                    
-                    >
-                    </p-dropdown>
-                  </div>
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ACLARACION DE ESTADO DE CUENTA' && formExtraccion.controls['subMotivo'].value == 'TRASPASO/PAGO NO APLICADO' && formExtraccion.controls['solucion'].value == 'SE CANALIZA A BACK OFFICE'">
-                    <p-dropdown
-                    [options]="[
-                    'APP',
-                    'BANCOS',
-                    'CAJERO AUTOMATICO',
-                    'DOMICILIACION',
-                    'EN LINEA',
-                    'IVR',
-                    'SUCURSAL',
-                    'TIENDAS CONVENIO',
-                    'TRASPASO DE SALDO',
-                    'CLIENTES PYME'
-                    ]"
-                    [showClear]="true"
-                    placeholder="Motivo Cliente"
-                    formControlName="motivoCliente"
-                    class="custom-dropdown"
-                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivoCliente')?.errors != null && formExtraccion.get('motivoCliente')?.touched == true}"
-                    
-                    >
-                    </p-dropdown>
-                  </div> -->
-                <!-- ACLARACION DE ESTADO DE CUENTA FIN-->
-                <!--AL COLGAR SE REGRESA LLAMADA INICIO-->
-                <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'AL COLGAR SE REGRESA LLAMADA'">
-                  <p-dropdown
-                  [options]="[
-                    'SE REVISA EQUIPO TELEFONICO'
-                  ]"
-                  [showClear]="true"
-                  placeholder="SubMotivo"
-                  formControlName="subMotivo"
-                  class="custom-dropdown"
-                  [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('subMotivo')?.errors != null && formExtraccion.get('subMotivo')?.touched == true}"
-                  
-                  >
-                  </p-dropdown>
-                </div>
-                <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'AL COLGAR SE REGRESA LLAMADA'">
-                  <p-dropdown
-                  [options]="[
-                    'CAMBIO DE EQUIPO TELEFONICO'
-                  ]"
-                  [showClear]="true"
-                  placeholder="Solucion"
-                  formControlName="solucion"
-                  class="custom-dropdown"
-                  [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('solucion')?.errors != null && formExtraccion.get('solucion')?.touched == true}"
-                  
-                  >
-                  </p-dropdown>
-                </div> -->
 
-              <!-- AL COLGAR SE REGRESA LLAMADA FIN-->
-              <!--ALT APROVISIONAMIENTO I INICIO-->
-              <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ALT APROVISIONAMIENTO I'">
-                <p-dropdown
-                [options]="[
-                  'FALLA INTERNET ALT'
-                ]"
-                [showClear]="true"
-                placeholder="SubMotivo"
-                formControlName="subMotivo"
-                class="custom-dropdown"
-                [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('subMotivo')?.errors != null && formExtraccion.get('subMotivo')?.touched == true}"
-                
-                >
-                </p-dropdown>
-              </div>
-              <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ALT APROVISIONAMIENTO I'">
-                <p-dropdown
-                [options]="[
-                  'SE CANALIZA AREA CORRESP'
-                ]"
-                [showClear]="true"
-                placeholder="Solucion"
-                formControlName="solucion"
-                class="custom-dropdown"
-                [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('solucion')?.errors != null && formExtraccion.get('solucion')?.touched == true}"
-                
-                >
-                </p-dropdown>
-              </div>
-              <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ALT APROVISIONAMIENTO I' && formExtraccion.controls['subMotivo'].value == 'FALLA INTERNET ALT' && formExtraccion.controls['solucion'].value == 'SE CANALIZA AREA CORRESP'">
-                <p-dropdown
-                [options]="[
-                'NO ACTIVO EN VIEW 360',
-                'SIN NAVEGACION',
-                'SERVICIO SUSPENDIDO',
-                'NAVEGACION LENTA',
-                'INTERMITENCIA',
-                'SIN ACCESO A PAGINAS'
-                ]"
-                [showClear]="true"
-                placeholder="Motivo Cliente"
-                formControlName="motivoCliente"
-                class="custom-dropdown"
-                [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivoCliente')?.errors != null && formExtraccion.get('motivoCliente')?.touched == true}"
-                
-                >
-                </p-dropdown>
-              </div> -->
+ 
 
-            <!-- ALT APROVISIONAMIENTO I FIN-->
-              <!--ALT APROVISIONAMIENTO T INICIO-->
-              <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ALT APROVISIONAMIENTO T'">
-                <p-dropdown
-                [options]="[
-                  'FALLA TELEFONIA ALT'
-                ]"
-                [showClear]="true"
-                placeholder="SubMotivo"
-                formControlName="subMotivo"
-                class="custom-dropdown"
-                [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('subMotivo')?.errors != null && formExtraccion.get('subMotivo')?.touched == true}"
-                
-                >
-                </p-dropdown>
-              </div>
-              <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ALT APROVISIONAMIENTO T'">
-                <p-dropdown
-                [options]="[
-                  'SE CANALIZA AREA CORRESP'
-                ]"
-                [showClear]="true"
-                placeholder="Solucion"
-                formControlName="solucion"
-                class="custom-dropdown"
-                [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('solucion')?.errors != null && formExtraccion.get('solucion')?.touched == true}"
-                
-                >
-                </p-dropdown>
-              </div>
-              <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value == 'ALT APROVISIONAMIENTO T' && formExtraccion.controls['subMotivo'].value == 'FALLA TELEFONIA ALT' && formExtraccion.controls['solucion'].value == 'SE CANALIZA AREA CORRESP'">
-                <p-dropdown
-                [options]="[
-                'NO ACTIVO EN VIEW 360',
-                'SERVICIO SUSPENDIDO',
-                'SIN TONO'                
-                ]"
-                [showClear]="true"
-                placeholder="Motivo Cliente"
-                formControlName="motivoCliente"
-                class="custom-dropdown"
-                [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivoCliente')?.errors != null && formExtraccion.get('motivoCliente')?.touched == true}"
-                
-                >
-                </p-dropdown>
-              </div> -->
-
-            <!-- ALT APROVISIONAMIENTO T FIN-->
-                  
-
-
-    
+        <!--     
                    <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Fallas generales'">
                     <span class="p-float-label">
                         <input
@@ -492,7 +230,7 @@
                         <label>Motivo Cliente</label>
                     </span>
                   </div>
-     
+      -->
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
                     <span class="p-float-label">
                         <input
@@ -1278,4 +1016,14 @@
     </ng-template>
 </p-dialog>
 
+
+
+
+
+<!-- <div class="p-fluid p-formgrid grid m-2 flex justify-content-center">
+  <div class="col-6 text-center">
+      <input type="file" id="file" accept=".csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" (change)="readExcel($event)">
+       <p-progressSpinner *ngIf="spinner"></p-progressSpinner>
+  </div>
+</div> -->
 
