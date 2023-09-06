@@ -1351,15 +1351,30 @@ export class PruebaComponent implements OnInit {
     
   }
   cambioSolucion(){
+
     if(this.formExtraccion.controls['motivo'].value != null && this.formExtraccion.controls['subMotivo'].value != null && this.formExtraccion.controls['solucion'].value != null){
       this.cors.get(`Reporte/getMostrarCatalogoExtraccionAutomatizadasMotivoCliente`,{
         motivo1:this.formExtraccion.controls['motivo'].value,
         submotivo:this.formExtraccion.controls['subMotivo'].value,
         solucion:this.formExtraccion.controls['solucion'].value
       }).then((response) => {
-        // console.log(response)
         let a = response[0].motivoCliente[0]
-        this.moClien = a.split(',');
+        if(a == ''){
+          this.moClien = [];
+        }else if(a == '-'){
+          this.moClien = ['-'];
+        }else if (a == undefined){
+          this.moClien = [];
+        }else{
+          const caracterBuscado = ",";
+          if(a.includes(caracterBuscado)){
+            this.moClien = a.split(',');
+          }else{
+            let b=[];
+            b[0] = a;
+            this.moClien = b
+          }
+        }
       }).catch((error) => {
         console.log(error)
       });

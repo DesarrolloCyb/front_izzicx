@@ -79,10 +79,11 @@
                         <label for="inputdate">Fecha de Apertura</label>
                     </span> -->
                     <span class="p-float-label"> 
-                      <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" formControlName="fechaApertura" selectionMode="range"  inputId="icon">
+                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true"  dateFormat="dd-mm-yy" formControlName="fechaApertura" selectionMode="range"  inputId="icon">
                       </p-calendar>
-                      <label for="inputdate">Fecha de Apertura</label>
+                      <label for="fechaApertura">Fecha de Apertura</label>
                     </span>
+                    
                   </div>
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
                     <span class="p-float-label">
@@ -180,6 +181,20 @@
                     >
                     </p-dropdown>
                   </div>
+                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
+                    <p-dropdown
+                    [options]="moClien"
+                    [showClear]="true"
+                    placeholder="Motivo Cliente"
+                    formControlName="motivoCliente"
+                    class="custom-dropdown"
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivoCliente')?.errors != null && formExtraccion.get('motivoCliente')?.touched == true}"
+                    
+                    >
+                    </p-dropdown> 
+                    <p-inputSwitch ></p-inputSwitch>
+                  </div> -->
+
 
  
 
@@ -255,7 +270,7 @@
                         <label for="inputdate">Fecha de Asignación</label>
                     </span> -->
                     <span class="p-float-label"> 
-                      <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" formControlName="fechaAsignacion" selectionMode="range"  inputId="icon">
+                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" formControlName="fechaAsignacion" selectionMode="range"  inputId="icon">
                       </p-calendar>
                       <label for="inputdate">Fecha de Asignacion</label>
                     </span>
@@ -274,7 +289,7 @@
                         <label for="inputdate">Vencimiento</label>
                     </span> -->
                     <span class="p-float-label"> 
-                      <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" formControlName="vencimientoActividad" selectionMode="range"  inputId="icon">
+                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" formControlName="vencimientoActividad" selectionMode="range"  inputId="icon">
                       </p-calendar>
                       <label for="inputdate">Vencimiento</label>
                     </span>
@@ -293,7 +308,7 @@
                         <label for="inputdate">Vencimiento</label>
                     </span> -->
                     <span class="p-float-label"> 
-                      <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" formControlName="fechaCreacion" selectionMode="range"  inputId="icon">
+                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" formControlName="fechaCreacion" selectionMode="range"  inputId="icon">
                       </p-calendar>
                       <label for="inputdate">Fecha de Creación</label>
                     </span>
@@ -377,7 +392,7 @@
                         <label for="inputdate">Fecha de la Orden</label>
                     </span> -->
                     <span class="p-float-label"> 
-                      <p-calendar [showIcon]="true" [showSeconds]="true" [showTime]="true" dateFormat="dd-mm-yy" formControlName="fechaOrden" selectionMode="range"  inputId="icon">
+                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" [showSeconds]="true" [showTime]="true" dateFormat="dd-mm-yy" formControlName="fechaOrden" selectionMode="range"  inputId="icon">
                       </p-calendar>
                       <label for="inputdate">Fecha de la Orden</label>
                     </span>
@@ -406,7 +421,7 @@
                         <label for="inputdate">Fecha de Pago</label>
                     </span> -->
                     <span class="p-float-label"> 
-                      <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" formControlName="fechaPago" selectionMode="range"  inputId="icon">
+                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" formControlName="fechaPago" selectionMode="range"  inputId="icon">
                       </p-calendar>
                       <label for="inputdate">Fecha de Pago</label>
                     </span>
@@ -583,7 +598,7 @@
                   <div class="field col-12"></div>
                   <div class="field col-12 md:col-4" >
                     <p-multiSelect (onChange)="cambioHora($event.value)"  [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('hora')?.errors != null && formExtraccion.get('hora')?.touched == true}"
-                      [options]="horas" formControlName="hora" defaultLabel="Selecciona una Hora" optionValue="value" optionLabel="label" >
+                      [options]="horas" [appendTo]="'body'" formControlName="hora" defaultLabel="Selecciona una Hora" optionValue="value" optionLabel="label" >
                       <ng-template let-value pTemplate="selectedItems">
                           <div class="flex align-items-center gap-2" *ngFor="let option of formExtraccion.controls['hora'].value">
                               {{ getHoraLabel(option) }}
@@ -702,7 +717,7 @@
                       </span>
                     </div> -->
               </div>
-              <br><br><br><br><br>
+              <br><br><br><br><br><br><br><br><br>
               <!-- BOTON DE EJECUCION -->
               <div class="col lg:col-12">
           
