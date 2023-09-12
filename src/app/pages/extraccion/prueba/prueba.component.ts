@@ -431,7 +431,7 @@ export class PruebaComponent implements OnInit {
         "horaProgramacion": "",
         "nombreCron":`${this.formExtraccion.controls['tipoExtraccion'].value}_${randomId}`,
         "scheduleExpression":"",
-        "tipoProgramacion":`${this.formExtraccion.controls['tipoProgramacion'].value}`,
+        "tipoProgramacion":`${this.formExtraccion.controls['tipoProgramacion'].value == true ? "1":"0"}`,
       };
       if(this.formExtraccion.controls['tipoExtraccion'].value === "Cuenta"){
         // console.log("Esto es Cuenta")
@@ -495,69 +495,68 @@ export class PruebaComponent implements OnInit {
       const post = {
         data: data
       }
-      console.log(this.formExtraccion)
       
-      // this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
-      // .then((response) => {
-      //   this.messageService.add({
-      //     key: 'tst',
-      //     severity: 'success',
-      //     summary: 'Exito!!!',
-      //     detail: 'Datos guardados',
-      //   });
+      this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
+      .then((response) => {
+        this.messageService.add({
+          key: 'tst',
+          severity: 'success',
+          summary: 'Exito!!!',
+          detail: 'Datos guardados',
+        });
 
-      //   this.cors.post('Reporte/agregarNuevoCron',data)
-      //   .then((response) => {
-      //     console.log(response)
-      //     })
-      //     .catch((error) => {
-      //       console.log(error)
-      //       this.messageService.add({
-      //         key:'tst',
-      //         severity: 'error',
-      //         summary: 'No se logro guardar el Cron',
-      //         detail: 'Intenta Nuevamente!!!',
-      //       });
-      //     });
+        this.cors.post('Reporte/agregarNuevoCron',data)
+        .then((response) => {
+          console.log(response)
+          })
+          .catch((error) => {
+            console.log(error)
+            this.messageService.add({
+              key:'tst',
+              severity: 'error',
+              summary: 'No se logro guardar el Cron',
+              detail: 'Intenta Nuevamente!!!',
+            });
+          });
 
-      //     setTimeout(() => {
-      //       this.reset()
-      //       this.spinner = false;
-      //       this.tablaExtraccion();
-      //       this.reset()
-      //       /* FLASK */
-      //       // this.http.post('https://izzicron.pagekite.me/programar', post).subscribe(
-      //       //   (res: any) => {
-      //       //     console.log(res)
-      //       //   },
-      //       //   (err: any) => {
-      //       //     console.log(err)
-      //       //   }
-      //       // );
-      //       // this.cron.post('programar', post).subscribe(
-      //       //   (res: any) => {
-      //       //     console.log(res)
-      //       //   },
-      //       //   (err: any) => {
-      //       //     console.log(err)
-      //       //   }
-      //       // );
+          setTimeout(() => {
+            this.reset()
+            this.spinner = false;
+            this.tablaExtraccion();
+            this.reset()
+            /* FLASK */
+            // this.http.post('https://izzicron.pagekite.me/programar', post).subscribe(
+            //   (res: any) => {
+            //     console.log(res)
+            //   },
+            //   (err: any) => {
+            //     console.log(err)
+            //   }
+            // );
+            // this.cron.post('programar', post).subscribe(
+            //   (res: any) => {
+            //     console.log(res)
+            //   },
+            //   (err: any) => {
+            //     console.log(err)
+            //   }
+            // );
     
     
             
-      //     }, 3000);
+          }, 3000);
 
 
-      // })
-      // .catch((error) => {
-      //   console.log(error)
-      //   this.messageService.add({
-      //     key:'tst',
-      //     severity: 'error',
-      //     summary: 'No se logro guardar',
-      //     detail: 'Intenta Nuevamente!!!',
-      //   });
-      // });
+      })
+      .catch((error) => {
+        console.log(error)
+        this.messageService.add({
+          key:'tst',
+          severity: 'error',
+          summary: 'No se logro guardar',
+          detail: 'Intenta Nuevamente!!!',
+        });
+      });
 
       // this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramada2Prueba`,{hora:moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH")})
       // .then((response) => {
