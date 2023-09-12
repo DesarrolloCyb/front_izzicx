@@ -118,7 +118,7 @@
                         <label>Caso de Negocio</label>
                     </span>
                   </div>
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Fallas generales'">
+                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Fallas generales'">
                     <span class="p-float-label">
                         <input
                         type="text"
@@ -128,12 +128,23 @@
                         >
                         <label>Categoría</label>
                     </span>
+                  </div> -->
+
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
+                    <p-dropdown
+                    [options]="catego"
+                    [showClear]="true"
+                    placeholder="Categoría"
+                    formControlName="categoria"
+                    class="custom-dropdown"
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('categoria')?.errors != null && formExtraccion.get('categoria')?.touched == true}"
+                    (onChange)="cambioCategoria($event.value)"
+                    >
+                    </p-dropdown>
                   </div>
 
 
-
-
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['categoria'].value != null">
                     <p-dropdown
                     [options]="mo"
                     [showClear]="true"
@@ -181,18 +192,14 @@
                     >
                     </p-dropdown>
                   </div>
-                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
-                    <p-dropdown
-                    [options]="moClien"
-                    [showClear]="true"
-                    placeholder="Motivo Cliente"
-                    formControlName="motivoCliente"
-                    class="custom-dropdown"
-                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivoCliente')?.errors != null && formExtraccion.get('motivoCliente')?.touched == true}"
-                    
-                    >
-                    </p-dropdown> 
-                    <p-inputSwitch ></p-inputSwitch>
+                  <!-- <div class="field col-12 md:col-4 justify-content-center align-items-center" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
+                    <label for="">El tipo de Programación es: {{formExtraccion.get('tipoProgramacion')?.value == false ? 'Fija':'Consecutiva'}} </label>
+                    <div class="grid flex justify-content-center">
+                      <div class="col-4 text-center">
+                        <p-inputSwitch formControlName="tipoProgramacion"></p-inputSwitch>
+
+                      </div>
+                    </div>
                   </div> -->
 
 
@@ -1015,7 +1022,7 @@
   </div>
 
 
-  <p-dialog header="Header" [(visible)]="modal" [style]="{ width: '35vw',height:'30vw' }">
+<p-dialog header="Header" [(visible)]="modal" [style]="{ width: '35vw',height:'30vw' }">
     <ng-template pTemplate="header">
         <span class="text-xl font-bold">Editar hora</span>
     </ng-template>    

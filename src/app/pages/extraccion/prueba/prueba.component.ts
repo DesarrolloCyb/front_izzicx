@@ -181,6 +181,7 @@ export class PruebaComponent implements OnInit {
   submo:any[]=[];
   solu:any[]=[];
   moClien:any[]=[];
+  catego:any[]=[];
 
   // mo:string[]=[
   //   'ACLARACION DE ESTADO DE CUENTA',
@@ -365,6 +366,8 @@ export class PruebaComponent implements OnInit {
       minuto:[null,Validators.required],
       diasSemana:[null,Validators.required],
 
+      tipoProgramacion:[false]
+
     });
 
     for(let i=0;i<60;i++){
@@ -382,9 +385,9 @@ export class PruebaComponent implements OnInit {
       }
       this.min.push(a);
     }
-    this.cors.get('Reporte/getMostrarCatalogoExtraccionAutomatizadasMotivo').then((response) => {
+    this.cors.get('Reporte/getMostrarCatalogoExtraccionAutomatizadasCategoria').then((response) => {
       // console.log(response)
-      this.mo=response;
+      this.catego=response;
     }).catch((error) => {
       console.log(error)
     })
@@ -428,6 +431,7 @@ export class PruebaComponent implements OnInit {
         "horaProgramacion": "",
         "nombreCron":`${this.formExtraccion.controls['tipoExtraccion'].value}_${randomId}`,
         "scheduleExpression":"",
+        "tipoProgramacion":`${this.formExtraccion.controls['tipoProgramacion'].value}`,
       };
       if(this.formExtraccion.controls['tipoExtraccion'].value === "Cuenta"){
         // console.log("Esto es Cuenta")
@@ -491,68 +495,69 @@ export class PruebaComponent implements OnInit {
       const post = {
         data: data
       }
+      console.log(this.formExtraccion)
       
-      this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
-      .then((response) => {
-        this.messageService.add({
-          key: 'tst',
-          severity: 'success',
-          summary: 'Exito!!!',
-          detail: 'Datos guardados',
-        });
+      // this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
+      // .then((response) => {
+      //   this.messageService.add({
+      //     key: 'tst',
+      //     severity: 'success',
+      //     summary: 'Exito!!!',
+      //     detail: 'Datos guardados',
+      //   });
 
-        this.cors.post('Reporte/agregarNuevoCron',data)
-        .then((response) => {
-          console.log(response)
-          })
-          .catch((error) => {
-            console.log(error)
-            this.messageService.add({
-              key:'tst',
-              severity: 'error',
-              summary: 'No se logro guardar el Cron',
-              detail: 'Intenta Nuevamente!!!',
-            });
-          });
+      //   this.cors.post('Reporte/agregarNuevoCron',data)
+      //   .then((response) => {
+      //     console.log(response)
+      //     })
+      //     .catch((error) => {
+      //       console.log(error)
+      //       this.messageService.add({
+      //         key:'tst',
+      //         severity: 'error',
+      //         summary: 'No se logro guardar el Cron',
+      //         detail: 'Intenta Nuevamente!!!',
+      //       });
+      //     });
 
-          setTimeout(() => {
-            this.reset()
-            this.spinner = false;
-            this.tablaExtraccion();
-            this.reset()
-            /* FLASK */
-            // this.http.post('https://izzicron.pagekite.me/programar', post).subscribe(
-            //   (res: any) => {
-            //     console.log(res)
-            //   },
-            //   (err: any) => {
-            //     console.log(err)
-            //   }
-            // );
-            // this.cron.post('programar', post).subscribe(
-            //   (res: any) => {
-            //     console.log(res)
-            //   },
-            //   (err: any) => {
-            //     console.log(err)
-            //   }
-            // );
+      //     setTimeout(() => {
+      //       this.reset()
+      //       this.spinner = false;
+      //       this.tablaExtraccion();
+      //       this.reset()
+      //       /* FLASK */
+      //       // this.http.post('https://izzicron.pagekite.me/programar', post).subscribe(
+      //       //   (res: any) => {
+      //       //     console.log(res)
+      //       //   },
+      //       //   (err: any) => {
+      //       //     console.log(err)
+      //       //   }
+      //       // );
+      //       // this.cron.post('programar', post).subscribe(
+      //       //   (res: any) => {
+      //       //     console.log(res)
+      //       //   },
+      //       //   (err: any) => {
+      //       //     console.log(err)
+      //       //   }
+      //       // );
     
     
             
-          }, 3000);
+      //     }, 3000);
 
 
-      })
-      .catch((error) => {
-        console.log(error)
-        this.messageService.add({
-          key:'tst',
-          severity: 'error',
-          summary: 'No se logro guardar',
-          detail: 'Intenta Nuevamente!!!',
-        });
-      });
+      // })
+      // .catch((error) => {
+      //   console.log(error)
+      //   this.messageService.add({
+      //     key:'tst',
+      //     severity: 'error',
+      //     summary: 'No se logro guardar',
+      //     detail: 'Intenta Nuevamente!!!',
+      //   });
+      // });
 
       // this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramada2Prueba`,{hora:moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH")})
       // .then((response) => {
@@ -1275,13 +1280,6 @@ export class PruebaComponent implements OnInit {
   
   }
 
-  prueba(){
-    console.log("prueba")
-    this.cors.getCommand(`http://192.168.49.87:2000`).then((response) => {
-      console.log(response)
-
-    })
-  }
 
   // readExcel(event:any){
   //   let file = event.target.files[0];
@@ -1335,13 +1333,18 @@ export class PruebaComponent implements OnInit {
   //   }
 
   // }
+
+
   cambioMotivo(item:any){
-    this.cors.get(`Reporte/getMostrarCatalogoExtraccionAutomatizadasSubmotivoSolucion`,{motivo1:item}).then((response) => {
-      this.submo = response[0].submotivo;
-      this.solu = response[0].solucion;
-    }).catch((error) => {
-      console.log(error)
-    });
+    if(item != null){
+      this.cors.get(`Reporte/getMostrarCatalogoExtraccionAutomatizadasSubmotivoSolucion`,{motivo1:item,categoria:this.formExtraccion.controls['categoria'].value}).then((response) => {
+        this.submo = response[0].submotivo;
+        this.solu = response[0].solucion;
+      }).catch((error) => {
+        console.log(error)
+      });
+
+    }
     this.formExtraccion.get('subMotivo')?.patchValue(null);
     this.formExtraccion.get('solucion')?.patchValue(null);
   }
@@ -1350,13 +1353,15 @@ export class PruebaComponent implements OnInit {
     this.formExtraccion.get('solucion')?.patchValue(null);
     
   }
+
   cambioSolucion(){
 
     if(this.formExtraccion.controls['motivo'].value != null && this.formExtraccion.controls['subMotivo'].value != null && this.formExtraccion.controls['solucion'].value != null){
       this.cors.get(`Reporte/getMostrarCatalogoExtraccionAutomatizadasMotivoCliente`,{
         motivo1:this.formExtraccion.controls['motivo'].value,
         submotivo:this.formExtraccion.controls['subMotivo'].value,
-        solucion:this.formExtraccion.controls['solucion'].value
+        solucion:this.formExtraccion.controls['solucion'].value,
+        categoria:this.formExtraccion.controls['categoria'].value
       }).then((response) => {
         let a = response[0].motivoCliente[0]
         if(a == ''){
@@ -1381,6 +1386,26 @@ export class PruebaComponent implements OnInit {
   
     }
   }
+
+  cambioCategoria(item:any){
+    // console.log(item)
+    this.formExtraccion.get('motivo')?.patchValue(null);
+
+    if(item != null){
+      this.cors.get('Reporte/getMostrarCatalogoExtraccionAutomatizadasMotivo',{
+        categoria1:this.formExtraccion.controls['categoria'].value
+      }).then((response) => {
+        // console.log(response)
+        this.mo = response
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
+  }
+
+
+
+
 
 
 }
