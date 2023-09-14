@@ -625,6 +625,7 @@ export class PruebaComponent implements OnInit {
     this.formExtraccion.controls['tipoOrden'].reset();
     // this.formExtraccion.controls['asignada'].reset();
     this.formExtraccion.controls['horaProgramacion'].reset();
+    this.formExtraccion.controls['tipoProgramacion'].reset();
 
     this.formExtraccion.get('estado')?.clearValidators();
     this.formExtraccion.get('estado')?.updateValueAndValidity();
@@ -658,6 +659,9 @@ export class PruebaComponent implements OnInit {
     this.formExtraccion.get('asignada')?.updateValueAndValidity();
     this.formExtraccion.get('horaProgramacion')?.clearValidators();
     this.formExtraccion.get('horaProgramacion')?.updateValueAndValidity();
+    this.formExtraccion.get('tipoProgramacion')?.clearValidators();
+    this.formExtraccion.get('tipoProgramacion')?.updateValueAndValidity();
+
 
 
   };
