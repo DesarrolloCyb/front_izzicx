@@ -112,11 +112,17 @@
                             IP
                         </div>
                     </th>
+                    <!-- <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Proceso asignado
+                        </div>
+                    </th> -->
                     <th>
                         <div class="flex justify-content-between align-items-center">
                             Proceso asignado
                         </div>
                     </th>
+
 
                     <th>
                         <div class="flex justify-content-between align-items-center">
@@ -150,10 +156,18 @@
                         {{ item.botIp }}
                      </td> 
 
+                    <!-- <td>
+                        <p-dropdown  optionLabel="name_process" optionValue="id" appendTo="body" [options]="processArr"
+                            [disabled]="true"
+                            [(ngModel)]="item.procesoId" [showClear]="false" placeholder="Seleccione un processo"
+                            (onChange)="preguntarCambiarProceso($event.value,item)">
+                        </p-dropdown>
+                        <p-progressSpinner [style]="{width: '30px', height: '30px'}" *ngIf="item.sendingProcess">
+                        </p-progressSpinner>
+                    </td> -->
+                    
                     <td>
-
-
-                        <p-dropdown optionLabel="name_process" optionValue="id" appendTo="body" [options]="processArr"
+                        <p-dropdown optionLabel="name_process" optionValue="id" appendTo="body" [options]="processArr1"
                             [disabled]="item.sendingComand == true || item.sendingProcess ==true"
                             [(ngModel)]="item.procesoId" [showClear]="false" placeholder="Seleccione un processo"
                             (onChange)="preguntarCambiarProceso($event.value,item)">

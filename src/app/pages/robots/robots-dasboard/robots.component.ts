@@ -19,6 +19,7 @@ export class RobotsComponent implements OnInit {
   loading: boolean = false
   dataSource: any[] = []
   processArr: any[] = []
+  processArr1: any[] = []
   @ViewChild('filter') filter!: ElementRef
 
 
@@ -60,6 +61,7 @@ export class RobotsComponent implements OnInit {
   displayLogDialog: boolean = false
   statsBots:any=[];
   loading1: boolean = false
+  excluir:any=[];
 
   constructor(
     private router: Router,
@@ -70,24 +72,7 @@ export class RobotsComponent implements OnInit {
     private socketIo: SocketIoService
   ) {
 
-    this.cors.get('Bots/getCatProcesos').then((response) => {
-      if(response[0] == 'SIN INFO'){
-        this.processArr = [];
-      }else{
-        for(var b=0;b<response.length;b++){
-          if(response[b].status == "1"){
-            let bb = {
-              id:response[b].id,
-              name_process:response[b].name_process
-            }
-            this.processArr.push(bb)
-          }
-        }
-      }
-    }).catch((error) => {
-      console.log(error);
-      this.showToastError(`No se logro traer la lista de procesos`)
-    })
+    this.obtenerProcesos();
 
     this.items = [{
       label: 'Actualizar', icon: 'pi pi-refresh', command: () => {
@@ -178,7 +163,7 @@ export class RobotsComponent implements OnInit {
 
 
   deleteMAquina() {
-    console.log(this.opcionToAction)
+    // console.log(this.opcionToAction)
 
     this.cors.delete(`Bots/EliminarBot?id=${this.opcionToAction.botId}`, 
       {
@@ -219,6 +204,7 @@ export class RobotsComponent implements OnInit {
       message: 'Esta seguro que desea cambiar el proceso?',
       accept: () => {
         this.sendProcess(item, process)
+        this.obtenerProcesos();
       }
     })
 
@@ -307,6 +293,7 @@ export class RobotsComponent implements OnInit {
     ).then((response) => {
       item.sendingProcess = false
       this.buscaBots()
+      this.obtenerProcesos()
 
       this.showToastSuccess(`Se guardo el cambio de proceso del Robot ${item.botIp}`)
     }).catch((error) => {
@@ -380,6 +367,7 @@ export class RobotsComponent implements OnInit {
     })
 
   }
+
   buscaBots() {
     this.cors.get('Bots/getBots').then((response) => {
 
@@ -452,4 +440,59 @@ export class RobotsComponent implements OnInit {
 
     return proccesFind?.name_process || "Sin proceso asignado"
   }
+
+  validacionProceso(){
+    this.processArr1=[];
+    this.processArr1 = this.processArr;
+    this.cors.get('Bots/getValidationProcesos').then((response) => {
+      this.excluir= [];
+      for(let i =0 ; i< response.length ;i++){
+        if(response[i].num >= 3){
+          let b ={
+            nombre:response[i].procesoName
+          }
+          this.excluir.push(b);
+        }
+      }
+      for(let i=0;i<this.processArr1.length ; i++){
+        for(let j=0;j<this.excluir.length ; j++){
+          if(this.processArr1[i].name_process == this.excluir[j].nombre){
+            this.processArr1.splice(i,1);
+          }
+        }
+      }  
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
+
+  obtenerProcesos(){
+      this.cors.get('Bots/getCatProcesos').then((response) => {
+        if(response[0] == 'SIN INFO'){
+          this.processArr = [];
+        }else{
+          this.processArr=[];
+          for(var b=0;b<response.length;b++){
+            if(response[b].status == "1"){
+              let bb = {
+                id:response[b].id,
+                name_process:response[b].name_process
+              }
+              this.processArr.push(bb)
+            }
+          }
+          this.validacionProceso();
+        }
+      }).catch((error) => {
+        console.log(error);
+        this.showToastError(`No se logro traer la lista de procesos`)
+      })
+
+  }
+
+
+
+
+
+
 }
