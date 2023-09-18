@@ -44,7 +44,7 @@
                           <div class="card">
                             <p-table #dt1 [value]="cc" dataKey="id" [rows]="50" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
                                 styleClass="p-datatable-gridlines" [paginator]="true"
-                                [globalFilterFields]="['cuenta','cve_usuario','estado','hub','lead_id','nodo','numOrden','source','status','tipo']" responsiveLayout="scroll">
+                                [globalFilterFields]="['cuenta','numOrden']" responsiveLayout="scroll">
                                 <ng-template pTemplate="caption">
                                     <div class="flex justify-content-center flex-column sm:flex-row">
                     
@@ -253,15 +253,15 @@
                     <div class="row">
                         <div class="cols">
                           <div class="card">
-                            <p-table #dt1 [value]="ext" dataKey="id" [rows]="50" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
+                            <p-table #dt2 [value]="ext" dataKey="id" [rows]="50" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
                                 styleClass="p-datatable-gridlines" [paginator]="true"
-                                [globalFilterFields]="['compania','cuenta','ip','hub','lead_id','nodo','numOrden','source','status','tipo','user_registro','usuario_creo']" responsiveLayout="scroll">
+                                [globalFilterFields]="['cuenta','numOrden']" responsiveLayout="scroll">
                                 <ng-template pTemplate="caption">
                                     <div class="flex justify-content-center flex-column sm:flex-row">
                     
                                         <span class="p-input-icon-left mb-2">
                                             <i class="pi pi-search"></i>
-                                            <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar"
+                                            <input pInputText type="text" #filter (input)="onGlobalFilter(dt2, $event)" placeholder="Buscar"
                                             class="w-full" />
                                         </span>
                                     </div>
