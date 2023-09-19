@@ -30,7 +30,7 @@ export class MenuComponent implements OnInit {
     //   routerLink: ['/capturas'],
       items: [
         {
-          label: 'Home',
+          label: 'Extracciones Manual',
         //   icon: 'pi pi-fw pi-filter',
           icon: 'pi pi-fw pi-external-link',
           routerLink: ['/extraccion'],
@@ -41,7 +41,7 @@ export class MenuComponent implements OnInit {
         //   routerLink: ['/extraccion/automatizados'],
         // },
         {
-          label: 'Extraccion Automatizadas',
+          label: 'Extracciones Automatizadas',
           icon: 'pi pi-fw pi-exclamation-triangle',
           routerLink: ['/extraccion/automatizados'],
         },

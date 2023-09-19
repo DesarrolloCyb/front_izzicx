@@ -15,7 +15,10 @@ import { CronService } from 'app/_services/cron.service';
 import { nanoid } from 'nanoid';
 import * as XLSX from 'xlsx';
 
-
+interface AutoCompleteCompleteEvent {
+  originalEvent: Event;
+  query: string;
+}
 @Component({
   selector: 'prueba',
   templateUrl: './prueba.component.html',
@@ -182,7 +185,11 @@ export class PruebaComponent implements OnInit {
   solu:any[]=[];
   moClien:any[]=[];
   catego:any[]=[];
-
+  filterCat:any[]=[];
+  filterMotivo:any[]=[];
+  filterSub:any[]=[];
+  filterSol:any[]=[];
+  filterMotivoCli:any[]=[];
   // mo:string[]=[
   //   'ACLARACION DE ESTADO DE CUENTA',
   //   'AL COLGAR SE REGRESA LLAMADA',
@@ -1350,11 +1357,68 @@ export class PruebaComponent implements OnInit {
     }
     this.formExtraccion.get('subMotivo')?.patchValue(null);
     this.formExtraccion.get('solucion')?.patchValue(null);
+    this.formExtraccion.get('motivoCliente')?.patchValue(null);
+  }
+
+  cleanMo(item:any){
+    this.formExtraccion.get('motivo')?.patchValue(null);
+    this.formExtraccion.get('subMotivo')?.patchValue(null);
+    this.formExtraccion.get('solucion')?.patchValue(null);
+  }
+  
+  inputMo(){
+    this.submo=[];
+    this.solu=[];
+    if(this.formExtraccion.controls['motivo'].value ==""){
+      this.formExtraccion.get('motivo')?.patchValue(null);
+      this.formExtraccion.get('submotivo')?.patchValue(null);
+
+    }
+  }
+
+  filterMo(event: AutoCompleteCompleteEvent) {
+      let filtered: any[] = [];
+      let query = event.query;
+
+      for (let i = 0; i < (this.mo as any[]).length; i++) {
+          let country = (this.mo as any[])[i];
+          if (country.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+              filtered.push(country);
+          }
+      }
+
+      this.filterMotivo = filtered;
   }
   
   cambioSubmotivo(){
     this.formExtraccion.get('solucion')?.patchValue(null);
     
+  }
+
+  cleanSub(item:any){
+    this.formExtraccion.get('subMotivo')?.patchValue(null);
+    this.formExtraccion.get('solucion')?.patchValue(null);
+  }
+  
+  inputSub(){
+    if(this.formExtraccion.controls['subMotivo'].value ==""){
+      this.formExtraccion.get('subMotivo')?.patchValue(null);
+
+    }
+  }
+
+  filterSubm(event: AutoCompleteCompleteEvent) {
+      let filtered: any[] = [];
+      let query = event.query;
+
+      for (let i = 0; i < (this.submo as any[]).length; i++) {
+          let country = (this.submo as any[])[i];
+          if (country.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+              filtered.push(country);
+          }
+      }
+
+      this.filterSub = filtered;
   }
 
   cambioSolucion(){
@@ -1390,8 +1454,36 @@ export class PruebaComponent implements OnInit {
     }
   }
 
+  cleanSolucion(item:any){
+    this.formExtraccion.get('solucion')?.patchValue(null);
+    this.formExtraccion.get('motivoCliente')?.patchValue(null);
+    // this.formExtraccion.get('categoria')?.patchValue(null);
+  }
+  
+  inputSol(){
+    this.moClien=[]
+    if(this.formExtraccion.controls['solucion'].value ==""){
+      this.formExtraccion.get('moCliente')?.patchValue(null);
+      // this.formExtraccion.get('categoria')?.patchValue(null);
+
+    }
+  }
+
+  filterSolu(event: AutoCompleteCompleteEvent) {
+      let filtered: any[] = [];
+      let query = event.query;
+
+      for (let i = 0; i < (this.solu as any[]).length; i++) {
+          let country = (this.solu as any[])[i];
+          if (country.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+              filtered.push(country);
+          }
+      }
+
+      this.filterSol = filtered;
+  }
+
   cambioCategoria(item:any){
-    // console.log(item)
     this.formExtraccion.get('motivo')?.patchValue(null);
 
     if(item != null){
@@ -1404,9 +1496,50 @@ export class PruebaComponent implements OnInit {
         console.log(error)
       })
     }
+    // console.log(this.formExtraccion)
   }
 
+  cleanCategoria(item:any){
+    this.formExtraccion.get('motivo')?.patchValue(null);
+    this.formExtraccion.get('categoria')?.patchValue(null);
+  }
+  
+  inputCategoria(){
+    this.mo=[]
+    if(this.formExtraccion.controls['categoria'].value ==""){
+      this.formExtraccion.get('motivo')?.patchValue(null);
+      this.formExtraccion.get('categoria')?.patchValue(null);
 
+    }
+  }
+
+  filterCategory(event: AutoCompleteCompleteEvent) {
+      let filtered: any[] = [];
+      let query = event.query;
+
+      for (let i = 0; i < (this.catego as any[]).length; i++) {
+          let country = (this.catego as any[])[i];
+          if (country.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+              filtered.push(country);
+          }
+      }
+
+      this.filterCat = filtered;
+  }
+
+  filterMotivoCl(event: AutoCompleteCompleteEvent) {
+    let filtered: any[] = [];
+    let query = event.query;
+
+    for (let i = 0; i < (this.moClien as any[]).length; i++) {
+        let country = (this.moClien as any[])[i];
+        if (country.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(country);
+        }
+    }
+
+    this.filterMotivoCli = filtered;
+}
 
 
 

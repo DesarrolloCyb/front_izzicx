@@ -138,8 +138,14 @@
                         <label>Categoría</label>
                     </span>
                   </div> -->
-
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
+                    <p-autoComplete [showClear]="true" formControlName="categoria" 
+                    [dropdown]="true" (onSelect)="cambioCategoria($event)" (onClear)="cleanCategoria($event)" (input)="inputCategoria()"
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('categoria')?.errors != null && formExtraccion.get('categoria')?.touched == true}"
+                     placeholder="Categoría" [suggestions]="filterCat" (completeMethod)="filterCategory($event)">
+                    </p-autoComplete>
+                  </div>
+                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
                     <p-dropdown
                     [options]="catego"
                     [showClear]="true"
@@ -150,10 +156,10 @@
                     (onChange)="cambioCategoria($event.value)"
                     >
                     </p-dropdown>
-                  </div>
+                  </div> -->
 
 
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['categoria'].value != null">
+                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['categoria'].value != null">
                     <p-dropdown
                     [options]="mo"
                     [showClear]="true"
@@ -164,8 +170,18 @@
                     (onChange)="cambioMotivo($event.value)"
                     >
                     </p-dropdown>
+                  </div> -->
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['categoria'].value != null">
+                    <p-autoComplete [showClear]="true" formControlName="motivo" 
+                    [dropdown]="true" (onSelect)="cambioMotivo($event)" (onClear)="cleanMo($event)" (input)="inputMo()"
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivo')?.errors != null && formExtraccion.get('motivo')?.touched == true}"
+                     placeholder="Motivo" [suggestions]="filterMotivo" (completeMethod)="filterMo($event)">
+                    </p-autoComplete>
                   </div>
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value != null">
+
+
+
+                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value != null">
                     <p-dropdown
                     [options]="submo"
                     [showClear]="true"
@@ -176,8 +192,18 @@
                     (onChange)="cambioSubmotivo()"
                     >
                     </p-dropdown>
+                  </div> -->
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value != null">
+                    <p-autoComplete [showClear]="true" formControlName="subMotivo" 
+                    [dropdown]="true" (onSelect)="cambioSubmotivo()" (onClear)="cleanSub($event)" (input)="inputSub()"
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('subMotivo')?.errors != null && formExtraccion.get('subMotivo')?.touched == true}"
+                     placeholder="SubMotivo" [suggestions]="filterSub" (completeMethod)="filterSubm($event)">
+                    </p-autoComplete>
                   </div>
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value != null && formExtraccion.controls['subMotivo'].value != null  ">
+
+
+
+                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value != null && formExtraccion.controls['subMotivo'].value != null  ">
                     <p-dropdown
                     [options]="solu"
                     [showClear]="true"
@@ -188,8 +214,16 @@
                     (onChange)="cambioSolucion()"
                     >
                     </p-dropdown>
+                  </div> -->
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['subMotivo'].value != null">
+                    <p-autoComplete [showClear]="true" formControlName="solucion" 
+                    [dropdown]="true" (onSelect)="cambioSolucion()" (onClear)="cleanSolucion($event)" (input)="inputSol()"
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('solucion')?.errors != null && formExtraccion.get('solucion')?.touched == true}"
+                     placeholder="Solución" [suggestions]="filterSol" (completeMethod)="filterSolu($event)">
+                    </p-autoComplete>
                   </div>
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value != null && formExtraccion.controls['subMotivo'].value != null && formExtraccion.controls['solucion'].value != null">
+
+                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value != null && formExtraccion.controls['subMotivo'].value != null && formExtraccion.controls['solucion'].value != null">
                     <p-dropdown
                     [options]="moClien"
                     [showClear]="true"
@@ -200,7 +234,16 @@
                     
                     >
                     </p-dropdown>
+                  </div> -->
+
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['solucion'].value != null">
+                    <p-autoComplete [showClear]="true" formControlName="motivoCliente" 
+                    [dropdown]="true"
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivoCliente')?.errors != null && formExtraccion.get('motivoCliente')?.touched == true}"
+                     placeholder="Motivo Cliente" [suggestions]="filterMotivoCli" (completeMethod)="filterMotivoCl($event)">
+                    </p-autoComplete>
                   </div>
+
 
 
  
@@ -827,13 +870,13 @@
                           </th>
                           <th>
                               <div  class="flex justify-content-center align-items-center">
-                                  Fecha de Extracción
+                                  Fecha de Programación
       
                               </div>
                           </th>
                           <th>
                               <div  class="flex justify-content-center align-items-center">
-                                  Hora Programada
+                                  Parámetros de Programación
       
                               </div>
                           </th>
@@ -937,7 +980,7 @@
                     </th>
                     <th>
                         <div style="width: 150px;" class="flex justify-content-center align-items-center">
-                            Fecha de Extracción
+                            Fecha de Programación
 
                         </div>
                     </th>
@@ -958,7 +1001,7 @@
                     </th>
                     <th>
                       <div class="flex justify-content-center align-items-center" style="white-space: pre-line;">
-                          Hora Programación
+                          Párametros de Programación
                       </div>
                     </th>
                     <th>
