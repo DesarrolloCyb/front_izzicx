@@ -64,11 +64,11 @@ export class ReportesIzziDashComponent implements OnInit {
         let nomArchivo="";
         // console.log(a)
         console.log(this.formReporte.value)
-        if(this.formReporte.value.tipoReporte =='Ajustes (Cobranza y Latte fe)'){
-          console.log("Ajustes (Cobranza y Latte fe)")
+        if(this.formReporte.value.tipoReporte =='Ajustes (Cobranza y Late fee)'){
+          console.log("Ajustes (Cobranza y Late fee)")
           url = `ReportesIzzi/getReporteAjustesCasoNegocioCobranza`;
           para =`fecha1=${fechaini}&fecha2=${fechafin}`;
-          nomArchivo="Reporte_Ajustes_Cobranza_latte"
+          nomArchivo="Reporte_Ajustes_Cobranza_Late_Fee"
           // console.log(`${url}?${para}`)
         }else if(this.formReporte.value.tipoReporte =='Depuracion OS'){
           console.log("Depuracion OS")
