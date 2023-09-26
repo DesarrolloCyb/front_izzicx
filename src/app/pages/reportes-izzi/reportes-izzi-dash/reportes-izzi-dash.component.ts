@@ -63,11 +63,12 @@ export class ReportesIzziDashComponent implements OnInit {
         }
         let nomArchivo="";
         // console.log(a)
+        console.log(this.formReporte.value)
         if(this.formReporte.value.tipoReporte =='Ajustes (Cobranza y Latte fe)'){
           console.log("Ajustes (Cobranza y Latte fe)")
           url = `ReportesIzzi/getReporteAjustesCasoNegocioCobranza`;
           para =`fecha1=${fechaini}&fecha2=${fechafin}`;
-          nomArchivo="Reporte_Ajustes_CN_Cobranza"
+          nomArchivo="Reporte_Ajustes_Cobranza_latte"
           // console.log(`${url}?${para}`)
         }else if(this.formReporte.value.tipoReporte =='Depuracion OS'){
           console.log("Depuracion OS")
@@ -85,7 +86,7 @@ export class ReportesIzziDashComponent implements OnInit {
           console.log("Ajustes Sucursales")
           url = `ReportesIzzi/getReporteAjustesCambioServicios`;
           para =`fecha1=${fechaini}&fecha2=${fechafin}`
-          nomArchivo="Reporte_Ajustes_CambioServicio"
+          nomArchivo="Reporte_Ajustes_Sucursales"
           // console.log(`${url}?${para}`)
         }else if(this.formReporte.value.tipoReporte =='Ajustes Sin Validacion'){
           console.log("Ajustes Sin Validacion")
