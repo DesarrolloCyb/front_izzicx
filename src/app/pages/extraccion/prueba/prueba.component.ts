@@ -1618,6 +1618,20 @@ filterAreaAct(event: AutoCompleteCompleteEvent) {
   this.filterareaAct = filtered;
 }
 
+filterEstaAct(event: AutoCompleteCompleteEvent) {
+  let filtered: any[] = [];
+  let query = event.query;
+
+  for (let i = 0; i < (this.estadoAct as any[]).length; i++) {
+      let country = (this.estadoAct as any[])[i];
+      if (country.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+          filtered.push(country);
+      }
+  }
+
+  this.filterestadoAct = filtered;
+}
+
 
 
 
