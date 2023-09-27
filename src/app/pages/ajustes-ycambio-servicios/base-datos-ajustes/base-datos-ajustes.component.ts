@@ -56,7 +56,7 @@ export class BaseDatosAjustesComponent implements OnInit {
         var workBook = XLSX.read(fileReader.result,{type:'binary',cellDates:true })
         var sheetNames =  workBook.SheetNames;
         this.ExcelData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]],{defval: ''});
-        console.log(this.ExcelData)
+        // console.log(this.ExcelData)
         for(let [key,value] of Object.entries(this.ExcelData[0])){
           // console.log("Esto es cabezera",key)
           for(let i = 0 ; i<this.headers.length;i++){
