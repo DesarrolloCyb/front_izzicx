@@ -190,6 +190,16 @@ export class PruebaComponent implements OnInit {
   filterSub:any[]=[];
   filterSol:any[]=[];
   filterMotivoCli:any[]=[];
+  tipoOrOS:any=[];
+  estadoOS:any=[];
+  tipoAct:any=[];
+  areaAct:any=[];
+  estadoAct:any=[];
+  filtertipoOrOS:any=[];
+  filterestadoOS:any=[];
+  filtertipoAct:any=[];
+  filterareaAct:any=[];
+  filterestadoAct:any=[];
   // mo:string[]=[
   //   'ACLARACION DE ESTADO DE CUENTA',
   //   'AL COLGAR SE REGRESA LLAMADA',
@@ -395,6 +405,17 @@ export class PruebaComponent implements OnInit {
     this.cors.get('Reporte/getMostrarCatalogoExtraccionAutomatizadasCategoria').then((response) => {
       // console.log(response)
       this.catego=response;
+    }).catch((error) => {
+      console.log(error)
+    })
+
+    this.cors.get('Reporte/getMostrarCatalogoExtraccionAutomatizadasOSACT').then((response) => {
+      console.log(response[0])
+      this.estadoOS=response[0].estadoOS;
+      this.tipoOrOS=response[0].tipoOrden;
+      this.tipoAct=response[0].tipo;
+      this.areaAct=response[0].area;
+      this.estadoAct=response[0].estadoAct;
     }).catch((error) => {
       console.log(error)
     })
@@ -1540,6 +1561,74 @@ export class PruebaComponent implements OnInit {
 
     this.filterMotivoCli = filtered;
 }
+
+filterEstadoOS(event: AutoCompleteCompleteEvent) {
+  let filtered: any[] = [];
+  let query = event.query;
+
+  for (let i = 0; i < (this.estadoOS as any[]).length; i++) {
+      let country = (this.estadoOS as any[])[i];
+      if (country.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+          filtered.push(country);
+      }
+  }
+
+  this.filterestadoOS = filtered;
+}
+
+filterTipoOrdenOS(event: AutoCompleteCompleteEvent) {
+  let filtered: any[] = [];
+  let query = event.query;
+
+  for (let i = 0; i < (this.tipoOrOS as any[]).length; i++) {
+      let country = (this.tipoOrOS as any[])[i];
+      if (country.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+          filtered.push(country);
+      }
+  }
+
+  this.filtertipoOrOS = filtered;
+}
+
+filterTipoAct(event: AutoCompleteCompleteEvent) {
+  let filtered: any[] = [];
+  let query = event.query;
+
+  for (let i = 0; i < (this.tipoAct as any[]).length; i++) {
+      let country = (this.tipoAct as any[])[i];
+      if (country.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+          filtered.push(country);
+      }
+  }
+
+  this.filtertipoAct = filtered;
+}
+
+filterAreaAct(event: AutoCompleteCompleteEvent) {
+  let filtered: any[] = [];
+  let query = event.query;
+
+  for (let i = 0; i < (this.areaAct as any[]).length; i++) {
+      let country = (this.areaAct as any[])[i];
+      if (country.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+          filtered.push(country);
+      }
+  }
+
+  this.filterareaAct = filtered;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

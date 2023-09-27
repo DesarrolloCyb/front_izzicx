@@ -56,6 +56,7 @@ export class BaseDatosAjustesComponent implements OnInit {
         var workBook = XLSX.read(fileReader.result,{type:'binary',cellDates:true })
         var sheetNames =  workBook.SheetNames;
         this.ExcelData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]],{defval: ''});
+        console.log(this.ExcelData)
         for(let [key,value] of Object.entries(this.ExcelData[0])){
           // console.log("Esto es cabezera",key)
           for(let i = 0 ; i<this.headers.length;i++){
@@ -71,12 +72,12 @@ export class BaseDatosAjustesComponent implements OnInit {
             this.ExcelData[key]["Cve_usuario"]=this.usuario.email;
             this.ExcelData[key]["Procesando"]="0";
             this.ExcelData[key]["IP"]="";
-            this.ExcelData[key]["Fecha_Carga"]=moment(Date.now()).format('yyyy-MM-DD hh:mm:ss');
+            this.ExcelData[key]["Fecha_Carga"]=moment(Date.now()).format('yyyy-MM-DD HH:mm:ss');
             this.ExcelData[key]["Motivo"]=this.ExcelData[key]["Descripción"];
-            let a=moment(this.ExcelData[key]["Fecha de apertura"]).format('yyyy-MM-DD hh:mm:ss');
-            this.ExcelData[key]["Creado_1"]=a;
-            let c=moment(this.ExcelData[key]["Cierre Estimado"]).format('yyyy-MM-DD hh:mm:ss');
-            this.ExcelData[key]["Vencimiento"]=c;
+            // let a=moment().format('yyyy-MM-DD hh:mm:ss');
+            this.ExcelData[key]["Creado_1"]=this.ExcelData[key]["Fecha de apertura"];
+            // let c=moment().format('yyyy-MM-DD hh:mm:ss');
+            this.ExcelData[key]["Vencimiento"]=this.ExcelData[key]["Cierre Estimado"];
   
             delete this.ExcelData[key]["Descripción"];
             delete this.ExcelData[key]["Cierre Estimado"];

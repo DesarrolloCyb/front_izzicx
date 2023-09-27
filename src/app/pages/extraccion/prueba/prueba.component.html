@@ -30,7 +30,8 @@
                       </p-dropdown>
                   </div>
     
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Cuenta' || formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Actividades' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio' || formExtraccion.controls['tipoExtraccion'].value == 'Pagos' || formExtraccion.controls['tipoExtraccion'].value == 'Fallas generales'">
+                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Cuenta' || formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Actividades' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio' || formExtraccion.controls['tipoExtraccion'].value == 'Pagos' || formExtraccion.controls['tipoExtraccion'].value == 'Fallas generales'"> -->
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' ">
                     <span class="p-float-label">
                         <input
                         type="text"
@@ -41,7 +42,15 @@
                         <label>Estado</label>
                     </span>
                   </div>
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Cuenta' || formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio' ">
+                    <p-autoComplete [showClear]="true" formControlName="estado" 
+                    [dropdown]="true" 
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('estado')?.errors != null && formExtraccion.get('estado')?.touched == true}"
+                     placeholder="Estado" [suggestions]="filterestadoOS" (completeMethod)="filterEstadoOS($event)">
+                    </p-autoComplete>
+
+                  </div>
+                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Cuenta' || formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
                     <span class="p-float-label">
                         <input
                         type="text"
@@ -51,6 +60,13 @@
                         >
                         <label>Tipo</label>
                     </span>
+                  </div> -->
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
+                    <p-autoComplete [showClear]="true" formControlName="tipo" 
+                    [dropdown]="true" 
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('tipo')?.errors != null && formExtraccion.get('tipo')?.touched == true}"
+                     placeholder="Tipo" [suggestions]="filtertipoAct" (completeMethod)="filterTipoAct($event)">
+                    </p-autoComplete>
                   </div>
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Cuenta'">
                     <span class="p-float-label">
@@ -296,7 +312,7 @@
                     </span>
                   </div>
       -->
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
+                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
                     <span class="p-float-label">
                         <input
                         type="text"
@@ -306,6 +322,14 @@
                         >
                         <label>Área de Conocimiento</label>
                     </span>
+                  </div> -->
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
+                    <p-autoComplete [showClear]="true" formControlName="areaConocimiento" 
+                    [dropdown]="true" 
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('areaConocimiento')?.errors != null && formExtraccion.get('areaConocimiento')?.touched == true}"
+                     placeholder="Área de Conocimiento" [suggestions]="filterareaAct" (completeMethod)="filterAreaAct($event)">
+                    </p-autoComplete>
+
                   </div>
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
                     <!-- <span class="p-float-label">
@@ -418,7 +442,7 @@
                         <label>Número de Orden</label>
                     </span>
                   </div>
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
+                  <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
                     <span class="p-float-label">
                         <input
                         type="text"
@@ -428,7 +452,16 @@
                         >
                         <label>Tipo de Orden</label>
                     </span>
+                  </div> -->
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
+                    <p-autoComplete [showClear]="true" formControlName="tipoOrden" 
+                    [dropdown]="true" 
+                    [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('tipoOrden')?.errors != null && formExtraccion.get('tipoOrden')?.touched == true}"
+                     placeholder="Tipo de Orden" [suggestions]="filtertipoOrOS" (completeMethod)="filterTipoOrdenOS($event)">
+                    </p-autoComplete>
+
                   </div>
+
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
                     <!-- <span class="p-float-label">
                         <p-calendar
