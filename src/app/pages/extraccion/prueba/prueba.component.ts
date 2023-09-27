@@ -200,6 +200,22 @@ export class PruebaComponent implements OnInit {
   filtertipoAct:any=[];
   filterareaAct:any=[];
   filterestadoAct:any=[];
+  editForm:any={
+    "id": "",
+    "cve_usuario": ``,
+    "tipoExtraccion":``,
+    "fechaCompletado": "",
+    "status": "",
+    "ip": "",
+    "parametrosExtraccion":"",
+    "procesando": "",
+    "fechaExtraccion": "",
+    "archivo": "",
+    "horaProgramacion": "",
+    "nombreCron":``,
+    "scheduleExpression":"",
+    "tipoProgramacion":""
+  };
   // mo:string[]=[
   //   'ACLARACION DE ESTADO DE CUENTA',
   //   'AL COLGAR SE REGRESA LLAMADA',
@@ -410,7 +426,7 @@ export class PruebaComponent implements OnInit {
     })
 
     this.cors.get('Reporte/getMostrarCatalogoExtraccionAutomatizadasOSACT').then((response) => {
-      console.log(response[0])
+      // console.log(response[0])
       this.estadoOS=response[0].estadoOS;
       this.tipoOrOS=response[0].tipoOrden;
       this.tipoAct=response[0].tipo;
@@ -1105,10 +1121,17 @@ export class PruebaComponent implements OnInit {
   }
 
   editar(item:any){ 
-    // console.log("editar",item)
+    if(item.tipoProgramacion == "0"){
+      item.tipoProgramacion = false
+    }else if(item.tipoProgramacion == "1"){
+      
+      item.tipoProgramacion = true
+    }
     this.modal=true;
-    this.nuevaHora = item.horaProgramacion.substring(0,5);
-    this.id=item.id;
+    this.editForm = item;
+    console.log(this.editForm)
+    // this.nuevaHora = item.horaProgramacion.substring(0,5);
+    // this.id=item.id;
     // console.log(this.nuevaHora)
     // console.log(this.id)
   }
