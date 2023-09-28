@@ -3,7 +3,7 @@ import { UntypedFormBuilder,UntypedFormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 moment.lang('es');
-import { Message, MessageService } from 'primeng/api';
+import { Message, MessageService,ConfirmationService,ConfirmEventType } from 'primeng/api';
 import { CorsService } from '@services';
 import { Table } from 'primeng/table';
 
@@ -22,7 +22,8 @@ interface AutoCompleteCompleteEvent {
 @Component({
   selector: 'prueba',
   templateUrl: './prueba.component.html',
-  styleUrls: ['./prueba.component.scss']
+  styleUrls: ['./prueba.component.scss'],
+  providers: [ConfirmationService, MessageService]
 })
 export class PruebaComponent implements OnInit {
   usuario: any = JSON.parse(localStorage.getItem("userData") || "{}")
@@ -214,7 +215,10 @@ export class PruebaComponent implements OnInit {
     "horaProgramacion": "",
     "nombreCron":``,
     "scheduleExpression":"",
-    "tipoProgramacion":""
+    "tipoProgramacion":"",
+    "correo":"",
+    "medioExtraccion":"",
+
   };
   // mo:string[]=[
   //   'ACLARACION DE ESTADO DE CUENTA',
@@ -346,7 +350,11 @@ export class PruebaComponent implements OnInit {
   // ];
 
 
-  constructor(private formBuilder: UntypedFormBuilder,private router:Router,private messageService: MessageService,private cors: CorsService, private http: HttpClient, private cron: CronService,private httpClient: HttpClient) {
+  constructor(private formBuilder: UntypedFormBuilder,
+    private router:Router,private messageService: MessageService,
+    private cors: CorsService, private http: HttpClient, 
+    private cron: CronService,private httpClient: HttpClient,
+    private confirmationService: ConfirmationService) {
     this.formExtraccion = this.formBuilder.group({
       tipoExtraccion: [null, Validators.required],
 
@@ -399,7 +407,9 @@ export class PruebaComponent implements OnInit {
       minuto:[null,Validators.required],
       diasSemana:[null,Validators.required],
 
-      tipoProgramacion:[false]
+      tipoProgramacion:[false],
+      correo:[null],
+      medioExtraccion:[false],
 
     });
 
@@ -476,6 +486,8 @@ export class PruebaComponent implements OnInit {
         "nombreCron":`${this.formExtraccion.controls['tipoExtraccion'].value}_${randomId}`,
         "scheduleExpression":"",
         "tipoProgramacion":`${this.formExtraccion.controls['tipoProgramacion'].value == true ? "1":"0"}`,
+        "correo":`${this.formExtraccion.controls['correo'].value }`,
+        "medioExtraccion":`${this.formExtraccion.controls['medioExtraccion'].value }`,
       };
       if(this.formExtraccion.controls['tipoExtraccion'].value === "Cuenta"){
         // console.log("Esto es Cuenta")
@@ -931,6 +943,90 @@ export class PruebaComponent implements OnInit {
         //   const jsonArray = JSON.parse(response[i].parametrosExtraccion);
         //   response[i].parametrosExtraccion = jsonArray;
         // }
+        for(let i = 0 ; i<response.length;i++){
+          if(response[i].procesando && response[i].procesando=="1"){
+            response[i].procesando="Si"
+          }else{
+            response[i].procesando="No"
+          }
+          if(response[i].parametrosExtraccion){
+            let modifiedString;
+            if(response[i].tipoExtraccion == "Casos de negocio"){
+              modifiedString = response[i].parametrosExtraccion
+              .replace(/"estado":"(.*?)",/g, (match:any, p1:any) => {
+                // const modifiedestado = p1.replace(/"/g, '\\"'); //pone \ a los "" que sobran
+                const modifiedestado = p1.replace(/"/g, "'");
+                return `"estado":"${modifiedestado}",`;
+              }).replace(/"cuenta":"(.*?)",/g, (match:any, p1:any) => {
+                const modifiedcuenta = p1.replace(/"/g, "'");
+                return `"cuenta":"${modifiedcuenta}",`;
+              }).replace(/"medioContacto":"(.*?)",/g, (match:any, p1:any) => {
+                const modifiedmedioContacto = p1.replace(/"/g, "'");
+                return `"medioContacto":"${modifiedmedioContacto}",`;
+              }).replace(/"casoNegocio":"(.*?)",/g, (match:any, p1:any) => {
+                const modifiedcasoNegocio = p1.replace(/"/g, "'");
+                return `"casoNegocio":"${modifiedcasoNegocio}",`;
+              }).replace(/"categoria":"(.*?)",/g, (match:any, p1:any) => {
+                const modifiedcategoria = p1.replace(/"/g, "'");
+                return `"categoria":"${modifiedcategoria}",`;
+              }).replace(/"motivo":"(.*?)",/g, (match:any, p1:any) => {
+                const modifiedmotivo = p1.replace(/"/g, "'");
+                return `"motivo":"${modifiedmotivo}",`; 
+              }).replace(/"subMotivo":"(.*?)",/g, (match:any, p1:any) => {
+                const modifiedSubMotivo = p1.replace(/"/g, "'");
+                return `"subMotivo":"${modifiedSubMotivo}",`;
+              }).replace(/"solucion":"(.*?)",/g, (match:any, p1:any) => {
+                const modifiedSolucion = p1.replace(/"/g, "'");
+                return `"solucion":"${modifiedSolucion}",`;
+              }).replace(/"motivoCliente":"(.*?)(?=}])/g, (match:any, p1:any) => {
+                const modifiedmotivoCliente = p1.replace(/"/g, "'");
+                // console.log(match)
+                // console.log(p1)
+                return `"motivoCliente":"${modifiedmotivoCliente}"`;
+              });
+            }else if(response[i].tipoExtraccion == "Actividades"){
+              modifiedString = response[i].parametrosExtraccion
+              .replace(/"estado":"(.*?)",/g, (match:any, p1:any) => {
+                // const modifiedestado = p1.replace(/"/g, '\\"'); //pone \ a los "" que sobran
+                const modifiedestado = p1.replace(/"/g, "'");
+                return `"estado":"${modifiedestado}",`;
+              }).replace(/"areaConocimiento":"(.*?)",/g, (match:any, p1:any) => {
+                const modifiedareaConocimiento = p1.replace(/"/g, "'");
+                return `"areaConocimiento":"${modifiedareaConocimiento}",`;
+              }).replace(/"tipo":"(.*?)",/g, (match:any, p1:any) => {
+                const modifiedtipo = p1.replace(/"/g, "'");
+                return `"tipo":"${modifiedtipo}",`;
+              });
+            }else if(response[i].tipoExtraccion == "Ordenes de servicio"){
+              modifiedString = response[i].parametrosExtraccion
+              .replace(/"cuenta":"(.*?)",/g, (match:any, p1:any) => {
+                const modifiedcuenta = p1.replace(/"/g, "'");
+                return `"cuenta":"${modifiedcuenta}",`;
+              }).replace(/"compania":"(.*?)",/g, (match:any, p1:any) => {
+                const modifiedcompania = p1.replace(/"/g, "'");
+                return `"compania":"${modifiedcompania}",`;
+              }).replace(/"telefonos":"(.*?)",/g, (match:any, p1:any) => {
+                const modifiedtelefonos = p1.replace(/"/g, "'");
+                return `"telefonos":"${modifiedtelefonos}",`;
+              }).replace(/"numOrden":"(.*?)",/g, (match:any, p1:any) => {
+                const modifiednumOrden = p1.replace(/"/g, "'");
+                return `"numOrden":"${modifiednumOrden}",`;
+              }).replace(/"tipoOrden":"(.*?)",/g, (match:any, p1:any) => {
+                const modifiedtipoOrden = p1.replace(/"/g, "'");
+                return `"tipoOrden":"${modifiedtipoOrden}",`; 
+              }).replace(/"estado":"(.*?)(?=}])/g, (match:any, p1:any) => {
+                const modifiedestado = p1.replace(/"/g, "'");
+                return `"estado":"${modifiedestado}"`;
+              });
+            }
+            // console.log(modifiedString)    
+            let jsonArray = JSON.parse(modifiedString);
+            // console.log(jsonArray)
+            response[i].parametrosExtraccion = jsonArray;
+
+          }
+        }
+
         
         this.datosExtraccion2 = response;
 
@@ -1124,11 +1220,31 @@ export class PruebaComponent implements OnInit {
     if(item.tipoProgramacion == "0"){
       item.tipoProgramacion = false
     }else if(item.tipoProgramacion == "1"){
-      
       item.tipoProgramacion = true
     }
     this.modal=true;
     this.editForm = item;
+    const inputString = this.editForm.parametrosExtraccion[0].fechaApertura;
+    const regex = /'(\d{1,2}\/\d{1,2}\/\d{4})'/g;
+    let matches = inputString.match(regex);
+    if (matches && matches.length >= 2) {
+      let a=matches[0].replace(/'/g, ''); 
+      let b=matches[1].replace(/'/g, '');
+      matches[0]=a;
+      matches[1]=b;
+      let fechas: Date[] = [];
+      for (const fechaStr of matches) {
+        const parts = fechaStr.split('/');
+        if (parts.length === 3) {
+          const day = parseInt(parts[0]);
+          const month = parseInt(parts[1]); // Restar 1 al mes, ya que en Date los meses van de 0 a 11
+          const year = parseInt(parts[2]);
+          fechas.push(new Date(year, month, day));
+        }
+      }
+      matches = fechas;
+      this.editForm.parametrosExtraccion[0].fechaApertura = matches
+    }   
     console.log(this.editForm)
     // this.nuevaHora = item.horaProgramacion.substring(0,5);
     // this.id=item.id;
@@ -1656,8 +1772,32 @@ filterEstaAct(event: AutoCompleteCompleteEvent) {
 }
 
 
+confirm1(item:any) {
+  this.confirmationService.confirm({
+      message: `Deseas eliminar esta Extracción? - ${item.tipoExtraccion}`,
+      header: 'Confirmación',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+          // this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'Ha sido Aceptado' });
+          this.eliminar(item);
+      },
+      reject: (type: any) => {
+          switch (type as ConfirmEventType) {
+              case ConfirmEventType.REJECT:
+                  this.messageService.add({ severity: 'error', summary: 'Rechazado', detail: 'Ha sido Rechazado' });
+                  break;
+              case ConfirmEventType.CANCEL:
+                  this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Ha sido Cancelado' });
+                  break;        
+          }
+      }
+  });
+}
 
-
+medioExtraccionChange(item:any){
+  this.formExtraccion.controls['telefonos']?.reset();
+  this.formExtraccion.controls['compania']?.reset();
+}
 
 
 

@@ -17,6 +17,16 @@
                     </div>
                   </div>
                 </div>
+                <div class="field col-12 md:col-6 justify-content-center align-items-center" >
+                  <div class="grid flex justify-content-center">
+                    <div class="col-8 text-center">
+                      <label for="">El medio de Extracción es: {{formExtraccion.get('medioExtraccion')?.value == true ? 'General':'Vista'}} </label><br>
+                      <p-inputSwitch formControlName="medioExtraccion" (onChange)="medioExtraccionChange($event)"></p-inputSwitch>
+
+                    </div>
+                  </div>
+                </div>
+
                   <div class="field col-12 md:col-6">
                       <p-dropdown
                       [options]="tipoExtraccion"
@@ -29,7 +39,8 @@
                       >
                       </p-dropdown>
                   </div>
-                  <br><br><br><br><br><br><br><br><br>
+                  <div class="col-12"></div>
+                  <br><br><br><br><br>
                   <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Cuenta' || formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Actividades' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio' || formExtraccion.controls['tipoExtraccion'].value == 'Pagos' || formExtraccion.controls['tipoExtraccion'].value == 'Fallas generales'"> -->
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' ">
                     <span class="p-float-label">
@@ -418,7 +429,7 @@
                         <label>RPT</label>
                     </span>
                   </div> -->
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio' && formExtraccion.controls['medioExtraccion'].value == false">
                     <span class="p-float-label">
                         <input
                         type="text"
@@ -429,7 +440,7 @@
                         <label>Compañia (Nombre del Titular)</label>
                     </span>
                   </div>              
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio' && formExtraccion.controls['medioExtraccion'].value == false">
                     <span class="p-float-label">
                         <input
                         type="text"
@@ -669,6 +680,18 @@
                       formControlName="Incidente"
                       >
                       <label>Incidente</label>
+                    </span>
+                  </div>
+
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio' || formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
+                    <span class="p-float-label">
+                        <input
+                        type="text"
+                        pInputText
+                        [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('correo')?.errors != null && formExtraccion.get('correo')?.touched == true}"
+                        formControlName="correo"
+                        >
+                        <label>Correo Electrónico</label>
                     </span>
                   </div>
           
@@ -924,7 +947,7 @@
                           </th>
                           <th>
                               <div  class="flex justify-content-center align-items-center">
-                                  Parametros de Extracción
+                                  Párametros de Extracción
       
                               </div>
                           </th>
@@ -968,7 +991,7 @@
                                   pButton
                                   label="Eliminar"
                                   style="margin-bottom: 1rem;width:8rem;background-color: #FFC300;border: 0;"
-                                  (click)="eliminar(item)"
+                                  (click)="confirm1(item)"
                               ></button>
                   
                           </td>
@@ -1047,6 +1070,12 @@
                       </div>
                     </th>
                     <th>
+                      <div  class="flex justify-content-center align-items-center">
+                          Párametros de Extracción
+
+                      </div>
+                    </th>
+                    <th>
                       <div class="flex justify-content-center align-items-center">
                           Archivo
                       </div>
@@ -1073,6 +1102,13 @@
                     <td class="text-center" style="white-space: pre-line;">
                       <!-- {{item.horaProgramacion}} -->
                       <span [innerHTML]="item.horaProgramacion"></span>
+                    </td>
+                    <td class="text-left" >
+                      <ng-container *ngFor="let parametro of item.parametrosExtraccion">
+                          <div *ngFor="let key of getKeys(parametro)">
+                              <strong>*{{capitalizarFirstLeter(key)}}</strong>: {{parametro[key]}}
+                          </div>
+                      </ng-container>
                     </td>
                     <td *ngIf="item.archivo" class="text-center">
                     <!-- {{item.archivo}} -->
@@ -1134,6 +1170,57 @@
               >
               </p-dropdown>
         </div>
+        <br><br><br><br><br><br><br><br><br>
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio' ">
+          <span class="p-float-label">
+              <input
+              type="text"
+              pInputText
+              [(ngModel)]="editForm.parametrosExtraccion[0].estado"
+              >
+              <label>Estado</label>
+          </span>
+        </div>
+        <!-- <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio' ">
+          <p-autoComplete [showClear]="true" [(ngModel)]="editForm.parametrosExtraccion[0].estado" 
+          [dropdown]="true" 
+           placeholder="Estado" [suggestions]="filterestadoOS" (completeMethod)="filterEstadoOS($event)">
+          </p-autoComplete>
+
+        </div>
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Actividades' ">
+          <p-autoComplete [showClear]="true" [(ngModel)]="editForm.parametrosExtraccion[0].estado" 
+          [dropdown]="true" 
+           placeholder="Estado" [suggestions]="filterestadoAct" (completeMethod)="filterEstaAct($event)">
+          </p-autoComplete>
+
+        </div> -->
+        <!-- <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Actividades'">
+          <p-autoComplete [showClear]="true" formControlName="editForm.parametrosExtraccion[0].tipo" 
+          [dropdown]="true" 
+           placeholder="Tipo" [suggestions]="filtertipoAct" (completeMethod)="filterTipoAct($event)">
+          </p-autoComplete>
+        </div> -->
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio'">
+          <span class="p-float-label"> 
+            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true"  dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].fechaApertura"  selectionMode="range"  inputId="icon">
+            </p-calendar>
+            <label>Fecha de Apertura</label>
+          </span>
+        </div>
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio' || editForm.tipoExtraccion == 'Ordenes de servicio'">
+          <span class="p-float-label">
+              <input
+              type="text"
+              pInputText
+              [(ngModel)]="editForm.parametrosExtraccion[0].cuenta"
+              >
+              <label>Cuenta</label>
+          </span>
+        </div>
+
+
+
       </div>
     </div>
     <ng-template pTemplate="footer">
@@ -1142,4 +1229,10 @@
     </ng-template>
 </p-dialog>
 
+
+
+<div class="card flex justify-content-center gap-2">
+  <p-toast></p-toast>
+  <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+</div>
 
