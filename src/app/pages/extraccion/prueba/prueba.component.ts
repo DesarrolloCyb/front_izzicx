@@ -548,9 +548,6 @@ export class PruebaComponent implements OnInit {
       
       data.procesando="0";
       data.status="Pendiente";
-      const post = {
-        data: data
-      }
       
       this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
       .then((response) => {
@@ -614,37 +611,6 @@ export class PruebaComponent implements OnInit {
         });
       });
 
-      // this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramada2Prueba`,{hora:moment(this.formExtraccion.controls['horaProgramacion'].value).format("HH")})
-      // .then((response) => {
-
-
-      //   // console.log(response)
-      //   if(response[0] == 'SIN INFO'){
-            
-
-      //   }else{
-      //     this.spinner=false;
-      //     this.messageService.add({
-      //       key:'tst',
-      //       severity: 'error',
-      //       summary: 'Ya existe este horario!!',
-      //       detail: 'Intenta Nuevamente!!!',
-      //     });
-  
-      //   }
-      
-   
-      // })
-      // .catch((error) => {
-      //   console.log(error)
-      //   this.messageService.add({
-      //     key:'tst',
-      //     severity: 'error',
-      //     summary: 'No se logro editar!!',
-      //     detail: 'Intenta Nuevamente!!!',
-      //   });
-      // });
-
       
     }else{
       
@@ -681,7 +647,10 @@ export class PruebaComponent implements OnInit {
     this.formExtraccion.controls['tipoOrden'].reset();
     // this.formExtraccion.controls['asignada'].reset();
     this.formExtraccion.controls['horaProgramacion'].reset();
-    this.formExtraccion.controls['tipoProgramacion'].reset();
+    this.formExtraccion.controls['correo'].reset();
+    // // this.formExtraccion.controls['tipoProgramacion'].reset();
+    // this.formExtraccion.controls['tipoProgramacion'].patchValue(false);
+    // this.formExtraccion.controls['medioExtraccion'].patchValue(false);
 
     this.formExtraccion.get('estado')?.clearValidators();
     this.formExtraccion.get('estado')?.updateValueAndValidity();
