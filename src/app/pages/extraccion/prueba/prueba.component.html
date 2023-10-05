@@ -952,6 +952,13 @@
                               </div>
                           </th>
                           <th>
+                              <div  class="flex justify-content-center align-items-center">
+                                  Correo Electrónico
+      
+                              </div>
+                          </th>
+
+                          <th>
                               <div style="width: 150px;" class="flex justify-content-center align-items-center">
                                   Acciones
       
@@ -977,6 +984,9 @@
                                       <strong>*{{capitalizarFirstLeter(key)}}</strong>: {{parametro[key]}}
                                   </div>
                               </ng-container>
+                          </td>
+                          <td class="text-center">
+                            {{ (item.correo == "null" || item.correo== null) ? "":item.correo }}
                           </td>
                           <td class="text-center button-container" >
                               <!-- <button

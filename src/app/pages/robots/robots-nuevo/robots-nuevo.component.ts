@@ -19,7 +19,8 @@ export class RobotsNuevoComponent implements OnInit {
     private message: MessageService,
     private router: Router,
     private formBuilder: UntypedFormBuilder,
-    private cors: CorsService) {
+    private cors: CorsService) 
+  {
     this.formNuevoBot = this.formBuilder.group({
       ip: [null, [Validators.required, Validators.pattern('(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')]],
       procesoBotId: [null, Validators.required],
@@ -36,7 +37,6 @@ export class RobotsNuevoComponent implements OnInit {
 
   getCats() {
     this.cors.get('Bots/getCatProcesos').then((response) => {
-      // console.log(response)
       if(response[0] == 'SIN INFO'){
         this.processArr = [];
       }else{
@@ -48,7 +48,30 @@ export class RobotsNuevoComponent implements OnInit {
             }
             this.processArr.push(bb)
           }
-        }      }
+        }      
+      }
+      this.cors.get('Bots/getValidationProcesos').then((response) => {
+        // console.log("validar procesos",response)
+        let a =[];
+        for(let i=0; i< response.length;i++){
+          if(response[i].num >=3){
+            a.push(response[i].procesoBotId);
+          }
+        }
+        for(let i=0; i<this.processArr.length;i++){
+          for(let j=0;j<a.length;j++){
+            if(this.processArr[i].id == a[j]){
+              let index = this.processArr.indexOf(this.processArr[i]);
+              if(index !== -1){
+              this.processArr = this.processArr.slice(0,index).concat(this.processArr.slice(index+1))   
+              }
+            }
+          }
+        }
+      }).catch((error) => {
+        console.log(error);
+      })
+  
     }).catch((error) => {
       console.log(error)
 

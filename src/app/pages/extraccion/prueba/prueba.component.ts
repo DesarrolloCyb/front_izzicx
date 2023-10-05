@@ -684,8 +684,8 @@ export class PruebaComponent implements OnInit {
     this.formExtraccion.get('asignada')?.updateValueAndValidity();
     this.formExtraccion.get('horaProgramacion')?.clearValidators();
     this.formExtraccion.get('horaProgramacion')?.updateValueAndValidity();
-    this.formExtraccion.get('tipoProgramacion')?.clearValidators();
-    this.formExtraccion.get('tipoProgramacion')?.updateValueAndValidity();
+    // this.formExtraccion.get('tipoProgramacion')?.clearValidators();
+    // this.formExtraccion.get('tipoProgramacion')?.updateValueAndValidity();
 
 
 
