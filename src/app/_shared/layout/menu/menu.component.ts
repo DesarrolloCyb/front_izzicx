@@ -495,7 +495,9 @@ export class MenuComponent implements OnInit {
       "Ajustes":['home','ajustesYcambioServicio','reportes'],
       "AjustesNotDone":['home','notDone','reportes'],
       "testAjustes1":['home','ajustes','reportes'],
-      "eBarrera":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','robots']
+      "eBarrera":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','robots'],
+      "testReportes":['home','reportes'],
+
       //   "SUPERVISOR TROUBLESHOOTING CELULAR":['capturasA','home','reportes'],
     //   "ESPECIALISTA TROUBLESHOOTING CELULAR":['capturasA'],
     //   "SUPERVISOR CALL CENTER REPARACIONES":['capturasA','home','reportes'],
