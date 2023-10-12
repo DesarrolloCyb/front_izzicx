@@ -495,7 +495,7 @@
                         <label for="inputdate">Fecha de la Orden</label>
                     </span> -->
                     <span class="p-float-label"> 
-                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" [showSeconds]="true" [showTime]="true" dateFormat="dd-mm-yy" formControlName="fechaOrden" selectionMode="range"  inputId="icon">
+                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" [showSeconds]="true"  dateFormat="dd-mm-yy" formControlName="fechaOrden" selectionMode="range"  inputId="icon">
                       </p-calendar>
                       <label for="inputdate">Fecha de la Orden</label>
                     </span>
@@ -652,7 +652,7 @@
                       <p-calendar
                           [showIcon]="true"
                           dateFormat="yy-mm-dd"
-                          [showTime]="true" 
+                          
                           [showSeconds]="true"
                           [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('fechaInicio')?.errors != null && formExtraccion.get('fechaInicio')?.touched == true}"
                           formControlName="fechaInicio">
@@ -989,13 +989,13 @@
                             {{ (item.correo == "null" || item.correo== null) ? "":item.correo }}
                           </td>
                           <td class="text-center button-container" >
-                              <!-- <button
+                              <button
                                   type="button"
                                   pButton
                                   label="Editar"
                                   style="margin-bottom: 1rem;width:8rem;background-color: #FFC300;border: 0;"
                                   (click)="editar(item)"
-                              ></button>&nbsp; -->
+                              ></button>&nbsp;
                               <button
                                   type="button"
                                   pButton
@@ -1170,6 +1170,15 @@
             </div>
           </div>
         </div>
+        <div class="field col-12 md:col-6 justify-content-center align-items-center" >
+          <div class="grid flex justify-content-center">
+            <div class="col-8 text-center">
+              <label for="">El medio de Extracción es: {{editForm.medioExtraccion == true ? 'General':'Vista'}} </label><br>
+              <p-inputSwitch [(ngModel)]="editForm.medioExtraccion" ></p-inputSwitch>
+
+            </div>
+          </div>
+        </div>
         <div class="field col-12 md:col-6">
               <p-dropdown
               [options]="tipoExtraccion"
@@ -1180,7 +1189,9 @@
               >
               </p-dropdown>
         </div>
-        <br><br><br><br><br><br><br><br><br>
+        <br><br><br><br>
+        <!-- caso negocio -->
+        <div class="col-12"></div>
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio' ">
           <span class="p-float-label">
               <input
@@ -1191,26 +1202,7 @@
               <label>Estado</label>
           </span>
         </div>
-        <!-- <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio' ">
-          <p-autoComplete [showClear]="true" [(ngModel)]="editForm.parametrosExtraccion[0].estado" 
-          [dropdown]="true" 
-           placeholder="Estado" [suggestions]="filterestadoOS" (completeMethod)="filterEstadoOS($event)">
-          </p-autoComplete>
-
-        </div>
-        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Actividades' ">
-          <p-autoComplete [showClear]="true" [(ngModel)]="editForm.parametrosExtraccion[0].estado" 
-          [dropdown]="true" 
-           placeholder="Estado" [suggestions]="filterestadoAct" (completeMethod)="filterEstaAct($event)">
-          </p-autoComplete>
-
-        </div> -->
-        <!-- <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Actividades'">
-          <p-autoComplete [showClear]="true" formControlName="editForm.parametrosExtraccion[0].tipo" 
-          [dropdown]="true" 
-           placeholder="Tipo" [suggestions]="filtertipoAct" (completeMethod)="filterTipoAct($event)">
-          </p-autoComplete>
-        </div> -->
+     
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio'">
           <span class="p-float-label"> 
             <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true"  dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].fechaApertura"  selectionMode="range"  inputId="icon">
@@ -1228,6 +1220,239 @@
               <label>Cuenta</label>
           </span>
         </div>
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio'">
+          <span class="p-float-label">
+              <input
+              type="text"
+              pInputText
+              [(ngModel)]="editForm.parametrosExtraccion[0].medioContacto"
+              >
+              <label>Medio de Contacto</label>
+          </span>
+        </div>
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio'">
+          <span class="p-float-label">
+              <input
+              type="text"
+              pInputText
+              [(ngModel)]="editForm.parametrosExtraccion[0].casoNegocio"
+              >
+              <label>Caso de Negocio</label>
+          </span>
+        </div>
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio'">
+          <p-autoComplete [showClear]="true" [(ngModel)]="editForm.parametrosExtraccion[0].categoria" 
+          [dropdown]="true" (onSelect)="cambioCategoriaEdit($event)" (onClear)="cleanCategoriaEdit($event)" (input)="inputCategoriaEdit()"
+           placeholder="Categoría" [suggestions]="filterCat" (completeMethod)="filterCategory($event)">
+          </p-autoComplete>
+        </div>
+        
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio' && editForm.parametrosExtraccion[0].categoria != null">
+          <p-autoComplete [showClear]="true" [(ngModel)]="editForm.parametrosExtraccion[0].motivo" 
+          [dropdown]="true" (onSelect)="cambioMotivoEdit($event)" (onClear)="cleanMoEdit($event)" (input)="inputMoEdit()"
+           placeholder="Motivo" [suggestions]="filterMotivo" (completeMethod)="filterMo($event)">
+          </p-autoComplete>
+        </div>
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio' && editForm.parametrosExtraccion[0].motivo != null">
+          <p-autoComplete [showClear]="true" [(ngModel)]="editForm.parametrosExtraccion[0].subMotivo" 
+          [dropdown]="true" (onSelect)="cambioSubmotivoEdit()" (onClear)="cleanSubEdit($event)" (input)="inputSubEdit()"
+           placeholder="SubMotivo" [suggestions]="filterSub" (completeMethod)="filterSubm($event)">
+          </p-autoComplete>
+        </div>
+
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio' && editForm.parametrosExtraccion[0].subMotivo != null">
+          <p-autoComplete [showClear]="true" [(ngModel)]="editForm.parametrosExtraccion[0].solucion" 
+          [dropdown]="true" (onSelect)="cambioSolucionEdit()" (onClear)="cleanSolucionEdit($event)" (input)="inputSolEdit()"
+           placeholder="Solución" [suggestions]="filterSol" (completeMethod)="filterSolu($event)">
+          </p-autoComplete>
+        </div>
+
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio' && editForm.parametrosExtraccion[0].solucion != null">
+          <p-autoComplete [showClear]="true" [(ngModel)]="editForm.parametrosExtraccion[0].motivoCliente" 
+          [dropdown]="true"
+           placeholder="Motivo Cliente" [suggestions]="filterMotivoCli" (completeMethod)="filterMotivoCl($event)">
+          </p-autoComplete>
+        </div>
+          <!-- actividad -->
+
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Actividades' ">
+          <p-autoComplete [showClear]="true" [(ngModel)]="editForm.parametrosExtraccion[0].estado" 
+          [dropdown]="true" 
+           placeholder="Estado" [suggestions]="filterestadoAct" (completeMethod)="filterEstaAct($event)">
+          </p-autoComplete>
+
+        </div> 
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Actividades'">
+          <p-autoComplete [showClear]="true" [(ngModel)]="editForm.parametrosExtraccion[0].tipo" 
+          [dropdown]="true" 
+           placeholder="Tipo" [suggestions]="filtertipoAct" (completeMethod)="filterTipoAct($event)">
+          </p-autoComplete>
+        </div>
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Actividades'">
+          <p-autoComplete [showClear]="true" [(ngModel)]="editForm.parametrosExtraccion[0].areaConocimiento" 
+          [dropdown]="true" 
+           placeholder="Área de Conocimiento" [suggestions]="filterareaAct" (completeMethod)="filterAreaAct($event)">
+          </p-autoComplete>
+
+        </div>
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Actividades'">
+          <span class="p-float-label"> 
+            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].fechaAsignacion" selectionMode="range"  inputId="icon">
+            </p-calendar>
+            <label for="inputdate">Fecha de Asignacion</label>
+          </span>
+
+        </div>
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Actividades'">
+          <span class="p-float-label"> 
+            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].vencimientoActividad" selectionMode="range"  inputId="icon">
+            </p-calendar>
+            <label for="inputdate">Vencimiento</label>
+          </span>
+        </div>
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Actividades'">
+          <span class="p-float-label"> 
+            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].fechaCreacion" selectionMode="range"  inputId="icon">
+            </p-calendar>
+            <label for="inputdate">Fecha de Creación</label>
+          </span>
+        </div>
+
+        <!-- orden de servicio -->
+
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio' ">
+          <p-autoComplete [showClear]="true" [(ngModel)]="editForm.parametrosExtraccion[0].estado" 
+          [dropdown]="true" 
+           placeholder="Estado" [suggestions]="filterestadoOS" (completeMethod)="filterEstadoOS($event)">
+          </p-autoComplete>
+
+        </div>
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio'">
+          <span class="p-float-label">
+              <input
+              type="text"
+              pInputText
+              [(ngModel)]="editForm.parametrosExtraccion[0].compania"
+              >
+              <label>Compañia (Nombre del Titular)</label>
+          </span>
+        </div>              
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio'">
+          <span class="p-float-label">
+              <input
+              type="text"
+              pInputText
+              [(ngModel)]="editForm.parametrosExtraccion[0].telefonos"
+              >
+              <label>Telefonos</label>
+          </span>
+        </div>
+
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio' || formExtraccion.controls['tipoExtraccion'].value == 'Fallas generales'">
+          <span class="p-float-label">
+              <input
+              type="text"
+              pInputText
+              [(ngModel)]="editForm.parametrosExtraccion[0].numOrden"
+              >
+              <label>Número de Orden</label>
+          </span>
+        </div>
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio'">
+          <p-autoComplete [showClear]="true" [(ngModel)]="editForm.parametrosExtraccion[0].tipoOrden" 
+          [dropdown]="true" 
+           placeholder="Tipo de Orden" [suggestions]="filtertipoOrOS" (completeMethod)="filterTipoOrdenOS($event)">
+          </p-autoComplete>
+
+        </div>
+
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio'">
+          <span class="p-float-label"> 
+            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" [showSeconds]="true" dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].fechaOrden" selectionMode="range"  inputId="icon">
+            </p-calendar>
+            <label for="inputdate">Fecha de la Orden</label>
+          </span>
+        </div>
+     
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio' || editForm.tipoExtraccion == 'Ordenes de servicio' || editForm.tipoExtraccion == 'Actividades'">
+          <span class="p-float-label">
+              <input
+              type="text"
+              pInputText
+              [(ngModel)]="editForm.correo"
+              >
+              <label>Correo Electrónico</label>
+          </span>
+        </div>
+
+         <div class="field col-12"></div>
+        <div class="col-12" style="white-space: pre-line;" >
+          <span [innerHTML]="getTextoEdit()"></span>
+        </div>
+        <div class="field col-12"></div>
+        
+        <div class="field col-12 md:col-4" >
+          <p-multiSelect (onChange)="cambioHoraEdit($event.value)"  
+            [options]="horas" [appendTo]="'body'" [(ngModel)]="editForm.hora" defaultLabel="Selecciona una Hora" optionValue="value" optionLabel="label" >
+            <ng-template let-value pTemplate="selectedItems">
+                <div class="flex align-items-center gap-2" *ngFor="let option of editForm.hora">
+                    {{ getHoraLabel(option) }}
+                </div>
+                <div *ngIf="!editForm.hora || editForm.hora.length === 0">Selecciona Hora</div>
+            </ng-template>
+            <ng-template let-country pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                    <div>{{ country.label }}</div>
+                </div>
+            </ng-template>
+          </p-multiSelect>
+        </div>
+        <div class="field col-12 md:col-4" >
+           <!-- <p-multiSelect  
+            [options]="min" [(ngModel)]="editForm.minuto" defaultLabel="Selecciona Minutos" optionValue="value" optionLabel="label" >
+            <ng-template let-value pTemplate="selectedItems">
+                <div class="flex align-items-center gap-2" *ngFor="let option of editForm.minuto">
+                    <div>{{ getMinutoLabel(option) }}</div>
+                </div>
+                <div *ngIf="!editForm.minuto || editForm.minuto.length === 0">Selecciona Minutos</div>
+            </ng-template>
+            <ng-template let-country pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                    <div>{{ country.label }}</div>
+                </div>
+            </ng-template>
+          </p-multiSelect> -->
+
+          <p-dropdown (onChange)="cambioMinEdit($event.value)" placeholder="Selecciona Minutos"  
+            [options]="min" optionValue="value" optionLabel="label" [(ngModel)]="editForm.minuto"
+          ></p-dropdown>
+
+        </div>
+
+  
+        <div class="field col-12 md:col-4">
+          <p-multiSelect (onChange)="cambioDiasEdit($event.value)" 
+            [options]="diasemanas" [(ngModel)]="editForm.diaSemana" defaultLabel="Selecciona dia de la Semana" optionValue="value" optionLabel="label" >
+            <ng-template let-value pTemplate="selectedItems">
+                <div class="flex align-items-center gap-2" *ngFor="let option of editForm.diaSemana">
+                    <div>{{ getDiaLabel(option) }}</div>
+                </div>
+                <div *ngIf="!editForm.diaSemana || editForm.diaSemana.length === 0">Selecciona dia de la Semana</div>
+            </ng-template>
+            <ng-template let-country pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                    <div>{{ country.label }}</div>
+                </div>
+            </ng-template>
+          </p-multiSelect>
+        </div>
+
+
+
+
+
+
+
 
 
 

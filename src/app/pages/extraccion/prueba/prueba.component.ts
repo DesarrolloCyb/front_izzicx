@@ -43,7 +43,10 @@ export class PruebaComponent implements OnInit {
   archivoSeleccionado:string="";
 	loading2:boolean=false;
   modal:boolean=false;
-  nuevaHora:string="";
+  horaEdit:any;
+  minutoEdit:any;
+  diaSemanaEdit:any;
+  Edit:any;
   id:string="";
   horas:any[]=[
     {
@@ -218,6 +221,9 @@ export class PruebaComponent implements OnInit {
     "tipoProgramacion":"",
     "correo":"",
     "medioExtraccion":"",
+    "hora":"",
+    "minuto":"",
+    "diaSemana":"",
 
   };
   // mo:string[]=[
@@ -754,7 +760,8 @@ export class PruebaComponent implements OnInit {
   dateFormat(value:any){
     // console.log(value)
     if(value != null){
-      return moment(value).format('DD/MM/yyyy HH:mm:ss')
+      // return moment(value).format('DD/MM/yyyy HH:mm:ss')
+      return moment(value).format('DD/MM/yyyy')
     }else{
       return ""
     }
@@ -1191,76 +1198,214 @@ export class PruebaComponent implements OnInit {
     }else if(item.tipoProgramacion == "1"){
       item.tipoProgramacion = true
     }
-    this.modal=true;
+    if(item.medioExtraccion == "true"){
+      item.medioExtraccion = true
+    }else if(item.medioExtraccion == "false"){
+      item.medioExtraccion = false
+    }
     this.editForm = item;
-    const inputString = this.editForm.parametrosExtraccion[0].fechaApertura;
-    const regex = /'(\d{1,2}\/\d{1,2}\/\d{4})'/g;
-    let matches = inputString.match(regex);
-    if (matches && matches.length >= 2) {
-      let a=matches[0].replace(/'/g, ''); 
-      let b=matches[1].replace(/'/g, '');
-      matches[0]=a;
-      matches[1]=b;
-      let fechas: Date[] = [];
-      for (const fechaStr of matches) {
-        const parts = fechaStr.split('/');
-        if (parts.length === 3) {
-          const day = parseInt(parts[0]);
-          const month = parseInt(parts[1]); // Restar 1 al mes, ya que en Date los meses van de 0 a 11
-          const year = parseInt(parts[2]);
-          fechas.push(new Date(year, month, day));
+    if(item.tipoExtraccion == "Casos de negocio"){
+      const inputString = this.editForm.parametrosExtraccion[0].fechaApertura;
+      const regex = /'(\d{1,2}\/\d{1,2}\/\d{4})'/g;
+      let matches = inputString.match(regex);
+      if (matches && matches.length >= 2) {
+        let a=matches[0].replace(/'/g, ''); 
+        let b=matches[1].replace(/'/g, '');
+        matches[0]=a;
+        matches[1]=b;
+        let fechas: Date[] = [];
+        for (const fechaStr of matches) {
+          const parts = fechaStr.split('/');
+          if (parts.length === 3) {
+            const day = parseInt(parts[0]);
+            const month = parseInt(parts[1]); // Restar 1 al mes, ya que en Date los meses van de 0 a 11
+            const year = parseInt(parts[2]);
+            fechas.push(new Date(year, month, day));
+          }
         }
+        matches = fechas;
+        this.editForm.parametrosExtraccion[0].fechaApertura = matches
+      }else{
+        this.editForm.parametrosExtraccion[0].fechaApertura = []
       }
-      matches = fechas;
-      this.editForm.parametrosExtraccion[0].fechaApertura = matches
-    }   
-    console.log(this.editForm)
-    // this.nuevaHora = item.horaProgramacion.substring(0,5);
-    // this.id=item.id;
-    // console.log(this.nuevaHora)
-    // console.log(this.id)
+  
+    }else if(item.tipoExtraccion == "Actividades"){
+      const inputString = this.editForm.parametrosExtraccion[0].fechaCreacion;
+      const inputString1 = this.editForm.parametrosExtraccion[0].fechaAsignacion;
+      const inputString2 = this.editForm.parametrosExtraccion[0].vencimientoActividad;
+      const regex = /'(\d{1,2}\/\d{1,2}\/\d{4})'/g;
+      let matches = inputString.match(regex);
+      let matches1 = inputString1.match(regex);
+      let matches2 = inputString2.match(regex);
+      if (matches && matches.length >= 2) {
+        let a=matches[0].replace(/'/g, ''); 
+        let b=matches[1].replace(/'/g, '');
+        matches[0]=a;
+        matches[1]=b;
+        let fechas: Date[] = [];
+        for (const fechaStr of matches) {
+          const parts = fechaStr.split('/');
+          if (parts.length === 3) {
+            const day = parseInt(parts[0]);
+            const month = parseInt(parts[1]); // Restar 1 al mes, ya que en Date los meses van de 0 a 11
+            const year = parseInt(parts[2]);
+            fechas.push(new Date(year, month, day));
+          }
+        }
+        matches = fechas;
+        this.editForm.parametrosExtraccion[0].fechaCreacion = matches
+      }else{
+        this.editForm.parametrosExtraccion[0].fechaCreacion = []
+
+      }  
+      if (matches1 && matches1.length >= 2) {
+        let a=matches1[0].replace(/'/g, ''); 
+        let b=matches1[1].replace(/'/g, '');
+        matches1[0]=a;
+        matches1[1]=b;
+        let fechas: Date[] = [];
+        for (const fechaStr of matches1) {
+          const parts = fechaStr.split('/');
+          if (parts.length === 3) {
+            const day = parseInt(parts[0]);
+            const month = parseInt(parts[1]); // Restar 1 al mes, ya que en Date los meses van de 0 a 11
+            const year = parseInt(parts[2]);
+            fechas.push(new Date(year, month, day));
+          }
+        }
+        matches1 = fechas;
+        this.editForm.parametrosExtraccion[0].fechaAsignacion = matches1
+      }else{
+        this.editForm.parametrosExtraccion[0].fechaAsignacion = [];
+
+      }
+
+      if (matches2 && matches2.length >= 2) {
+        let a=matches2[0].replace(/'/g, ''); 
+        let b=matches2[1].replace(/'/g, '');
+        matches2[0]=a;
+        matches2[1]=b;
+        let fechas: Date[] = [];
+        for (const fechaStr of matches2) {
+          const parts = fechaStr.split('/');
+          if (parts.length === 3) {
+            const day = parseInt(parts[0]);
+            const month = parseInt(parts[1]); // Restar 1 al mes, ya que en Date los meses van de 0 a 11
+            const year = parseInt(parts[2]);
+            fechas.push(new Date(year, month, day));
+          }
+        }
+        matches2 = fechas;
+        this.editForm.parametrosExtraccion[0].vencimientoActividad = matches2
+      }else{
+        this.editForm.parametrosExtraccion[0].vencimientoActividad = []
+
+      }
+  
+    }else if(item.tipoExtraccion == "Ordenes de servicio"){
+      const inputString = this.editForm.parametrosExtraccion[0].fechaOrden;
+      const regex = /'(\d{1,2}\/\d{1,2}\/\d{4})'/g;
+      let matches = inputString.match(regex);
+      if (matches && matches.length >= 2) {
+        let a=matches[0].replace(/'/g, ''); 
+        let b=matches[1].replace(/'/g, '');
+        matches[0]=a;
+        matches[1]=b;
+        let fechas: Date[] = [];
+        for (const fechaStr of matches) {
+          const parts = fechaStr.split('/');
+          if (parts.length === 3) {
+            const day = parseInt(parts[0]);
+            const month = parseInt(parts[1]); // Restar 1 al mes, ya que en Date los meses van de 0 a 11
+            const year = parseInt(parts[2]);
+            fechas.push(new Date(year, month, day));
+          }
+        }
+        matches = fechas;
+        this.editForm.parametrosExtraccion[0].fechaOrden = matches
+      }else{
+        this.editForm.parametrosExtraccion[0].fechaOrden = []
+
+      }
+      
+  
+    }
+
+    this.modal=true;
   }
 
   editar1(){
-    let viejo = this.nuevaHora;
-    let nuevaH = moment(this.nuevaHora).format("HH:mm:00")
-    let nuevaV = moment(this.nuevaHora).format("HH:mm")
-    let a= null;
-    // console.log("Viejo",viejo)
-    // console.log("nuevo",nuevaV)
-    if(nuevaV=='Fecha inválida'){
-      let b = viejo.split(":");
-      a=b[0];
-    }else if(nuevaV!='Fecha inválida'){
-      let b= nuevaV.split(":");
-      a=b[0]
+    console.log(this.editForm)
+
+    if((!this.editForm.minuto && (!this.editForm.diaSemana || this.editForm.diaSemana?.length<=0))|| (this.editForm.minuto && this.editForm.diaSemana)){
+      let randomId = nanoid();
+    let data ={
+      "id": 0,
+      "cve_usuario": `${this.usuario.email}`,
+      "tipoExtraccion":`${this.editForm.tipoExtraccion}`,
+      "fechaCompletado": null,
+      "status": "Pendiente",
+      "ip": "",
+      "parametrosExtraccion":"",
+      "procesando": "0",
+      "fechaExtraccion": "",
+      "archivo": "",
+      "horaProgramacion": this.getTextoEdit(),
+      "nombreCron":`${this.editForm.tipoExtraccion}_${randomId}`,
+      "scheduleExpression":"",
+      "tipoProgramacion":`${this.editForm.tipoProgramacion == true ? "1":"0"}`,
+      "correo":`${this.editForm.correo }`,
+      "medioExtraccion":`${this.editForm.medioExtraccion }`,
+    };
+  
+    if(this.editForm.tipoExtraccion === "Casos de negocio"){
+      // console.log("Casos de negocio")
+      data.parametrosExtraccion =`[{"fechaApertura":">='${this.editForm.parametrosExtraccion[0].fechaApertura?.length==2 ? this.dateFormatDate(this.editForm.parametrosExtraccion[0].fechaApertura[0]):"null" }' AND <= '${this.editForm.parametrosExtraccion[0].fechaApertura?.length==2 ? this.dateFormatDate(this.editForm.parametrosExtraccion[0].fechaApertura[1]):"null"}'","estado":"${this.editForm.parametrosExtraccion[0].estado ? this.editForm.parametrosExtraccion[0].estado : ""}","cuenta":"${this.editForm.parametrosExtraccion[0].cuenta ? this.editForm.parametrosExtraccion[0].cuenta :""}","medioContacto":"${this.editForm.parametrosExtraccion[0].medioContacto ? this.editForm.parametrosExtraccion[0].medioContacto :""}","casoNegocio":"${this.editForm.parametrosExtraccion[0].casoNegocio ? this.editForm.parametrosExtraccion[0].casoNegocio :""}","categoria":"${this.editForm.parametrosExtraccion[0].categoria ? this.editForm.parametrosExtraccion[0].categoria :""}","motivo":"${this.editForm.parametrosExtraccion[0].motivo ? this.editForm.parametrosExtraccion[0].motivo:""}","subMotivo":"${this.editForm.parametrosExtraccion[0].subMotivo ? this.editForm.parametrosExtraccion[0].subMotivo :""}","solucion":"${this.editForm.parametrosExtraccion[0].solucion ? this.editForm.parametrosExtraccion[0].solucion :""}","motivoCliente":"${this.editForm.parametrosExtraccion[0].motivoCliente ? this.editForm.parametrosExtraccion[0].motivoCliente :""}"}]`;
+    }else if(this.editForm.tipoExtraccion === "Actividades"){
+      // console.log("Actividades")
+      data.parametrosExtraccion =`[{"estado":"${this.editForm.parametrosExtraccion[0].estado ? this.editForm.parametrosExtraccion[0].estado : ""}","areaConocimiento":"${this.editForm.parametrosExtraccion[0].areaConocimiento ? this.editForm.parametrosExtraccion[0].areaConocimiento :""}","fechaAsignacion":">='${this.editForm.parametrosExtraccion[0].fechaAsignacion?.length==2 ? this.dateFormatDate(this.editForm.parametrosExtraccion[0].fechaAsignacion[0]):"null" }' AND <= '${this.editForm.parametrosExtraccion[0].fechaAsignacion?.length==2 ? this.dateFormatDate(this.editForm.parametrosExtraccion[0].fechaAsignacion[1]):"null"}'","tipo":"${this.editForm.parametrosExtraccion[0].tipo ? this.editForm.parametrosExtraccion[0].tipo : ""}","vencimientoActividad":">='${this.editForm.parametrosExtraccion[0].vencimientoActividad?.length==2 ? this.dateFormatDate(this.editForm.parametrosExtraccion[0].vencimientoActividad[0]):"null" }' AND <= '${this.editForm.parametrosExtraccion[0].vencimientoActividad?.length==2 ? this.dateFormatDate(this.editForm.parametrosExtraccion[0].vencimientoActividad[1]):"null"}'","fechaCreacion":">='${this.editForm.parametrosExtraccion[0].fechaCreacion?.length==2 ? this.dateFormatDate(this.editForm.parametrosExtraccion[0].fechaCreacion[0]):"null" }' AND <= '${this.editForm.parametrosExtraccion[0].fechaCreacion?.length==2 ? this.dateFormatDate(this.editForm.parametrosExtraccion[0].fechaCreacion[1]):"null"}'"}]`;
+      
+    }else if(this.editForm.tipoExtraccion === "Ordenes de servicio"){
+      // console.log("Ordenes de servicio")
+      // data.parametrosExtraccion =`[{"estado":"${this.formExtraccion.controls['estado'].value ? this.formExtraccion.controls['estado'].value : ""}","rpt":"${this.formExtraccion.controls['rpt'].value}","tipoOrden":"${this.formExtraccion.controls['tipoOrden'].value}","motivo":"${this.formExtraccion.controls['motivo'].value}","asignada":"${this.formExtraccion.controls['asignada'].value}"}]`;
+      data.parametrosExtraccion =`[{"cuenta":"${this.editForm.parametrosExtraccion[0].cuenta ? this.editForm.parametrosExtraccion[0].cuenta : ""}","compania":"${this.editForm.parametrosExtraccion[0].compania ? this.editForm.parametrosExtraccion[0].compania :""}","telefonos":"${this.editForm.parametrosExtraccion[0].telefonos ? this.editForm.parametrosExtraccion[0].telefonos :""}","numOrden":"${this.editForm.parametrosExtraccion[0].numOrden ? this.editForm.parametrosExtraccion[0].numOrden :""}","tipoOrden":"${this.editForm.parametrosExtraccion[0].tipoOrden ? this.editForm.parametrosExtraccion[0].tipoOrden :""}","fechaOrden":">='${this.editForm.parametrosExtraccion[0].fechaOrden?.length==2 ? this.dateFormat(this.editForm.parametrosExtraccion[0].fechaOrden[0]):"null" }' AND <= '${this.editForm.parametrosExtraccion[0].fechaOrden.length==2 ? this.dateFormat(this.editForm.parametrosExtraccion[0].fechaOrden[1]):"null"}'","estado":"${this.editForm.parametrosExtraccion[0].estado ? this.editForm.parametrosExtraccion[0].estado :""}"}]`;
     }
-    // console.log(a)
-    this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramadaPrueba`,{hora:a,id:this.id})
-    .then((response) => {
-      // console.log(response)
-      let z=null;
-      if(nuevaH == 'Fecha inválida'){
-        z=viejo+":00"
-      }else{
-        z=nuevaH
-      }
-      if(response[0]=='SIN INFO'){
-        this.cors.put(`Reporte/ActualizaEjecucionExtraccionAutomatizadosHoraProgramadaPrueba?id=${this.id}`,
-          {
-            "id": this.id,
-            "tipoExtraccion": "string",
-            "fechaExtraccion": "2023-08-04T18:35:02.042Z",
-            "parametrosExtraccion": "string",
-            "archivo": "string",
-            "cve_usuario": "string",
-            "fechaCompletado": "2023-08-04T18:35:02.042Z",
-            "status": "string",
-            "procesando": "string",
-            "ip": "string",
-            "horaProgramacion": z
-          }
-        )
+
+    let regexCron=null;
+    let horas =null;
+    let minuto = null;
+    let diasS=null;
+    if(this.editForm.hora && this.editForm.hora.length>0 && this.editForm.hora.length<=23){
+      horas=this.editForm.hora.join(',');
+    }else if(this.editForm.hora && this.editForm.hora.length == 24){
+      horas="*";
+    }
+    if(this.editForm.minuto != null){
+      minuto=this.editForm.minuto;
+    }
+    if(this.editForm.diaSemana && this.editForm.diaSemana.length >0 && this.editForm.diaSemana.length <=6){
+      diasS = this.editForm.diaSemana.join(',');
+    }else if(this.editForm.diaSemana && this.editForm.diaSemana.length == 7){
+      diasS ="*";
+    }
+
+    if(this.editForm.hora==null || this.editForm.hora.length ==0){
+      regexCron = `0 0/${minuto} * ? * ${diasS}`;
+      
+    }else{
+      
+      regexCron = `0 ${minuto} ${horas?horas:"*"} ? * ${diasS}`;
+    }
+
+    if((!this.editForm.hora || this.editForm.hora.length==0)&& !this.editForm.minuto){
+      data.scheduleExpression=this.editForm.scheduleExpression;
+    }else{
+      data.scheduleExpression=regexCron;
+    }
+    data.fechaExtraccion = `${moment().format('yyyy-MM-DDTHH:mm:ss')}`
+    data.id = this.editForm.id
+    console.log("data",data)
+     this.cors.put(`Reporte/ActualizaEjecucionExtraccionAutomatizadosHoraProgramadaPrueba?id=${data.id}`,data)
           .then((response) => {
             // console.log(response)
             this.messageService.add({
@@ -1269,6 +1414,33 @@ export class PruebaComponent implements OnInit {
               summary: 'Se logro editar!!',
               detail: 'Con Exito!!',
             });
+            this.cors.post('Reporte/eliminarCron',this.editForm)
+            .then((response) => {
+              console.log(response)
+            })
+            .catch((error) => {
+              console.log(error)
+              this.messageService.add({
+                key:'tst',
+                severity: 'error',
+                summary: 'No se logro eliminar el Cron',
+                detail: 'Intenta Nuevamente!!!',
+              });
+            });
+            this.cors.post('Reporte/agregarNuevoCron',data)
+            .then((response) => {
+            console.log(response)
+            })
+            .catch((error) => {
+              console.log(error)
+              this.messageService.add({
+                key:'tst',
+                severity: 'error',
+                summary: 'No se logro guardar el Cron',
+                detail: 'Intenta Nuevamente!!!',
+              });
+            });
+
           })
           .catch((error) => {
             console.log(error)
@@ -1279,32 +1451,70 @@ export class PruebaComponent implements OnInit {
               detail: 'Intenta Nuevamente!!!',
             });
           });
-
-
-
-      }else if(response[0].id){
-        this.messageService.add({
-          key:'tst',
-          severity: 'error',
-          summary: 'Ya existe este horario',
-          detail: 'Intenta Nuevamente!!',
-        });      
-        
-      }
-      this.modal=false;
-      this.tablaExtraccion()
-    })
-    .catch((error) => {
-      console.log(error)
+    }else if(this.editForm.minuto && (!this.editForm.diaSemana || this.editForm.diaSemana?.length<=0)){
       this.messageService.add({
         key:'tst',
         severity: 'error',
-        summary: 'No se logro editar!!',
+        summary: 'Se necesita los dias de la semana',
         detail: 'Intenta Nuevamente!!!',
       });
-    });
+    }else if(!this.editForm.minuto && (this.editForm.diaSemana || this.editForm.diaSemana?.length>0)){
+      this.messageService.add({
+        key:'tst',
+        severity: 'error',
+        summary: 'Se necesita los minutos',
+        detail: 'Intenta Nuevamente!!!',
+      });
+    }
+    
+    // let viejo = this.nuevaHora;
+    // let nuevaH = moment(this.nuevaHora).format("HH:mm:00")
+    // let nuevaV = moment(this.nuevaHora).format("HH:mm")
+    // let a= null;
+    // // console.log("Viejo",viejo)
+    // // console.log("nuevo",nuevaV)
+    // if(nuevaV=='Fecha inválida'){
+    //   let b = viejo.split(":");
+    //   a=b[0];
+    // }else if(nuevaV!='Fecha inválida'){
+    //   let b= nuevaV.split(":");
+    //   a=b[0]
+    // }
+    // // console.log(a)
+    // this.cors.get(`Reporte/validarEjecucionExtraccionAutomatizacionHoraProgramadaPrueba`,{hora:a,id:this.id})
+    // .then((response) => {
+    //   // console.log(response)
+    //   let z=null;
+    //   if(nuevaH == 'Fecha inválida'){
+    //     z=viejo+":00"
+    //   }else{
+    //     z=nuevaH
+    //   }
+    //   if(response[0]=='SIN INFO'){
+    //    
+    //   }else if(response[0].id){
+    //     this.messageService.add({
+    //       key:'tst',
+    //       severity: 'error',
+    //       summary: 'Ya existe este horario',
+    //       detail: 'Intenta Nuevamente!!',
+    //     });      
+        
+    //   }
+    //   this.modal=false;
+    //   this.tablaExtraccion()
+    // })
+    // .catch((error) => {
+    //   console.log(error)
+    //   this.messageService.add({
+    //     key:'tst',
+    //     severity: 'error',
+    //     summary: 'No se logro editar!!',
+    //     detail: 'Intenta Nuevamente!!!',
+    //   });
+    // });
 
-
+    this.modal=false;
   }
   
 
@@ -1419,6 +1629,105 @@ export class PruebaComponent implements OnInit {
   
   }
 
+  getTextoEdit(): string {
+      if((!this.editForm.hora || this.editForm.hora.length<=0) && !this.editForm.minuto && (!this.editForm.diaSemana || this.editForm.diaSemana.length<=0)){
+        return this.editForm.horaProgramacion;
+      }else if(this.editForm.hora && this.editForm.hora.length>0 && (this.editForm.minuto || this.editForm.minuto == 0)){
+        let a="";
+         for(let i = 0 ; i< this.editForm.hora.length;i++){
+          if(this.editForm.hora[i] == 0){
+            a+=`24:${this.minutoEdit}am, `
+          }else if(this.editForm.hora[i] >=1 && this.editForm.hora[i] <=11){
+            if(this.editForm.hora[i] >=1 && this.editForm.hora[i] <10){
+              a+=`0${this.editForm.hora[i]}:${this.minutoEdit}am, `;
+
+            }else{
+              a+=`${this.editForm.hora[i]}:${this.minutoEdit}am, `;
+            }
+          }else if(this.editForm.hora[i] >=12 && this.editForm.hora[i] <=23){
+            a+=`${this.editForm.hora[i]}:${this.minutoEdit}pm, `;
+          }
+          
+        }
+        this.horaEdit=a.substring(0,a.length-2);
+        return `Se ejecuta a las <strong>${this.horaEdit}</strong> los días: <strong>${this.diaSemanaEdit}</strong>`;
+
+      }
+      if( this.editForm.minuto){
+        return `Se ejecuta cada <strong>${this.minutoEdit}</strong> minutos los días: <strong>${this.diaSemanaEdit == undefined ? "":this.diaSemanaEdit}</strong>`;
+
+      }else if( this.editForm.minuto ==0){
+        return `Se ejecuta cada minuto los días: <strong>${this.diaSemanaEdit}</strong>`;
+
+      }
+      
+      return ""
+  
+  }
+
+  cambioHoraEdit(event:any){
+    // console.log(event)
+    let a="";
+    if(event.length==0){
+      this.horaEdit="";
+    }else if(event.length==1){
+      if(event[0] == 0){
+        a+=`24am`
+      }else if(event[0] >=1 && event[0] <=11){
+        a+=`${event[0]}am`;
+      }else if(event[0] >=12 && event[0] <=23){
+        a+=`${event[0]}pm`;
+      }
+      this.horaEdit=a;
+    }else if(event.length >1){
+      for(let i = 0 ; i< event.length;i++){
+        // console.log(this.getHoraLabel(event[i]))
+        if(event[i] == 0){
+          a+=`24am, `
+        }else if(event[i] >=1 && event[i] <=11){
+          a+=`${event[i]}am, `;
+        }else if(event[i] >=12 && event[i] <=23){
+          a+=`${event[i]}pm, `;
+        }
+        
+      }
+      let b = a.substring(0, a.length - 2);
+      // console.log(b)
+      this.horaEdit=b;
+      
+    }
+  }
+
+  cambioMinEdit(event:any){
+    if(event <9){
+      this.minutoEdit=`0${event}`;
+    }else{
+      this.minutoEdit=event;
+
+    }
+  }
+
+   cambioDiasEdit(event:any){
+    // console.log(event)
+    let a ="";
+    if(event.length==0){
+      a="";
+    }else if(event.length==1){
+        a = `${this.getDiaLabel(event[0])}`;
+    }else if(event.length>1){
+      
+      for(let i =0;i<event.length;i++){
+        if(i==event.length-1){
+          a+=`${this.getDiaLabel(event[i])}`;
+        }else{
+          a+=`${this.getDiaLabel(event[i])}, `;
+
+        }
+      }
+    }
+    this.diaSemanaEdit=a;
+  }
+
 
   // readExcel(event:any){
   //   let file = event.target.files[0];
@@ -1489,6 +1798,45 @@ export class PruebaComponent implements OnInit {
     this.formExtraccion.get('motivoCliente')?.patchValue(null);
   }
 
+  cambioMotivoEdit(item:any){
+    if(item != null){
+      this.cors.get(`Reporte/getMostrarCatalogoExtraccionAutomatizadasSubmotivoSolucion`,{motivo1:item,categoria:this.editForm.parametrosExtraccion[0].categoria}).then((response) => {
+        this.submo = response[0].submotivo;
+        this.solu = response[0].solucion;
+      }).catch((error) => {
+        console.log(error)
+      });
+
+    }
+    // this.formExtraccion.get('subMotivo')?.patchValue(null);
+    // this.formExtraccion.get('solucion')?.patchValue(null);
+    // this.formExtraccion.get('motivoCliente')?.patchValue(null);
+  }
+
+  cleanMoEdit(item:any){
+    // this.formExtraccion.get('motivo')?.patchValue(null);
+    // this.formExtraccion.get('subMotivo')?.patchValue(null);
+    // this.formExtraccion.get('solucion')?.patchValue(null);
+    this.editForm.parametrosExtraccion[0].motivo = null;
+    this.editForm.parametrosExtraccion[0].subMotivo = null;
+    this.editForm.parametrosExtraccion[0].solucion = null;
+  }
+  
+  inputMoEdit(){
+    this.submo=[];
+    this.solu=[];
+    // if(this.formExtraccion.controls['motivo'].value ==""){
+    //   this.formExtraccion.get('motivo')?.patchValue(null);
+    //   this.formExtraccion.get('submotivo')?.patchValue(null);
+
+    // }
+    
+    if(this.editForm.parametrosExtraccion[0].motivo = ""){
+      this.editForm.parametrosExtraccion[0].motivo = null;
+      this.editForm.parametrosExtraccion[0].submotivo = null;
+    }
+  }
+
   cleanMo(item:any){
     this.formExtraccion.get('motivo')?.patchValue(null);
     this.formExtraccion.get('subMotivo')?.patchValue(null);
@@ -1522,6 +1870,30 @@ export class PruebaComponent implements OnInit {
   cambioSubmotivo(){
     this.formExtraccion.get('solucion')?.patchValue(null);
     
+  }
+
+  cambioSubmotivoEdit(){
+    // this.formExtraccion.get('solucion')?.patchValue(null);
+    this.editForm.parametrosExtraccion[0].solucion = null;
+    
+  }
+
+  cleanSubEdit(item:any){
+    // this.formExtraccion.get('subMotivo')?.patchValue(null);
+    // this.formExtraccion.get('solucion')?.patchValue(null);
+    this.editForm.parametrosExtraccion[0].subMotivo = null;
+    this.editForm.parametrosExtraccion[0].solucion = null;
+
+  }
+  
+  inputSubEdit(){
+    // if(this.formExtraccion.controls['subMotivo'].value ==""){
+    //   this.formExtraccion.get('subMotivo')?.patchValue(null);
+
+    // }
+    if(this.editForm.parametrosExtraccion[0].subMotivo = null){
+      this.editForm.parametrosExtraccion[0].subMotivo = null
+    }
   }
 
   cleanSub(item:any){
@@ -1583,6 +1955,58 @@ export class PruebaComponent implements OnInit {
     }
   }
 
+  cambioSolucionEdit(){
+
+    if(this.editForm.parametrosExtraccion[0].motivo != null && this.editForm.parametrosExtraccion[0].subMotivo && this.editForm.parametrosExtraccion[0].solucion != null){
+      this.cors.get(`Reporte/getMostrarCatalogoExtraccionAutomatizadasMotivoCliente`,{
+        motivo1:this.editForm.parametrosExtraccion[0].motivo,
+        submotivo:this.editForm.parametrosExtraccion[0].subMotivo,
+        solucion:this.editForm.parametrosExtraccion[0].solucion,
+        categoria:this.editForm.parametrosExtraccion[0].categoria
+      }).then((response) => {
+        let a = response[0].motivoCliente[0]
+        if(a == ''){
+          this.moClien = [];
+        }else if(a == '-'){
+          this.moClien = ['-'];
+        }else if (a == undefined){
+          this.moClien = [];
+        }else{
+          const caracterBuscado = ",";
+          if(a.includes(caracterBuscado)){
+            this.moClien = a.split(',');
+          }else{
+            let b=[];
+            b[0] = a;
+            this.moClien = b
+          }
+        }
+      }).catch((error) => {
+        console.log(error)
+      });
+  
+    }
+  }
+
+  cleanSolucionEdit(item:any){
+    // this.formExtraccion.get('solucion')?.patchValue(null);
+    // this.formExtraccion.get('motivoCliente')?.patchValue(null);
+    this.editForm.parametrosExtraccion[0].solucion = null;
+    this.editForm.parametrosExtraccion[0].motivoCliente = null
+  }
+  
+  inputSolEdit(){
+    this.moClien=[]
+    // if(this.formExtraccion.controls['solucion'].value ==""){
+    //   this.formExtraccion.get('moCliente')?.patchValue(null);
+    //   // this.formExtraccion.get('categoria')?.patchValue(null);
+
+    // }
+    if(this.editForm.parametrosExtraccion[0].solucion == ""){
+      this.editForm.parametrosExtraccion[0].moCliente = null;
+    }
+  }
+
   cleanSolucion(item:any){
     this.formExtraccion.get('solucion')?.patchValue(null);
     this.formExtraccion.get('motivoCliente')?.patchValue(null);
@@ -1627,6 +2051,58 @@ export class PruebaComponent implements OnInit {
     }
     // console.log(this.formExtraccion)
   }
+  //categoriaEdit
+  cambioCategoriaEdit(item:any){ 
+    this.editForm.parametrosExtraccion[0].motivo = null;
+    // this.formExtraccion.get('motivo')?.patchValue(null);
+
+    // if(item != null){
+    //   this.cors.get('Reporte/getMostrarCatalogoExtraccionAutomatizadasMotivo',{
+    //     categoria1:this.formExtraccion.controls['categoria'].value
+    //   }).then((response) => {
+    //     // console.log(response)
+    //     this.mo = response
+    //   }).catch((error) => {
+    //     console.log(error)
+    //   })
+    // }
+    if(item != null){
+      this.cors.get('Reporte/getMostrarCatalogoExtraccionAutomatizadasMotivo',{
+            categoria1:this.editForm.parametrosExtraccion[0].categoria
+          }).then((response) => {
+            // console.log(response)
+            this.mo = response
+          }).catch((error) => {
+            console.log(error)
+          })
+    }
+    // console.log(this.formExtraccion)
+  }
+  cleanCategoriaEdit(item:any){
+    // this.formExtraccion.get('motivo')?.patchValue(null);
+    // this.formExtraccion.get('categoria')?.patchValue(null);
+    this.editForm.parametrosExtraccion[0].motivo = null;
+    this.editForm.parametrosExtraccion[0].categoria = null;
+    this.editForm.parametrosExtraccion[0].solucion = null;
+    this.editForm.parametrosExtraccion[0].moCliente = null;
+    this.editForm.parametrosExtraccion[0].subMotivo = null;
+
+  }
+
+  inputCategoriaEdit(){
+    this.mo=[]
+    // if(this.formExtraccion.controls['categoria'].value ==""){
+    //   this.formExtraccion.get('motivo')?.patchValue(null);
+    //   this.formExtraccion.get('categoria')?.patchValue(null);
+
+    // }
+    if(this.editForm.parametrosExtraccion[0].categoria == "" ){
+      this.editForm.parametrosExtraccion[0].motivo = null;
+      this.editForm.parametrosExtraccion[0].categoria = null;
+
+    }
+  }
+  // categoria Edit
 
   cleanCategoria(item:any){
     this.formExtraccion.get('motivo')?.patchValue(null);
