@@ -1335,7 +1335,7 @@ export class PruebaComponent implements OnInit {
   }
 
   editar1(){
-    console.log(this.editForm)
+    // console.log(this.editForm)
 
     if((!this.editForm.minuto && (!this.editForm.diaSemana || this.editForm.diaSemana?.length<=0))|| (this.editForm.minuto && this.editForm.diaSemana)){
       let randomId = nanoid();
@@ -1404,7 +1404,7 @@ export class PruebaComponent implements OnInit {
     }
     data.fechaExtraccion = `${moment().format('yyyy-MM-DDTHH:mm:ss')}`
     data.id = this.editForm.id
-    console.log("data",data)
+    // console.log("data",data)
      this.cors.put(`Reporte/ActualizaEjecucionExtraccionAutomatizadosHoraProgramadaPrueba?id=${data.id}`,data)
           .then((response) => {
             // console.log(response)
