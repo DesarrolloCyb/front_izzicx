@@ -787,7 +787,7 @@ export class PruebaComponent implements OnInit {
   }
 
   tablaExtraccion(){
-    this.cors.get('Reporte/getmostrarTablaExtraccionAutomatizadosPrueba',{})
+    this.cors.get('Reporte/getmostrarTablaExtraccionAutomatizadosPrueba',{"usuario":this.usuario.email})
     .then((response) => {
       // console.log(response)
       if(response[0] == "SIN INFO"){
