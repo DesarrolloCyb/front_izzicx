@@ -760,8 +760,8 @@ export class PruebaComponent implements OnInit {
   dateFormat(value:any){
     // console.log(value)
     if(value != null){
-      // return moment(value).format('DD/MM/yyyy HH:mm:ss')
-      return moment(value).format('DD/MM/yyyy')
+      return moment(value).format('DD/MM/yyyy HH:mm:ss')
+      // return moment(value).format('DD/MM/yyyy')
     }else{
       return ""
     }
@@ -1304,23 +1304,26 @@ export class PruebaComponent implements OnInit {
   
     }else if(item.tipoExtraccion == "Ordenes de servicio"){
       const inputString = this.editForm.parametrosExtraccion[0].fechaOrden;
-      const regex = /'(\d{1,2}\/\d{1,2}\/\d{4})'/g;
+      // const regex = /'(\d{1,2}\/\d{1,2}\/\d{4})'/g;
+      const regex = /(\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2})/g;
+
       let matches = inputString.match(regex);
       if (matches && matches.length >= 2) {
         let a=matches[0].replace(/'/g, ''); 
         let b=matches[1].replace(/'/g, '');
         matches[0]=a;
         matches[1]=b;
+        console.log(matches)
         let fechas: Date[] = [];
-        for (const fechaStr of matches) {
-          const parts = fechaStr.split('/');
-          if (parts.length === 3) {
-            const day = parseInt(parts[0]);
-            const month = parseInt(parts[1]); // Restar 1 al mes, ya que en Date los meses van de 0 a 11
-            const year = parseInt(parts[2]);
-            fechas.push(new Date(year, month, day));
-          }
-        }
+        const dateObjects = matches.map((m:any) => {
+          const [datePart, timePart] = m.split(' ');
+          const [day, month, year] = datePart.split('/').map(Number);
+          const [hour, minute, second] = timePart.split(':').map(Number);
+        
+          // Los meses en JavaScript son basados en 0, por lo que debemos restar 1 al mes.
+          fechas.push(new Date(year, month - 1, day, hour, minute, second));
+        });
+        
         matches = fechas;
         this.editForm.parametrosExtraccion[0].fechaOrden = matches
       }else{

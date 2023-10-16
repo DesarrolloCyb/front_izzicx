@@ -495,7 +495,7 @@
                         <label for="inputdate">Fecha de la Orden</label>
                     </span> -->
                     <span class="p-float-label"> 
-                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" [showSeconds]="true"  dateFormat="dd-mm-yy" formControlName="fechaOrden" selectionMode="range"  inputId="icon">
+                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" [showTime]="true" [showSeconds]="true"  dateFormat="dd-mm-yy" formControlName="fechaOrden" selectionMode="range"  inputId="icon">
                       </p-calendar>
                       <label for="inputdate">Fecha de la Orden</label>
                     </span>
@@ -1368,7 +1368,7 @@
 
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio'">
           <span class="p-float-label"> 
-            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" [showSeconds]="true" dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].fechaOrden" selectionMode="range"  inputId="icon">
+            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" [showTime]="true" [showSeconds]="true" dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].fechaOrden" selectionMode="range"  inputId="icon">
             </p-calendar>
             <label for="inputdate">Fecha de la Orden</label>
           </span>
