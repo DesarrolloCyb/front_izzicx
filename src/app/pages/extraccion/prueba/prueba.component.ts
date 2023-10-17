@@ -207,6 +207,35 @@ export class PruebaComponent implements OnInit {
   fechaAperturaMin:any = null;
   fechaAperturaMax:any=null;
   disabledDates:any=[];
+  fechaAsignacionMin:any = null;
+  fechaAsignacionMax:any=null;
+  disabledDatesfechaAsignacion:any=[];
+  fechaVencimientoMin:any = null;
+  fechaVencimientoMax:any=null;
+  disabledDatesfechaVencimiento:any=[];
+  fechaCreacionMin:any = null;
+  fechaCreacionMax:any=null;
+  disabledDatesfechaCreacion:any=[];
+  fechaOrdenMin:any = null;
+  fechaOrdenMax:any=null;
+  disabledDatesfechaOrden:any=[];
+
+  fechaAperturaMinEdit:any = null;
+  fechaAperturaMaxEdit:any=null;
+  disabledDatesEdit:any=[];
+  fechaAsignacionMinEdit:any = null;
+  fechaAsignacionMaxEdit:any=null;
+  disabledDatesfechaAsignacionEdit:any=[];
+  fechaVencimientoMinEdit:any = null;
+  fechaVencimientoMaxEdit:any=null;
+  disabledDatesfechaVencimientoEdit:any=[];
+  fechaCreacionMinEdit:any = null;
+  fechaCreacionMaxEdit:any=null;
+  disabledDatesfechaCreacionEdit:any=[];
+  fechaOrdenMinEdit:any = null;
+  fechaOrdenMaxEdit:any=null;
+  disabledDatesfechaOrdenEdit:any=[];
+
   editForm:any={
     "id": "",
     "cve_usuario": ``,
@@ -652,6 +681,10 @@ export class PruebaComponent implements OnInit {
     this.formExtraccion.controls['solucion'].reset();
     this.formExtraccion.controls['areaConocimiento'].reset();
     this.formExtraccion.controls['fechaAsignacion'].reset();
+    this.formExtraccion.controls['fechaApertura'].reset();
+    this.formExtraccion.controls['vencimientoActividad'].reset();
+    this.formExtraccion.controls['fechaCreacion'].reset();
+    this.formExtraccion.controls['fechaOrden'].reset();
     // this.formExtraccion.controls['rpt'].reset();
     this.formExtraccion.controls['tipoOrden'].reset();
     // this.formExtraccion.controls['asignada'].reset();
@@ -2262,28 +2295,221 @@ medioExtraccionChange(item:any){
 
 
 changeFechaApertura(event:any){
-  this.disabledDates=[];
   if (!this.fechaAperturaMin) {
     this.fechaAperturaMin = event;
+    let a = new Date(this.fechaAperturaMin);
+    a.setHours(0, 0, 0, 0);
+    a.setDate(a.getDate()+3)
+    for(let i = 0 ;i<=30;i++){
+      let b = a.setDate(a.getDate()+1)
+      this.disabledDates.push(new Date(moment(b).format('yyyy-MM-DD')));
+    }
+      this.fechaAperturaMax = null;
   } else if (!this.fechaAperturaMax) {
     this.fechaAperturaMax = event;
-  } else {
-    this.fechaAperturaMin = event;
-    this.fechaAperturaMax = null;
-  }  
-  let a = new Date(this.fechaAperturaMin);
-  a.setHours(0, 0, 0, 0);
-  a.setDate(a.getDate()+4)
-  for(let i = 0 ;i<=30;i++){
-    let b = a.setDate(a.getDate()+1)
-    this.disabledDates.push(new Date(moment(b).format('yyyy-MM-DD')));
-    // this.disabledDates.push();
-  }
-  // let today = new Date();
-  // let invalidDate = new Date();
-  // invalidDate.setDate(invalidDate.getDate() + 2);
-  // this.disabledDates = [today, invalidDate];
+    this.disabledDates=[];
+    this.fechaAperturaMin=null;
+    
+  } 
+ 
+
 }
+
+changeFechaAsignacion(event:any){
+  if (!this.fechaAsignacionMin) {
+    this.fechaAsignacionMin = event;
+    let a = new Date(this.fechaAsignacionMin);
+    a.setHours(0, 0, 0, 0);
+    a.setDate(a.getDate()+3)
+    for(let i = 0 ;i<=30;i++){
+      let b = a.setDate(a.getDate()+1)
+      this.disabledDatesfechaAsignacion.push(new Date(moment(b).format('yyyy-MM-DD')));
+    }
+      this.fechaAsignacionMax = null;
+  } else if (!this.fechaAsignacionMax) {
+    this.fechaAsignacionMax = event;
+    this.disabledDatesfechaAsignacion=[];
+    this.fechaAsignacionMin=null;
+    
+  } 
+ 
+
+}
+
+changeFechaVencimiento(event:any){
+  if (!this.fechaVencimientoMin) {
+    this.fechaVencimientoMin = event;
+    let a = new Date(this.fechaVencimientoMin);
+    a.setHours(0, 0, 0, 0);
+    a.setDate(a.getDate()+3)
+    for(let i = 0 ;i<=30;i++){
+      let b = a.setDate(a.getDate()+1)
+      this.disabledDatesfechaVencimiento.push(new Date(moment(b).format('yyyy-MM-DD')));
+    }
+      this.fechaVencimientoMax = null;
+  } else if (!this.fechaVencimientoMax) {
+    this.fechaVencimientoMax = event;
+    this.disabledDatesfechaVencimiento=[];
+    this.fechaVencimientoMin=null;
+    
+  } 
+ 
+
+}
+
+
+changeFechaCreacion(event:any){
+  if (!this.fechaCreacionMin) {
+    this.fechaCreacionMin = event;
+    let a = new Date(this.fechaCreacionMin);
+    a.setHours(0, 0, 0, 0);
+    a.setDate(a.getDate()+3)
+    for(let i = 0 ;i<=30;i++){
+      let b = a.setDate(a.getDate()+1)
+      this.disabledDatesfechaCreacion.push(new Date(moment(b).format('yyyy-MM-DD')));
+    }
+      this.fechaVencimientoMax = null;
+  } else if (!this.fechaVencimientoMax) {
+    this.fechaVencimientoMax = event;
+    this.disabledDatesfechaCreacion=[];
+    this.fechaCreacionMin=null;
+    
+  } 
+ 
+
+}
+
+changeFechaOrden(event:any){
+  if (!this.fechaOrdenMin) {
+    this.fechaOrdenMin = event;
+    let a = new Date(this.fechaOrdenMin);
+    a.setHours(0, 0, 0, 0);
+    a.setDate(a.getDate()+1)
+    for(let i = 0 ;i<=30;i++){
+      let b = a.setDate(a.getDate()+1)
+      this.disabledDatesfechaOrden.push(new Date(moment(b).format('yyyy-MM-DD')));
+    }
+      this.fechaOrdenMax = null;
+  } else if (!this.fechaOrdenMax) {
+    this.fechaOrdenMax = event;
+    this.disabledDatesfechaOrden=[];
+    this.fechaOrdenMin=null;
+    
+  } 
+ 
+
+}
+
+
+changeFechaAperturaEdit(event:any){
+  if (!this.fechaAperturaMinEdit) {
+    this.fechaAperturaMinEdit = event;
+    let a = new Date(this.fechaAperturaMinEdit);
+    a.setHours(0, 0, 0, 0);
+    a.setDate(a.getDate()+3)
+    for(let i = 0 ;i<=30;i++){
+      let b = a.setDate(a.getDate()+1)
+      this.disabledDatesEdit.push(new Date(moment(b).format('yyyy-MM-DD')));
+    }
+      this.fechaAperturaMaxEdit = null;
+  } else if (!this.fechaAperturaMaxEdit) {
+    this.fechaAperturaMaxEdit = event;
+    this.disabledDatesEdit=[];
+    this.fechaAperturaMinEdit=null;
+    
+  } 
+ 
+
+}
+
+changeFechaAsignacionEdit(event:any){
+  if (!this.fechaAsignacionMinEdit) {
+    this.fechaAsignacionMinEdit = event;
+    let a = new Date(this.fechaAsignacionMinEdit);
+    a.setHours(0, 0, 0, 0);
+    a.setDate(a.getDate()+3)
+    for(let i = 0 ;i<=30;i++){
+      let b = a.setDate(a.getDate()+1)
+      this.disabledDatesfechaAsignacionEdit.push(new Date(moment(b).format('yyyy-MM-DD')));
+    }
+      this.fechaAsignacionMaxEdit = null;
+  } else if (!this.fechaAsignacionMaxEdit) {
+    this.fechaAsignacionMaxEdit = event;
+    this.disabledDatesfechaAsignacionEdit=[];
+    this.fechaAsignacionMinEdit=null;
+    
+  } 
+ 
+
+}
+
+changeFechaVencimientoEdit(event:any){
+  if (!this.fechaVencimientoMinEdit) {
+    this.fechaVencimientoMinEdit = event;
+    let a = new Date(this.fechaVencimientoMinEdit);
+    a.setHours(0, 0, 0, 0);
+    a.setDate(a.getDate()+3)
+    for(let i = 0 ;i<=30;i++){
+      let b = a.setDate(a.getDate()+1)
+      this.disabledDatesfechaVencimientoEdit.push(new Date(moment(b).format('yyyy-MM-DD')));
+    }
+      this.fechaVencimientoMaxEdit = null;
+  } else if (!this.fechaVencimientoMaxEdit) {
+    this.fechaVencimientoMaxEdit = event;
+    this.disabledDatesfechaVencimientoEdit=[];
+    this.fechaVencimientoMinEdit=null;
+    
+  } 
+ 
+
+}
+
+
+changeFechaCreacionEdit(event:any){
+  if (!this.fechaCreacionMinEdit) {
+    this.fechaCreacionMinEdit = event;
+    let a = new Date(this.fechaCreacionMinEdit);
+    a.setHours(0, 0, 0, 0);
+    a.setDate(a.getDate()+3)
+    for(let i = 0 ;i<=30;i++){
+      let b = a.setDate(a.getDate()+1)
+      this.disabledDatesfechaCreacionEdit.push(new Date(moment(b).format('yyyy-MM-DD')));
+    }
+      this.fechaVencimientoMaxEdit = null;
+  } else if (!this.fechaVencimientoMaxEdit) {
+    this.fechaVencimientoMaxEdit = event;
+    this.disabledDatesfechaCreacionEdit=[];
+    this.fechaCreacionMinEdit=null;
+    
+  } 
+ 
+
+}
+
+changeFechaOrdenEdit(event:any){
+  if (!this.fechaOrdenMinEdit) {
+    this.fechaOrdenMinEdit = event;
+    let a = new Date(this.fechaOrdenMinEdit);
+    a.setHours(0, 0, 0, 0);
+    a.setDate(a.getDate()+1)
+    for(let i = 0 ;i<=30;i++){
+      let b = a.setDate(a.getDate()+1)
+      this.disabledDatesfechaOrdenEdit.push(new Date(moment(b).format('yyyy-MM-DD')));
+    }
+      this.fechaOrdenMaxEdit = null;
+  } else if (!this.fechaOrdenMaxEdit) {
+    this.fechaOrdenMaxEdit = event;
+    this.disabledDatesfechaOrdenEdit=[];
+    this.fechaOrdenMinEdit=null;
+    
+  } 
+ 
+
+}
+
+
+
+
 
 
 

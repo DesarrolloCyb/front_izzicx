@@ -123,7 +123,7 @@
                         </p-calendar>
                         <label for="inputdate">Fecha de Apertura</label>
                     </span> -->
-                    <!-- <span class="p-float-label"> 
+                    <span class="p-float-label"> 
                       <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true"  
                       dateFormat="dd-mm-yy" formControlName="fechaApertura" selectionMode="range"  inputId="icon"
                        (onSelect)="changeFechaApertura($event)" [minDate]="fechaAperturaMin"
@@ -131,14 +131,14 @@
                        >
                       </p-calendar>
                       <label for="fechaApertura">Fecha de Apertura</label>
-                    </span> -->
-                    <span class="p-float-label"> 
+                    </span>
+                    <!-- <span class="p-float-label"> 
                       <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true"  
                       dateFormat="dd-mm-yy" formControlName="fechaApertura" selectionMode="range"  inputId="icon"
                        >
                       </p-calendar>
                       <label for="fechaApertura">Fecha de Apertura</label>
-                    </span>
+                    </span> -->
                     
                   </div>
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
@@ -375,7 +375,12 @@
                         <label for="inputdate">Fecha de Asignación</label>
                     </span> -->
                     <span class="p-float-label"> 
-                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" formControlName="fechaAsignacion" selectionMode="range"  inputId="icon">
+                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" 
+                      dateFormat="dd-mm-yy" formControlName="fechaAsignacion" selectionMode="range"  
+                      inputId="icon" (onSelect)="changeFechaAsignacion($event)" [minDate]="fechaAsignacionMin"
+                       [disabledDates]="disabledDatesfechaAsignacion"
+
+                      >
                       </p-calendar>
                       <label for="inputdate">Fecha de Asignacion</label>
                     </span>
@@ -394,7 +399,12 @@
                         <label for="inputdate">Vencimiento</label>
                     </span> -->
                     <span class="p-float-label"> 
-                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" formControlName="vencimientoActividad" selectionMode="range"  inputId="icon">
+                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" 
+                      dateFormat="dd-mm-yy" formControlName="vencimientoActividad" 
+                      selectionMode="range"  inputId="icon" (onSelect)="changeFechaVencimiento($event)" [minDate]="fechaVencimientoMin"
+                      [disabledDates]="disabledDatesfechaVencimiento"
+                      
+                      >
                       </p-calendar>
                       <label for="inputdate">Vencimiento</label>
                     </span>
@@ -413,7 +423,11 @@
                         <label for="inputdate">Vencimiento</label>
                     </span> -->
                     <span class="p-float-label"> 
-                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" formControlName="fechaCreacion" selectionMode="range"  inputId="icon">
+                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" 
+                      dateFormat="dd-mm-yy" formControlName="fechaCreacion" selectionMode="range"  
+                      inputId="icon" (onSelect)="changeFechaCreacion($event)" [minDate]="fechaCreacionMin"
+                      [disabledDates]="disabledDatesfechaCreacion"
+                      >
                       </p-calendar>
                       <label for="inputdate">Fecha de Creación</label>
                     </span>
@@ -506,7 +520,12 @@
                         <label for="inputdate">Fecha de la Orden</label>
                     </span> -->
                     <span class="p-float-label"> 
-                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" [showTime]="true" [showSeconds]="true"  dateFormat="dd-mm-yy" formControlName="fechaOrden" selectionMode="range"  inputId="icon">
+                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" 
+                      [showTime]="true" [showSeconds]="true"  dateFormat="dd-mm-yy" 
+                      formControlName="fechaOrden" selectionMode="range"  inputId="icon"
+                      (onSelect)="changeFechaOrden($event)" [minDate]="fechaOrdenMin"
+                      [disabledDates]="disabledDatesfechaOrden"
+                      >
                       </p-calendar>
                       <label for="inputdate">Fecha de la Orden</label>
                     </span>
@@ -1216,7 +1235,12 @@
      
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio'">
           <span class="p-float-label"> 
-            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true"  dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].fechaApertura"  selectionMode="range"  inputId="icon">
+            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true"  
+            dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].fechaApertura"  
+            selectionMode="range"  inputId="icon"
+            (onSelect)="changeFechaAperturaEdit($event)" [minDate]="fechaAperturaMinEdit"
+            [disabledDates]="disabledDatesEdit"
+            >
             </p-calendar>
             <label>Fecha de Apertura</label>
           </span>
@@ -1308,7 +1332,11 @@
         </div>
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Actividades'">
           <span class="p-float-label"> 
-            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].fechaAsignacion" selectionMode="range"  inputId="icon">
+            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" 
+            [(ngModel)]="editForm.parametrosExtraccion[0].fechaAsignacion" selectionMode="range"  
+            inputId="icon"  (onSelect)="changeFechaAsignacionEdit($event)" [minDate]="fechaAsignacionMinEdit"
+            [disabledDates]="disabledDatesfechaAsignacionEdit"
+            >
             </p-calendar>
             <label for="inputdate">Fecha de Asignacion</label>
           </span>
@@ -1316,14 +1344,22 @@
         </div>
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Actividades'">
           <span class="p-float-label"> 
-            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].vencimientoActividad" selectionMode="range"  inputId="icon">
+            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" 
+            [(ngModel)]="editForm.parametrosExtraccion[0].vencimientoActividad" selectionMode="range"  
+            inputId="icon"  (onSelect)="changeFechaVencimientoEdit($event)" [minDate]="fechaVencimientoMinEdit"
+            [disabledDates]="disabledDatesfechaVencimientoEdit"
+            >
             </p-calendar>
             <label for="inputdate">Vencimiento</label>
           </span>
         </div>
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Actividades'">
           <span class="p-float-label"> 
-            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].fechaCreacion" selectionMode="range"  inputId="icon">
+            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" 
+            [(ngModel)]="editForm.parametrosExtraccion[0].fechaCreacion" selectionMode="range"  
+            inputId="icon" (onSelect)="changeFechaCreacionEdit($event)" [minDate]="fechaCreacionMinEdit"
+            [disabledDates]="disabledDatesfechaCreacionEdit"
+            >
             </p-calendar>
             <label for="inputdate">Fecha de Creación</label>
           </span>
@@ -1379,7 +1415,12 @@
 
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio'">
           <span class="p-float-label"> 
-            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" [showTime]="true" [showSeconds]="true" dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].fechaOrden" selectionMode="range"  inputId="icon">
+            <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" [showTime]="true" 
+            [showSeconds]="true" dateFormat="dd-mm-yy" 
+            [(ngModel)]="editForm.parametrosExtraccion[0].fechaOrden" selectionMode="range"  
+            inputId="icon" (onSelect)="changeFechaOrdenEdit($event)" [minDate]="fechaOrdenMinEdit"
+            [disabledDates]="disabledDatesfechaOrdenEdit"
+            >
             </p-calendar>
             <label for="inputdate">Fecha de la Orden</label>
           </span>
