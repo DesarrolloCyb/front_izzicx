@@ -124,7 +124,11 @@
                         <label for="inputdate">Fecha de Apertura</label>
                     </span> -->
                     <span class="p-float-label"> 
-                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true"  dateFormat="dd-mm-yy" formControlName="fechaApertura" selectionMode="range"  inputId="icon">
+                      <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true"  
+                      dateFormat="dd-mm-yy" formControlName="fechaApertura" selectionMode="range"  inputId="icon"
+                       (onSelect)="changeFechaApertura($event)" [minDate]="fechaAperturaMin"
+                       [disabledDates]="disabledDates"
+                       >
                       </p-calendar>
                       <label for="fechaApertura">Fecha de Apertura</label>
                     </span>
@@ -207,7 +211,7 @@
                     >
                     </p-dropdown>
                   </div> -->
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['categoria'].value != null">
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
                     <p-autoComplete [showClear]="true" formControlName="motivo" 
                     [dropdown]="true" (onSelect)="cambioMotivo($event)" (onClear)="cleanMo($event)" (input)="inputMo()"
                     [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivo')?.errors != null && formExtraccion.get('motivo')?.touched == true}"
@@ -229,7 +233,7 @@
                     >
                     </p-dropdown>
                   </div> -->
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['motivo'].value != null">
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
                     <p-autoComplete [showClear]="true" formControlName="subMotivo" 
                     [dropdown]="true" (onSelect)="cambioSubmotivo()" (onClear)="cleanSub($event)" (input)="inputSub()"
                     [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('subMotivo')?.errors != null && formExtraccion.get('subMotivo')?.touched == true}"
@@ -251,7 +255,7 @@
                     >
                     </p-dropdown>
                   </div> -->
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['subMotivo'].value != null">
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
                     <p-autoComplete [showClear]="true" formControlName="solucion" 
                     [dropdown]="true" (onSelect)="cambioSolucion()" (onClear)="cleanSolucion($event)" (input)="inputSol()"
                     [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('solucion')?.errors != null && formExtraccion.get('solucion')?.touched == true}"
@@ -272,7 +276,7 @@
                     </p-dropdown>
                   </div> -->
 
-                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' && formExtraccion.controls['solucion'].value != null">
+                  <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
                     <p-autoComplete [showClear]="true" formControlName="motivoCliente" 
                     [dropdown]="true"
                     [ngClass]="{'ng-invalid ng-dirty': formExtraccion.get('motivoCliente')?.errors != null && formExtraccion.get('motivoCliente')?.touched == true}"
@@ -1327,7 +1331,7 @@
           </p-autoComplete>
 
         </div>
-        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio'">
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio' && editForm.medioExtraccion==false">
           <span class="p-float-label">
               <input
               type="text"
@@ -1337,7 +1341,7 @@
               <label>Compañia (Nombre del Titular)</label>
           </span>
         </div>              
-        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio'">
+        <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio' && editForm.medioExtraccion==false">
           <span class="p-float-label">
               <input
               type="text"

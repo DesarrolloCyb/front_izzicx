@@ -204,6 +204,9 @@ export class PruebaComponent implements OnInit {
   filtertipoAct:any=[];
   filterareaAct:any=[];
   filterestadoAct:any=[];
+  fechaAperturaMin:any = null;
+  fechaAperturaMax:any=null;
+  disabledDates:any=[];
   editForm:any={
     "id": "",
     "cve_usuario": ``,
@@ -2247,9 +2250,40 @@ medioExtraccionChange(item:any){
   this.formExtraccion.controls['compania']?.reset();
 }
 
+// changeFechaApertura(item:any){
+// console.log(item)
+// this.fechaAperturaMin = item
+// let dias=3;
+// item.setDate(item.getDate()+dias)
+// console.log(item)
+// // this.fechaAperturaMax = item
+// // console.log(this.formExtraccion.controls['fechaApertura'].value)
+// }
 
 
-
+changeFechaApertura(event:any){
+  this.disabledDates=[];
+  if (!this.fechaAperturaMin) {
+    this.fechaAperturaMin = event;
+  } else if (!this.fechaAperturaMax) {
+    this.fechaAperturaMax = event;
+  } else {
+    this.fechaAperturaMin = event;
+    this.fechaAperturaMax = null;
+  }  
+  let a = new Date(this.fechaAperturaMin);
+  a.setHours(0, 0, 0, 0);
+  a.setDate(a.getDate()+4)
+  for(let i = 0 ;i<=30;i++){
+    let b = a.setDate(a.getDate()+1)
+    this.disabledDates.push(new Date(moment(b).format('yyyy-MM-DD')));
+    // this.disabledDates.push();
+  }
+  // let today = new Date();
+  // let invalidDate = new Date();
+  // invalidDate.setDate(invalidDate.getDate() + 2);
+  // this.disabledDates = [today, invalidDate];
+}
 
 
 
