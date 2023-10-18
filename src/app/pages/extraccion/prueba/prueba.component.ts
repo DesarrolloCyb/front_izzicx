@@ -2380,22 +2380,27 @@ changeFechaCreacion(event:any){
 }
 
 changeFechaOrden(event:any){
-  if (!this.fechaOrdenMin) {
-    this.fechaOrdenMin = event;
-    let a = new Date(this.fechaOrdenMin);
-    a.setHours(0, 0, 0, 0);
-    a.setDate(a.getDate()+1)
-    for(let i = 0 ;i<=30;i++){
-      let b = a.setDate(a.getDate()+1)
-      this.disabledDatesfechaOrden.push(new Date(moment(b).format('yyyy-MM-DD')));
-    }
-      this.fechaOrdenMax = null;
-  } else if (!this.fechaOrdenMax) {
-    this.fechaOrdenMax = event;
-    this.disabledDatesfechaOrden=[];
-    this.fechaOrdenMin=null;
-    
-  } 
+  if(event.length==2){
+
+  }else{
+    if (!this.fechaOrdenMin) {
+      this.fechaOrdenMin = event;
+      let a = new Date(this.fechaOrdenMin);
+      a.setHours(0, 0, 0, 0);
+      a.setDate(a.getDate()+1)
+      for(let i = 0 ;i<=30;i++){
+        let b = a.setDate(a.getDate()+1)
+        this.disabledDatesfechaOrden.push(new Date(moment(b).format('yyyy-MM-DD')));
+      }
+        this.fechaOrdenMax = null;
+    } else if (!this.fechaOrdenMax) {
+      this.fechaOrdenMax = event;
+      this.disabledDatesfechaOrden=[];
+      this.fechaOrdenMin=null;
+      
+    } 
+
+  }
  
 
 }
@@ -2487,22 +2492,27 @@ changeFechaCreacionEdit(event:any){
 }
 
 changeFechaOrdenEdit(event:any){
-  if (!this.fechaOrdenMinEdit) {
-    this.fechaOrdenMinEdit = event;
-    let a = new Date(this.fechaOrdenMinEdit);
-    a.setHours(0, 0, 0, 0);
-    a.setDate(a.getDate()+1)
-    for(let i = 0 ;i<=30;i++){
-      let b = a.setDate(a.getDate()+1)
-      this.disabledDatesfechaOrdenEdit.push(new Date(moment(b).format('yyyy-MM-DD')));
-    }
-      this.fechaOrdenMaxEdit = null;
-  } else if (!this.fechaOrdenMaxEdit) {
-    this.fechaOrdenMaxEdit = event;
-    this.disabledDatesfechaOrdenEdit=[];
-    this.fechaOrdenMinEdit=null;
-    
-  } 
+  if(event.length==2){
+  
+  }else{
+    if (!this.fechaOrdenMinEdit) {
+      this.fechaOrdenMinEdit = event;
+      let a = new Date(this.fechaOrdenMinEdit);
+      a.setHours(0, 0, 0, 0);
+      a.setDate(a.getDate()+1)
+      for(let i = 0 ;i<=30;i++){
+        let b = a.setDate(a.getDate()+1)
+        this.disabledDatesfechaOrdenEdit.push(new Date(moment(b).format('yyyy-MM-DD')));
+      }
+        this.fechaOrdenMaxEdit = null;
+    } else if (!this.fechaOrdenMaxEdit) {
+      this.fechaOrdenMaxEdit = event;
+      this.disabledDatesfechaOrdenEdit=[];
+      this.fechaOrdenMinEdit=null;
+      
+    } 
+
+  }
  
 
 }
