@@ -2283,16 +2283,6 @@ medioExtraccionChange(item:any){
   this.formExtraccion.controls['compania']?.reset();
 }
 
-// changeFechaApertura(item:any){
-// console.log(item)
-// this.fechaAperturaMin = item
-// let dias=3;
-// item.setDate(item.getDate()+dias)
-// console.log(item)
-// // this.fechaAperturaMax = item
-// // console.log(this.formExtraccion.controls['fechaApertura'].value)
-// }
-
 
 changeFechaApertura(event:any){
   if (!this.fechaAperturaMin) {
