@@ -2374,9 +2374,10 @@ changeFechaOrden(event:any){
 
   }else{
     if (!this.fechaOrdenMin) {
-      this.fechaOrdenMin = event;
+      event.setHours(0,0,0,0)
+      this.fechaOrdenMin = event; 
       let a = new Date(this.fechaOrdenMin);
-      a.setHours(0, 0, 0, 0);
+      // a.setHours(0, 0, 0, 0);
       a.setDate(a.getDate()+1)
       for(let i = 0 ;i<=30;i++){
         let b = a.setDate(a.getDate()+1)
@@ -2389,9 +2390,7 @@ changeFechaOrden(event:any){
       this.fechaOrdenMin=null;
       
     } 
-
   }
- 
 
 }
 
@@ -2486,9 +2485,9 @@ changeFechaOrdenEdit(event:any){
   
   }else{
     if (!this.fechaOrdenMinEdit) {
+      event.setHours(0, 0, 0, 0);
       this.fechaOrdenMinEdit = event;
       let a = new Date(this.fechaOrdenMinEdit);
-      a.setHours(0, 0, 0, 0);
       a.setDate(a.getDate()+1)
       for(let i = 0 ;i<=30;i++){
         let b = a.setDate(a.getDate()+1)
