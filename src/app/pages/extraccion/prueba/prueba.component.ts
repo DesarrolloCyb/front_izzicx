@@ -586,68 +586,68 @@ export class PruebaComponent implements OnInit {
       
       data.procesando="0";
       data.status="Pendiente";
-      console.log(data)
-      // this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
-      // .then((response) => {
-      //   this.messageService.add({
-      //     key: 'tst',
-      //     severity: 'success',
-      //     summary: 'Exito!!!',
-      //     detail: 'Datos guardados',
-      //   });
+      // console.log(data)
+      this.cors.post('Reporte/GuardarFormularioEjecucionExtraccionAutomatizadosPrueba',data)
+      .then((response) => {
+        this.messageService.add({
+          key: 'tst',
+          severity: 'success',
+          summary: 'Exito!!!',
+          detail: 'Datos guardados',
+        });
 
-      //   this.cors.post('Reporte/agregarNuevoCron',data)
-      //   .then((response) => {
-      //     console.log(response)
-      //     })
-      //     .catch((error) => {
-      //       console.log(error)
-      //       this.messageService.add({
-      //         key:'tst',
-      //         severity: 'error',
-      //         summary: 'No se logro guardar el Cron',
-      //         detail: 'Intenta Nuevamente!!!',
-      //       });
-      //     });
+        this.cors.post('Reporte/agregarNuevoCron',data)
+        .then((response) => {
+          console.log(response)
+          })
+          .catch((error) => {
+            console.log(error)
+            this.messageService.add({
+              key:'tst',
+              severity: 'error',
+              summary: 'No se logro guardar el Cron',
+              detail: 'Intenta Nuevamente!!!',
+            });
+          });
 
-      //     setTimeout(() => {
-      //       this.reset()
+          setTimeout(() => {
+            this.reset()
             this.spinner = false;
-      //       this.tablaExtraccion();
-      //       this.reset()
-      //       /* FLASK */
-      //       // this.http.post('https://izzicron.pagekite.me/programar', post).subscribe(
-      //       //   (res: any) => {
-      //       //     console.log(res)
-      //       //   },
-      //       //   (err: any) => {
-      //       //     console.log(err)
-      //       //   }
-      //       // );
-      //       // this.cron.post('programar', post).subscribe(
-      //       //   (res: any) => {
-      //       //     console.log(res)
-      //       //   },
-      //       //   (err: any) => {
-      //       //     console.log(err)
-      //       //   }
-      //       // );
+            this.tablaExtraccion();
+            this.reset()
+            /* FLASK */
+            // this.http.post('https://izzicron.pagekite.me/programar', post).subscribe(
+            //   (res: any) => {
+            //     console.log(res)
+            //   },
+            //   (err: any) => {
+            //     console.log(err)
+            //   }
+            // );
+            // this.cron.post('programar', post).subscribe(
+            //   (res: any) => {
+            //     console.log(res)
+            //   },
+            //   (err: any) => {
+            //     console.log(err)
+            //   }
+            // );
     
     
             
-      //     }, 3000);
+          }, 3000);
 
 
-      // })
-      // .catch((error) => {
-      //   console.log(error)
-      //   this.messageService.add({
-      //     key:'tst',
-      //     severity: 'error',
-      //     summary: 'No se logro guardar',
-      //     detail: 'Intenta Nuevamente!!!',
-      //   });
-      // });
+      })
+      .catch((error) => {
+        console.log(error)
+        this.messageService.add({
+          key:'tst',
+          severity: 'error',
+          summary: 'No se logro guardar',
+          detail: 'Intenta Nuevamente!!!',
+        });
+      });
 
       
     }else{
@@ -1041,7 +1041,6 @@ export class PruebaComponent implements OnInit {
 
         
         this.datosExtraccion2 = response;
-        console.log(this.datosExtraccion2)
       }
     })
     .catch((error) => {
@@ -2385,7 +2384,7 @@ changeFechaOrden(event:any){
       }
         this.fechaOrdenMax = null;
     } else if (!this.fechaOrdenMax) {
-      this.fechaOrdenMax = event; 
+      this.fechaOrdenMax = event;
       this.disabledDatesfechaOrden=[];
       this.fechaOrdenMin=null;
       
