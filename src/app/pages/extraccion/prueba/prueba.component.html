@@ -1090,6 +1090,12 @@
                           Archivo
                       </div>
                     </th>
+                    <th>
+                      <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                          Progreso
+                      </div>
+                    </th>
+
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item let-i="rowIndex">
@@ -1120,14 +1126,39 @@
                           </div>
                       </ng-container>
                     </td>
-                    <td *ngIf="item.archivo" class="text-center">
-                    <!-- {{item.archivo}} -->
-                      <button pButton  style="background-color: #FFC300;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)" [loading]="estaSiendoDescargado(item.archivo)"></button>
-                      <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
-                    </td>
-                    <td *ngIf="!item.archivo" class="text-center">
+                    <td *ngIf="(!item.archivo || item.archivo== null || item.archivo =='-') ;else elseArchivo" class="text-center">
                       <button pButton disabled style="background-color: grey;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
-                    <!-- {{item.archivo}} -->
+                    </td>
+                    <ng-template #elseArchivo>
+                      <td class="text-center">
+                        <button pButton  style="background-color: #FFC300;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)" [loading]="estaSiendoDescargado(item.archivo)"></button>
+                      </td>
+                    </ng-template>
+                    <td class="text-center">
+                      <!-- <div [ngSwitch]="item.status">
+                        <ng-container *ngSwitchCase="'Pendiente'">
+                          <p-progressBar [value]="25">
+                            <ng-template let-value let-label="label" pTemplate="display">
+                              <div style="text-align: center;">{{ label }}</div>
+                            </ng-template>
+                          </p-progressBar>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'Procesando'" class="text-center">
+                           <p-progressBar [value]="50" ></p-progressBar>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'Completado'" class="text-center">
+                            <i class="pi pi-fw pi-check" style="color: green;font-size: 2rem;font-weight: bold;"></i>
+                          </ng-container>
+                          <ng-container *ngSwitchDefault>
+                            <i class="pi pi-fw pi-times" style="color: red;font-size: 2rem;font-weight: bold;"></i>
+                            
+                          </ng-container>
+                        </div> -->
+                        <i *ngIf="item.status =='Completado'" class="pi pi-fw pi-check" style="color: green;font-size: 2rem;font-weight: bold;"></i>
+                        <i *ngIf="item.status =='Error' || item.status =='Error Falla al Extraer' || item.status =='Error Servidor Ocupado' || item.status =='Error Sin Datos' || item.status =='Error Sin Resultados'" class="pi pi-fw pi-times" style="color: red;font-size: 2rem;font-weight: bold;"></i>
+                        <i *ngIf="item.status =='Procesando' && (item.archivo =='-' || item.archivo==null) && item.procesando =='Si'" class="pi pi-fw pi-times" style="color: red;font-size: 2rem;font-weight: bold;"></i>
+                        <p-progressBar *ngIf="item.status=='Pendiente'" [value]="0" [showValue]="true" ></p-progressBar>
+                        <p-progressBar *ngIf="item.status=='Procesando' && item.procesando == 'No'" [value]="50" ></p-progressBar>
                     </td>
                 </tr>
             </ng-template>
