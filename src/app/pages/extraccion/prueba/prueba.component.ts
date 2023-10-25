@@ -484,7 +484,7 @@ export class PruebaComponent implements OnInit {
       console.log(error)
     })
 
-   }
+  }
 
   ngOnInit(): void {
     this.tablaExtraccion();
