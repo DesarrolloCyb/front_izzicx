@@ -1136,11 +1136,11 @@
                     </ng-template>
                     <td class="text-center">
                         <i *ngIf="item.status =='Completado'" class="pi pi-fw pi-check" style="color: green;font-size: 2rem;font-weight: bold;"></i>
-                        <i *ngIf="(item.status =='Error' || item.status =='Error Falla al Extraer' || item.status =='Error Servidor Ocupado' || item.status =='Error Sin Datos' || item.status =='Error Sin Resultados') || (item.status =='Procesando' && (item.procesando=='Si' || item.ip !='')) || (item.status =='Procesando' && (item.archivo =='-' || item.archivo==null))" class="pi pi-fw pi-times" style="color: red;font-size: 2rem;font-weight: bold;"></i>
+                        <i *ngIf="(item.status =='Error' || item.status =='Error Falla al Extraer' || item.status =='Error Servidor Ocupado' || item.status =='Error Sin Datos' || item.status =='Error Sin Resultados') " class="pi pi-fw pi-times" style="color: red;font-size: 2rem;font-weight: bold;"></i>
                         <!-- <i *ngIf="item.status =='Procesando' && (item.archivo =='-' || item.archivo==null) && item.procesando =='Si'" class="pi pi-fw pi-times" style="color: red;font-size: 2rem;font-weight: bold;"></i>
                         <p-progressBar *ngIf="item.status=='Pendiente'" [value]="0" [showValue]="true" ></p-progressBar>
                         <p-progressBar *ngIf="item.status=='Procesando' && item.procesando == 'No'" [value]="50" ></p-progressBar> -->
-                        <p-progressBar *ngIf="item.status =='Pendiente' || (item.status =='Procesando' && item.ip == '')" [value]="item.proceso" ></p-progressBar>
+                        <p-progressBar *ngIf="item.status =='Pendiente'|| item.status =='Procesando'" [value]="item.proceso" ></p-progressBar>
                     </td>
                 </tr>
             </ng-template>
