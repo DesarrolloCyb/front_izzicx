@@ -610,37 +610,19 @@ export class PruebaComponent implements OnInit {
             });
           });
 
-          setTimeout(() => {
-            this.reset()
-            this.spinner = false;
-            this.tablaExtraccion();
-            this.reset()
-            /* FLASK */
-            // this.http.post('https://izzicron.pagekite.me/programar', post).subscribe(
-            //   (res: any) => {
-            //     console.log(res)
-            //   },
-            //   (err: any) => {
-            //     console.log(err)
-            //   }
-            // );
-            // this.cron.post('programar', post).subscribe(
-            //   (res: any) => {
-            //     console.log(res)
-            //   },
-            //   (err: any) => {
-            //     console.log(err)
-            //   }
-            // );
-    
-    
-            
-          }, 3000);
-
-
       })
       .catch((error) => {
-        console.log(error)
+        console.log("Este es el error",error)
+        if(error.error=='An error occurred while saving the entity changes. See the inner exception for details.'){
+          this.messageService.add({
+            key:'tst',
+            severity: 'error',
+            summary: 'Ya existe este registro!!',
+            detail: 'Intenta Nuevamente!!!',
+          });
+          return
+        }
+
         this.messageService.add({
           key:'tst',
           severity: 'error',
@@ -660,6 +642,15 @@ export class PruebaComponent implements OnInit {
       });
       
     }
+    setTimeout(() => {
+      this.reset()
+      this.spinner = false;
+      this.tablaExtraccion();
+      this.reset()
+
+      
+    }, 3000);
+
     
   }
 
@@ -1482,6 +1473,16 @@ export class PruebaComponent implements OnInit {
           })
           .catch((error) => {
             console.log(error)
+            if(error.error=='An error occurred while saving the entity changes. See the inner exception for details.'){
+              this.messageService.add({
+                key:'tst',
+                severity: 'error',
+                summary: 'Ya existe este registro!!',
+                detail: 'Intenta Nuevamente!!!',
+              });
+              return
+            }
+    
             this.messageService.add({
               key:'tst',
               severity: 'error',
