@@ -681,6 +681,12 @@ export class PruebaComponent implements OnInit {
     // this.formExtraccion.controls['asignada'].reset();
     this.formExtraccion.controls['horaProgramacion'].reset();
     this.formExtraccion.controls['correo'].reset();
+    this.formExtraccion.controls['medioContacto'].reset();
+    this.formExtraccion.controls['casoNegocio'].reset();
+    this.formExtraccion.controls['motivoCliente'].reset();
+    this.formExtraccion.controls['compania'].reset();
+    this.formExtraccion.controls['telefonos'].reset();
+    this.formExtraccion.controls['numOrden'].reset();
     // // this.formExtraccion.controls['tipoProgramacion'].reset();
     // this.formExtraccion.controls['tipoProgramacion'].patchValue(false);
     // this.formExtraccion.controls['medioExtraccion'].patchValue(false);
@@ -825,6 +831,7 @@ export class PruebaComponent implements OnInit {
         //   detail: 'Intenta Nuevamente!!!',
         // });
       }else{
+        console.log(response)
         for(let i = 0 ; i<response.length;i++){
           if(response[i].procesando && response[i].procesando=="1"){
             response[i].procesando="Si"
@@ -907,6 +914,10 @@ export class PruebaComponent implements OnInit {
             response[i].parametrosExtraccion = jsonArray;
 
           }
+          let a ={
+            medioExtraccion:`${response[i].medioExtraccion == "false" ? "Vista":"General"}`
+          }
+          response[i].parametrosExtraccion.push(a);
         }
         
         this.datosExtraccion = response;
@@ -1028,6 +1039,11 @@ export class PruebaComponent implements OnInit {
             response[i].parametrosExtraccion = jsonArray;
 
           }
+          let a ={
+            medioExtraccion:`${response[i].medioExtraccion == "false" ? "Vista":"General"}`
+          }
+          response[i].parametrosExtraccion.push(a);
+
         }
 
         
@@ -1880,6 +1896,8 @@ export class PruebaComponent implements OnInit {
     this.formExtraccion.get('motivo')?.patchValue(null);
     this.formExtraccion.get('subMotivo')?.patchValue(null);
     this.formExtraccion.get('solucion')?.patchValue(null);
+    this.formExtraccion.get('motivoCliente')?.patchValue(null);
+
   }
   
   inputMo(){
@@ -1908,6 +1926,7 @@ export class PruebaComponent implements OnInit {
   
   cambioSubmotivo(){
     this.formExtraccion.get('solucion')?.patchValue(null);
+    this.formExtraccion.get('motivoCliente')?.patchValue(null);
     
   }
 
@@ -1938,6 +1957,8 @@ export class PruebaComponent implements OnInit {
   cleanSub(item:any){
     this.formExtraccion.get('subMotivo')?.patchValue(null);
     this.formExtraccion.get('solucion')?.patchValue(null);
+    this.formExtraccion.get('motivoCliente')?.patchValue(null);
+
   }
   
   inputSub(){
@@ -2077,6 +2098,9 @@ export class PruebaComponent implements OnInit {
 
   cambioCategoria(item:any){
     this.formExtraccion.get('motivo')?.patchValue(null);
+    this.formExtraccion.get('subMotivo')?.patchValue(null);
+    this.formExtraccion.get('solucion')?.patchValue(null);
+    this.formExtraccion.get('motivoCliente')?.patchValue(null);
 
     if(item != null){
       this.cors.get('Reporte/getMostrarCatalogoExtraccionAutomatizadasMotivo',{
@@ -2146,6 +2170,9 @@ export class PruebaComponent implements OnInit {
   cleanCategoria(item:any){
     this.formExtraccion.get('motivo')?.patchValue(null);
     this.formExtraccion.get('categoria')?.patchValue(null);
+    this.formExtraccion.get('subMotivo')?.patchValue(null);
+    this.formExtraccion.get('solucion')?.patchValue(null);
+    this.formExtraccion.get('motivoCliente')?.patchValue(null);
   }
   
   inputCategoria(){

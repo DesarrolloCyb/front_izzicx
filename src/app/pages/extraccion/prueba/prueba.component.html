@@ -43,7 +43,8 @@
                   <br><br><br><br><br>
                   <!-- <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Cuenta' || formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Actividades' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio' || formExtraccion.controls['tipoExtraccion'].value == 'Pagos' || formExtraccion.controls['tipoExtraccion'].value == 'Fallas generales'"> -->
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' ">
-                    <span class="p-float-label">
+                    <span class="p-float-label p-input-icon-right">
+                        <i *ngIf="formExtraccion.get('estado') !== null && formExtraccion.get('estado')?.value !== null && formExtraccion?.get('estado')?.value !== ''" class="pi pi-times" (click)="formExtraccion.controls['estado'].reset()"></i>
                         <input
                         type="text"
                         pInputText
@@ -127,7 +128,7 @@
                       <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true"  
                       dateFormat="dd-mm-yy" formControlName="fechaApertura" selectionMode="range"  inputId="icon"
                        (onSelect)="changeFechaApertura($event)" [minDate]="fechaAperturaMin"
-                       [disabledDates]="disabledDates"
+                       [disabledDates]="disabledDates" [showButtonBar]="true"
                        >
                       </p-calendar>
                       <label for="fechaApertura">Fecha de Apertura</label>
@@ -142,7 +143,8 @@
                     
                   </div>
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio'">
-                    <span class="p-float-label">
+                    <span class="p-float-label p-input-icon-right">
+                      <i *ngIf="formExtraccion.get('cuenta') !== null && formExtraccion.get('cuenta')?.value !== null && formExtraccion?.get('cuenta')?.value !== ''" class="pi pi-times" (click)="formExtraccion.controls['cuenta'].reset()"></i>
                         <input
                         type="text"
                         pInputText
@@ -153,7 +155,8 @@
                     </span>
                   </div>
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
-                    <span class="p-float-label">
+                    <span class="p-float-label p-input-icon-right">
+                      <i *ngIf="formExtraccion.get('medioContacto') !== null && formExtraccion.get('medioContacto')?.value !== null && formExtraccion?.get('medioContacto')?.value !== ''" class="pi pi-times" (click)="formExtraccion.controls['medioContacto'].reset()"></i>
                         <input
                         type="text"
                         pInputText
@@ -164,7 +167,8 @@
                     </span>
                   </div>
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio'">
-                    <span class="p-float-label">
+                    <span class="p-float-label p-input-icon-right">
+                      <i *ngIf="formExtraccion.get('casoNegocio') !== null && formExtraccion.get('casoNegocio')?.value !== null && formExtraccion?.get('casoNegocio')?.value !== ''" class="pi pi-times" (click)="formExtraccion.controls['casoNegocio'].reset()"></i>
                         <input
                         type="text"
                         pInputText
@@ -378,7 +382,7 @@
                       <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" 
                       dateFormat="dd-mm-yy" formControlName="fechaAsignacion" selectionMode="range"  
                       inputId="icon" (onSelect)="changeFechaAsignacion($event)" [minDate]="fechaAsignacionMin"
-                       [disabledDates]="disabledDatesfechaAsignacion"
+                       [disabledDates]="disabledDatesfechaAsignacion" [showButtonBar]="true"
 
                       >
                       </p-calendar>
@@ -402,7 +406,7 @@
                       <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" 
                       dateFormat="dd-mm-yy" formControlName="vencimientoActividad" 
                       selectionMode="range"  inputId="icon" (onSelect)="changeFechaVencimiento($event)" [minDate]="fechaVencimientoMin"
-                      [disabledDates]="disabledDatesfechaVencimiento"
+                      [disabledDates]="disabledDatesfechaVencimiento" [showButtonBar]="true"
                       
                       >
                       </p-calendar>
@@ -426,7 +430,7 @@
                       <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" 
                       dateFormat="dd-mm-yy" formControlName="fechaCreacion" selectionMode="range"  
                       inputId="icon" (onSelect)="changeFechaCreacion($event)" [minDate]="fechaCreacionMin"
-                      [disabledDates]="disabledDatesfechaCreacion"
+                      [disabledDates]="disabledDatesfechaCreacion" [showButtonBar]="true"
                       >
                       </p-calendar>
                       <label for="inputdate">Fecha de Creación</label>
@@ -455,7 +459,8 @@
                     </span>
                   </div> -->
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio' && formExtraccion.controls['medioExtraccion'].value == false">
-                    <span class="p-float-label">
+                    <span class="p-float-label p-input-icon-right">
+                      <i *ngIf="formExtraccion.get('compania') !== null && formExtraccion.get('compania')?.value !== null && formExtraccion?.get('compania')?.value !== ''" class="pi pi-times" (click)="formExtraccion.controls['compania'].reset()"></i>
                         <input
                         type="text"
                         pInputText
@@ -466,7 +471,8 @@
                     </span>
                   </div>              
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio' && formExtraccion.controls['medioExtraccion'].value == false">
-                    <span class="p-float-label">
+                    <span class="p-float-label p-input-icon-right">
+                      <i *ngIf="formExtraccion.get('telefonos') !== null && formExtraccion.get('telefonos')?.value !== null && formExtraccion?.get('telefonos')?.value !== ''" class="pi pi-times" (click)="formExtraccion.controls['telefonos'].reset()"></i>
                         <input
                         type="text"
                         pInputText
@@ -477,7 +483,8 @@
                     </span>
                   </div>
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio' || formExtraccion.controls['tipoExtraccion'].value == 'Fallas generales'">
-                    <span class="p-float-label">
+                    <span class="p-float-label p-input-icon-right">
+                      <i *ngIf="formExtraccion.get('numOrden') !== null && formExtraccion.get('numOrden')?.value !== null && formExtraccion?.get('numOrden')?.value !== ''" class="pi pi-times" (click)="formExtraccion.controls['numOrden'].reset()"></i>
                         <input
                         type="text"
                         pInputText
@@ -524,7 +531,7 @@
                       [showTime]="true" [showSeconds]="true"  dateFormat="dd-mm-yy" 
                       formControlName="fechaOrden" selectionMode="range"  inputId="icon"
                       (onSelect)="changeFechaOrden($event)" [minDate]="fechaOrdenMin"
-                      [disabledDates]="disabledDatesfechaOrden"
+                      [disabledDates]="disabledDatesfechaOrden" [showButtonBar]="true"
                       >
                       </p-calendar>
                       <label for="inputdate">Fecha de la Orden</label>
@@ -714,7 +721,8 @@
                   </div>
 
                   <div class="field col-12 md:col-4" *ngIf="formExtraccion.controls['tipoExtraccion'].value == 'Casos de negocio' || formExtraccion.controls['tipoExtraccion'].value == 'Ordenes de servicio' || formExtraccion.controls['tipoExtraccion'].value == 'Actividades'">
-                    <span class="p-float-label">
+                    <span class="p-float-label p-input-icon-right">
+                      <i *ngIf="formExtraccion.get('correo') !== null && formExtraccion.get('correo')?.value !== null && formExtraccion?.get('correo')?.value !== ''" class="pi pi-times" (click)="formExtraccion.controls['correo'].reset()"></i>
                         <input
                         type="text"
                         pInputText
@@ -1206,7 +1214,8 @@
         <!-- caso negocio -->
         <div class="col-12"></div>
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio' ">
-          <span class="p-float-label">
+          <span class="p-float-label p-input-icon-right">
+            <i *ngIf="editForm.parametrosExtraccion[0].estado !== null && editForm.parametrosExtraccion[0].estado !== null && editForm.parametrosExtraccion[0].estado !== ''" class="pi pi-times" (click)="editForm.parametrosExtraccion[0].estado = null"></i>
               <input
               type="text"
               pInputText
@@ -1222,14 +1231,15 @@
             dateFormat="dd-mm-yy" [(ngModel)]="editForm.parametrosExtraccion[0].fechaApertura"  
             selectionMode="range"  inputId="icon"
             (onSelect)="changeFechaAperturaEdit($event)" [minDate]="fechaAperturaMinEdit"
-            [disabledDates]="disabledDatesEdit"
+            [disabledDates]="disabledDatesEdit" [showButtonBar]="true"
             >
             </p-calendar>
             <label>Fecha de Apertura</label>
           </span>
         </div>
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio' || editForm.tipoExtraccion == 'Ordenes de servicio'">
-          <span class="p-float-label">
+          <span class="p-float-label p-input-icon-right">
+            <i *ngIf="editForm.parametrosExtraccion[0].cuenta !== null && editForm.parametrosExtraccion[0].cuenta !== null && editForm.parametrosExtraccion[0].cuenta !== ''" class="pi pi-times" (click)="editForm.parametrosExtraccion[0].cuenta = null"></i>
               <input
               type="text"
               pInputText
@@ -1239,7 +1249,8 @@
           </span>
         </div>
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio'">
-          <span class="p-float-label">
+          <span class="p-float-label p-input-icon-right">
+            <i *ngIf="editForm.parametrosExtraccion[0].medioContacto !== null && editForm.parametrosExtraccion[0].medioContacto !== null && editForm.parametrosExtraccion[0].medioContacto !== ''" class="pi pi-times" (click)="editForm.parametrosExtraccion[0].medioContacto = null"></i>
               <input
               type="text"
               pInputText
@@ -1249,7 +1260,8 @@
           </span>
         </div>
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio'">
-          <span class="p-float-label">
+          <span class="p-float-label p-input-icon-right">
+            <i *ngIf="editForm.parametrosExtraccion[0].casoNegocio !== null && editForm.parametrosExtraccion[0].casoNegocio !== null && editForm.parametrosExtraccion[0].casoNegocio !== ''" class="pi pi-times" (click)="editForm.parametrosExtraccion[0].casoNegocio = null"></i>
               <input
               type="text"
               pInputText
@@ -1318,10 +1330,10 @@
             <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" 
             [(ngModel)]="editForm.parametrosExtraccion[0].fechaAsignacion" selectionMode="range"  
             inputId="icon"  (onSelect)="changeFechaAsignacionEdit($event)" [minDate]="fechaAsignacionMinEdit"
-            [disabledDates]="disabledDatesfechaAsignacionEdit"
+            [disabledDates]="disabledDatesfechaAsignacionEdit" [showButtonBar]="true"
             >
             </p-calendar>
-            <label for="inputdate">Fecha de Asignacion</label>
+            <label for="inputdate">Fecha de Asignación</label>
           </span>
 
         </div>
@@ -1330,7 +1342,7 @@
             <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" 
             [(ngModel)]="editForm.parametrosExtraccion[0].vencimientoActividad" selectionMode="range"  
             inputId="icon"  (onSelect)="changeFechaVencimientoEdit($event)" [minDate]="fechaVencimientoMinEdit"
-            [disabledDates]="disabledDatesfechaVencimientoEdit"
+            [disabledDates]="disabledDatesfechaVencimientoEdit" [showButtonBar]="true"
             >
             </p-calendar>
             <label for="inputdate">Vencimiento</label>
@@ -1341,7 +1353,7 @@
             <p-calendar [showIcon]="true" [touchUI]="true" [readonlyInput]="true" dateFormat="dd-mm-yy" 
             [(ngModel)]="editForm.parametrosExtraccion[0].fechaCreacion" selectionMode="range"  
             inputId="icon" (onSelect)="changeFechaCreacionEdit($event)" [minDate]="fechaCreacionMinEdit"
-            [disabledDates]="disabledDatesfechaCreacionEdit"
+            [disabledDates]="disabledDatesfechaCreacionEdit" [showButtonBar]="true"
             >
             </p-calendar>
             <label for="inputdate">Fecha de Creación</label>
@@ -1358,7 +1370,8 @@
 
         </div>
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio' && editForm.medioExtraccion==false">
-          <span class="p-float-label">
+          <span class="p-float-label p-input-icon-right">
+            <i *ngIf="editForm.parametrosExtraccion[0].compania !== null && editForm.parametrosExtraccion[0].compania !== null && editForm.parametrosExtraccion[0].compania !== ''" class="pi pi-times" (click)="editForm.parametrosExtraccion[0].compania = null"></i>
               <input
               type="text"
               pInputText
@@ -1368,7 +1381,8 @@
           </span>
         </div>              
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio' && editForm.medioExtraccion==false">
-          <span class="p-float-label">
+          <span class="p-float-label p-input-icon-right">
+            <i *ngIf="editForm.parametrosExtraccion[0].telefonos !== null && editForm.parametrosExtraccion[0].telefonos !== null && editForm.parametrosExtraccion[0].telefonos !== ''" class="pi pi-times" (click)="editForm.parametrosExtraccion[0].telefonos = null"></i>
               <input
               type="text"
               pInputText
@@ -1379,7 +1393,8 @@
         </div>
 
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Ordenes de servicio' || formExtraccion.controls['tipoExtraccion'].value == 'Fallas generales'">
-          <span class="p-float-label">
+          <span class="p-float-label p-input-icon-right">
+            <i *ngIf="editForm.parametrosExtraccion[0].numOrden !== null && editForm.parametrosExtraccion[0].numOrden !== null && editForm.parametrosExtraccion[0].numOrden !== ''" class="pi pi-times" (click)="editForm.parametrosExtraccion[0].numOrden = null"></i>
               <input
               type="text"
               pInputText
@@ -1410,7 +1425,8 @@
         </div>
      
         <div class="field col-12 md:col-4" *ngIf="editForm.tipoExtraccion == 'Casos de negocio' || editForm.tipoExtraccion == 'Ordenes de servicio' || editForm.tipoExtraccion == 'Actividades'">
-          <span class="p-float-label">
+          <span class="p-float-label p-input-icon-right">
+            <i *ngIf="editForm.correo !== null && editForm.correo !== ''" class="pi pi-times" (click)="editForm.correo = null"></i>
               <input
               type="text"
               pInputText
