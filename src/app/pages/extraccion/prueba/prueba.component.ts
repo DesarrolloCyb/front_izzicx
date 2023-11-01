@@ -831,7 +831,7 @@ export class PruebaComponent implements OnInit {
         //   detail: 'Intenta Nuevamente!!!',
         // });
       }else{
-        console.log(response)
+        // console.log(response)
         for(let i = 0 ; i<response.length;i++){
           if(response[i].procesando && response[i].procesando=="1"){
             response[i].procesando="Si"
@@ -1355,7 +1355,7 @@ export class PruebaComponent implements OnInit {
         let b=matches[1].replace(/'/g, '');
         matches[0]=a;
         matches[1]=b;
-        console.log(matches)
+        // console.log(matches)
         let fechas: Date[] = [];
         const dateObjects = matches.map((m:any) => {
           const [datePart, timePart] = m.split(' ');
