@@ -390,6 +390,24 @@ export class MenuComponent implements OnInit {
           // },
         ]
         },
+        {
+          label: 'Creación de OS',
+          key: "ordenes",
+          icon: 'pi pi-fw pi-compass',
+          //   routerLink: ['/capturas'],
+          items: [
+            {
+            label: 'Base Creación de Ordenes',
+            icon: 'pi pi-fw pi-database',
+              routerLink: ['/ordenes/creacion-Orden'],
+            },
+            {
+              label: 'Consulta Creación de Ordenes',
+              icon: 'pi pi-fw pi-database',
+                routerLink: ['/ordenes/consulta-creacion-Orden'],
+            },
+          ]
+          },
     
     // {
     //   label: 'Capturas atencion a clientes',
@@ -488,11 +506,11 @@ export class MenuComponent implements OnInit {
 
 
     let permisos: any = {
-      "admin":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','ajustesYcambioServicio','robots'],
+      "admin":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','ajustesYcambioServicio','robots','ordenes'],
       "Reporte":['home','reporteFidelizacion'],
       "Extraccion":['home','extraccion'],
       "Depuracion":['home','depuracion','reportes'],
-      "Ajustes":['home','ajustesYcambioServicio','reportes'],
+      "Ajustes":['home','ajustesYcambioServicio','reportes','ordenes'],
       "AjustesNotDone":['home','notDone','reportes'],
       "testAjustes1":['home','ajustes','reportes'],
       "eBarrera":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','robots'],

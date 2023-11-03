@@ -85,6 +85,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/ajustes-ycambio-servicios/ajustes-ycambio-servicios.module').then((m) => m.AjustesYcambioServiciosModule),
   },
+  {
+    path: 'ordenes',
+    data: { breadcrumb: 'Creación de Ordenes'},
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./pages/creaorden/creaorden.module').then((m) => m.CreaordenModule),
+  },
   { path: 'robots', data: { breadcrumb: 'Robots' }, loadChildren: () => import('./pages/robots/robots.module').then(m => m.RobotsModule) },
 //   { path: 'usuarios', data: { breadcrumb: 'Usuarios' }, loadChildren: () => import('./pages/usuarios/usuarios.module').then(m => m.UsuariosModule) },
 

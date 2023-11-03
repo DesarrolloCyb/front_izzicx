@@ -14,11 +14,11 @@ export class AuthGuard implements CanActivate {
 
 
     let permisos: any = {
-    "admin":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','ajustesYcambioServicio','robots'],
+    "admin":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','ajustesYcambioServicio','robots','ordenes'],
     "Reporte":['home','reporteFidelizacion'],
     "Extraccion":['home','extraccion'],
     "Depuracion":['home','depuracion','reportes'],
-    "Ajustes":['home','ajustesYcambioServicio','reportes'],
+    "Ajustes":['home','ajustesYcambioServicio','reportes','ordenes'],
     "AjustesNotDone":['home','notDone','reportes'],
     "testAjustes1":['home','ajustes','reportes'],
     "eBarrera":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','robots'],

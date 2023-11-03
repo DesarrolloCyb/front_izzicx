@@ -100,6 +100,12 @@ export class ReportesIzziDashComponent implements OnInit {
           para =`fecha1=${fechaini}&fecha2=${fechafin}`
           nomArchivo="Reporte_NotDone_SinValidacion"
           // console.log(`${url}?${para}`)
+        }else if(this.formReporte.value.tipoReporte =='Creacion OS'){
+          console.log("Creacion OS")
+          url = `ReportesIzzi/getReporteCreacionOrden`;
+          para =`fecha1=${fechaini}&fecha2=${fechafin}`
+          nomArchivo="Reporte_Creacion_OS"
+          // console.log(`${url}?${para}`)
         }
         // this.cors.get1(`${url}`,a).then((response) => {
         //   this.show = true;
