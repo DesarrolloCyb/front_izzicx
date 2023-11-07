@@ -511,8 +511,8 @@ export class MenuComponent implements OnInit {
       "Extraccion":['home','extraccion'],
       "Depuracion":['home','depuracion','reportes'],
       "Ajustes":['home','ajustesYcambioServicio','reportes'],
-      "AjustesNotDone":['home','notDone','reportes','ordenes'],
-      "testAjustes1":['home','ajustes','reportes'],
+      "AjustesNotDone":['home','notDone','reportes'],
+      "testAjustes1":['home','ajustes','reportes','ordenes'],
       "eBarrera":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','robots'],
       "testReportes":['home','reportes'],
 
