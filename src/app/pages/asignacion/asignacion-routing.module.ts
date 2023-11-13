@@ -6,6 +6,7 @@ import { PantallaConsultaComponent } from './pantalla-consulta/pantalla-consulta
 import { ParametrosconfigComponent } from './parametrosconfig/parametrosconfig.component';
 import { SubirbaseSinValidacionComponent } from './subirbase-sin-validacion/subirbase-sin-validacion.component';
 import { ConsultaSinValidacionComponent } from './consulta-sin-validacion/consulta-sin-validacion.component';
+import { ReprocesarComponent } from './reprocesar/reprocesar.component';
 
 const routes: Routes = [
 	{
@@ -32,6 +33,11 @@ const routes: Routes = [
 		path: 'consultaSinValidacion',
 		component: LayoutComponent,
 		children: [{ path: '', component: ConsultaSinValidacionComponent }],
+	},
+	{
+		path: 'reprocesar',
+		component: LayoutComponent,
+		children: [{ path: '', component: ReprocesarComponent }],
 	},
 ];
 

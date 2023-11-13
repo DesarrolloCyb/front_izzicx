@@ -23,6 +23,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SidebarModule } from 'primeng/sidebar';
 import { BadgeModule } from 'primeng/badge';
 import { RippleModule } from 'primeng/ripple';
+import { DividerModule } from 'primeng/divider';
+
 import {
   ErrorInputClassDirective,
   ErrorMessageDirective,
@@ -124,6 +126,7 @@ import { AccordionModule } from 'primeng/accordion';
   ToolbarModule,
   TabViewModule,
   AccordionModule,
+  DividerModule,
     //
 
     OnlyAlphabetsDirective,

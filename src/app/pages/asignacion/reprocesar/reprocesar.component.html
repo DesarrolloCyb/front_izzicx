@@ -1,0 +1,194 @@
+<div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #FFBF00 ;color: white !important;">Reprocesar Cuentas de Casos de Negocio Cobranza</div>
+<div class="grid flex justify-content-center text-center">
+    <div class="col-4" [formGroup]="formReproceso">
+        <p-card header="Calendario" subheader="Seleccionar un intervalo de fechas" [style]="{ width: '360px' }">
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 md:col-12" >
+                    <span class="p-float-label"> 
+                      <p-calendar [showIcon]="true" formControlName="fecha" dateFormat="dd-mm-yy" selectionMode="range"  inputId="icon">
+                      </p-calendar>
+                      <label for="inputdate">Fechas de Busqueda</label>
+                    </span>
+    
+                  </div>
+
+            </div>
+            <ng-template pTemplate="footer">
+                <button mat-button pButton (click)="buscar()" style="width:auto; background-color: #FFBF00;border: 0;" label="Buscar" ></button>
+            </ng-template>
+        </p-card>    
+    </div>
+</div>
+<div class="row" >
+    <div class="cols">
+      <div class="card">
+        <p-table #dt1 [value]="showtable" dataKey="Caso de negocio" [rows]="50" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
+            styleClass="p-datatable-gridlines" [paginator]="true"
+            responsiveLayout="scroll" [globalFilterFields]="['cuenta','casoNegocio','categoria','estado','motivos']">
+            <!-- <ng-template pTemplate="caption">
+                <div class="flex justify-content-between flex-column sm:flex-row">
+
+                    <span class="p-input-icon-left mb-2">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar"
+                            class="w-full" />
+                    </span>
+                </div>
+            </ng-template> -->
+            <ng-template pTemplate="header">
+                <tr>
+                    <!-- <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Cuenta
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Caso de Negocio
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Categoria
+
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Estado
+
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Fecha de Apertura
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Medio de Contacto
+                        </div>
+                    </th> -->
+                    <!-- <th>
+                      <div class="flex justify-content-between align-items-center">
+                          Motivo del Cliente
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex justify-content-between align-items-center">
+                          Motivos
+                      </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Solución
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Submotivo
+                        </div>
+                    </th>   -->
+                    <th >
+                        <div class="flex justify-content-center align-items-center text-center">
+                            Estatus
+                        </div>
+                    </th>  
+                    <th >
+                        <div class="flex justify-content-center align-items-center text-center">
+                            Total
+                        </div>
+                    </th> 
+                    <!-- <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Fecha Captura
+                        </div>
+                    </th> 
+
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Fecha Completado
+                        </div>
+                    </th>  -->
+                    <!-- <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Estatus Ajuste
+                        </div>
+                    </th>    -->
+                    <th >
+                        <div class="flex justify-content-center align-items-center text-center">
+                            Acciones
+                        </div>
+                    </th> 
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+                <tr>
+                    <!-- <td>
+                        {{item.cuenta}}
+                    </td>
+                    <td>
+                        {{item.casoNegocio}}
+                    </td>
+                    <td>
+                      {{item.categoria}}
+                    </td>
+                    <td>
+                        {{item.estado}}
+                    </td>
+                    <td>
+                        {{ dateFormat(item.fechaApertura) }}
+                    </td>
+                    <td>
+                       {{item.mediosContacto}}
+                    </td> -->
+                    <!-- <td>
+                      {{item.motivoCliente}}
+                    </td>
+                    <td>
+                      {{item.motivos}}
+                    </td>
+                    <td>
+                      {{item.solucion}}
+                    </td>
+                    <td>
+                        {{item.submotivo}}
+                    </td> -->
+                    <td class="text-center">
+                        {{item.groupedStatus}}
+                    </td>
+                    <td class="text-center">
+                        {{item.totalCount}}
+                    </td>
+
+                    <!-- <td>
+                          {{dateFormat(item.fechaCompletado)}}
+                    </td> -->
+                    <td class="text-center">
+                        <button pButton  style="background-color: #FFC300;border: 0;" label="Reprocesar" (click)="reprocesar(item.groupedStatus)" ></button>
+                    </td>
+    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">Sin Datos para Mostrar.</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="loadingbody">
+                <tr>
+                    <td colspan="7">Cargando Datos, espere...</td>
+                </tr>
+
+            </ng-template>
+            <ng-template pTemplate="paginatorleft" let-state>
+                Mostrando {{(state.page  * state.rows) + 1}} a {{state.rows * (state.page + 1)}} de {{state.totalRecords}} registros.
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+</div>
+
+<p-toast
+  [baseZIndex]="99999"
+  key="tst"></p-toast>

@@ -92,7 +92,12 @@ export class MenuComponent implements OnInit {
             label: 'Parámetros',
             icon: 'pi pi-fw pi-cog',
             routerLink: ['/ajustes/parametros'],
-          }
+          },
+          {
+            label: 'Reprocesar',
+            icon: 'pi pi-fw pi-sync',
+            routerLink: ['/ajustes/reprocesar'],
+          },
         ]
       }, 
       {
@@ -159,7 +164,7 @@ export class MenuComponent implements OnInit {
               label: 'Parámetros',
               icon: 'pi pi-fw pi-cog',
               routerLink: ['/notDone/parametros'],
-            },
+            }
         ]
       },
       {
