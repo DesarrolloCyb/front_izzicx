@@ -91,7 +91,7 @@ export class ReprocesarComponent implements OnInit {
     this.cors.get(`AjustesNotDone/ActualizarStatusCasosNegocioCobranzaError`,{
       status:item
     }).then((response) => {
-      console.log(response)
+      // console.log(response)
       if(response.length == 0){
         this.showtable = [];
         this.messageService.add({
