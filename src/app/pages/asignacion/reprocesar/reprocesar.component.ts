@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder,UntypedFormGroup, Validators } from '@angular/forms';
 import { Table } from 'primeng/table';
-import { Message,MessageService } from 'primeng/api';
+import { Message,MessageService,ConfirmationService,ConfirmEventType } from 'primeng/api';
 import { CorsService } from '@services';
 import * as moment from 'moment';
 
@@ -10,7 +10,8 @@ import * as moment from 'moment';
 @Component({
   selector: 'reprocesar',
   templateUrl: './reprocesar.component.html',
-  styleUrls: ['./reprocesar.component.scss']
+  styleUrls: ['./reprocesar.component.scss'],
+  providers: [ConfirmationService, MessageService]
 })
 export class ReprocesarComponent implements OnInit {
   showtable:any=[];
@@ -20,7 +21,8 @@ export class ReprocesarComponent implements OnInit {
 
   constructor(private formBuilder: UntypedFormBuilder,
     private messageService: MessageService,
-    private cors: CorsService
+    private cors: CorsService,
+    private confirmationService: ConfirmationService
   ) {
     this.formReproceso = this.formBuilder.group({
       fecha: [null, Validators.required]
@@ -53,9 +55,9 @@ export class ReprocesarComponent implements OnInit {
         this.showtable = [];
         this.messageService.add({
           key: 'tst',
-          severity: 'error',
+          severity: 'info',
           summary: 'No hay datos para mostrar',
-          detail: 'Intentarlo Nuevamente!!',
+          detail: '',
         });
 
       }else{
@@ -91,20 +93,14 @@ export class ReprocesarComponent implements OnInit {
     this.cors.get(`AjustesNotDone/ActualizarStatusCasosNegocioCobranzaError`,{
       status:item
     }).then((response) => {
-      // console.log(response)
-      if(response.length == 0){
-        this.showtable = [];
-        this.messageService.add({
-          key: 'tst',
-          severity: 'error',
-          summary: 'No hay datos para mostrar',
-          detail: 'Intentarlo Nuevamente!!',
-        });
+      this.showtable = [];
+      this.messageService.add({
+        key: 'tst',
+        severity: 'info',
+        summary: `${response[0].message}`,
+        detail: '',
+      });
 
-      }else{
-        this.showtable = response;
-
-      }
     }).catch((error) => {
       console.log(error)
     })
@@ -113,8 +109,30 @@ export class ReprocesarComponent implements OnInit {
     this.getAjustesCasoNegocioError(fecha1,fecha2);
   }
 
+  confirm1(item:any) {
+    this.confirmationService.confirm({
+        message: `Deseas reprocesar todas las cuentas <br> con el siguiente Estatus: <strong>${item}</strong>?`,
+        header: 'Confirmación',
+        icon: 'pi pi-exclamation-triangle',
+        acceptLabel: 'Sí',
+        rejectLabel: 'No',     
+        accept: () => {
+            // this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'Ha sido Aceptado' });
+            this.reprocesar(item);
+        },
+        reject: (type: any) => {
+            switch (type as ConfirmEventType) {
+                case ConfirmEventType.REJECT:
+                    this.messageService.add({ severity: 'error', summary: 'Rechazado', detail: 'Ha sido Rechazado' });
+                    break;
+                case ConfirmEventType.CANCEL:
+                    this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Ha sido Cancelado' });
+                    break;        
+            }
+        }
 
-
+    });
+  }
 
 
 
