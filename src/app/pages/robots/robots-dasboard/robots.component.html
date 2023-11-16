@@ -177,7 +177,7 @@
                     </td>
                     <td>
                         <p-dropdown optionLabel="desc" optionValue="id" appendTo="body" [options]="commadArr"
-                            [disabled]="item.sendingComand == true || item.sendingProcess ==true" [(ngModel)]="comando"
+                            [disabled]="item.sendingComand == true || item.sendingProcess ==true" 
                             [showClear]="false" placeholder="Seleccione un comando"
                             (onChange)="preguntarEnviar($event.value,item)">
                         </p-dropdown>

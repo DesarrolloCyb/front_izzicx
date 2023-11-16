@@ -36,11 +36,10 @@ export class RobotsComponent implements OnInit {
       id: "STOPED",
       desc: "Detener Proceso"
     }
-    ,
-    {
-      id: "REBOOT",
-      desc: "Reiniciar PC"
-    }
+    // {
+    //   id: "REBOOT",
+    //   desc: "Reiniciar PC"
+    // }
   ]
 
   comando: any = null;
