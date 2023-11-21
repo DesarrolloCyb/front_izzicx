@@ -210,7 +210,8 @@ export class RobotsComponent implements OnInit {
 
   }
   preguntarEnviar(command: any, item: any) {
-    console.log(item);
+    console.log("item",item);
+    console.log("command",command);
 
 
     this.confirmationService.confirm({
@@ -244,25 +245,35 @@ export class RobotsComponent implements OnInit {
   }*/
   sendCommand(item: any, command: any) {
     item.sendingComand = true
-    console.log(this.processArr);
+    // console.log(this.processArr);
     
-    let proceso = this.processArr.find(itemProcess => itemProcess.id == item.procesoId)
-    console.log(proceso);
+    // let proceso = this.processArr.find(itemProcess => itemProcess.id == item.procesoId)
+    // console.log(proceso);
 
-    
-
-    this.cors.getCommand(`http://${item.ipEquipo}:9000?id=${item.procesoId}&name=${proceso?.name_process || ''}&command=${command}&userId=${this.usuarioInfo.userID}&userName=${this.usuarioInfo.firstName || ''} ${this.usuarioInfo.lastName || ''} - ${this.usuarioInfo.email || ''}`).then((response) => {
-      console.log(response);
-
-
-      this.showToastSuccess(`Se envio el comando al Robot ${item.ipEquipo}`)
-      item.sendingComand = false
+    this.cors.get('Reporte/cambiarProcesosIzzi',{
+      ip:`${item.botIp}`,
+      proceso:`${item.procesoId}`,
+      status:`${command}`
+    }).then((response) => {
+      console.log(response)
     }).catch((error) => {
       console.log(error);
-      item.sendingComand = false
-      this.showToastError(`No se logro enviar el comando al Robot ${item.ipEquipo}`)
-
     })
+
+    item.sendingComand = false
+
+    // this.cors.getCommand(`http://${item.ipEquipo}:9000?id=${item.procesoId}&name=${proceso?.name_process || ''}&command=${command}&userId=${this.usuarioInfo.userID}&userName=${this.usuarioInfo.firstName || ''} ${this.usuarioInfo.lastName || ''} - ${this.usuarioInfo.email || ''}`).then((response) => {
+    //   console.log(response);
+
+
+    //   this.showToastSuccess(`Se envio el comando al Robot ${item.ipEquipo}`)
+    //   item.sendingComand = false
+    // }).catch((error) => {
+    //   console.log(error);
+    //   item.sendingComand = false
+    //   this.showToastError(`No se logro enviar el comando al Robot ${item.ipEquipo}`)
+
+    // })
   }
 
   sendProcess(item: any, idProceso: any) {
