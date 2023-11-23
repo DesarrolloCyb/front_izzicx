@@ -14,6 +14,11 @@ import { CronService } from 'app/_services/cron.service';
 
 import { nanoid } from 'nanoid';
 import * as XLSX from 'xlsx';
+import { PrimeNGConfig } from 'primeng/api';
+import es from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(es);
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -392,7 +397,9 @@ export class PruebaComponent implements OnInit {
     private router:Router,private messageService: MessageService,
     private cors: CorsService, private http: HttpClient, 
     private cron: CronService,private httpClient: HttpClient,
-    private confirmationService: ConfirmationService) {
+    private confirmationService: ConfirmationService,
+    private primengConfig: PrimeNGConfig
+    ) {
     this.formExtraccion = this.formBuilder.group({
       tipoExtraccion: [null, Validators.required],
 
@@ -483,6 +490,15 @@ export class PruebaComponent implements OnInit {
     }).catch((error) => {
       console.log(error)
     })
+    this.primengConfig.setTranslation({
+      dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+      dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+      dayNamesMin: ['D', 'L', 'Ma', 'Mi', 'J', 'V', 'S'],
+      monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+      today: 'Hoy',
+      clear: 'Limpiar'
+    });
 
   }
 
