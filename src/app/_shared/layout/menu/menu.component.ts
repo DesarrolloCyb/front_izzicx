@@ -520,6 +520,7 @@ export class MenuComponent implements OnInit {
       "testAjustes1":['home','ajustes','reportes','ordenes'],
       "eBarrera":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','robots'],
       "testReportes":['home','reportes'],
+      "ACS":['home','ajustesYcambioServicio']
 
       //   "SUPERVISOR TROUBLESHOOTING CELULAR":['capturasA','home','reportes'],
     //   "ESPECIALISTA TROUBLESHOOTING CELULAR":['capturasA'],
