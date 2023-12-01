@@ -70,6 +70,7 @@ export class DashboardAsignacionComponent implements OnInit {
             this.ExcelData[key]["Status"]='Registro pendiente';
             this.ExcelData[key]["Cve_usuario"]=this.usuario.email;
             this.ExcelData[key]["Procesando"]="0";
+            this.ExcelData[key]["prioridad"]="0";
             this.ExcelData[key]["IP"]="";
             this.ExcelData[key]["fechaCaptura"]=moment(Date.now()).format('yyyy-MM-DD HH:mm:ss');;
             let a =moment(this.ExcelData[key]["Fecha de apertura"]).format('yyyy-MM-DD hh:mm:ss');
