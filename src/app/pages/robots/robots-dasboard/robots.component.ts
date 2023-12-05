@@ -156,7 +156,10 @@ export class RobotsComponent implements OnInit {
   ngOnInit() {
 
     this.buscaBots();
-    // this.getDataStatsBots();
+    
+    setInterval(() => {
+      this.buscaBots();
+    },5000);    // this.getDataStatsBots();
     // this.refreshStatsBots();
   }
 
@@ -249,6 +252,12 @@ export class RobotsComponent implements OnInit {
     
     // let proceso = this.processArr.find(itemProcess => itemProcess.id == item.procesoId)
     // console.log(proceso);
+    let a ="";
+    if(command == 'STARTED'){
+      a = '1';
+    }else if(command == 'STOPED'){
+      a= '0'
+    }
 
     this.cors.get('Reporte/cambiarProcesosIzzi',{
       ip:`${item.botIp}`,
@@ -256,9 +265,22 @@ export class RobotsComponent implements OnInit {
       status:`${command}`
     }).then((response) => {
       console.log(response)
+      this.cors.get('Bots/updateProcessStatusBot',{
+        ip:`${item.botIp}`,
+        estado:`${a}`
+      }).then((response) => {
+        // console.log(response)
+      }).catch((error) => {
+        console.log(error);
+      });
+  
+      
     }).catch((error) => {
       console.log(error);
     })
+
+
+   
 
     item.sendingComand = false
 
@@ -380,7 +402,6 @@ export class RobotsComponent implements OnInit {
 
   buscaBots() {
     this.cors.get('Bots/getBots').then((response) => {
-
       // console.log(response);
       if(response[0] == 'SIN INFO'){
         this.dataSource = []
@@ -389,7 +410,7 @@ export class RobotsComponent implements OnInit {
         this.dataSource = response
 
       }
-      this.adddListeners()
+      // this.adddListeners()
 
     }).catch((error) => {
       console.log(error);
