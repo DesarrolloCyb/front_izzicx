@@ -112,28 +112,28 @@ export class RobotsComponent implements OnInit {
     })
   }
 
-  preguntarLog() {
-    console.log("consulta log");
-    this.logContent = []
-    this.loadingLog = true
+  // preguntarLog() {
+  //   console.log("consulta log");
+  //   this.logContent = []
+  //   this.loadingLog = true
 
-    this.displayLogDialog = true
+  //   this.displayLogDialog = true
 
-    this.cors.getCommand(`http://${this.opcionToAction.ipEquipo}:9000/getLog`).then((response) => {
-      console.log(response);
+  //   this.cors.getCommand(`http://${this.opcionToAction.ipEquipo}:9000/getLog`).then((response) => {
+  //     console.log(response);
 
-      this.loadingLog = false
-      this.logContent = response.data
-
-
-    }).catch((error) => {
-      console.log(error);
-      this.loadingLog = false
-      this.showToastError(`No se logro traer el log de la maquina ${this.opcionToAction.ipEquipo}`)
+  //     this.loadingLog = false
+  //     this.logContent = response.data
 
 
-    })
-  }
+  //   }).catch((error) => {
+  //     console.log(error);
+  //     this.loadingLog = false
+  //     this.showToastError(`No se logro traer el log de la maquina ${this.opcionToAction.ipEquipo}`)
+
+
+  //   })
+  // }
   getDays(fecha:string){
     
     
@@ -158,8 +158,9 @@ export class RobotsComponent implements OnInit {
     this.buscaBots();
     
     setInterval(() => {
-      this.buscaBots();
-    },5000);    // this.getDataStatsBots();
+      this.obtenerBotsEstados();
+    },5000);    
+    // this.getDataStatsBots();
     // this.refreshStatsBots();
   }
 
@@ -213,8 +214,8 @@ export class RobotsComponent implements OnInit {
 
   }
   preguntarEnviar(command: any, item: any) {
-    console.log("item",item);
-    console.log("command",command);
+    // console.log("item",item);
+    // console.log("command",command);
 
 
     this.confirmationService.confirm({
@@ -260,21 +261,20 @@ export class RobotsComponent implements OnInit {
     }
 
     this.cors.get('Reporte/cambiarProcesosIzzi',{
-      ip:`${item.botIp}`,
-      proceso:`${item.procesoId}`,
-      status:`${command}`
-    }).then((response) => {
-      console.log(response)
-      this.cors.get('Bots/updateProcessStatusBot',{
         ip:`${item.botIp}`,
-        estado:`${a}`
+        proceso:`${item.procesoId}`,
+        status:`${command}`
       }).then((response) => {
-        // console.log(response)
-      }).catch((error) => {
-        console.log(error);
-      });
-  
-      
+          console.log(response)
+          this.cors.get('Bots/updateProcessStatusBot',{
+            ip:`${item.botIp}`,
+            estado:`${a}`
+          }).then((response1) => {
+            console.log(response1)
+          }).catch((error) => {
+            console.log(error);
+          });
+          
     }).catch((error) => {
       console.log(error);
     })
@@ -349,56 +349,56 @@ export class RobotsComponent implements OnInit {
 
   }
 
-  adddListeners() {
+  // adddListeners() {
 
-    this.socket.on('botConected', (bot: any) => {
-
-
-      let index = this.dataSource.findIndex(item => item.ipEquipo == bot.host.replace("::ffff:", ""))
-
-      if (index > -1) {
-        this.dataSource[index].estatus = 1
-      }
-
-    })
-
-    this.socket.on('processStopedNotification', (botStopped: any) => {
-      console.log('processStopedNotification');
-      console.error(JSON.parse(botStopped.data));
+  //   this.socket.on('botConected', (bot: any) => {
 
 
-      let index = this.dataSource.findIndex(item => item.ipEquipo == botStopped.host.replace("::ffff:", ""))
+  //     let index = this.dataSource.findIndex(item => item.ipEquipo == bot.host.replace("::ffff:", ""))
 
-      if (index > -1) {
-        this.dataSource[index].estatus = 2
-      }
+  //     if (index > -1) {
+  //       this.dataSource[index].estatus = 1
+  //     }
 
-    })
+  //   })
 
-    this.socket.on('disconectionBot', (botDisconected: any) => {
-      console.log('disconectionBot');
-
-      let index = this.dataSource.findIndex(item => item.ipEquipo == botDisconected.host.replace("::ffff:", ""))
-
-      if (index > -1) {
-        this.dataSource[index].estatus = 4
-      }
-
-    })
-    this.socket.on('processErrorNotification', (botError: any) => {
-      console.log('processErrorNotification');
-      console.error(JSON.parse(botError.data));
+  //   this.socket.on('processStopedNotification', (botStopped: any) => {
+  //     console.log('processStopedNotification');
+  //     console.error(JSON.parse(botStopped.data));
 
 
-      let index = this.dataSource.findIndex(item => item.ipEquipo == botError.host.replace("::ffff:", ""))
+  //     let index = this.dataSource.findIndex(item => item.ipEquipo == botStopped.host.replace("::ffff:", ""))
 
-      if (index > -1) {
-        this.dataSource[index].estatus = 3
-      }
+  //     if (index > -1) {
+  //       this.dataSource[index].estatus = 2
+  //     }
 
-    })
+  //   })
 
-  }
+  //   this.socket.on('disconectionBot', (botDisconected: any) => {
+  //     console.log('disconectionBot');
+
+  //     let index = this.dataSource.findIndex(item => item.ipEquipo == botDisconected.host.replace("::ffff:", ""))
+
+  //     if (index > -1) {
+  //       this.dataSource[index].estatus = 4
+  //     }
+
+  //   })
+  //   this.socket.on('processErrorNotification', (botError: any) => {
+  //     console.log('processErrorNotification');
+  //     console.error(JSON.parse(botError.data));
+
+
+  //     let index = this.dataSource.findIndex(item => item.ipEquipo == botError.host.replace("::ffff:", ""))
+
+  //     if (index > -1) {
+  //       this.dataSource[index].estatus = 3
+  //     }
+
+  //   })
+
+  // }
 
   buscaBots() {
     this.cors.get('Bots/getBots').then((response) => {
@@ -520,6 +520,26 @@ export class RobotsComponent implements OnInit {
       })
 
   }
+
+
+  obtenerBotsEstados(){
+    this.cors.get('Bots/getBotsEstado').then((response) => {
+      if(response[0] == 'SIN INFO'){
+      }else if(response.length>0){
+        for(let i =0;i< this.dataSource.length;i++){
+          for(let j =0; j<response.length;j++){
+            if(response[j].botIp == this.dataSource[i].botIp){
+              this.dataSource[i].botEstado = response[j].botEstado;
+            }
+          }
+        
+        }
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+
+}
 
 
 
