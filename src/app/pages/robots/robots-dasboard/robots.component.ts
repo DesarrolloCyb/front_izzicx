@@ -275,9 +275,18 @@ export class RobotsComponent implements OnInit {
             console.log(error);
           });
           
-    }).catch((error) => {
-      console.log(error);
-    })
+      }).catch((error) => {
+        console.log(error);
+        this.cors.get('Bots/updateProcessStatusBot',{
+          ip:`${item.botIp}`,
+          estado:`3`
+        }).then((response1) => {
+          console.log(response1)
+        }).catch((error) => {
+          console.log(error);
+        });
+
+      })
 
 
    
