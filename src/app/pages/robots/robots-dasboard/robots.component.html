@@ -197,9 +197,11 @@
                             <p-tag *ngSwitchCase="4" severity="danger" value="No conectado"></p-tag>
 
                         </div> -->
-                        <p-tag *ngIf="item.botEstado == undefined || item.botEstado == null || item.botEstado == '0' ; else elseBlock" severity="danger" value="No conectado"></p-tag>
+                        <!-- <p-tag *ngIf="item.botEstado == undefined || item.botEstado == null || item.botEstado == '0' ; else elseBlock" severity="danger" value="No conectado"></p-tag> -->
+                        <p-tag *ngIf="item.botEstado == undefined || item.botEstado == null || item.botEstado == '0' ; else elseBlock" severity="danger" value="Bot Detenido"></p-tag>
                         <ng-template #elseBlock>                
-                            <p-tag severity="success" value="En Linea"></p-tag>
+                            <!-- <p-tag severity="success" value="En Linea"></p-tag> -->
+                            <p-tag severity="success" value="Bot Trabajando"></p-tag>
                           </ng-template>
                     </td>
                     <td>

@@ -91,7 +91,9 @@ export class ReprocesarComponent implements OnInit {
 
   reprocesar(item:any){
     this.cors.get(`AjustesNotDone/ActualizarStatusCasosNegocioCobranzaError`,{
-      status:item
+      status:item,
+      fecha1:moment(this.formReproceso.controls['fecha'].value[0]).format('yyyy-MM-DD'),
+      fecha2:moment(this.formReproceso.controls['fecha'].value[1]).format('yyyy-MM-DD')
     }).then((response) => {
       this.showtable = [];
       this.messageService.add({
