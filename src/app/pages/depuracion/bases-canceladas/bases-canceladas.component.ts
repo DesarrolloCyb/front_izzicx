@@ -104,7 +104,7 @@ export class BasesCanceladasComponent implements OnInit {
         }
         if(count == 10){
           Object.keys(this.ExcelData).forEach(key => {
-            this.ExcelData[key]["Status"]='Pendiente';
+            this.ExcelData[key]["Status"]='Registro pendiente';
             this.ExcelData[key]["Cve_usuario"]=this.usuario.email;
             this.ExcelData[key]["Procesando"]="0";
             this.ExcelData[key]["IP"]="";
