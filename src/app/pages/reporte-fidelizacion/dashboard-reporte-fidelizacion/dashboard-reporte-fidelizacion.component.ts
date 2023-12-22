@@ -85,6 +85,9 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
 
     // console.log(this.usuario)
     this.registrosReporte()
+    setInterval(() => {
+      this.registrosReporte();
+  }, 600000);
 
   }
 
