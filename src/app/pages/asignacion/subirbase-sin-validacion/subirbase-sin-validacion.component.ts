@@ -73,7 +73,7 @@ export class SubirbaseSinValidacionComponent implements OnInit {
           let regex = /^[a-zA-Z0-9% ]+$/;
           let regex1 = /^[0-9.]+$/;
           for(let i =0 ; i<this.ExcelData.length;i++){
-            if(this.ExcelData[i]['Motivo ajuste'].toUpperCase() !== 'CONVENIO DE COBRANZA' && this.ExcelData[i]['Motivo ajuste'].toUpperCase() !== 'CARGO EXTEMPORANEO'){
+            if(this.ExcelData[i]['Motivo ajuste'].toUpperCase() !== 'CONVENIO DE COBRANZA' && this.ExcelData[i]['Motivo ajuste'].toUpperCase() !== 'CARGO POR PAGO EXTEMPORANEO'){
               moti++;
             }
             if(!regex.test(this.ExcelData[i]['Comentario ajuste'])){
