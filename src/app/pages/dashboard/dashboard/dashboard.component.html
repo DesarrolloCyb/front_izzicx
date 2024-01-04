@@ -1,8 +1,9 @@
-<div class="text-900 font-bold text-2xl mb-4 text-center">Dashboard CyberRoom</div>
+<div class="text-900 font-bold text-2xl mb-4 text-center">  </div>
 <div [formGroup]="fechasForm" class="pb-5">
   <div class="card" style="padding-left: 1rem;">
-    <p-panel header="Reporte Procesos"
+    <p-panel [header]="fechas[0] + ' al ' + fechas[1]"
       class="line-height-12 m-0">
+      <h2 class="text-center">Reporte de Procesos</h2> <br><br>
       <div class="p-fluid p-formgrid grid">
         <div class="field col-12 md:col-6">
           <div class="grid flex justify-content-center">
@@ -837,6 +838,126 @@
                             </p-table>
                         </div>
                       </div> <br>
+
+                      <div class="row">
+                        <div class="cols">
+                            <p-table #dt1 dataKey="id" [value]="basicDataCCArray.tipo" [loading]="loading" [rows]="50" [rowHover]="true" 
+                                styleClass="p-datatable-gridlines"
+                                responsiveLayout="scroll">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="background-color: #FF7987;color: white;" class="flex justify-content-center align-items-center">
+                                          <div style="width: 100px;" class="text-center">
+                                                Tipo de la Orden
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FF7987;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Error Operativo
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FF7987;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Falla RPA
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FF7987;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Orden Cancelada
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FF7987;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Registro Exitoso
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FF7987;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Registro Pendiente
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FF7987;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Total
+                                          </div>
+                                        </th>
+                                      </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                    <tr *ngIf="item.base != 'Total'; else elseBlock">
+                                      <td class="text-center">
+                                        <div>{{ item.base }}</div>
+                                      </td>
+                                      <td class="text-center">
+                                        <div>{{ item.errorOperativo }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.fallaRPA }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.ordenCancelada }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.registroExitoso }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.registroPendiente }}</div>
+                                      </td>
+
+                                      <td class="text-center" >
+                                        <div>{{ item.total }}</div>
+                                      </td>                      
+                                    </tr>
+                                    <ng-template #elseBlock>
+                                      <!-- Contenido que se mostrará si mostrarContenido es falso -->
+                                      <tr >
+                                        <td class="text-center" style="background-color: #FF7987;color: white;">
+                                          <div>{{ item.base }}</div>
+                                        </td>
+                                        <td class="text-center" style="background-color: #FF9AA2;color: white;">
+                                          <div>{{ item.errorOperativo }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FF9AA2;color: white;">
+                                          <div>{{ item.fallaRPA }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FF9AA2;color: white;">
+                                          <div>{{ item.ordenCancelada }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FF9AA2;color: white;">
+                                          <div>{{ item.registroExitoso }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FF9AA2;color: white;">
+                                          <div>{{ item.registroPendiente }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FF9AA2;color: white;" >
+                                          <div>{{ item.total }}</div>
+                                        </td>                      
+                                      </tr>                                    
+                                    </ng-template>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">Sin Datos para Mostrar.</td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="loadingbody">
+                                    <tr>
+                                        <td colspan="7">Cargando Datos, espere...</td>
+                                    </tr>
+                    
+                                </ng-template>
+                            </p-table>
+                        </div>
+                      </div> <br>
                     
                       <div class="row">
                         <div class="cols">
@@ -1180,6 +1301,706 @@
                                         </td>
   
                                         <td class="text-center" style="background-color: #FF9AA2;color: white;" >
+                                          <div>{{ item.total }}</div>
+                                        </td>                      
+                                      </tr>                                    
+                                    </ng-template>
+
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">Sin Datos para Mostrar.</td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="loadingbody">
+                                    <tr>
+                                        <td colspan="7">Cargando Datos, espere...</td>
+                                    </tr>
+                    
+                                </ng-template>
+                            </p-table>
+                        </div>
+                      </div> <br>
+
+                    </p-tabPanel>
+                    <p-tabPanel header="Ajustes Con Validación" >
+                      <div class="card">
+                        <p-chart type="bar" [data]="basicDataAjustesConValidacion" [options]="basicOptionsAjustesConValidacion"></p-chart>
+                      </div> <br>
+
+                      <div class="row">
+                        <div class="cols">
+                            <p-table #dt1 dataKey="id" [value]="basicDataAjustesConValidacionArray.val" [loading]="loading" [rows]="50" [rowHover]="true" 
+                                styleClass="p-datatable-gridlines" 
+                                responsiveLayout="scroll">
+                                <ng-template pTemplate="header">
+                                  <tr>
+                                      <th style="background-color: #FFBF00;color: white;" class="flex justify-content-center align-items-center">
+                                        <div style="width: 100px; height: 3rem; margin-top: 1rem;" class="text-center">
+                                              Proceso
+                                        </div>
+                                      </th>
+                                      <th style="background-color: #FFBF00;color: white;" class="justify-content-center align-items-center" >
+                                        <div style="width: 100px;"  class="text-center">
+                                            Error Operativo
+                                        </div>
+                                      </th>
+                                      <th style="background-color: #FFBF00;color: white;">
+                                        <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                            Falla RPA
+                                        </div>
+                                      </th>
+                                      <th style="background-color: #FFBF00;color: white;">
+                                        <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                            Ajustes Realizados
+                                        </div>
+                                      </th>
+                                      <th style="background-color: #FFBF00;color: white;">
+                                        <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                          Inconsistencia de Siebel
+                                        </div>
+                                      </th>
+                                      <th style="background-color: #FFBF00;color: white;">
+                                        <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                            Registro Pendiente
+                                        </div>
+                                      </th>
+                                      <th style="background-color: #FFBF00;color: white;">
+                                        <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                            Total
+                                        </div>
+                                      </th>
+                                    </tr>
+                              </ng-template>
+                              <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                    <tr>
+                                      <td class="text-center">
+                                        <div>{{ item.base }}</div>
+                                      </td>
+                                      <td class="text-center">
+                                        <div>{{ item.errorOperativo }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.fallaRPA }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.ajusteRealizado }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.inconcistenciaSiebel }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.registroPendiente }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.total }}</div>
+                                      </td>
+
+                                                                
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">Sin Datos para Mostrar.</td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="loadingbody">
+                                    <tr>
+                                        <td colspan="7">Cargando Datos, espere...</td>
+                                    </tr>
+                    
+                                </ng-template>
+                            </p-table>
+                        </div>
+                      </div><br>
+
+                      <div class="row">
+                        <div class="cols">
+                            <p-table #dt1 dataKey="id" [value]="basicDataAjustesConValidacionArray.categoria" [loading]="loading" [rows]="50" [rowHover]="true" 
+                                styleClass="p-datatable-gridlines"
+                                responsiveLayout="scroll">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="background-color: #FFBF00;color: white;" class="flex justify-content-center align-items-center">
+                                          <div style="width: 100px; height: 3rem;" class="text-center">
+                                                Categoría
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Error Operativo
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Falla RPA
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                            Ajustes Realizados
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                            Inconsistencia de Siebel
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Registro Pendiente
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Total
+                                          </div>
+                                        </th>
+                                      </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                    <tr *ngIf="item.base != 'Total'; else elseBlock">
+                                      <td class="text-center">
+                                        <div>{{ item.base }}</div>
+                                      </td>
+                                      <td class="text-center">
+                                        <div>{{ item.errorOperativo }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.fallaRPA }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.ajusteRealizado }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.inconcistenciaSiebel }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.registroPendiente }}</div>
+                                      </td>
+
+                                      <td class="text-center" >
+                                        <div>{{ item.total }}</div>
+                                      </td>                      
+                                    </tr>
+                                    <ng-template #elseBlock>
+                                      <!-- Contenido que se mostrará si mostrarContenido es falso -->
+                                      <tr >
+                                        <td class="text-center" style="background-color: #FFBF00;color: white;">
+                                          <div>{{ item.base }}</div>
+                                        </td>
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.errorOperativo }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.fallaRPA }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.ajusteRealizado }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.inconcistenciaSiebel }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.registroPendiente }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;" >
+                                          <div>{{ item.total }}</div>
+                                        </td>                      
+                                      </tr>                                    
+                                    </ng-template>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">Sin Datos para Mostrar.</td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="loadingbody">
+                                    <tr>
+                                        <td colspan="7">Cargando Datos, espere...</td>
+                                    </tr>
+                    
+                                </ng-template>
+                            </p-table>
+                        </div>
+                      </div><br>
+
+                      <div class="row">
+                        <div class="cols">
+                            <p-table #dt1 dataKey="id" [value]="basicDataAjustesConValidacionArray.solucion" [loading]="loading" [rows]="50" [rowHover]="true" 
+                                styleClass="p-datatable-gridlines"
+                                responsiveLayout="scroll">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="background-color: #FFBF00;color: white;" class="flex justify-content-center align-items-center">
+                                          <div style="width: 100px; height: 3rem;" class="text-center">
+                                                Solución
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Error Operativo
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Falla RPA
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                            Ajustes Realizados
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                            Inconsistencia de Siebel
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Registro Pendiente
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Total
+                                          </div>
+                                        </th>
+                                      </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                    <tr *ngIf="item.base != 'Total'; else elseBlock">
+                                      <td class="text-center">
+                                        <div>{{ item.base }}</div>
+                                      </td>
+                                      <td class="text-center">
+                                        <div>{{ item.errorOperativo }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.fallaRPA }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.ajusteRealizado }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.inconcistenciaSiebel }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.registroPendiente }}</div>
+                                      </td>
+
+                                      <td class="text-center" >
+                                        <div>{{ item.total }}</div>
+                                      </td>                      
+                                    </tr>
+                                    <ng-template #elseBlock>
+                                      <!-- Contenido que se mostrará si mostrarContenido es falso -->
+                                      <tr >
+                                        <td class="text-center" style="background-color: #FFBF00;color: white;">
+                                          <div>{{ item.base }}</div>
+                                        </td>
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.errorOperativo }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.fallaRPA }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.ajusteRealizado }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.inconcistenciaSiebel }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.registroPendiente }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;" >
+                                          <div>{{ item.total }}</div>
+                                        </td>                      
+                                      </tr>                                    
+                                    </ng-template>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">Sin Datos para Mostrar.</td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="loadingbody">
+                                    <tr>
+                                        <td colspan="7">Cargando Datos, espere...</td>
+                                    </tr>
+                    
+                                </ng-template>
+                            </p-table>
+                        </div>
+                      </div> <br>
+                    
+                      <div class="row">>
+                        <div class="cols">
+                            <p-table #dt1 dataKey="id" [value]="basicDataAjustesConValidacionArray.mes" [loading]="loading" [rows]="50" [rowHover]="true" 
+                                styleClass="p-datatable-gridlines"
+                                responsiveLayout="scroll">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="background-color: #FFBF00;color: white;" class="flex justify-content-center align-items-center">
+                                          <div style="width: 100px;height: 3rem;margin-top: 1rem;" class="text-center">
+                                                Mes
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px; padding-left: 1rem;" class="flex justify-content-center align-items-center text-center">
+                                              Error Operativo
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Falla RPA
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                            Ajustes Realizados
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                            Inconsistencia de Siebel
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Registro Pendiente
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Total
+                                          </div>
+                                        </th>
+                                      </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                    <tr *ngIf="item.base != 'Total'; else elseBlock">
+                                      <td class="text-center">
+                                        <div>{{ mesFormat(item.base) }}</div>
+                                      </td>
+                                      <td class="text-center">
+                                        <div>{{ item.errorOperativo }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.fallaRPA }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.ajusteRealizado }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.inconcistenciaSiebel }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.registroPendiente }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.total }}</div>
+                                      </td>                      
+                                    </tr>
+                                    <ng-template #elseBlock>
+                                      <!-- Contenido que se mostrará si mostrarContenido es falso -->
+                                      <tr >
+                                        <td class="text-center" style="background-color: #FFBF00;color: white;">
+                                          <div>{{ mesFormat(item.base) }}</div>
+                                        </td>
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.errorOperativo }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.fallaRPA }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.ajusteRealizado }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.inconcistenciaSiebel }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.registroPendiente }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;" >
+                                          <div>{{ item.total }}</div>
+                                        </td>                      
+                                      </tr>                                    
+                                    </ng-template>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">Sin Datos para Mostrar.</td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="loadingbody">
+                                    <tr>
+                                        <td colspan="7">Cargando Datos, espere...</td>
+                                    </tr>
+                    
+                                </ng-template>
+                            </p-table>
+                        </div>
+                      </div> <br>
+
+                      <div class="row">
+                        <div class="cols">
+                            <p-table #dt1 dataKey="id" [value]="basicDataAjustesConValidacionArray.dia" [loading]="loading" [rows]="50" [rowHover]="true" 
+                                styleClass="p-datatable-gridlines"
+                                responsiveLayout="scroll">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="background-color: #FFBF00;color: white;" class="flex justify-content-center align-items-center">
+                                          <div style="width: 100px; height: 3rem; margin-top: 1rem;" class="text-center">
+                                                Día
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Error Operativo
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Falla RPA
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                            Ajustes Realizados
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                            Inconsistencia de Siebel
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Registro Pendiente
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Total
+                                          </div>
+                                        </th>
+                                      </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                    <tr *ngIf="item.base != 'Total'; else elseBlock">
+                                      <td class="text-center">
+                                        <div>{{ item.base }}</div>
+                                      </td>
+                                      <td class="text-center">
+                                        <div>{{ item.errorOperativo }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.fallaRPA }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.ajusteRealizado }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.inconcistenciaSiebel }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.registroPendiente }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.total }}</div>
+                                      </td>                     
+                                    </tr>
+                                    <ng-template #elseBlock>
+                                      <!-- Contenido que se mostrará si mostrarContenido es falso -->
+                                      <tr >
+                                        <td class="text-center" style="background-color: #FFBF00;color: white;">
+                                          <div>{{ item.base }}</div>
+                                        </td>
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.errorOperativo }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.fallaRPA }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.ajusteRealizado }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.inconcistenciaSiebel }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.registroPendiente }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;" >
+                                          <div>{{ item.total }}</div>
+                                        </td>                      
+                                      </tr>                                    
+                                    </ng-template>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">Sin Datos para Mostrar.</td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="loadingbody">
+                                    <tr>
+                                        <td colspan="7">Cargando Datos, espere...</td>
+                                    </tr>
+                    
+                                </ng-template>
+                            </p-table>
+                        </div>
+                      </div> <br>
+
+                      <div class="row">
+                        <div class="cols">
+                            <p-table #dt1 dataKey="id" [value]="basicDataAjustesConValidacionArray.status" [loading]="loading" [rows]="50" [rowHover]="true" 
+                                styleClass="p-datatable-gridlines"
+                                responsiveLayout="scroll">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="background-color: #FFBF00;color: white;" class="flex justify-content-center align-items-center">
+                                          <div style="width: 100px; height: 3rem;margin-top: 1rem;" class="text-center">
+                                                Estatus
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Error Operativo
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Falla RPA
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                            Ajustes Realizados
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                            Inconsistencia de Siebel
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Registro Pendiente
+                                          </div>
+                                        </th>
+                                        <th style="background-color: #FFBF00;color: white;">
+                                          <div style="width: 100px;" class="flex justify-content-center align-items-center text-center">
+                                              Total
+                                          </div>
+                                        </th>
+                                      </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                    <tr *ngIf="item.base != 'Total'; else elseBlock">
+                                      <td class="text-center">
+                                        <div>{{ item.base }}</div>
+                                      </td>
+                                      <td class="text-center">
+                                        <div>{{ item.errorOperativo }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.fallaRPA }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.ajusteRealizado }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.inconcistenciaSiebel }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.registroPendiente }}</div>
+                                      </td>
+
+                                      <td class="text-center">
+                                        <div>{{ item.total }}</div>
+                                      </td>
+                                    </tr>
+                                    <ng-template #elseBlock>
+                                      <!-- Contenido que se mostrará si mostrarContenido es falso -->
+                                      <tr >
+                                        <td class="text-center" style="background-color: #FFBF00;color: white;">
+                                          <div>{{ item.base }}</div>
+                                        </td>
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.errorOperativo }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.fallaRPA }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.ajusteRealizado }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.inconcistenciaSiebel }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;">
+                                          <div>{{ item.registroPendiente }}</div>
+                                        </td>
+  
+                                        <td class="text-center" style="background-color: #FFD699;color: white;" >
                                           <div>{{ item.total }}</div>
                                         </td>                      
                                       </tr>                                    

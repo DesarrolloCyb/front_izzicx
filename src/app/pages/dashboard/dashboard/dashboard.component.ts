@@ -18,6 +18,7 @@ registerLocaleData(es);
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+    fechas:any=[];
     primerDia = moment().startOf('month');
     ultimoDia = moment().endOf('month');
     fechasForm:UntypedFormGroup;
@@ -46,6 +47,20 @@ export class DashboardComponent implements OnInit {
         mes:[],
         dia:[],
         status:[],
+        tipo:[],
+    };
+
+    basicDataAjustesConValidacion: any;
+    basicOptionsAjustesConValidacion: any;
+    basicDataAjustesConValidacionArray:any={
+        graf:[],
+        esta:[],
+        val:[],
+        categoria:[],
+        solucion:[],
+        mes:[],
+        dia:[],
+        status:[],
     };
   
 
@@ -62,11 +77,14 @@ export class DashboardComponent implements OnInit {
         this.fechasForm = this.formBuilder.group({
             fechas: [null],
           });
+        this.fechas[0]=moment(this.primerDia).format('LL');
+        this.fechas[1]=moment(this.ultimoDia).format('LL');
       
         // console.log('Primer día del mes:', this.primerDia.format('YYYY-MM-DD'));
         // console.log('Último día del mes:', this.ultimoDia.format('YYYY-MM-DD'));
         this.buscarStatsEXT(this.primerDia.format('YYYY-MM-DD'),this.ultimoDia.format('YYYY-MM-DD'));
         this.buscarStatsCC(this.primerDia.format('YYYY-MM-DD'),this.ultimoDia.format('YYYY-MM-DD'));
+        this.buscarStatsAjustesConValidacion(this.primerDia.format('YYYY-MM-DD'),this.ultimoDia.format('YYYY-MM-DD'));
     }
 
     ngOnInit() {
@@ -87,6 +105,9 @@ export class DashboardComponent implements OnInit {
             fin =moment(this.fechasForm.controls['fechas'].value[1]).format('YYYY-MM-DD');
             
         }
+        this.fechas[0]=moment(ini).format('LL');
+        this.fechas[1]=moment(fin).format('LL');
+
         this.buscarStatsEXT(ini,fin);
         this.buscarStatsCC(ini,fin);
         this.load=false;
@@ -204,6 +225,7 @@ export class DashboardComponent implements OnInit {
 
 
     }
+
     buscarStatsCC(ini:any,fin:any){
         this.basicDataCCArray={
             graf:[],
@@ -213,6 +235,7 @@ export class DashboardComponent implements OnInit {
             mes:[],
             dia:[],
             status:[],
+            tipo:[],
         };
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
@@ -290,6 +313,7 @@ export class DashboardComponent implements OnInit {
                 this.basicDataCCArray.dia=response[0].dia
                 this.basicDataCCArray.dia[this.basicDataCCArray.dia.length-1].base='Total'
                 this.basicDataCCArray.status=response[0].status
+                this.basicDataCCArray.tipo=response[0].tipo
                
 
                 this.basicDataCC = {
@@ -315,6 +339,121 @@ export class DashboardComponent implements OnInit {
 
 
     }
+
+    buscarStatsAjustesConValidacion(ini:any,fin:any){
+        this.basicDataAjustesConValidacionArray={
+            graf:[],
+            esta:[],
+            val:[],
+            categoria:[],
+            solucion:[],
+            mes:[],
+            dia:[],
+            status:[],
+        };
+        const documentStyle = getComputedStyle(document.documentElement);
+        const textColor = documentStyle.getPropertyValue('--text-color');
+        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+        this.basicOptionsAjustesConValidacion = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: textColor
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: textColorSecondary
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                        drawBorder: false
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: textColorSecondary
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                        drawBorder: false
+                    }
+                }
+            }
+        };
+
+        this.cors.get('Estadisticas/estadisticasAjustesConValidacion',{
+            startDateStr:ini,
+            endDateStr:fin
+        }).then((response) => {
+            if(response[0]=='SIN INFO'){
+             
+            }else{
+ 
+            
+                console.log(response);
+                let grafica = response[0].grafica;
+                grafica.forEach((obj:any) => {
+                    Object.entries(obj).forEach(([key, value]) => {
+                      if(key=='fallaRPA'){
+                        this.basicDataAjustesConValidacionArray.graf.push(key)
+                        this.basicDataAjustesConValidacionArray.esta.push(value)
+                      }
+                      if(key=='errorOperativo'){
+                        this.basicDataAjustesConValidacionArray.graf.push(key)
+                        this.basicDataAjustesConValidacionArray.esta.push(value)
+                      }
+                      if(key=='registroPendiente'){
+                        this.basicDataAjustesConValidacionArray.graf.push(key)
+                        this.basicDataAjustesConValidacionArray.esta.push(value)
+                      }
+                      if(key=='ajusteRealizado'){
+                        this.basicDataAjustesConValidacionArray.graf.push(key)
+                        this.basicDataAjustesConValidacionArray.esta.push(value)
+                      }
+                      if(key=='inconcistenciaSiebel'){
+                        this.basicDataAjustesConValidacionArray.graf.push(key)
+                        this.basicDataAjustesConValidacionArray.esta.push(value)
+                      }
+                    });
+                });
+                this.basicDataAjustesConValidacionArray.val=response[0].grafica
+                this.basicDataAjustesConValidacionArray.categoria=response[0].categoria
+                this.basicDataAjustesConValidacionArray.solucion=response[0].solucion
+                this.basicDataAjustesConValidacionArray.mes=response[0].mes
+                this.basicDataAjustesConValidacionArray.dia=response[0].dia
+                this.basicDataAjustesConValidacionArray.dia[this.basicDataAjustesConValidacionArray.dia.length-1].base='Total'
+                this.basicDataAjustesConValidacionArray.status=response[0].status
+               
+
+                this.basicDataAjustesConValidacion = {
+                    // labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                    labels: this.basicDataAjustesConValidacionArray.graf,
+                    datasets: [
+                        {
+                            label: 'Ajustes con Validación',
+                            data: this.basicDataAjustesConValidacionArray.esta,
+                            backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+                            borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
+                            borderWidth: 1
+                        }
+                    ]
+                };
+        
+            }
+        }).catch((error) => {
+            console.log(error)
+        })
+        
+
+
+
+    }
+
 
 
     primeraLetraMayuscula(cadena: string): string {
