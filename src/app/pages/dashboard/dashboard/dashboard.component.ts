@@ -62,6 +62,19 @@ export class DashboardComponent implements OnInit {
         dia:[],
         status:[],
     };
+
+    basicDataAjustesSinValidacion: any;
+    basicOptionsAjustesSinValidacion: any;
+    basicDataAjustesSinValidacionArray:any={
+        graf:[],
+        esta:[],
+        val:[],
+        categoria:[],
+        solucion:[],
+        mes:[],
+        dia:[],
+        status:[],
+    };
   
 
     constructor(private cors: CorsService,private formBuilder: UntypedFormBuilder,private primengConfig: PrimeNGConfig,private messageService: MessageService,) {
@@ -85,9 +98,15 @@ export class DashboardComponent implements OnInit {
         this.buscarStatsEXT(this.primerDia.format('YYYY-MM-DD'),this.ultimoDia.format('YYYY-MM-DD'));
         this.buscarStatsCC(this.primerDia.format('YYYY-MM-DD'),this.ultimoDia.format('YYYY-MM-DD'));
         this.buscarStatsAjustesConValidacion(this.primerDia.format('YYYY-MM-DD'),this.ultimoDia.format('YYYY-MM-DD'));
+        this.buscarStatsAjustesSinValidacion(this.primerDia.format('YYYY-MM-DD'),this.ultimoDia.format('YYYY-MM-DD'));
     }
 
     ngOnInit() {
+
+        setTimeout(() => {
+            let a =  moment().format('yyyy-MM-dd HH:mm:ss')
+            console.log("se ejecuta cada minuto")
+        }, 60000);
         
         
     }
@@ -110,8 +129,8 @@ export class DashboardComponent implements OnInit {
 
         this.buscarStatsEXT(ini,fin);
         this.buscarStatsCC(ini,fin);
-        this.load=false;
-        this.fechasForm.controls['fechas'].patchValue(null);        
+        this.buscarStatsAjustesConValidacion(ini,fin);
+        this.buscarStatsAjustesSinValidacion(ini,fin);
     }
     
     buscarStatsEXT(ini:any,fin:any){
@@ -395,7 +414,7 @@ export class DashboardComponent implements OnInit {
             }else{
  
             
-                console.log(response);
+                // console.log(response);
                 let grafica = response[0].grafica;
                 grafica.forEach((obj:any) => {
                     Object.entries(obj).forEach(([key, value]) => {
@@ -443,6 +462,9 @@ export class DashboardComponent implements OnInit {
                         }
                     ]
                 };
+                this.load=false;
+                this.fechasForm.controls['fechas'].patchValue(null);        
+        
         
             }
         }).catch((error) => {
@@ -453,6 +475,121 @@ export class DashboardComponent implements OnInit {
 
 
     }
+
+    buscarStatsAjustesSinValidacion(ini:any,fin:any){
+        this.basicDataAjustesSinValidacionArray={
+            graf:[],
+            esta:[],
+            val:[],
+            categoria:[],
+            solucion:[],
+            mes:[],
+            dia:[],
+            status:[],
+        };
+        const documentStyle = getComputedStyle(document.documentElement);
+        const textColor = documentStyle.getPropertyValue('--text-color');
+        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+        this.basicOptionsAjustesSinValidacion = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: textColor
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: textColorSecondary
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                        drawBorder: false
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: textColorSecondary
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                        drawBorder: false
+                    }
+                }
+            }
+        };
+
+        this.cors.get('Estadisticas/estadisticasAjustesSinValidacion',{
+            startDateStr:ini,
+            endDateStr:fin
+        }).then((response) => {
+            if(response[0]=='SIN INFO'){
+             
+            }else{
+ 
+            
+                // console.log(response);
+                let grafica = response[0].grafica;
+                grafica.forEach((obj:any) => {
+                    Object.entries(obj).forEach(([key, value]) => {
+                      if(key=='fallaRPA'){
+                        this.basicDataAjustesSinValidacionArray.graf.push(key)
+                        this.basicDataAjustesSinValidacionArray.esta.push(value)
+                      }
+                      if(key=='errorOperativo'){
+                        this.basicDataAjustesSinValidacionArray.graf.push(key)
+                        this.basicDataAjustesSinValidacionArray.esta.push(value)
+                      }
+                      if(key=='registroPendiente'){
+                        this.basicDataAjustesSinValidacionArray.graf.push(key)
+                        this.basicDataAjustesSinValidacionArray.esta.push(value)
+                      }
+                      if(key=='ajusteRealizado'){
+                        this.basicDataAjustesSinValidacionArray.graf.push(key)
+                        this.basicDataAjustesSinValidacionArray.esta.push(value)
+                      }
+                      if(key=='inconcistenciaSiebel'){
+                        this.basicDataAjustesSinValidacionArray.graf.push(key)
+                        this.basicDataAjustesSinValidacionArray.esta.push(value)
+                      }
+                    });
+                });
+                this.basicDataAjustesSinValidacionArray.val=response[0].grafica
+                this.basicDataAjustesSinValidacionArray.motivoAjuste=response[0].motivoAjuste
+                this.basicDataAjustesSinValidacionArray.solucion=response[0].solucion
+                this.basicDataAjustesSinValidacionArray.mes=response[0].mes
+                this.basicDataAjustesSinValidacionArray.dia=response[0].dia
+                this.basicDataAjustesSinValidacionArray.dia[this.basicDataAjustesSinValidacionArray.dia.length-1].base='Total'
+                this.basicDataAjustesSinValidacionArray.status=response[0].status
+               
+
+                this.basicDataAjustesSinValidacion = {
+                    // labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                    labels: this.basicDataAjustesSinValidacionArray.graf,
+                    datasets: [
+                        {
+                            label: 'Ajustes sin Validación',
+                            data: this.basicDataAjustesSinValidacionArray.esta,
+                            backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+                            borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
+                            borderWidth: 1
+                        }
+                    ]
+                };
+        
+            }
+        }).catch((error) => {
+            console.log(error)
+        })
+        
+
+
+
+    }
+
 
 
 
