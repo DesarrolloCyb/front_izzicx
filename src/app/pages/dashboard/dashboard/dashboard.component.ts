@@ -103,11 +103,9 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
 
-        setTimeout(() => {
-            let a =  moment().format('yyyy-MM-dd HH:mm:ss')
-            console.log("se ejecuta cada minuto")
-        }, 60000);
-        
+        setInterval(() => {
+            this.buscarStatsTodos();
+        }, 300000);        
         
     }
     
