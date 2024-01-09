@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LayoutService } from '@services';
 import { CorsService } from '@services';
@@ -12,12 +12,20 @@ import { registerLocaleData } from '@angular/common';
 
 registerLocaleData(es);
 
+
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
+
+
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+    @ViewChild('barChart') barChart: any; // Cambiar 'any' según la versión de PrimeNG
+
+
     fechas:any=[];
     primerDia = moment().startOf('month');
     ultimoDia = moment().endOf('month');
@@ -75,7 +83,10 @@ export class DashboardComponent implements OnInit {
         dia:[],
         status:[],
     };
-  
+
+
+
+
 
     constructor(private cors: CorsService,private formBuilder: UntypedFormBuilder,private primengConfig: PrimeNGConfig,private messageService: MessageService,) {
         this.primengConfig.setTranslation({
@@ -99,6 +110,10 @@ export class DashboardComponent implements OnInit {
         this.buscarStatsCC(this.primerDia.format('YYYY-MM-DD'),this.ultimoDia.format('YYYY-MM-DD'));
         this.buscarStatsAjustesConValidacion(this.primerDia.format('YYYY-MM-DD'),this.ultimoDia.format('YYYY-MM-DD'));
         this.buscarStatsAjustesSinValidacion(this.primerDia.format('YYYY-MM-DD'),this.ultimoDia.format('YYYY-MM-DD'));
+
+
+
+
     }
 
     ngOnInit() {
@@ -217,6 +232,8 @@ export class DashboardComponent implements OnInit {
                 this.basicDataExtArray.dia=response[0].dia
                 this.basicDataExtArray.dia[this.basicDataExtArray.dia.length-1].base='Total'
                 this.basicDataExtArray.status=response[0].status
+
+                console.log(this.basicDataExtArray)
                
 
                 this.basicDataEXT = {
@@ -598,18 +615,6 @@ export class DashboardComponent implements OnInit {
         return cadena.charAt(0).toUpperCase() + cadena.slice(1);
     }
 
-    // dateFormat(value:any){
-    //     if(value != null || value!=""){
-    //         if(value.includes("T00")){
-    //           return moment(value).format('DD/MM/yyyy')
-            
-    //         }
-    //         return value
-
-    //     }else{
-    //       return ""
-    //     }
-    // }
 
     mesFormat(value:any){
         const meses = [
@@ -639,7 +644,159 @@ export class DashboardComponent implements OnInit {
     }
 
 
+    generatePDF(){
+
+        const pdfDoc = new jsPDF();
+
+        // Verificar que el gráfico se haya inicializado
+        if (this.barChart && this.barChart.chart) {
+          const chart = this.barChart.chart;
+          
+          // Obtener el elemento canvas del gráfico
+          const chartCanvas = chart.ctx.canvas;
+          const chartDataUrl = chartCanvas.toDataURL('image/png');
     
+          // Agregar la imagen del gráfico al documento PDF
+          pdfDoc.addImage(chartDataUrl, 'PNG', 10, 10, 190, 100);
+
+          let a:any=[];
+          let b:any=[];
+            
+          // Aquí puedes usar autoTable para generar tus tablas
+            this.basicDataExtArray.val.forEach((obj:any) => {
+                Object.entries(obj).forEach(([key, value]) => {
+                    if(key=='base'){
+                        a.push('Proceso')
+                        b.push(value)
+                    }
+                    if(key=='errorOperativo'){
+                        a.push('Error Operativo')
+                        b.push(value)
+                    }
+                    if(key=='fallaRPA'){
+                        a.push('Falla RPA')
+                        b.push(value)
+                    }
+                    if(key=='ordenCancelada'){
+                        a.push('Orden Cancelada por un Tercero')
+                        b.push(value)
+                    }
+                    if(key=='registroExitoso'){
+                        a.push('Registro Exitoso')
+                        b.push(value)
+                    }
+                    if(key=='registroPendiente'){
+                        a.push('Registro Pendiente')
+                        b.push(value)
+                    }
+                    if(key=='total'){
+                        a.push('Total')
+                        b.push(value)
+                    }
+                });
+                
+                
+            });
+            let aa=a.pop();
+            a.unshift(aa);
+            let bb=b.pop();
+            b.unshift(bb);
+            (pdfDoc as any).autoTable({
+                head: [a],
+                body: [b],
+                startY: 120
+            });
+            // Obtener la altura total de la tabla
+            let tableHeight = (this.basicDataExtArray.val.length + 1) * 5; // Puedes ajustar el factor según tus necesidades
+
+            // Ajustar la posición vertical dinámicamente
+            let startYEXTmotivo = (pdfDoc as any).autoTable.previous.finalY + tableHeight;
+
+            let columns = Object.keys(this.basicDataExtArray.motivo[0]);
+            let c:any = columns.pop()
+            columns.unshift(c);
+            columns.splice(1,1);
+            (pdfDoc as any).autoTable({
+                head: [['Motivo de la orden','Falla RPA','Error Operativo','Registro Pendiente','Registro Exitoso','Orden Cancelada por un tercero','Total']],
+                body: this.basicDataExtArray.motivo.map((obj:any) => columns.map(col => obj[col])), // Mapear propiedades a celdas
+                startY: startYEXTmotivo
+            });
+
+
+            let tableHeight1 = (this.basicDataExtArray.motivo.length + 1) * 2; // Puedes ajustar el factor según tus necesidades
+            let startYEXTmes = (pdfDoc as any).autoTable.previous.finalY + tableHeight1;
+            let columnsmES = Object.keys(this.basicDataExtArray.mes[0]);
+            let cc:any = columnsmES.pop()
+            columnsmES.unshift(cc);
+            columnsmES.splice(1,1);
+            (pdfDoc as any).autoTable({
+                head: [['Mes','Falla RPA','Error Operativo','Registro Pendiente','Registro Exitoso','Orden Cancelada por un tercero','Total']],
+                body: this.basicDataExtArray.mes.map((obj:any) => columnsmES.map(col => obj[col])), // Mapear propiedades a celdas
+                startY: startYEXTmes
+            });
+
+
+            let tableHeight2 = (this.basicDataExtArray.mes.length + 1) * 2; // Puedes ajustar el factor según tus necesidades
+
+            let startYEXTdia = (pdfDoc as any).autoTable.previous.finalY + tableHeight2;
+
+            let columnsdia = Object.keys(this.basicDataExtArray.mes[0]);
+            let d:any = columnsdia.pop()
+            columnsdia.unshift(d);
+            columnsdia.splice(1,1);
+            (pdfDoc as any).autoTable({
+                head: [['Día','Falla RPA','Error Operativo','Registro Pendiente','Registro Exitoso','Orden Cancelada por un tercero','Total']],
+                body: this.basicDataExtArray.dia.map((obj:any) => columnsdia.map(col => obj[col])), // Mapear propiedades a celdas
+                startY: startYEXTdia
+            });
+
+            let tableHeight3 = (this.basicDataExtArray.dia.length + 1) * 2; // Puedes ajustar el factor según tus necesidades
+
+            let startYEXTstatus = (pdfDoc as any).autoTable.previous.finalY + tableHeight3;
+
+            let columnsstatus = Object.keys(this.basicDataExtArray.mes[0]);
+            let e:any = columnsstatus.pop()
+            columnsstatus.unshift(e);
+            columnsstatus.splice(1,1);
+            (pdfDoc as any).autoTable({
+                head: [['Estatus','Falla RPA','Error Operativo','Registro Pendiente','Registro Exitoso','Orden Cancelada por un tercero','Total']],
+                body: this.basicDataExtArray.status.map((obj:any) => columnsstatus.map(col => obj[col])), // Mapear propiedades a celdas
+                startY: startYEXTstatus
+            });
+
+
+
+
+
+
+
+            
+              pdfDoc.addPage();
+            //   pdfDoc.setPage
+            // Guardar el documento PDF
+            pdfDoc.save('ProcesosBots_Reporte.pdf');
+        
+          
+        } else {
+          console.error('Elemento barChart o barChart.chart no encontrado o no inicializado.');
+        }    
+  
+    }
+
+
+    generateExcel(){
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
