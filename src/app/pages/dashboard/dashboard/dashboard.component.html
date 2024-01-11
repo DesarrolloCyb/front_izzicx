@@ -1,8 +1,8 @@
 <div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #3B82F6 ;color: white !important;"> Dashboard de Procesos </div>
 <h3 class="text-center"> {{ fechas[0] + ' al ' + fechas[1] }}  </h3>
-    <!-- <div>
-      <button (click)="generatePDF()">Generar PDF con Gráfico</button>
-    </div> -->
+    <div>
+      <button (click)="generateExcelWithChart()">Generar PDF con Gráfico</button>
+    </div>
 <div [formGroup]="fechasForm" class="pb-5">
   <div class="card" style="padding-left: 1rem;">
     <p-panel
@@ -44,13 +44,13 @@
       </div>
       <div class="p-fluid p-formgrid grid">
         <div class="field col-12 md:col-12">
-          <div class="grid flex justify-content-center">
+          <div class="grid flex justify-content-center"> 
             <div class="col-12 text-center">
               <div >
-                <p-tabView>
+                <p-tabView >
                     <p-tabPanel header="DepuracionEXT" [selected]="true">
                       <div class="card">
-                        <p-chart #barChart type="bar" [data]="basicDataEXT" [options]="basicOptionsEXT"></p-chart>
+                        <p-chart  id="barChart" type="bar" [data]="basicDataEXT" [options]="basicOptionsEXT"></p-chart>
                       </div> <br>
 
                       <div class="row">
@@ -630,7 +630,7 @@
                     </p-tabPanel>
                     <p-tabPanel header="DepuracionCC" >
                       <div class="card">
-                        <p-chart type="bar" [data]="basicDataCC" [options]="basicOptionsCC"></p-chart>
+                        <p-chart id="barChart1" type="bar" [data]="basicDataCC" [options]="basicOptionsCC"></p-chart>
                       </div> <br>
 
                       <div class="row">
@@ -1330,7 +1330,7 @@
                     </p-tabPanel>
                     <p-tabPanel header="Ajustes Con Validación" >
                       <div class="card">
-                        <p-chart type="bar" [data]="basicDataAjustesConValidacion" [options]="basicOptionsAjustesConValidacion"></p-chart>
+                        <p-chart id="barChart2" type="bar" [data]="basicDataAjustesConValidacion" [options]="basicOptionsAjustesConValidacion"></p-chart>
                       </div> <br>
 
                       <div class="row">
@@ -2031,7 +2031,7 @@
 
                     <p-tabPanel header="Ajustes Sin Validación" >
                       <div class="card">
-                        <p-chart type="bar" [data]="basicDataAjustesSinValidacion" [options]="basicOptionsAjustesSinValidacion"></p-chart>
+                        <p-chart id="barChart3" type="bar" [data]="basicDataAjustesSinValidacion" [options]="basicOptionsAjustesSinValidacion"></p-chart>
                       </div> <br>
 
                       <div class="row">

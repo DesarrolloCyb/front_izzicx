@@ -29,6 +29,7 @@
     "@fullcalendar/timegrid": "^5.11.3",
     "@microsoft/signalr": "^6.0.9",
     "chart.js": "^3.9.1",
+    "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
     "https-proxy-agent": "^5.0.1",
     "jspdf": "^2.5.1",
