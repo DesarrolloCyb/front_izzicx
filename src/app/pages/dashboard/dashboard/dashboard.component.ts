@@ -114,6 +114,7 @@ export class DashboardComponent implements OnInit {
       
         // console.log('Primer día del mes:', this.primerDia.format('YYYY-MM-DD'));
         // console.log('Último día del mes:', this.ultimoDia.format('YYYY-MM-DD'));
+        this.load=true;
         this.buscarStatsEXT(this.primerDia.format('YYYY-MM-DD'),this.ultimoDia.format('YYYY-MM-DD'));
         this.buscarStatsCC(this.primerDia.format('YYYY-MM-DD'),this.ultimoDia.format('YYYY-MM-DD'));
         this.buscarStatsAjustesConValidacion(this.primerDia.format('YYYY-MM-DD'),this.ultimoDia.format('YYYY-MM-DD'));
@@ -133,6 +134,7 @@ export class DashboardComponent implements OnInit {
     }
     
     buscarStatsTodos(){
+        this.load=true;
         let ini:any;
         let fin:any;
         this.load=true;
@@ -1612,7 +1614,7 @@ export class DashboardComponent implements OnInit {
                             { name: 'Registro Pendiente', filterButton: false },
                             { name: 'Total', filterButton: false },
                             ],
-                            rows: this.basicDataAjustesConValidacionArray.dia.map((item:any) => [item.base, item.errorOperativo, item.fallaRPA,item.ordenCancelada,item.ajusteRealizado,item.inconcistenciaSiebel,item.total]),
+                            rows: this.basicDataAjustesConValidacionArray.dia.map((item:any) => [item.base, item.errorOperativo, item.fallaRPA,item.ajusteRealizado,item.inconcistenciaSiebel,item.registroPendiente,item.total]),
 
                         };
                 
@@ -1640,7 +1642,7 @@ export class DashboardComponent implements OnInit {
                             { name: 'Registro Pendiente', filterButton: false },
                             { name: 'Total', filterButton: false },
                             ],
-                            rows: this.basicDataAjustesConValidacionArray.status.map((item:any) => [item.base, item.errorOperativo, item.fallaRPA,item.ordenCancelada,item.ajusteRealizado,item.inconcistenciaSiebel,item.total]),
+                            rows: this.basicDataAjustesConValidacionArray.status.map((item:any) => [item.base, item.errorOperativo, item.fallaRPA,item.ajusteRealizado,item.inconcistenciaSiebel,item.registroPendiente,item.total]),
 
                         };
                 
@@ -1808,7 +1810,7 @@ export class DashboardComponent implements OnInit {
                             { name: 'Registro Pendiente', filterButton: false },
                             { name: 'Total', filterButton: false },
                             ],
-                            rows: this.basicDataAjustesSinValidacionArray.dia.map((item:any) => [item.base, item.errorOperativo, item.fallaRPA,item.ordenCancelada,item.ajusteRealizado,item.inconcistenciaSiebel,item.total]),
+                            rows: this.basicDataAjustesSinValidacionArray.dia.map((item:any) => [item.base, item.errorOperativo, item.fallaRPA,item.ajusteRealizado,item.inconcistenciaSiebel,item.registroPendiente,item.total]),
 
                         };
                 
@@ -1836,7 +1838,7 @@ export class DashboardComponent implements OnInit {
                             { name: 'Registro Pendiente', filterButton: false },
                             { name: 'Total', filterButton: false },
                             ],
-                            rows: this.basicDataAjustesSinValidacionArray.status.map((item:any) => [item.base, item.errorOperativo, item.fallaRPA,item.ordenCancelada,item.ajusteRealizado,item.inconcistenciaSiebel,item.total]),
+                            rows: this.basicDataAjustesSinValidacionArray.status.map((item:any) => [item.base, item.errorOperativo, item.fallaRPA,item.ajusteRealizado,item.inconcistenciaSiebel,item.registroPendiente,item.total]),
 
                         };
                 
