@@ -1897,6 +1897,14 @@ export class DashboardComponent implements OnInit {
                            }
                            this.load=false;
                            this.activeTabIndex = 0;
+                           this.messageService.add({
+                            key:'tst',
+                            severity: 'success',
+                            summary: 'Exito',
+                            detail: 'Se descargo el reporte!',
+                          });
+            
+
                        }, 5000);
                     },1000)
                  },1000)
