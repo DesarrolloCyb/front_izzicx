@@ -40,8 +40,8 @@
         <div class="field col-12 md:col-12">
           <div class="grid flex justify-content-center"> 
             <div class="col-12 text-center">
-              <div >
-                <p-tabView [activeIndex]="activeTabIndex">
+              <div >                  
+                <p-tabView [activeIndex]="activeTabIndex" (onChange)="onTabChange($event)">
                     <p-tabPanel header="DepuracionEXT" >
                       <div class="card">
                         <p-chart  id="barChart" type="bar" [data]="basicDataEXT" [options]="basicOptionsEXT"></p-chart>

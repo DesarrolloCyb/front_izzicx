@@ -1041,6 +1041,7 @@ export class DashboardComponent implements OnInit {
 
 
      generateExcelWithChart() {
+        // console.log(this.activeTabIndex)
          setTimeout(()=>{
              this.load=true;
               this.activeTabIndex = 0;
@@ -1900,11 +1901,17 @@ export class DashboardComponent implements OnInit {
                     },1000)
                  },1000)
              },1000)
-         },300);
+         },1000);
 
 
 
     }
+
+    onTabChange(event: any) {
+        // console.log(event.index)
+        this.activeTabIndex = event.index
+    }
+    
 
 
 
