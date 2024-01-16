@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // this.getUsersContraChange();
-    this.todoEnCero();
+    // this.todoEnCero();
   }
   
   startInterval() {
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
       this.intervalSubscription.unsubscribe();
     }
     
-    this.intervalSubscription = interval(20000).subscribe(() => {
+    this.intervalSubscription = interval(300000).subscribe(() => {
       let a = moment().format('HH:mm:ss');
       if(a.substring(0,2) == '09'){
         this.getUsersContraChange();
