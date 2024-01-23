@@ -40,7 +40,7 @@ export class DashboardAsignacionComponent implements OnInit {
     let file = event.target.files[0];
     let ultimo = file.name.split('.');
     if(ultimo[ultimo.length-1] != 'xlsx'){
-       this.messageService.add({
+      this.messageService.add({
         key: 'tst',
         severity: 'error',
         summary: 'La extensión del archivo es incorrecta',
@@ -51,21 +51,23 @@ export class DashboardAsignacionComponent implements OnInit {
       var pattern = /[\^*@!"#$%&/()=?¡!¿'\\]/gi;
       fileReader.readAsBinaryString(file);
       fileReader.onload= (e)=>{
-        // var workBook = XLSX.read(fileReader.result,{type:'binary',cellDates:true, raw: true })
         var workBook = XLSX.read(fileReader.result,{type:'binary',cellDates:true })
         var sheetNames =  workBook.SheetNames;
         this.ExcelData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]],{defval: ''});
-        // console.log(this.ExcelData)
-        let count=0;
+        let extraHeaders = [];
         for(let [key,value] of Object.entries(this.ExcelData[0])){
-          // console.log("Esto es cabezera",key)
-          for(let i = 0 ; i<this.headers.length;i++){
-            if(key == this.headers[i]){
-              count++;
-            }  
+          if(!this.headers.includes(key)){
+            extraHeaders.push(key);
           }
         }
-        if(count == 10){
+        if(extraHeaders.length > 0){
+          this.messageService.add({
+            key: 'tst',
+            severity: 'error',
+            summary: 'Error',
+            detail: 'El archivo contiene ' + extraHeaders.length + ' columnas de más: (' + extraHeaders.join(', ') + ')',
+        });
+        }else if(Object.keys(this.ExcelData[0]).length == this.headers.length){
           Object.keys(this.ExcelData).forEach(key => {
             this.ExcelData[key]["Status"]='Registro pendiente';
             this.ExcelData[key]["Cve_usuario"]=this.usuario.email;
@@ -82,7 +84,6 @@ export class DashboardAsignacionComponent implements OnInit {
             summary: 'Exito!!!',
             detail: 'El archivo se a cargado completamente!!!',
           });
-          // console.log(this.ExcelData)
           this.tabla=true;
           this.button=false;
         }else{
