@@ -57,6 +57,12 @@ export class BaseDatosAjustesComponent implements OnInit {
         var sheetNames =  workBook.SheetNames;
         this.ExcelData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]],{defval: ''});
         // console.log(this.ExcelData)
+        this.ExcelData = this.ExcelData.map((row:any) => {
+          if(row['Descripción']) {
+            row['Descripción'] = row['Descripción'].replace(pattern, '');
+          }
+          return row;
+        });
         for(let [key,value] of Object.entries(this.ExcelData[0])){
           // console.log("Esto es cabezera",key)
           for(let i = 0 ; i<this.headers.length;i++){
@@ -270,29 +276,9 @@ export class BaseDatosAjustesComponent implements OnInit {
   }
 
   saveExcel() {
-    // let a =[
-    //   {
-    // "Cliente":35955971,
-    // "Comentarios":"",
-    // "Comentarios CN":"S002 Gran Sur Pachuca Cliente molesto no recomoce la contratacion Vix plus  Monto de Ajuste $119 pesos Fecha de fact  May 23 ",
-    // "Creado_1":"2023-05-05 02:06:36",
-    // "Cve_usuario":"admin@test.com",
-    // "Estado":"No programado",
-    // "Fecha de asignación":"2023-05-05 02:06:36",
-    // "Fecha_Carga":"2023-05-08 04:01:09",
-    // "IP":"",
-    // "Nº de caso de negocio":1151800000000,
-    // "Procesando":"0",
-    // "Status":"Pendiente",
-    // "Vencimiento":"2023-05-06 02:07:36"
-    // }
-    // ];
     this.button=true;
     let filteredArray = this.ExcelData.filter((obj:any) => obj['Nº de cuenta']    !== "" && obj['Nº de cuenta'] !== undefined );
-    // console.log(filteredArray)
     this.cors.post('AjustesCambiosServicios/InsertarBaseDatosAjustesExcel',filteredArray).then((response) => {
-      // console.log(response)
-      // this.spinner=false;
       this.messageService.add({
         key: 'tst',
         severity: 'success',
@@ -301,7 +287,6 @@ export class BaseDatosAjustesComponent implements OnInit {
       }); 
     }).catch((error) => {
       console.log(error)
-      // this.spinner=false;
       this.messageService.add({
         key: 'tst',
         severity: 'error',
