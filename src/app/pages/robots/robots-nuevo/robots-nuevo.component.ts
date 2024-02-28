@@ -50,33 +50,11 @@ export class RobotsNuevoComponent implements OnInit {
           }
         }      
       }
-      this.cors.get('Bots/getValidationProcesos').then((response) => {
-        // console.log("validar procesos",response)
-        let a =[];
-        for(let i=0; i< response.length;i++){
-          if(response[i].num >=3){
-            a.push(response[i].procesoBotId);
-          }
-        }
-        for(let i=0; i<this.processArr.length;i++){
-          for(let j=0;j<a.length;j++){
-            if(this.processArr[i].id == a[j]){
-              let index = this.processArr.indexOf(this.processArr[i]);
-              if(index !== -1){
-              this.processArr = this.processArr.slice(0,index).concat(this.processArr.slice(index+1))   
-              }
-            }
-          }
-        }
-      }).catch((error) => {
-        console.log(error);
-      })
-  
     }).catch((error) => {
-      console.log(error)
-
+      console.log(error);
     })
   }
+  
   guardarBot() {
     this.guardando = true
     this.formNuevoBot.markAllAsTouched()

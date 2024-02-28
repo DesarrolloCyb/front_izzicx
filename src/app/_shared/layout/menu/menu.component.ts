@@ -520,64 +520,10 @@ export class MenuComponent implements OnInit {
       "testAjustes1":['home','ajustes','reportes','ordenes'],
       "eBarrera":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','robots'],
       "testReportes":['home','reportes'],
-      "ACS":['home','ajustesYcambioServicio']
-
-      //   "SUPERVISOR TROUBLESHOOTING CELULAR":['capturasA','home','reportes'],
-    //   "ESPECIALISTA TROUBLESHOOTING CELULAR":['capturasA'],
-    //   "SUPERVISOR CALL CENTER REPARACIONES":['capturasA','home','reportes'],
-    //   "EJECUTIVO ATENCION PREPAGO":['capturasA'],
-    //   "GERENTE REPARACIONES VETV":['capturasA','home','reportes'],
-    //   "COORDINADOR REPARACIONES":['home','reportes'],
-    //   "SUPERVISOR ATENCION CC MX":['capturasA','home','reportes'],
-    //   "COORDINADOR ATENCION CC MX":['home','reportes'],
-    //   "ASESOR ATENCION CC MX":['home','reportes'],
-    //   "EJECUTIVO ATENCION A CLIENTE":['capturasA'],
-    //   "ASESOR RETENCION VETV":['home','reportes'],http://localhost:4200/extraccion
-    //   "GERENTE RETENCION INBOUND":['home','capturasR','capturasA','robots','reportes','usuarios'],
-    //   "SUPERVISOR RETENCION WEB":['home','capturasR','reportes'],
-    //   "SUPERVISOR RETENCION INBOUND VETV":['home','capturasR','reportes'],
-    //   "SUPERVISOR RETENCION INBOUND":['home','capturasR','reportes'],
-    //   "ESPECIALISTA RETENCION WEB":['capturasR'],
-    //   "ESPECIALISTA RETENCION VETV":['capturasR'],
-    //   "ESPECIALISTA RETENCION INBOUND":['capturasR'],
-    //   "ESPECIALISTA RETENCION CHAT":['capturasR'],
-    //   "GERENTE ATENCION A CLIENTES":['home','reportes'], //despues de este las dos graficas
-    //   "SUPERVISOR ATENCION A CLIENTES INTERNO":['home','reportes'],
-    //   "ASESOR CONTROL INFORMACION":['home','reportes'],
-    //   "SUPERVISOR GESTION EDP":['home','reportes'],
-    //   "SUPERVISOR ESTRATEGIA OPERATIVA":['home','reportes'],
-    //   "ESPECIALISTA ESTRATEGIA OPERATIVA":['home'],
-    //   "GERENTE MESA DE CONTROL":['home','reportes'],
-    //   "SUPERVISOR MESA DE CONTROL":['home','reportes'],
-    //   "SUPERVISOR MESA CONTROL DE DOCUMENTOS":['home','reportes'],
-    //   "Resp: MOISES AVILA SOTO":['home','capturasR','capturasA','robots','reportes','usuarios'],
-    //   "EJECUTIVO ATENCION PREPAGO BRONCE J":['home','capturasA'],
-    //   "EJECUTIVO ATENCION PREPAGO BRONCE S":['home','capturasA'],
-    //   "EJECUTIVO REPARACIONES JR":['home','capturasA'],
-    //   "EJECUTIVO ATENCION PREPAGO BRONCE":['home','capturasA'],
-    //   "EJECUTIVO ATENCION A CLIENTE MX JR":['home','capturasA'],
-    //   "EJECUTIVO ATENCION A CLIENTE MX SENIOR":['home','capturasA'],
-    //   "EJECUTIVO ATENCION A CLIENTE MX JR":['home','capturasA'],
-    //   "SUPERVISOR ATENCION CC MX":['capturasA','home','reportes'],
-    //   "EJECUTIVO ATENCION POSPAGO BRONCE":['home','capturasA'],
-    //   "EJECUTIVO ATENCION POSPAGO ORO":['home','capturasA'],
-    //   "ESPECIALISTA RETENCION POSPAGO BRONCE":['home','capturasR'],
-    //   "EJECUTIVO ATENCION POSPAGO PLATA":['home','capturasA'],
-    //   "EJECUTIVO ATENCION PREPAGO PLATA":['home','capturasA'],
-    //   "EJECUTIVO ATENCION PREPAGO ORO":['home','capturasA'],
-    //   "ESPECIALISTA RETENCION PREPAGO BRONCE":['home','capturasR']
-    //   "":['home']
+      "ACS":['home','ajustesYcambioServicio'],
     }
     this.model = [];
-
-    /**
-     * {"userID":241,"firstName":"usrconfbot","lastName":null,"email":"usrconfbot","mobile":null,"gender":null,"role":"1","pWd":"","memberSince":"2022-11-06T17:10:35.6017627",
-     */
-
     let usuarioInfo = JSON.parse(localStorage.getItem("userData") || "{}")
-
-    // this.model.push(
-    // )
     this.menus.forEach((elemento) => {
 
 
