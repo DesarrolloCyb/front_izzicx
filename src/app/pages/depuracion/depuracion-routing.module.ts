@@ -7,6 +7,7 @@ import { BasesCanceladasComponent } from './bases-canceladas/bases-canceladas.co
 import { PantallaConsultaComponent } from './pantalla-consulta/pantalla-consulta.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { PrefijosComponent } from './prefijos/prefijos.component';
+import { HobsComponent } from './hobs/hobs.component';
 
 const routes: Routes = [
 	{
@@ -38,6 +39,11 @@ const routes: Routes = [
 		path: 'prefijos',
 		component: LayoutComponent,
 		children: [{ path: '', component: PrefijosComponent }],
+	},
+	{
+		path: 'HobsDepuracion',
+		component: LayoutComponent,
+		children: [{ path: '', component: HobsComponent }],
 	},
 ];
 

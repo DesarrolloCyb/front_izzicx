@@ -11,6 +11,7 @@ import { BasesCanceladasComponent } from './bases-canceladas/bases-canceladas.co
 import { PantallaConsultaComponent } from './pantalla-consulta/pantalla-consulta.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { PrefijosComponent } from './prefijos/prefijos.component';
+import { HobsComponent } from './hobs/hobs.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { PrefijosComponent } from './prefijos/prefijos.component';
     BasesCanceladasComponent,
     PantallaConsultaComponent,
     ReportesComponent,
-    PrefijosComponent
+    PrefijosComponent,
+    HobsComponent
   ],
   imports: [
     CommonModule,

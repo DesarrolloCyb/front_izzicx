@@ -244,6 +244,11 @@ export class MenuComponent implements OnInit {
 		    icon: 'pi pi-fw pi-phone',
 		    routerLink: ['/depuracion/prefijos'],
 		  },
+      {
+		    label: 'Hobs a Depurar',
+		    icon: 'pi pi-fw pi-phone',
+		    routerLink: ['/depuracion/HobsDepuracion'],
+		  },
 		  // {
 		  //   label: 'Reembolso',
 		  //   icon: 'pi pi-fw pi-exclamation-triangle',

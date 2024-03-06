@@ -287,24 +287,7 @@ export class RobotsComponent implements OnInit {
         });
 
       })
-
-
-   
-
     item.sendingComand = false
-
-    // this.cors.getCommand(`http://${item.ipEquipo}:9000?id=${item.procesoId}&name=${proceso?.name_process || ''}&command=${command}&userId=${this.usuarioInfo.userID}&userName=${this.usuarioInfo.firstName || ''} ${this.usuarioInfo.lastName || ''} - ${this.usuarioInfo.email || ''}`).then((response) => {
-    //   console.log(response);
-
-
-    //   this.showToastSuccess(`Se envio el comando al Robot ${item.ipEquipo}`)
-    //   item.sendingComand = false
-    // }).catch((error) => {
-    //   console.log(error);
-    //   item.sendingComand = false
-    //   this.showToastError(`No se logro enviar el comando al Robot ${item.ipEquipo}`)
-
-    // })
   }
 
   sendProcess(item: any, idProceso: any) {
