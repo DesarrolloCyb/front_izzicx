@@ -5,7 +5,7 @@
 <div class="card">
     <p-panel header="Hubs a Depurar" class="line-height-12 m-0">
         <form [formGroup]="formReembolso">
-            <div class="p-fluid p-formgrid grid">       
+            <div class="p-fluid p-formgrid grid">
                 <div class="field col-12 md:col-6">
                     <span class="p-float-label">
                         <input
@@ -113,7 +113,7 @@
                         {{item.fechaCaptura | date:'yyyy-MM-dd HH:mm:ss'}}
                     </td>
                     <td>
-                        <button (click)="eliminarColumna(item.id)">Eliminar</button>
+                        <button class="delete" (click)="eliminarColumna(item.id)">Eliminar</button>
                     </td>         
                 </tr>
             </ng-template>
@@ -133,5 +133,8 @@
           </ng-template>
         </p-table>
       </div>
+      <p-confirmDialog header="Eliminar Hub" key="deleteColumn" icon="pi pi-exclamation-triangle"
+        acceptLabel="Sí, Eliminar" rejectLabel="Cancelar" [style]="{width: '350px'}"
+        acceptButtonStyleClass="p-button-danger" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
     </div>
   </div>

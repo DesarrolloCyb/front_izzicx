@@ -7,11 +7,13 @@ import { DashboardDepuracionComponent } from './dashboard-depuracion/dashboard-d
 import { SharedModule } from 'app/_shared/modules/shared/shared.module';
 import { BasesDepuradasComponent } from './bases-depuradas/bases-depuradas.component';
 import { SafeUrlPipe } from './safeUrl.pipe';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { BasesCanceladasComponent } from './bases-canceladas/bases-canceladas.component';
 import { PantallaConsultaComponent } from './pantalla-consulta/pantalla-consulta.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { PrefijosComponent } from './prefijos/prefijos.component';
 import { HobsComponent } from './hobs/hobs.component';
+import { FallasDepuracionComponent } from './fallas-depuracion/fallas-depuracion.component';
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { HobsComponent } from './hobs/hobs.component';
     PantallaConsultaComponent,
     ReportesComponent,
     PrefijosComponent,
-    HobsComponent
+    HobsComponent,
+    FallasDepuracionComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,9 @@ import { HobsComponent } from './hobs/hobs.component';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+  ],
+  providers: [
+    ConfirmationService,MessageService,
   ]
 })
 export class DepuracionModule { }

@@ -8,6 +8,7 @@ import { PantallaConsultaComponent } from './pantalla-consulta/pantalla-consulta
 import { ReportesComponent } from './reportes/reportes.component';
 import { PrefijosComponent } from './prefijos/prefijos.component';
 import { HobsComponent } from './hobs/hobs.component';
+import { FallasDepuracionComponent } from './fallas-depuracion/fallas-depuracion.component';
 
 const routes: Routes = [
 	{
@@ -44,6 +45,11 @@ const routes: Routes = [
 		path: 'HobsDepuracion',
 		component: LayoutComponent,
 		children: [{ path: '', component: HobsComponent }],
+	},
+	{
+		path: 'FallasDepuracion',
+		component: LayoutComponent,
+		children: [{ path: '', component: FallasDepuracionComponent }],
 	},
 ];
 

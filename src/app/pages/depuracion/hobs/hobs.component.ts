@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { CorsService } from '@services';
-import { Message, MessageService } from 'primeng/api';
+import { ConfirmationService,Message, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 
 @Component({
@@ -25,7 +25,9 @@ export class HobsComponent implements OnInit {
   constructor(
     private cors: CorsService,
     private formBuilder: UntypedFormBuilder,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+
   ) {
     this.formReembolso = this.formBuilder.group({
       hubs: [null, Validators.required],
@@ -128,28 +130,30 @@ showToastError(message: string) {
 
 
 eliminarColumna(id: any){
-  this.cors.delete(`Bots/EliminarFilabub?id=${id}`, 
-    {
-      "id": id
+  const item = this.tablahubs.find((item: any) => item.id === id);
+  const hubsInfo = item ? item.hubs : 'desconocido';
+  
+  this.confirmationService.confirm({
+    key: 'deleteColumn',
+    message: `¿Estás seguro de que quieres eliminar el hub <strong>${hubsInfo}</strong>?`,
+    accept: () => {
+      this.cors.delete(`Bots/EliminarFilabub?id=${id}`, 
+        {
+          "id": id
+        }
+      ).then((response) => {
+        console.log(response);
+        const index = this.tablahubs.findIndex((item: any) => item.id === id);
+        if (index !== -1) {
+          this.tablahubs.splice(index, 1);
+        }
+        this.showToastSuccess(`Se eliminó la fila con información ${hubsInfo} correctamente.`)
+      }).catch((error) => {
+        console.log(error);
+        this.showToastError(`No se logró eliminar la fila con información ${hubsInfo}`)
+      })
     }
-  ).then((response) => {
-    console.log(response);
-    const index = this.tablahubs.findIndex((item: any) => item.id === id);
-    if (index !== -1) {
-      this.tablahubs.splice(index, 1);
-    }
-    this.showToastSuccess(`Se eliminó la fila con id ${id} correctamente.`)
-  }).catch((error) => {
-    console.log(error);
-    this.showToastError(`No se logró eliminar la fila con id ${id}`)
-  })
+  });
 }
-
-
-
-
-
-
-
 
 }
