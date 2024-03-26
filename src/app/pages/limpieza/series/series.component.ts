@@ -15,7 +15,6 @@ export class SeriesComponent implements OnInit {
 
   button:boolean=true;
   spinner:boolean=false;
-  formReembolso:UntypedFormGroup;
   closeModal: boolean = true;
   display: boolean = false;
   enviando: boolean = false;
@@ -34,14 +33,10 @@ export class SeriesComponent implements OnInit {
 
   constructor(
     private cors: CorsService,
-    private formBuilder: UntypedFormBuilder,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
 
   ) {
-    this.formReembolso = this.formBuilder.group({
-      falla: [null, Validators.required],
-    });
 
    }
 
@@ -80,6 +75,7 @@ export class SeriesComponent implements OnInit {
             this.ExcelData[key]["Cve_usuario"] = "'" + this.usuario.email + "'";
             this.ExcelData[key]["Procesando"]="0";
             this.ExcelData[key]["Ip"]="";
+            this.ExcelData[key]['serie']= `${this.ExcelData[key]['serie']}`;
             this.ExcelData[key]["FechaCaptura"]=moment(Date.now()).format('yyyy-MM-DD HH:mm:ss');
           });   
           this.messageService.add({
@@ -115,7 +111,6 @@ export class SeriesComponent implements OnInit {
         summary: 'Excel Exportado',
         detail: 'Correctamente!!',
       });
-      // location.reload();
     }).catch((error) => {
       console.log(error)
       this.spinner=false;
@@ -126,16 +121,8 @@ export class SeriesComponent implements OnInit {
         detail: 'Intenta nuevamente!!!',
       });
     })
-
+    // location.reload();
   }
-  verify() {
-    console.log(this.formReembolso)
-    this.formReembolso.markAllAsTouched();
-    if (this.formReembolso.valid) {
-      this.display = true;
-    }
-  }
-
   showErrorViaToast() {
     console.log('ERROR');
     this.messageService.add({
@@ -151,7 +138,7 @@ export class SeriesComponent implements OnInit {
   }
 
   getTablaSeries(){
-    this.cors.get('Bots/ObtenerSeries',{user:this.usuario.email})
+    this.cors.get('Bots/ObtenerSeries')
     .then((response)=>{
       console.log(response)
       this.TablaSeries = response;
@@ -185,13 +172,13 @@ showToastError(message: string) {
 
 eliminarColumna(id: any){
   const item = this.TablaSeries.find((item: any) => item.id === id);
-  const fallaInfo = item ? item.falla : 'desconocido';
+  const serieInfo = item ? item.serie : 'desconocido';
   
   this.confirmationService.confirm({
     key: 'deleteColumn',
-    message: `¿Estás seguro de que quieres eliminar el Tipo de falla <strong>${fallaInfo}</strong>?`,
+    message: `¿Estás seguro de que quieres eliminar la Serie <strong>${serieInfo}</strong>?`,
     accept: () => {
-      this.cors.delete(`Bots/EliminarFilafalladepuracion?id=${id}`, 
+      this.cors.delete(`Bots/EliminarFilaserie?id=${id}`, 
         {
           "id": id
         }
@@ -201,10 +188,10 @@ eliminarColumna(id: any){
         if (index !== -1) {
           this.TablaSeries.splice(index, 1);
         }
-        this.showToastSuccess(`Se eliminó la fila con información ${fallaInfo} correctamente.`)
+        this.showToastSuccess(`Se eliminó la fila con información ${serieInfo} correctamente.`)
       }).catch((error) => {
         console.log(error);
-        this.showToastError(`No se logró eliminar la fila con información ${fallaInfo}`)
+        this.showToastError(`No se logró eliminar la fila con información ${serieInfo}`)
       })
     }
   });
