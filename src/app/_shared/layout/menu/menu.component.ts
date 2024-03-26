@@ -26,57 +26,26 @@ export class MenuComponent implements OnInit {
     {
       label: 'Extracción',
       key: "extraccion",
-    //   icon: 'pi pi-fw pi-compass',
-    //   routerLink: ['/capturas'],
       items: [
         {
           label: 'Extracciones Manual',
-        //   icon: 'pi pi-fw pi-filter',
           icon: 'pi pi-fw pi-external-link',
           routerLink: ['/extraccion'],
         },
-        // {
-        //   label: 'Extracciones Automatizadas',
-        //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/extraccion/automatizados'],
-        // },
         {
           label: 'Extracciones Automatizadas',
           icon: 'pi pi-fw pi-exclamation-triangle',
           routerLink: ['/extraccion/automatizados'],
         },
-        // {
-        //   label: 'Servicios c/s costo',
-        //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturas/servicioscosto'],
-        // },
-        // {
-        //   label: 'Reembolso',
-        //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturas/reembolso'],
-        // },
-        // {
-        //   label: 'Cambio de Paquete',
-        //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturas/cambioPaquete'],
-        // },
-        // {
-        //   label: 'Cambio de Esquema',
-        //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturas/cambioEsquema'],
-        // },
       ]
     },
 	{
-		label: 'Ajustes', // Ajustes -asignacion
+		label: 'Ajustes',
 		key: "ajustes",
 		icon: 'pi pi-fw pi-compass',
-	  //   routerLink: ['/capturas'],
 		items: [
       {
         label: 'Con Validación',
-        // icon: 'pi pi-fw pi-database',
-        // routerLink: ['/ajustes'],
         items:[
           {
           label: 'Importar Casos de Negocio Cobranza',
@@ -102,8 +71,6 @@ export class MenuComponent implements OnInit {
       }, 
       {
 		    label: 'Sin Validación',
-		    // icon: 'pi pi-fw pi-database',
-		    // routerLink: ['/ajustes/baseSinValidacion'],
         items:[
           {
             label: 'Importar Base sin Validación',
@@ -116,39 +83,15 @@ export class MenuComponent implements OnInit {
             routerLink: ['/ajustes/consultaSinValidacion'],
           }
         ]
-		  }, 
-		  // {
-		  //   label: 'Servicios c/s costo',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/servicioscosto'],
-		  // },
-		  // {
-		  //   label: 'Reembolso',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/reembolso'],
-		  // },
-		  // {
-		  //   label: 'Cambio de Paquete',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/cambioPaquete'],
-		  // },
-		  // {
-		  //   label: 'Cambio de Esquema',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/cambioEsquema'],
-		  // },
+		  },
 		]
 	  },
 	  {
-		label: 'NotDone', // NOTDONE - caso-negocio
+		label: 'NotDone',
 		key: "notDone",
-		// icon: 'pi pi-fw pi-compass',
-	  //   routerLink: ['/capturas'],
 		items: [
       {
         label: 'Con Validación',
-        // icon: 'pi pi-fw pi-database',
-        // routerLink: ['/notDone'],
         items:[
           {
             label: 'Importar Bases NotDone',
@@ -169,8 +112,6 @@ export class MenuComponent implements OnInit {
       },
       {
 		    label: 'Sin Validación',
-		    // icon: 'pi pi-fw pi-database',
-		    // routerLink: ['/notDone/cancelacionSinValidacion'],
         items:[
           {
             label: 'Cancelación Sin Validación',
@@ -194,30 +135,12 @@ export class MenuComponent implements OnInit {
           },
         ]
 		  },
-
-
-		  // {
-		  //   label: 'Reembolso',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/reembolso'],
-		  // },
-		  // {
-		  //   label: 'Cambio de Paquete',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/cambioPaquete'],
-		  // },
-		  // {
-		  //   label: 'Cambio de Esquema',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/cambioEsquema'],
-		  // },
 		]
 	  },
 	  {
 		label: 'Depuración',
 		key: "depuracion",
 		icon: 'pi pi-fw pi-compass',
-	  //   routerLink: ['/capturas'],
 		items: [
 		  {
 			label: 'Extracción',
@@ -254,114 +177,53 @@ export class MenuComponent implements OnInit {
 		    icon: 'pi pi-fw pi-exclamation-triangle',
 		    routerLink: ['/depuracion/FallasDepuracion'],
 		  },
-		  // {
-		  //   label: 'Reembolso',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/reembolso'],
-		  // },
-		  // {
-		  //   label: 'Cambio de Paquete',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/cambioPaquete'],
-		  // },
-		  // {
-		  //   label: 'Cambio de Esquema',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/cambioEsquema'],
-		  // },
+		]
+	  },
+	  {
+		label: 'Limpieza',
+		key: "limpieza",
+		icon: 'pi pi-fw pi-compass',
+		items: [
+		  {
+			label: 'Series',
+			icon: 'pi pi-fw pi-chart-bar',
+		    routerLink: ['/limpieza/series'],
+		  },
+      {
+        label: 'Recuperadores',
+        icon: 'pi pi-fw pi-chart-bar',
+          routerLink: ['/limpieza/recuperadores'],
+        },
 		]
 	  },
 	  {
 		label: 'Reporte Fidelización',
 		key: "reporteFidelizacion",
 		icon: 'pi pi-fw pi-compass',
-	  //   routerLink: ['/capturas'],
 		items: [
 		  {
 			label: 'Home',
 			icon: 'pi pi-fw pi-chart-bar',
 		    routerLink: ['/reporteFidelizacion'],
 		  },
-		  // {
-		  //   label: 'Solicitud de Cancelación',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/solicitud-cancelacion'],
-		  // },
-		  // {
-		  //   label: 'Reactivación',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/reactivacion'],
-		  // },
-		  // {
-		  //   label: 'Servicios c/s costo',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/servicioscosto'],
-		  // },
-		  // {
-		  //   label: 'Reembolso',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/reembolso'],
-		  // },
-		  // {
-		  //   label: 'Cambio de Paquete',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/cambioPaquete'],
-		  // },
-		  // {
-		  //   label: 'Cambio de Esquema',
-		  //   icon: 'pi pi-fw pi-exclamation-triangle',
-		  //   routerLink: ['/capturas/cambioEsquema'],
-		  // },
 		]
 	  },
     {
       label: 'Reportes',
       key: "reportes",
       icon: 'pi pi-fw pi-compass',
-      //   routerLink: ['/capturas'],
       items: [
         {
         label: 'Dashboard',
         icon: 'pi pi-fw pi-book',
           routerLink: ['/reportes'],
         },
-        // {
-        //   label: 'Solicitud de Cancelación',
-        //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturas/solicitud-cancelacion'],
-        // },
-        // {
-        //   label: 'Reactivación',
-        //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturas/reactivacion'],
-        // },
-        // {
-        //   label: 'Servicios c/s costo',
-        //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturas/servicioscosto'],
-        // },
-        // {
-        //   label: 'Reembolso',
-        //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturas/reembolso'],
-        // },
-        // {
-        //   label: 'Cambio de Paquete',
-        //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturas/cambioPaquete'],
-        // },
-        // {
-        //   label: 'Cambio de Esquema',
-        //   icon: 'pi pi-fw pi-exclamation-triangle',
-        //   routerLink: ['/capturas/cambioEsquema'],
-        // },
       ]
       },
       {
         label: 'Ajustes y Cambios de Servicios',
         key: "ajustesYcambioServicio",
         icon: 'pi pi-fw pi-compass',
-        //   routerLink: ['/capturas'],
         items: [
           {
           label: 'Base de Datos Ajustes',
@@ -383,33 +245,12 @@ export class MenuComponent implements OnInit {
             icon: 'pi pi-fw pi-search',
             routerLink: ['/ajustesYcambioServicio/consultaMigracionesLineales'],
           },
-          // {
-          //   label: 'Servicios c/s costo',
-          //   icon: 'pi pi-fw pi-exclamation-triangle',
-          //   routerLink: ['/capturas/servicioscosto'],
-          // },
-          // {
-          //   label: 'Reembolso',
-          //   icon: 'pi pi-fw pi-exclamation-triangle',
-          //   routerLink: ['/capturas/reembolso'],
-          // },
-          // {
-          //   label: 'Cambio de Paquete',
-          //   icon: 'pi pi-fw pi-exclamation-triangle',
-          //   routerLink: ['/capturas/cambioPaquete'],
-          // },
-          // {
-          //   label: 'Cambio de Esquema',
-          //   icon: 'pi pi-fw pi-exclamation-triangle',
-          //   routerLink: ['/capturas/cambioEsquema'],
-          // },
         ]
         },
         {
           label: 'Creación de OS',
           key: "ordenes",
           icon: 'pi pi-fw pi-compass',
-          //   routerLink: ['/capturas'],
           items: [
             {
             label: 'Base Creación de Ordenes',
@@ -423,37 +264,6 @@ export class MenuComponent implements OnInit {
             },
           ]
           },
-    
-    // {
-    //   label: 'Capturas atencion a clientes',
-    //   key: "capturasA",
-    //   icon: 'pi pi-fw pi-android',
-    //   routerLink: ['/capturas'],
-    //   items: [
-    //     {
-    //       label: 'Temporadas',
-    //       icon: 'pi pi-fw pi-exclamation-triangle',
-    //       routerLink: ['/capturasAtc/temporadas'],
-    //     },
-    //     // {
-    //     //   label: 'RAySE PosPago Prepago',
-    //     //   icon: 'pi pi-fw pi-exclamation-triangle',
-    //     //   routerLink: ['/capturasAtc/PostPagoPrepago'],
-    //     // },
-    //     {
-    //       label: 'Bolsa de datos',
-    //       icon: 'pi pi-fw pi-exclamation-triangle',
-    //       routerLink: ['/capturasAtc/bolsaDatos'],
-    //     },
-    //     {
-    //       label: 'Garantia',
-    //       icon: 'pi pi-fw pi-exclamation-triangle',
-    //       routerLink: ['/capturasAtc/garantia'],
-    //     },
-
-
-    //   ]
-    // },
 
     {
       label: 'Robots',
@@ -483,45 +293,13 @@ export class MenuComponent implements OnInit {
         },
       ]
     },
-    // ///--------------------------------------------------///
-    // {
-    //   label: 'Reportes',
-    //   key: "reportes",
-    //   icon: 'pi pi-fw pi-compass',
-    //   routerLink: ['/capturas'],
-    //   items: [
-    //     {
-    //       label: 'Generar',
-    //       icon: 'pi pi-fw pi-chart-bar',
-    //       routerLink: ['/reportes'],
-    //     },
-    //   ]
-    // },
-    // {
-    //   label: 'Usuarios',
-    //   key: "usuarios",
-    //   icon: 'pi pi-fw pi-users',
-    //   routerLink: ['/usuarios'],
-    //   items: [
-    //     {
-    //       label: 'Listado',
-    //       icon: 'pi pi-fw pi-list',
-    //       routerLink: ['/usuarios'],
-    //     },
-    //     {
-    //       label: 'Nuevo',
-    //       icon: 'pi pi-fw pi-user-plus',
-    //       routerLink: ['/usuarios/nuevo'],
-    //     },
-    //   ]
-    // },
 
   ]
   ngOnInit() {
 
 
     let permisos: any = {
-      "admin":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','ajustesYcambioServicio','robots','ordenes'],
+      "admin":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','limpieza','reportes','ajustesYcambioServicio','robots','ordenes'],
       "Reporte":['home','reporteFidelizacion'],
       "Extraccion":['home','extraccion'],
       "Depuracion":['home','depuracion','reportes'],

@@ -58,6 +58,13 @@ const routes: Routes = [
       import('./pages/casos-negocio/casos-negocio.module').then((m) => m.CasosNegocioModule),
   },
   {
+    path: 'limpieza',
+    data: { breadcrumb: 'limpieza' },
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./pages/limpieza/limpieza.module').then((m) => m.LimpiezaModule),
+  },
+  {
     path: 'depuracion',
     data: { breadcrumb: 'Depuración'},
     canActivate: [AuthGuard],
