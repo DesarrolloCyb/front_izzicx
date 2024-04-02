@@ -189,11 +189,11 @@ export class MenuComponent implements OnInit {
 			icon: 'pi pi-fw pi-chart-bar',
 		    routerLink: ['/limpieza/series'],
 		  },
-      {
-        label: 'Recuperadores',
-        icon: 'pi pi-fw pi-chart-bar',
-          routerLink: ['/limpieza/recuperadores'],
-        },
+      // {
+      //   label: 'Recuperadores',
+      //   icon: 'pi pi-fw pi-chart-bar',
+      //     routerLink: ['/limpieza/recuperadores'],
+      //   },
 		]
 	  },
 	  {

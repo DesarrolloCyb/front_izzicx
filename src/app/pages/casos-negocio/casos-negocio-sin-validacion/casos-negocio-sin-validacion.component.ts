@@ -18,9 +18,10 @@ export class CasosNegocioSinValidacionComponent implements OnInit {
     'Cuenta',
     'Motivo Cliente',
     'Motivos',
+    'Estado',
     'Solución',
     'Submotivo',
-    'Comentarios'
+    'Comentarios',
   ];
   button:boolean=true;
   tabla:boolean=false;

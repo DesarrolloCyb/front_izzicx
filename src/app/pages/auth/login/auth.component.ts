@@ -43,7 +43,8 @@ export class AuthComponent {
                 || (this.formLogin.value.email =='TMFabiola' && this.formLogin.value.pWd =='TMFabiola_2023')
                 || (this.formLogin.value.email =='DRLizbeth' && this.formLogin.value.pWd =='DRLizbeth_2023')
                 || (this.formLogin.value.email =='LOFabian' && this.formLogin.value.pWd =='LOFabian_2023')
-                || (this.formLogin.value.email =='Hiram' && this.formLogin.value.pWd =='Hiram_2024')){
+                || (this.formLogin.value.email =='Hiram' && this.formLogin.value.pWd =='Hiram_2024')
+                || (this.formLogin.value.email =='ICortes' && this.formLogin.value.pWd =='Israel_2024')){
                 let a=null;
                 if(this.formLogin.value.email =='admin'){
                     a={
@@ -136,6 +137,14 @@ export class AuthComponent {
                         "firstName":"Hiram",
                         "lastName":"Martinez Herrera",
                         "email":"IMPatricio@test.com"
+                    }
+                }
+                else if(this.formLogin.value.email =='ICortes'){
+                    a={
+                        "role":"Reporte",
+                        "firstName":"Israel",
+                        "lastName":"Cortes",
+                        "email":"ICortes@test.com"
                     }
                 }
                 
