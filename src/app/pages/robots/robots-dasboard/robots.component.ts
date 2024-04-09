@@ -78,7 +78,7 @@ export class RobotsComponent implements OnInit {
         this.deleteMAquina()
       }
     })
-  }
+  }  
   getDays(fecha:string){
     let dif = moment().diff(moment(fecha),'days')
     if (isNaN(dif)) {

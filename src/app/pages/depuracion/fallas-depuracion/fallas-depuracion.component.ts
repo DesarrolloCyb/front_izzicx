@@ -45,6 +45,12 @@ export class FallasDepuracionComponent implements OnInit {
     this.closeModal = false;
     this.enviando = true;
     if (this.formReembolso.valid) {
+      let formValue = { ...this.formReembolso.value };
+    for (let field in formValue) {
+      if (typeof formValue[field] === 'string') {
+        formValue[field] = formValue[field].trim();
+      }
+    }
       this.cors
         .post('Bots/guardarformulariofallasdepuracion', this.formReembolso.value)
         .then((response) => {
