@@ -19,7 +19,7 @@ export class CasosNegocioSinValidacionComponent implements OnInit {
     'Motivo Cliente',
     'Motivos',
     'Estado',
-    'Solución',
+    'Solucion',
     'Submotivo',
     'Comentarios',
   ];
