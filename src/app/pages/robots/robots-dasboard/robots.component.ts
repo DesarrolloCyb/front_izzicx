@@ -84,7 +84,7 @@ export class RobotsComponent implements OnInit {
     if (isNaN(dif)) {
       return ''
     }else{
-      let di = 60;
+      let di =180;
       let result = di-dif
       return result
     }

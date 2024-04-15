@@ -133,26 +133,12 @@
                     <td>
                         {{item.botHostName}}
                     </td>
-                    <!-- <td>
-                        {{item.ipEquipo}}
-                    </td> -->
                     <td>
-                       <strong *ngIf="getDays(item.procesoFechaActualizacion) <= 10" style="color:red">  {{getDays(item.procesoFechaActualizacion)}}</strong> <strong *ngIf="getDays(item.procesoFechaActualizacion) > 10">{{getDays(item.procesoFechaActualizacion)}}</strong> dias
+                       <strong *ngIf="getDays(item.procesoFechaActualizacion) <= 5" style="color:red">  {{getDays(item.procesoFechaActualizacion)}}</strong> <strong *ngIf="getDays(item.procesoFechaActualizacion) > 5">{{getDays(item.procesoFechaActualizacion)}}</strong> dias
                     </td>
                     <td>
                         {{ item.botIp }}
                      </td> 
-
-                    <!-- <td>
-                        <p-dropdown  optionLabel="name_process" optionValue="id" appendTo="body" [options]="processArr"
-                            [disabled]="true"
-                            [(ngModel)]="item.procesoId" [showClear]="false" placeholder="Seleccione un processo"
-                            (onChange)="preguntarCambiarProceso($event.value,item)">
-                        </p-dropdown>
-                        <p-progressSpinner [style]="{width: '30px', height: '30px'}" *ngIf="item.sendingProcess">
-                        </p-progressSpinner>
-                    </td> -->
-                    
                     <td>
                         <p-dropdown optionLabel="name_process" optionValue="id" appendTo="body" [options]="processArr1"
                             [disabled]="item.sendingComand == true || item.sendingProcess ==true"

@@ -169,12 +169,12 @@ export class MenuComponent implements OnInit {
 		  },
       {
 		    label: 'Hobs a Depurar',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-spinner',
 		    routerLink: ['/depuracion/HobsDepuracion'],
 		  },
       {
 		    label: 'Estado de Fallas Depuraion',
-		    icon: 'pi pi-fw pi-exclamation-triangle',
+		    icon: 'pi pi-fw pi-ban',
 		    routerLink: ['/depuracion/FallasDepuracion'],
 		  },
 		]
@@ -182,11 +182,11 @@ export class MenuComponent implements OnInit {
 	  {
 		label: 'Limpieza',
 		key: "limpieza",
-		icon: 'pi pi-fw pi-compass',
+		icon: 'pi pi-fw pi-eraser',
 		items: [
 		  {
 			label: 'Series',
-			icon: 'pi pi-fw pi-chart-bar',
+			icon: 'pi pi-fw pi-server',
 		    routerLink: ['/limpieza/series'],
 		  },
       // {
