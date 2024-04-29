@@ -83,7 +83,7 @@ export class MenuComponent implements OnInit {
             routerLink: ['/ajustes/consultaSinValidacion'],
           },
           {
-            label: 'Reprocesar',
+            label: 'Reprocesar Sin Validacion',
             icon: 'pi pi-fw pi-sync',
             routerLink: ['/ajustes/Reprocesarsinvalidacion'],
           }
@@ -112,6 +112,11 @@ export class MenuComponent implements OnInit {
               label: 'Parámetros',
               icon: 'pi pi-fw pi-cog',
               routerLink: ['/notDone/parametros'],
+            },
+            {
+              label: 'Reprocesar',
+              icon: 'pi pi-fw pi-sync',
+              routerLink: ['/notDone/reprocesarnotdone'],
             }
         ]
       },
@@ -138,6 +143,11 @@ export class MenuComponent implements OnInit {
             icon: 'pi pi-fw pi-search',
             routerLink: ['/notDone/consultaCasosNegocioSinValidacion'],
           },
+          {
+            label: 'Reprocesar Sin Validacion',
+            icon: 'pi pi-fw pi-sync',
+            routerLink: ['/notDone/reprocesarnotdonesinvalidacion'],
+          }
         ]
 		  },
 		]

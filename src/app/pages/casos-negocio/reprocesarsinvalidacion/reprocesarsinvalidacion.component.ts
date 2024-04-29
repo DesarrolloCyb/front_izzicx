@@ -11,7 +11,6 @@ import * as moment from 'moment';
   styleUrls: ['./reprocesarsinvalidacion.component.scss']
 })
 export class ReprocesarsinvalidacionComponent implements OnInit {
-
   showtable:any=[];
   formReproceso:UntypedFormGroup;
   msgs: Message[] = [];
@@ -43,8 +42,8 @@ export class ReprocesarsinvalidacionComponent implements OnInit {
     }
   }
 
-  getAjustesCasoSinValidacion(fecha1:any,fecha2:any){
-    this.cors.get(`AjustesNotDone/getCasosSinValidacionError`,{
+  getAjustesCasoNotDoneSinValidacion(fecha1:any,fecha2:any){
+    this.cors.get(`AjustesNotDone/getCasosNotDoneSinValidacionError`,{
       fecha1:fecha1,
       fecha2:fecha2,
     }).then((response) => {
@@ -80,7 +79,7 @@ export class ReprocesarsinvalidacionComponent implements OnInit {
     }else{
       let fecha1= moment(this.formReproceso.controls['fecha'].value[0]).format('yyyy-MM-DD');
       let fecha2= moment(this.formReproceso.controls['fecha'].value[1]).format('yyyy-MM-DD');
-      this.getAjustesCasoSinValidacion(fecha1,fecha2);
+      this.getAjustesCasoNotDoneSinValidacion(fecha1,fecha2);
     }
 
 
@@ -88,7 +87,7 @@ export class ReprocesarsinvalidacionComponent implements OnInit {
   }
 
   reprocesar(item:any){
-    this.cors.get(`AjustesNotDone/ActualizarStatusCasosNegocioCobranzaError`,{
+    this.cors.get(`AjustesNotDone/ActualizarStatusCasoNotDoneSinValidacion`,{
       status:item,
       fecha1:moment(this.formReproceso.controls['fecha'].value[0]).format('yyyy-MM-DD'),
       fecha2:moment(this.formReproceso.controls['fecha'].value[1]).format('yyyy-MM-DD')
@@ -106,7 +105,7 @@ export class ReprocesarsinvalidacionComponent implements OnInit {
     })
     let fecha1= moment(this.formReproceso.controls['fecha'].value[0]).format('yyyy-MM-DD');
     let fecha2= moment(this.formReproceso.controls['fecha'].value[1]).format('yyyy-MM-DD');
-    this.getAjustesCasoSinValidacion(fecha1,fecha2);
+    this.getAjustesCasoNotDoneSinValidacion(fecha1,fecha2);
   }
 
   confirm1(item:any) {

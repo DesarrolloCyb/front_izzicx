@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { CasosNegocioRoutingModule } from './casos-negocio-routing.module';
 import { DashboardCasosNegocioComponent } from './dashboard-casos-negocio/dashboard-casos-negocio.component';
@@ -10,6 +11,10 @@ import { CancelacionSinValidacionComponent } from './cancelacion-sin-validacion/
 import { CasosNegocioSinValidacionComponent } from './casos-negocio-sin-validacion/casos-negocio-sin-validacion.component';
 import { ConsultacancelacionSinValidacionComponent } from './consultacancelacion-sin-validacion/consultacancelacion-sin-validacion.component';
 import { ConsultacasosNegocioSinValidacionComponent } from './consultacasos-negocio-sin-validacion/consultacasos-negocio-sin-validacion.component';
+import { ReprocesarComponent } from './reprocesar/reprocesar.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { ReprocesarsinvalidacionComponent } from './reprocesarsinvalidacion/reprocesarsinvalidacion.component';
 
 
 @NgModule({
@@ -20,12 +25,17 @@ import { ConsultacasosNegocioSinValidacionComponent } from './consultacasos-nego
     CancelacionSinValidacionComponent,
     CasosNegocioSinValidacionComponent,
     ConsultacancelacionSinValidacionComponent,
-    ConsultacasosNegocioSinValidacionComponent
+    ConsultacasosNegocioSinValidacionComponent,
+    ReprocesarComponent,
+    ReprocesarsinvalidacionComponent
   ],
   imports: [
     CommonModule,
     CasosNegocioRoutingModule,
-	SharedModule
-  ]
+    SharedModule,
+    ConfirmDialogModule,
+    ReactiveFormsModule,
+  ],
+  providers: [ConfirmationService], 
 })
 export class CasosNegocioModule { }
