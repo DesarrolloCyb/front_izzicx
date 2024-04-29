@@ -10,6 +10,9 @@ import { ParametrosconfigComponent } from './parametrosconfig/parametrosconfig.c
 import { SubirbaseSinValidacionComponent } from './subirbase-sin-validacion/subirbase-sin-validacion.component';
 import { ConsultaSinValidacionComponent } from './consulta-sin-validacion/consulta-sin-validacion.component';
 import { ReprocesarComponent } from './reprocesar/reprocesar.component';
+import { ReprocesarsinvalidacionComponent } from './reprocesarsinvalidacion/reprocesarsinvalidacion.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 
 @NgModule({
@@ -19,15 +22,17 @@ import { ReprocesarComponent } from './reprocesar/reprocesar.component';
     ParametrosconfigComponent,
     SubirbaseSinValidacionComponent,
     ConsultaSinValidacionComponent,
-    ReprocesarComponent
+    ReprocesarComponent,
+    ReprocesarsinvalidacionComponent
   ],
   imports: [
     CommonModule,
     AsignacionRoutingModule,
-	  SharedModule,
+    SharedModule,
     FormsModule,
     ReactiveFormsModule,
-
-  ]
+    ConfirmDialogModule,
+  ],
+  providers: [ConfirmationService], 
 })
 export class AsignacionModule { }

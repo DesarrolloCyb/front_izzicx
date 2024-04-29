@@ -81,6 +81,11 @@ export class MenuComponent implements OnInit {
             label: 'Consultar Base sin Validacion',
             icon: 'pi pi-fw pi-search',
             routerLink: ['/ajustes/consultaSinValidacion'],
+          },
+          {
+            label: 'Reprocesar',
+            icon: 'pi pi-fw pi-sync',
+            routerLink: ['/ajustes/Reprocesarsinvalidacion'],
           }
         ]
 		  },
@@ -191,7 +196,7 @@ export class MenuComponent implements OnInit {
 		  },
       // {
       //   label: 'Recuperadores',
-      //   icon: 'pi pi-fw pi-chart-bar',
+      //   icon: 'pi pi-fw pi-download',
       //     routerLink: ['/limpieza/recuperadores'],
       //   },
 		]

@@ -5,15 +5,13 @@ import { Message,MessageService,ConfirmationService,ConfirmEventType } from 'pri
 import { CorsService } from '@services';
 import * as moment from 'moment';
 
-
-
 @Component({
-  selector: 'reprocesar',
-  templateUrl: './reprocesar.component.html',
-  styleUrls: ['./reprocesar.component.scss'],
-  providers: [ConfirmationService, MessageService]
+  selector: 'reprocesarsinvalidacion',
+  templateUrl: './reprocesarsinvalidacion.component.html',
+  styleUrls: ['./reprocesarsinvalidacion.component.scss']
 })
-export class ReprocesarComponent implements OnInit {
+export class ReprocesarsinvalidacionComponent implements OnInit {
+
   showtable:any=[];
   formReproceso:UntypedFormGroup;
   msgs: Message[] = [];
@@ -46,8 +44,8 @@ export class ReprocesarComponent implements OnInit {
     }
   }
 
-  getAjustesCasoNegocioError(fecha1:any,fecha2:any){
-    this.cors.get(`AjustesNotDone/getCasosNegocioCobranzaError`,{
+  getAjustesCasoSinValidacion(fecha1:any,fecha2:any){
+    this.cors.get(`AjustesNotDone/getCasosSinValidacionError`,{
       fecha1:fecha1,
       fecha2:fecha2,
     }).then((response) => {
@@ -83,7 +81,7 @@ export class ReprocesarComponent implements OnInit {
     }else{
       let fecha1= moment(this.formReproceso.controls['fecha'].value[0]).format('yyyy-MM-DD');
       let fecha2= moment(this.formReproceso.controls['fecha'].value[1]).format('yyyy-MM-DD');
-      this.getAjustesCasoNegocioError(fecha1,fecha2);
+      this.getAjustesCasoSinValidacion(fecha1,fecha2);
     }
 
 
@@ -109,7 +107,7 @@ export class ReprocesarComponent implements OnInit {
     })
     let fecha1= moment(this.formReproceso.controls['fecha'].value[0]).format('yyyy-MM-DD');
     let fecha2= moment(this.formReproceso.controls['fecha'].value[1]).format('yyyy-MM-DD');
-    this.getAjustesCasoNegocioError(fecha1,fecha2);
+    this.getAjustesCasoSinValidacion(fecha1,fecha2);
   }
 
   confirm1(item:any) {
@@ -120,7 +118,6 @@ export class ReprocesarComponent implements OnInit {
         acceptLabel: 'Sí',
         rejectLabel: 'No',     
         accept: () => {
-            // this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'Ha sido Aceptado' });
             this.reprocesar(item);
         },
         reject: (type: any) => {

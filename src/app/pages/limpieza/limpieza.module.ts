@@ -13,7 +13,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   declarations: [
     RecuperadoresComponent,
     SafeUrlPipe,
-    SeriesComponent
+    SeriesComponent,
   ],
   imports: [
     CommonModule,

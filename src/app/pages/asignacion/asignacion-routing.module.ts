@@ -7,6 +7,7 @@ import { ParametrosconfigComponent } from './parametrosconfig/parametrosconfig.c
 import { SubirbaseSinValidacionComponent } from './subirbase-sin-validacion/subirbase-sin-validacion.component';
 import { ConsultaSinValidacionComponent } from './consulta-sin-validacion/consulta-sin-validacion.component';
 import { ReprocesarComponent } from './reprocesar/reprocesar.component';
+import { ReprocesarsinvalidacionComponent } from './reprocesarsinvalidacion/reprocesarsinvalidacion.component';
 
 const routes: Routes = [
 	{
@@ -38,6 +39,11 @@ const routes: Routes = [
 		path: 'reprocesar',
 		component: LayoutComponent,
 		children: [{ path: '', component: ReprocesarComponent }],
+	},
+	{
+		path: 'Reprocesarsinvalidacion',
+		component: LayoutComponent,
+		children: [{ path: '', component: ReprocesarsinvalidacionComponent }],
 	},
 ];
 

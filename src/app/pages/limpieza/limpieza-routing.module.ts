@@ -5,12 +5,12 @@ import { RecuperadoresComponent } from './recuperadores/recuperadores.component'
 import { SeriesComponent } from './series/series.component';
 
 const routes: Routes = [
-  {
-		path: 'recuperadores',
-    data: { breadcrumb: 'recuperadores' },
-		component: LayoutComponent,
-		children: [{ path: '', component: RecuperadoresComponent }],
-	},
+//   {
+// 		path: 'recuperadores',
+//     data: { breadcrumb: 'recuperadores' },
+// 		component: LayoutComponent,
+// 		children: [{ path: '', component: RecuperadoresComponent }],
+// 	},
   {
 		path: 'series',
     data: { breadcrumb: 'series' },
