@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './../../_shared/layout/layout/layout.component';
 import { RecuperadoresComponent } from './recuperadores/recuperadores.component';
 import { SeriesComponent } from './series/series.component';
+import { UsuariosbotsComponent } from './usuariosbots/usuariosbots.component';
+import { EditarusrbotComponent } from './editarusrbot/editarusrbot.component';
 
 const routes: Routes = [
 //   {
@@ -17,6 +19,15 @@ const routes: Routes = [
 		component: LayoutComponent,
 		children: [{ path: '', component: SeriesComponent }],
 	},
+	{
+		path: 'usuariosbots',
+		data: { breadcrumb: 'Usuarios bots' },
+		component: LayoutComponent,
+		children: [
+			{ path: '', component: UsuariosbotsComponent },
+		  	{ path: 'editar', component: EditarusrbotComponent }
+		],
+	  },
 ];
 
 @NgModule({

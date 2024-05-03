@@ -7,6 +7,8 @@ import { SafeUrlPipe } from './safeUrl.pipe';
 import { SharedModule } from '@shared';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { UsuariosbotsComponent } from './usuariosbots/usuariosbots.component';
+import { EditarusrbotComponent } from './editarusrbot/editarusrbot.component';
 
 
 @NgModule({
@@ -14,6 +16,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     RecuperadoresComponent,
     SafeUrlPipe,
     SeriesComponent,
+    UsuariosbotsComponent,
+    EditarusrbotComponent,
   ],
   imports: [
     CommonModule,

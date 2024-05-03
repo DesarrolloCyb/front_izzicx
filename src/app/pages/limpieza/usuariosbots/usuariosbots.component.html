@@ -1,12 +1,15 @@
-<div class="col-12">
-    <div class="card">
-        <h5>Usuarios </h5>
-        <p-table #dt1 [value]="dataSource" dataKey="id" [rows]="50" [loading]="loading" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
-            styleClass="p-datatable-gridlines" [paginator]="true"
-            [globalFilterFields]="['userID','firstName','lastName','email','role']" responsiveLayout="scroll">
+<p-toast
+  [baseZIndex]="99999"
+  key="tst"></p-toast>
+
+  <div class="row">
+    <div class="cols">
+      <div class="card">
+        <p-table #dt1 [value]="TablaUsrbots" dataKey="id" [loading]="loading" [rows]="50" [rowHover]="true" [rowsPerPageOptions]="[50,100,500,1000]"
+            styleClass="p-datatable-gridlines" [paginator]="true" 
+            [globalFilterFields]="['procesoUser','procesoasignado','procesoUpdateAt']" responsiveLayout="scroll">
             <ng-template pTemplate="caption">
                 <div class="flex justify-content-between flex-column sm:flex-row">
-
                     <span class="p-input-icon-left mb-2">
                         <i class="pi pi-search"></i>
                         <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar"
@@ -18,30 +21,27 @@
                 <tr>
                     <th>
                         <div class="flex justify-content-between align-items-center">
-                            User ID
-
-                        </div>
-                    </th>
-                    <th>
-                        <div class="flex justify-content-between align-items-center">
-                            Nombre
-
-                        </div>
-                    </th>
-                    <th>
-                        <div class="flex justify-content-between align-items-center">
                             Usuario
                         </div>
                     </th>
                     <th>
                         <div class="flex justify-content-between align-items-center">
-                            Rol
+                            Proceso Asignado
                         </div>
                     </th>
-                    
                     <th>
-                        <div class="flex justify-content-between align-items-center">
-
+                        <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                            Ultima Modificacion
+                        </div>
+                    </th>
+                    <th>
+                        <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                            Editar
+                        </div>
+                    </th>
+                    <th>
+                        <div style="width: 150px;" class="flex justify-content-between align-items-center">
+                            Eliminar
                         </div>
                     </th>
                 </tr>
@@ -49,35 +49,30 @@
             <ng-template pTemplate="body" let-item let-i="rowIndex">
                 <tr>
                     <td>
-                       <a styleClass="p-button-link mr-2 mb-2" [routerLink]="['/usuarios/detalle/'+item.userID]"> {{item.userID}}  </a>
+                        {{item.procesoUser}}
                     </td>
                     <td>
-                        {{item.firstName}}  {{item.lastName}}
+                        {{item.procesoasignado}}
                     </td>
                     <td>
-                        {{item.email}}
+                        {{item.procesoUpdateAt | date:'yyyy-MM-dd HH:mm:ss'}}
                     </td>
                     <td>
-                       {{item.role}}
+                        <button class="editar" (click)="router.navigate(['limpieza/usuariosbots/editar'])">Editar</button>
                     </td>
-
-                   
-                   
-                   
                     <td>
-                        <button pButton pRipple label="Eliminar" (click)="preguntarEliminar(item)" icon="pi pi-trash" class="p-button-danger mr-2 mb-2"></button>
-                    </td>
-
+                        <button class="delete" (click)="eliminarusrbot(item.id)">Eliminar</button>
+                    </td>    
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
                 <tr>
-                    <td colspan="7">Sin Usuarios encontrados.</td>
+                    <td colspan="7">Sin Datos para Mostrar.</td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="loadingbody">
                 <tr>
-                    <td colspan="7">Cargando usuarios, espere...</td>
+                    <td colspan="7">Cargando Datos, espere...</td>
                 </tr>
 
             </ng-template>
@@ -85,14 +80,9 @@
                 Mostrando {{(state.page  * state.rows) + 1}} a {{state.rows * (state.page + 1)}} de {{state.totalRecords}} registros.
           </ng-template>
         </p-table>
-    </div>
-    <p-toast key="tst" [baseZIndex]="99999"></p-toast>
- 
-
-    
-    <p-confirmDialog header="Eliminar Usuario" key="deleteBot" icon="pi pi-exclamation-triangle"
-        acceptLabel="Si, Eliminar" rejectLabel="Cancelar" [style]="{width: '350px'}"
+      </div>
+      <p-confirmDialog header="Eliminar Hub" key="deleteColumn" icon="pi pi-exclamation-triangle"
+        acceptLabel="Sí, Eliminar" rejectLabel="Cancelar" [style]="{width: '350px'}"
         acceptButtonStyleClass="p-button-danger" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
-    
-
-</div>
+    </div>
+  </div>

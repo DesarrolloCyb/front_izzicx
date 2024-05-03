@@ -204,6 +204,11 @@ export class MenuComponent implements OnInit {
 			icon: 'pi pi-fw pi-server',
 		    routerLink: ['/limpieza/series'],
 		  },
+      {
+        label: 'Usuarios Bots',
+        icon: 'pi pi-fw pi-user',
+          routerLink: ['/limpieza/usuariosbots'],
+        },
       // {
       //   label: 'Recuperadores',
       //   icon: 'pi pi-fw pi-download',
