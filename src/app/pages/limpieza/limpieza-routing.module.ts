@@ -24,10 +24,9 @@ const routes: Routes = [
 		data: { breadcrumb: 'Usuarios bots' },
 		component: LayoutComponent,
 		children: [
-			{ path: '', component: UsuariosbotsComponent },
-		  	{ path: 'editar', component: EditarusrbotComponent }
-		],
-	  },
+		  { path: '', component: UsuariosbotsComponent },
+		  { path: 'editar/:idRobot', component: EditarusrbotComponent,data: { breadcrumb: 'Editar' } }],
+	  }
 ];
 
 @NgModule({

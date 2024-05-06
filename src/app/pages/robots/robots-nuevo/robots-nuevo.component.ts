@@ -26,8 +26,6 @@ export class RobotsNuevoComponent implements OnInit {
       procesoBotId: [null, Validators.required],
       comentarios: [null, Validators.required],
       hostName: [null, Validators.required],
-      // usuarioBot: [null, Validators.required],
-      // passwordBot: [null, Validators.required],
 
     });
     this.getCats()
@@ -59,12 +57,7 @@ export class RobotsNuevoComponent implements OnInit {
     this.guardando = true
     this.formNuevoBot.markAllAsTouched()
     if (this.formNuevoBot.valid) {
-      // this.formNuevoBot.patchValue({
-      //   procesoId:`${this.formNuevoBot.value.procesoId}`
-      // });      
-      // console.log(this.formNuevoBot.value)
       this.cors.post('Bots/GuardarBots', this.formNuevoBot.value).then((response) => {
-        // console.log(response);
         this.showToastSuccess('Maquina guardada correctamente.' );
         setTimeout(() => {
           this.router.navigate(["/robots"])

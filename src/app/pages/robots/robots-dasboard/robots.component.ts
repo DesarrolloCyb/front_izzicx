@@ -7,6 +7,7 @@ import { ConfirmationService, Message, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { ThisReceiver } from '@angular/compiler';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'robots',
@@ -51,7 +52,8 @@ export class RobotsComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private socket: Socket,
     private cors: CorsService,
-    private socketIo: SocketIoService
+    private socketIo: SocketIoService,
+    private http: HttpClient,
   ) {
 
     this.obtenerProcesos();
@@ -69,6 +71,26 @@ export class RobotsComponent implements OnInit {
       }
     },]
   }
+
+  enviarCorreo(dias: number, usuario: string, proceso: string) {
+    const correos = ['bnava@cyberideas.com.mx', 'egarcia@cyberideas.com.mx'];
+    const subject = 'Contraseña Proxima a Vencer';
+    const body = `Al usuario ${usuario} del proceso ${proceso} le faltan ${dias} dias para que su contraseña venza, se recomienda actualización de la contraseña para el funcionamiento.`;
+
+    for (let correo of correos) {
+        const mail = {
+            to: correo,
+            subject: subject,
+            body: body
+        };
+
+        this.cors.post('Bots/SendMail', mail).then(response => {
+            console.log(response);
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+}
 
   preguntarEliminar() {
     this.confirmationService.confirm({
@@ -231,13 +253,23 @@ export class RobotsComponent implements OnInit {
       if(response[0] == 'SIN INFO'){
         this.dataSource = []
       }else{
-        this.dataSource = response
+        this.dataSource = response;
+        for (let bot of this.dataSource) {
+          let dias = this.getDays(bot.procesoFechaActualizacion);
+          // if (typeof dias === 'number') {
+          //   if (dias <= 5) {
+          //     this.enviarCorreo(dias, bot.ProcesoUser, bot.ProcesoName);
+          //   }
+          // } else {
+          //   console.log('dias no es un número:', dias);
+          // }
+        }
       }
     }).catch((error) => {
       console.log(error);
       this.showToastError(`No se logro traer el listado de Robots`)
     })
-  }
+}
 
   statsValidation(item:any){
     if(JSON.stringify(item) !== '{}'){
