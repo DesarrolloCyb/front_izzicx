@@ -44,6 +44,7 @@ export class AuthComponent {
                 || (this.formLogin.value.email =='DRLizbeth' && this.formLogin.value.pWd =='DRLizbeth_2023')
                 || (this.formLogin.value.email =='LOFabian' && this.formLogin.value.pWd =='LOFabian_2023')
                 || (this.formLogin.value.email =='Hiram' && this.formLogin.value.pWd =='Hiram_2024')
+                || (this.formLogin.value.email =='UsrRecuperacion' && this.formLogin.value.pWd =='Recuperacion_2024')
                 || (this.formLogin.value.email =='ICortes' && this.formLogin.value.pWd =='Israel_2024')){
                 let a=null;
                 if(this.formLogin.value.email =='admin'){
@@ -137,6 +138,14 @@ export class AuthComponent {
                         "firstName":"Hiram",
                         "lastName":"Martinez Herrera",
                         "email":"IMPatricio@test.com"
+                    }
+                }
+                else if(this.formLogin.value.email =='UsrRecuperacion'){
+                    a={
+                        "role":"recuperadores",
+                        "firstName":"Recuperacion",
+                        "lastName":"Usuario",
+                        "email":"UsrRecuperacion@test.com"
                     }
                 }
                 else if(this.formLogin.value.email =='ICortes'){

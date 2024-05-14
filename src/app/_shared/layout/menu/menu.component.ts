@@ -329,6 +329,7 @@ export class MenuComponent implements OnInit {
       "eBarrera":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','robots'],
       "testReportes":['home','reportes'],
       "ACS":['home','ajustesYcambioServicio'],
+      "recuperadores":['home','limpieza'],
     }
     this.model = [];
     let usuarioInfo = JSON.parse(localStorage.getItem("userData") || "{}")

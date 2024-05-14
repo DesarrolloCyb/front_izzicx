@@ -71,12 +71,7 @@ export class SeriesComponent implements OnInit {
         }
         if(count == 1){
           Object.keys(this.ExcelData).forEach(key => {
-            this.ExcelData[key]["Status"]='Registro pendiente';
-            this.ExcelData[key]["Cve_usuario"] = "'" + this.usuario.email + "'";
-            this.ExcelData[key]["Procesando"]="0";
-            this.ExcelData[key]["Ip"]="";
             this.ExcelData[key]['serie']= `${this.ExcelData[key]['serie']}`;
-            this.ExcelData[key]["FechaCaptura"]=moment(Date.now()).format('yyyy-MM-DD HH:mm:ss');
           });   
           this.messageService.add({
             key: 'tst',
@@ -110,7 +105,7 @@ export class SeriesComponent implements OnInit {
         severity: 'success',
         summary: 'Excel Exportado',
         detail: 'Correctamente!!',
-      });
+      });this.getTablaSeries()
     }).catch((error) => {
       console.log(error)
       this.spinner=false;
