@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { UsuariosbotsComponent } from './usuariosbots/usuariosbots.component';
 import { EditarusrbotComponent } from './editarusrbot/editarusrbot.component';
+import { ListboxModule } from 'primeng/listbox'; // Importa el módulo de Listbox
+import { DialogModule } from 'primeng/dialog'; // Importa el módulo de Dialog
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import { EditarusrbotComponent } from './editarusrbot/editarusrbot.component';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    ListboxModule, // Añade el módulo de Listbox a las importaciones
+    DialogModule, // Añade el módulo de Dialog a las importaciones
   ],
   providers: [
     ConfirmationService,MessageService,

@@ -15,6 +15,7 @@ import { ReprocesarComponent } from './reprocesar/reprocesar.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { ReprocesarsinvalidacionComponent } from './reprocesarsinvalidacion/reprocesarsinvalidacion.component';
+import { ReprocesarCasosnegociosinvalidacionComponent } from './reprocesar-casosnegociosinvalidacion/reprocesar-casosnegociosinvalidacion.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ReprocesarsinvalidacionComponent } from './reprocesarsinvalidacion/repr
     ConsultacancelacionSinValidacionComponent,
     ConsultacasosNegocioSinValidacionComponent,
     ReprocesarComponent,
-    ReprocesarsinvalidacionComponent
+    ReprocesarsinvalidacionComponent,
+    ReprocesarCasosnegociosinvalidacionComponent
   ],
   imports: [
     CommonModule,

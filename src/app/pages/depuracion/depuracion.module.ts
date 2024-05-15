@@ -14,6 +14,7 @@ import { ReportesComponent } from './reportes/reportes.component';
 import { PrefijosComponent } from './prefijos/prefijos.component';
 import { HobsComponent } from './hobs/hobs.component';
 import { FallasDepuracionComponent } from './fallas-depuracion/fallas-depuracion.component';
+import { ArchivosCCComponent } from './archivos-cc/archivos-cc.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { FallasDepuracionComponent } from './fallas-depuracion/fallas-depuracion
     ReportesComponent,
     PrefijosComponent,
     HobsComponent,
-    FallasDepuracionComponent
+    FallasDepuracionComponent,
+    ArchivosCCComponent
   ],
   imports: [
     CommonModule,

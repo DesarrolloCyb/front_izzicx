@@ -65,7 +65,7 @@ export class CasosNegocioSinValidacionComponent implements OnInit {
             }
           }
         }
-        if(count == 7){ 
+        if(count == 8){ 
           Object.keys(this.ExcelData).forEach(key => {
             this.ExcelData[key]["Status"]='Pendiente';
             this.ExcelData[key]["Cve_usuario"]=this.usuario.email;

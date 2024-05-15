@@ -9,6 +9,7 @@ import { ReportesComponent } from './reportes/reportes.component';
 import { PrefijosComponent } from './prefijos/prefijos.component';
 import { HobsComponent } from './hobs/hobs.component';
 import { FallasDepuracionComponent } from './fallas-depuracion/fallas-depuracion.component';
+import { ArchivosCCComponent } from './archivos-cc/archivos-cc.component';
 
 const routes: Routes = [
 	{
@@ -50,6 +51,11 @@ const routes: Routes = [
 		path: 'FallasDepuracion',
 		component: LayoutComponent,
 		children: [{ path: '', component: FallasDepuracionComponent }],
+	},
+	{
+		path: 'Archivos-CC',
+		component: LayoutComponent,
+		children: [{ path: '', component: ArchivosCCComponent }],
 	},
 ];
 

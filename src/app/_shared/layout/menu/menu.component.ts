@@ -144,9 +144,14 @@ export class MenuComponent implements OnInit {
             routerLink: ['/notDone/consultaCasosNegocioSinValidacion'],
           },
           {
-            label: 'Reprocesar Sin Validacion',
+            label: 'Reprocesar Cancelacion Sin Validacion',
             icon: 'pi pi-fw pi-sync',
             routerLink: ['/notDone/reprocesarnotdonesinvalidacion'],
+          },
+          {
+            label: 'Reprocesar Casos de Negocio Sin Validacion',
+            icon: 'pi pi-fw pi-sync',
+            routerLink: ['/notDone/reprocesarcasosnegociosinvalidacion'],
           }
         ]
 		  },
@@ -191,6 +196,11 @@ export class MenuComponent implements OnInit {
 		    label: 'Estado de Fallas Depuraion',
 		    icon: 'pi pi-fw pi-ban',
 		    routerLink: ['/depuracion/FallasDepuracion'],
+		  },
+      {
+		    label: 'Archivos CC',
+		    icon: 'pi pi-fw pi-file-pdf',
+		    routerLink: ['/depuracion/Archivos-CC'],
 		  },
 		]
 	  },

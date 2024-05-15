@@ -5,6 +5,7 @@ import { ConfirmationService, Message, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 
+
 @Component({
   selector: 'usuariosbots',
   templateUrl: './usuariosbots.component.html',
@@ -42,6 +43,8 @@ export class UsuariosbotsComponent implements OnInit {
   statsBots:any=[];
   loading1: boolean = false
   excluir:any=[];
+  displayUserSelectionDialog: boolean = false;// Aquí deberías cargar la lista de usuarios
+selectedUser: any; // Aquí se almacenará el usuario seleccionado
 
   constructor(
     private router: Router,
@@ -52,8 +55,10 @@ export class UsuariosbotsComponent implements OnInit {
 
     this.obtenerProcesos();
     this.items = [{
-      label: 'Actualizar', icon: 'pi pi-refresh', command: () => {
-        this.router.navigate([`/limpieza/usuariosbots/editar/${this.opcionToAction.botId}`])
+      label: 'Actualizar', 
+      icon: 'pi pi-refresh', 
+      command: () => {
+        this.openUserSelectionDialog();
       }
     },
     {
@@ -63,7 +68,17 @@ export class UsuariosbotsComponent implements OnInit {
       label: 'Eliminar', icon: 'pi pi-times', command: () => {
         this.preguntarEliminar()
       }
-    },]
+    }]
+  }
+
+  openUserSelectionDialog() {
+    this.buscaBots(); // Aquí cargas la lista de usuarios desde tu función
+    this.displayUserSelectionDialog = true;
+  }
+
+  onUserSelected() {
+    this.displayUserSelectionDialog = false;
+    this.router.navigate([`/limpieza/usuariosbots/editar/${this.selectedUser.botId}`]);
   }
 
   enviarCorreo(dias: number, usuario: string, proceso: string) {

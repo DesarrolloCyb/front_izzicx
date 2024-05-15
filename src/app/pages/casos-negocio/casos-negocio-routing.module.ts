@@ -10,6 +10,7 @@ import { ConsultacancelacionSinValidacionComponent } from './consultacancelacion
 import { ConsultacasosNegocioSinValidacionComponent } from './consultacasos-negocio-sin-validacion/consultacasos-negocio-sin-validacion.component';
 import { ReprocesarComponent } from './reprocesar/reprocesar.component';
 import { ReprocesarsinvalidacionComponent } from './reprocesarsinvalidacion/reprocesarsinvalidacion.component';
+import { ReprocesarCasosnegociosinvalidacionComponent } from './reprocesar-casosnegociosinvalidacion/reprocesar-casosnegociosinvalidacion.component';
 
 const routes: Routes = [
 	{
@@ -56,6 +57,11 @@ const routes: Routes = [
 		path: 'reprocesarnotdonesinvalidacion',
 		component: LayoutComponent,
 		children: [{ path: '', component: ReprocesarsinvalidacionComponent }],
+	},
+	{
+		path: 'reprocesarcasosnegociosinvalidacion',
+		component: LayoutComponent,
+		children: [{ path: '', component: ReprocesarCasosnegociosinvalidacionComponent }],
 	},
 
 ];
