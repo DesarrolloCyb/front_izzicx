@@ -28,6 +28,11 @@
                         </div>
                     </th>
                     <th>
+                      <div style="width: 150px;" class="flex justify-content-center align-items-center">
+                          Tipo de Archivo
+                      </div>
+                  </th>
+                    <th>
                         <div style="width: 150px;" class="flex justify-content-center align-items-center">
                             Fecha Creacion
                         </div>
@@ -58,6 +63,9 @@
                 <tr>
                     <td class="text-center">
                       {{item.nombreArchivo}}
+                    </td>
+                    <td class="text-center">
+                      {{item.tipoArchivo}}
                     </td>
                     <td class="text-center">
                         {{dateFormat(item.fechaCreacion)}}

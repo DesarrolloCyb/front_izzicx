@@ -198,7 +198,7 @@ export class MenuComponent implements OnInit {
 		    routerLink: ['/depuracion/FallasDepuracion'],
 		  },
       {
-		    label: 'Archivos CC',
+		    label: 'Repositorio de Archivos',
 		    icon: 'pi pi-fw pi-file-pdf',
 		    routerLink: ['/depuracion/Archivos-CC'],
 		  },

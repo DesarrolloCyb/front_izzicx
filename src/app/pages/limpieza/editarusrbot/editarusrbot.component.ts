@@ -28,7 +28,7 @@ export class EditarusrbotComponent implements OnInit {
     this.formNuevoBot = this.formBuilder.group({
       hostName: [null, Validators.required],
       ip: [null, [Validators.required, Validators.pattern('(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')]],
-      procesoId: [null, Validators.required],
+      procesoId: [null],
       comentarios: [null, Validators.required],
       usuarioBot: [null, Validators.required],
       passwordBot: [null, Validators.required],
@@ -44,11 +44,11 @@ export class EditarusrbotComponent implements OnInit {
             this.item=response;
             this.formNuevoBot.patchValue({
               hostName:response.botHostName,
-              procesoId:response.botProcesoId,
               comentarios:response.botComentarios,
               passwordBot:response.procesoPassword,
               usuarioBot:response.procesoUser,
-              ip:response.botIp
+              ip:response.botIp,
+              procesoId:response.botProcesoId
             });
 
           })
@@ -61,41 +61,45 @@ export class EditarusrbotComponent implements OnInit {
   }
 
   guardarBot() {
-    this.formNuevoBot.markAllAsTouched()
+    this.formNuevoBot.markAllAsTouched();
+
     if (this.formNuevoBot.valid) {
-      this.guardando = true
-      let a ={
-        "id": this.item.botId,
-        "comentarios": this.formNuevoBot.controls['comentarios'].value,
-        "hostName": this.formNuevoBot.controls['hostName'].value,
-        "ip": this.formNuevoBot.controls['ip'].value,
-        "fechaActualizacion": null,
-        "procesoBotId": this.formNuevoBot.controls['procesoId'].value,
-        "procesoBot": {
-          "id": this.formNuevoBot.controls['procesoId'].value,
-          "name_process": null,
-          "usuario": this.formNuevoBot.controls['usuarioBot'].value,
-          "password": this.formNuevoBot.controls['passwordBot'].value,
-          "update_At": null,
-          "status": null
-        }
-      }
-      this.cors.put(`Bots/ActualizarBotLimpieza?id=${this.item.botId}`, a).then((response) => {
+        this.guardando = true;
+        let a = {
+            "id": this.item.botId,
+            "comentarios": this.formNuevoBot.controls['comentarios'].value,
+            "hostName": this.formNuevoBot.controls['hostName'].value,
+            "ip": this.formNuevoBot.controls['ip'].value,
+            "fechaActualizacion": null,
+            "procesoBotId": this.formNuevoBot.controls['procesoId'].value,
+            "procesoBot": {
+                "id": this.formNuevoBot.controls['procesoId'].value,
+                "name_process": null,
+                "usuario": this.formNuevoBot.controls['usuarioBot'].value,
+                "password": this.formNuevoBot.controls['passwordBot'].value,
+                "update_At": null,
+                "status": null
+            }
+        };
 
-        // console.log(response);
-        this.showToastSuccess('Datos Guardados')
-        setTimeout(() => {
-          this.router.navigate(["/limpieza/usuariosbots"])
-        }, 3000);
-
-      }).catch((error) => {
-        console.log(error);
-        this.guardando = false
-        this.showToastError('No se lograron guardadar los datos de Robot')
-      })
+        this.cors.put(`Bots/ActualizarBotLimpieza?id=${this.item.botId}`, a)
+            .then((response) => {
+                this.showToastSuccess('Datos Guardados');
+                setTimeout(() => {
+                    this.router.navigate(["/limpieza/usuariosbots"]);
+                }, 3000);
+            })
+            .catch((error) => {
+                console.log(error);
+                this.guardando = false;
+                this.showToastError('No se lograron guardar los datos de Robot');
+            });
+    } else {
+        this.showToastError('Por favor, completa todos los campos.');
     }
-    this.guardando = false
-  }
+
+    this.guardando = false;
+}
   getCats() {
     this.cors.get('Bots/getCatProcesosLimpieza').then((response) => {
       // console.log(response);

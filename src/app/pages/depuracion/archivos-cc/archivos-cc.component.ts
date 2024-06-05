@@ -7,12 +7,12 @@ import { Message, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 
 @Component({
-  selector: 'archivos-cc',
-  templateUrl: './archivos-cc.component.html',
-  styleUrls: ['./archivos-cc.component.scss']
+	selector: 'archivos-cc',
+	templateUrl: './archivos-cc.component.html',
+	styleUrls: ['./archivos-cc.component.scss']
 })
 export class ArchivosCCComponent implements OnInit {
-  horarios:any[]=[];
+	horarios:any[]=[];
 	first:any=null;
 	second:any=null;
 	tablaArchivos:any[]=[];
@@ -25,17 +25,11 @@ export class ArchivosCCComponent implements OnInit {
 	timeCI:any=null;
 	timeCF:any=null;
 	nuevo:boolean=false;
-  
-  
 	constructor(private cors: CorsService,private messageService: MessageService,private http:HttpClient) {
-		
 	}
-
 	ngOnInit(): void {
 		this.gettablaArchivos();
 	}
-
-
 	gettablaArchivos(){
 		this.cors.get('EjecucionDepuracion/getBasesCC')
 		.then((response) => {
@@ -50,18 +44,16 @@ export class ArchivosCCComponent implements OnInit {
 						response[i].procesando="No"
 					}
 				}
-			  	this.tablaArchivos = response;
+			this.tablaArchivos = response;
 			}
 		})
 		.catch((error) => {
 		console.log(error)
 		});
-
 	}
 	onGlobalFilter(table: Table, event: Event) {
 		table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
 	}
-
 	dateFormat(value:any){
 		if(value != null || value != ""){
 			return moment(value).format('DD-MM-yyyy HH:mm:ss')
@@ -69,20 +61,18 @@ export class ArchivosCCComponent implements OnInit {
 			return "---"
 		}
 	}
-
 	descargarArchivo(archivo:string){
 		this.archivoSeleccionado = archivo;
 		this.loading2 = true;
 	
 		this.cors.get2(`EjecucionDepuracion/BajarExcelFTPArchivosCC`,{
-		  "nombre":archivo
+			"nombre":archivo
 		})
 		.then((response) => {
 		  // console.log(response)
-		  this.show = true;
-		  this.url1 = `https://rpabackizzi.azurewebsites.net/EjecucionDepuracion/BajarExcelFTPArchivosCC?nombre=${archivo}`;
-
-		  setTimeout(()=> {
+			this.show = true;
+			this.url1 = `https://rpabackizzi.azurewebsites.net/EjecucionDepuracion/BajarExcelFTPArchivosCC?nombre=${archivo}`;
+			setTimeout(()=> {
 			this.loading2 = false;
 			this.archivoSeleccionado = '';
 			this.messageService.add({
@@ -90,32 +80,25 @@ export class ArchivosCCComponent implements OnInit {
 				severity: 'success',
 				summary: 'Se descargo el archivo',
 				detail: 'Con exito!!',
-			  });
+				});
 			}, 5000);
-	
-		  
 		})
 		.catch((error) => {
-		  console.log(error)
-		  this.messageService.add({
-			key:'tst',
-			severity: 'error',
-			summary: 'No se logro descargar',
-			detail: 'Intenta Nuevamente!!!',
-		  });
-		  this.loading2 = false;
-		  this.archivoSeleccionado = '';
+			console.log(error)
+			this.messageService.add({
+				key:'tst',
+				severity: 'error',
+				summary: 'No se logro descargar',
+				detail: 'Intenta Nuevamente!!!',
+			});
+			this.loading2 = false;
+			this.archivoSeleccionado = '';
 		});
-		this.show=false;
-
-
-	
+		this.show=false;	
 	}
-
 	estaSiendoDescargado(archivo: string): boolean {
 		return this.archivoSeleccionado === archivo && this.loading2;
 	}
-	
 	async con(){
 		this.cors.get3('')
 		.then((response) => {
@@ -125,6 +108,5 @@ export class ArchivosCCComponent implements OnInit {
 			console.log(error)
 		});
 	}
-
 }
 

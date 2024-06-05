@@ -55,7 +55,7 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item let-i="rowIndex">
-                <tr>
+                <tr *ngIf="i === 0">
                     <td>
                         {{item.botHostName}}
                     </td>
@@ -122,7 +122,7 @@
             <p-listbox [options]="dataSource" [(ngModel)]="selectedUser" optionLabel="botHostName" style="width:100%" (dblclick)="onUserSelected()">
               <ng-template let-user pTemplate="item">
                 <div class="p-clearfix">
-                  <div style="font-size:1em;float:right;margin-top:15px">{{user.procesoUser}}</div>
+                  <div style="font-size:1em;float:right;margin-top:15px">{{user.procesonombreuser}}</div>
                 </div>
               </ng-template>
             </p-listbox>

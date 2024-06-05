@@ -28,7 +28,7 @@ export class PantallaConsultaComponent implements OnInit {
   ) { 
     this.formBusqueda = this.formBuilder.group({
       cuenta: [null,Validators.required],
-      cve_usuario: [this.usuario.email, Validators.required], //Se obtiene del direcotrio activo
+      cve_usuario: [this.usuario.email, Validators.required],
     });
 
   }
@@ -41,47 +41,6 @@ export class PantallaConsultaComponent implements OnInit {
       this.statsBasesDepuradas();
     },10000);
   }
-
-  // buscar(){
-  //   let orden = {
-  //     "orden":`${this.formBusqueda.controls['cuenta'].value}`
-  //   }
-  //   this.cors.get('EjecucionDepuracion/getConsultaBasesCanceladasOSEXT',orden).then((response) => {
-  //     if(response.length == 0){
-  //       this.messageService.add({
-  //         key: 'tst',
-  //         severity: 'error',
-  //         summary: 'Atención',
-  //         detail: 'No hay Registros',
-  //       });
-  //     }else{
-  //       let info = response[0];
-  //       info.usuario=info.cve_Usuario;
-  //       delete info.cve_Usuario;
-  //       info.compañia=info.compania;
-  //       delete info.compania;
-  //       info['Fecha de Carga']=this.dateFormat(info.fechaCarga);
-  //       delete info.fechaCarga;
-  //       info['Motivo de la Orden']=info.motivoOrden;
-  //       delete info.motivoOrden;
-  //       info['Número de la Orden']=info.numOrden;
-  //       delete info.numOrden;
-  //       delete info.usuario;
-  //       info['procesando']= info['procesando']=="1"?"Si":"No";
-  //       delete info.numOrden;
-  //       console.log(info)
-  //       let objetoLimpio = Object.entries(info)
-  //       .filter(([key, value]) => value !== null && value !== "" && !this.isObjectEmpty(value))
-  //       .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
-  //       console.log(objetoLimpio)
-  //       this.consulta=objetoLimpio;
-  //       // this.consulta=response;
-        
-  //     }
-  //   }).catch((error) => {
-  //     console.log(error)
-  //   })
-  // }
 
   isObjectEmpty(obj:any): boolean {
     return Object.keys(obj).length === 0;

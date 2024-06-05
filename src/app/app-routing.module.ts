@@ -1,22 +1,19 @@
-import { CapturasModule } from './pages/capturas/capturas.module';
 import { NotfoundComponent } from './_shared/layout/notfound/notfound.component';
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from './_shared/layout/layout/layout.component';
-// import { ReportesRoutingModule } from './pages/reportes/reportes-routing.module';
 import { AuthGuard } from './guards/auth.guard';
+
+
 
 const routerOptions: ExtraOptions = {
   anchorScrolling: 'enabled',
 };
-
 const routes: Routes = [
   {
     path: '',
     redirectTo: '/login',
     pathMatch: 'full'
   },
-
   {
     path: 'login',
     loadChildren: () =>
@@ -105,8 +102,6 @@ const routes: Routes = [
     path: '404',
     component: NotfoundComponent,
   },
-
-
 ];
 
 @NgModule({

@@ -78,7 +78,7 @@ selectedUser: any; // Aquí se almacenará el usuario seleccionado
 
   onUserSelected() {
     this.displayUserSelectionDialog = false;
-    this.router.navigate([`/limpieza/usuariosbots/editar/${this.selectedUser.botId}`]);
+    this.router.navigate([`/limpieza/usuariosbots/editar/${this.opcionToAction.botId}`]);
   }
 
   enviarCorreo(dias: number, usuario: string, proceso: string) {

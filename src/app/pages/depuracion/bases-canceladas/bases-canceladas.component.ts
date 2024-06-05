@@ -32,47 +32,12 @@ export class BasesCanceladasComponent implements OnInit {
   ];
   pdfContent:any;
   tabla:boolean=false;
-
-
   constructor(
     private cors: CorsService,
     private messageService: MessageService,
-    // private sanitizer: DomSanitizer
   ) { }
-
-//   generatePDF() {
-//     const doc = new jsPDF();
-    
-//     const data = this.ExcelData;
-    
-//     const columns = [
-//       // { header: 'Comentarios', dataKey: 'Comentarios' },
-//       // { header: 'Compañía', dataKey: 'Compañía' },
-//       { header: 'Creado', dataKey: 'Creado' },
-//       { header: 'Cve_usuario', dataKey: 'Cve_usuario' },
-//       { header: 'Estado', dataKey: 'Estado' },
-//       { header: 'Fecha_Carga', dataKey: 'Fecha_Carga' },
-//       { header: 'Hub', dataKey: 'Hub' },
-//       { header: 'Motivo de la orden', dataKey: 'Motivo de la orden' },
-//       { header: 'Nodo', dataKey: 'Nodo' },
-//       { header: 'Nº de cuenta', dataKey: 'Nº de cuenta' },
-//       { header: 'Nº de orden', dataKey: 'Nº de orden' },
-//       { header: 'Tipo', dataKey: 'Tipo' },
-//     ];
-    
-//     (doc as any).autoTable({
-//       columns,
-//       body: data,
-//     });
-    
-//     // const pdfOutput = doc.output('blob');
-//     this.pdfContent = doc.output('datauristring');
-//     this.pdfContent = this.sanitizer.bypassSecurityTrustResourceUrl(this.pdfContent) as SafeResourceUrl;
-// }
-  
   ngOnInit(): void {
   }
-
   readExcel(event:any){
     let file = event.target.files[0];
     let ultimo = file.name.split('.');
@@ -88,14 +53,11 @@ export class BasesCanceladasComponent implements OnInit {
       var pattern = /[\^*@!"#$%&/()=?¡!¿'\\]/gi;
       fileReader.readAsBinaryString(file);
       fileReader.onload= (e)=>{
-        // var workBook = XLSX.read(fileReader.result,{type:'binary',cellDates:true, raw: true })
         var workBook = XLSX.read(fileReader.result,{type:'binary',cellDates:true })
         var sheetNames =  workBook.SheetNames;
         this.ExcelData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]],{defval: ''});
-        // console.log(this.ExcelData)
         let count=0;
         for(let [key,value] of Object.entries(this.ExcelData[0])){
-          // console.log("Esto es cabezera",key)
           for(let i = 0 ; i<this.headers.length;i++){
             if(key == this.headers[i]){
               count++;
@@ -108,21 +70,15 @@ export class BasesCanceladasComponent implements OnInit {
             this.ExcelData[key]["Cve_usuario"]=this.usuario.email;
             this.ExcelData[key]["Procesando"]="0";
             this.ExcelData[key]["IP"]="";
-            // this.ExcelData[key]["fecha_hora_cierre"]=null;
-            // this.ExcelData[key]["cn_generado"]=null;
-            // this.ExcelData[key]["FechaCompletado"]=null;
             this.ExcelData[key]["Fecha_Carga"]=moment(Date.now()).format('yyyy-MM-DD HH:mm:ss');
             let aa =`${this.ExcelData[key]["Nº de cuenta"]}`;
             this.ExcelData[key]["Nº de cuenta"]=aa;
-
             let b = `${this.ExcelData[key]["Compañía"]}`;
             this.ExcelData[key]["Compañía"]=b;
-
             var excelNumber = this.ExcelData[key]["Creado"];
             var date = new Date((excelNumber - 25569) * 86400 * 1000);
             let a = moment(date).format('yyyy-MM-DD HH:mm:ss');
             this.ExcelData[key]["Creado"]=a;
-
             delete this.ExcelData[key][" Mensualidad total "];
             delete this.ExcelData[key]["% de descuento"];
             delete this.ExcelData[key]["."];
