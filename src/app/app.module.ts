@@ -14,6 +14,12 @@ import { AppComponent } from './app.component';
 import { TopbarComponent } from './_shared/layout/topbar/topbar.component';
 import { SharedModule } from './_shared/modules/shared/shared.module';
 import { NotfoundComponent } from './_shared/layout/notfound/notfound.component';
+import { LoginModule } from './components/login/login/login.module';
+import { RegistrarUsuarioModule } from './components/registrar-usuario/registrar-usuario.module';
+import { ActivaCuentaModule } from './components/activa-cuenta/activa-cuenta.module';
+import { SidenavModule } from './components/sidenav/sidenav.module';
+import { DashboardModule } from './components/dashboard/dashboard.module';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +40,11 @@ import { NotfoundComponent } from './_shared/layout/notfound/notfound.component'
     SharedModule,
     RouterModule,
     HttpClientModule,
+    LoginModule,
+    RegistrarUsuarioModule,
+    ActivaCuentaModule,
+    SidenavModule,
+    DashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent],

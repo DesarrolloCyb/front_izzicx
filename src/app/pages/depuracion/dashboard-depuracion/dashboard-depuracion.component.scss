@@ -1,3 +1,14 @@
+@keyframes loading {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.barra-cargando {
+  animation: loading 2s linear infinite;
+  background: linear-gradient(90deg, transparent, white, transparent);
+}
+
 :host ::ng-deep ::-webkit-scrollbar-thumb:horizontal {
     background-color: #FFC0CB;
 }

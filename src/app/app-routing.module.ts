@@ -2,18 +2,23 @@ import { NotfoundComponent } from './_shared/layout/notfound/notfound.component'
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-
+import { LoginComponent } from '../app/components/login/login/login.component';
+import { RegistrarUsuarioComponent } from '../app/components/registrar-usuario/registrar-usuario.component';
+import { ActivaCuentaComponent } from './components/activa-cuenta/activa-cuenta.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { AuthGuardService } from './services/auth-guard/auth-guard.service';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 const routerOptions: ExtraOptions = {
   anchorScrolling: 'enabled',
 };
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
-  },
+  // {
+  //   path: '',
+  //   redirectTo: '/login',
+  //   pathMatch: 'full'
+  // },
   {
     path: 'login',
     loadChildren: () =>
@@ -21,13 +26,13 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/dashboard/izzi',
     pathMatch: 'full'
   },
   {
-    path: 'home',
+    path: 'dashboard/izzi',
     data: { breadcrumb: 'Home' },
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     loadChildren: () =>
       import('./pages/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
@@ -97,11 +102,38 @@ const routes: Routes = [
       import('./pages/creaorden/creaorden.module').then((m) => m.CreaordenModule),
   },
   { path: 'robots', data: { breadcrumb: 'Robots' }, loadChildren: () => import('./pages/robots/robots.module').then(m => m.RobotsModule) },
-  { path: '**', redirectTo: '/404' },
   {
     path: '404',
     component: NotfoundComponent,
   },
+
+  //componentes de Mariana
+  // {path: 'login', component: LoginComponent},
+  {path: 'registrar', component: RegistrarUsuarioComponent},
+  {path: 'activar', component: ActivaCuentaComponent},
+  {
+    path: 'dashboard/mariana', component: SidenavComponent, 
+    // canActivate: [AuthGuardService],
+    children: [
+      {path: '', component: DashboardComponent},
+      // {path: 'inicial', component: InicialComponent},
+      // {path: 'cargar', component: CargarComponent},
+      // {path: 'cargar/individual', component: CargarComponent},
+      // {path: 'cargar/masiva', component: CargarComponent},
+      // {path: 'cargar', component: CargarComponent},
+      // {path: 'analizar', component: AnalizarComponent},
+      // {path: 'analizar/resultados/:tempName/:guia/:origen', component: ResultadosComponent},
+      // {path: 'generar', component: ReporteComponent},
+      // {path: 'programar', component: ProgramarComponent},
+      // {path: 'parametros', component: ParametrosComponent},
+      // {path: 'subcategorias', component: CategoriasComponent},
+      // {path: 'prueba', component: PruebaComponent},
+      // {path: 'cargar-plantilla', component: CargarPlantillasComponent},
+      // { path: 'asignacion', loadChildren: () => import('./components/asignacion/asignacion-routing.module').then(m => m.AsignacionRoutingModule) }
+    ]
+  },
+
+  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({

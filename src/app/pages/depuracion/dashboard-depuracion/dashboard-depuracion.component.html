@@ -1,4 +1,3 @@
-<!-- <div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #E80084;color: white !important;">Bases Depuradas</div> -->
 <div class="text-900 font-bold text-2xl mb-4 text-center" style="background-color: #E80084;color: white !important;">Depuración/Cierre</div>
 
 <div class="card" style="padding-left: 1rem;">
@@ -49,60 +48,15 @@
           <p-calendar   [showClear]="true" (onSelect)="changeTime($event)" (onClear)="second = null" placeholder="Editar Horario" [timeOnly]="true" hourFormat="12" inputId="timeonly"></p-calendar>
       </div>
       <div class="field col-12 md:col-2 text-center " *ngIf="second != null">
-        <!-- <p-button icon="pi pi-send" iconPos="left">Guardar</p-button>    -->
         <button type="button" style="width: 5rem;height: 3rem;background-color: #FF7987; color: white; border-radius: 0.5rem;border: 0;" (click)="enviar()">Guardar</button>   
       </div>
 
 
     </div>
-    <!-- BOTON DE EJECUCION -->
-    <!-- <div class="col lg:col-12">
-
-      <div class="grid flex justify-content-center">
-        <div class="col-4 text-center">
-          
-          <button
-            (click)="verify()"
-            pButton
-            label="Enviar"
-            style="width:auto;"></button>
-        </div>
-      </div>
-    </div> -->
   </p-panel>
   <br>
 
 </div>
-
-<!-- <p-dialog
-  [closable]="closeModal"
-  header="Guardar Cancelación"
-  [(visible)]="display"
-  [modal]="true"
-  showEffect="fade"
-  [style]="{width: '30vw'}"
-  [breakpoints]="{'960px': '75vw'}">
-  <p class="line-height-3 m-0">
-        Los datos a guardar son los siguientes:
-    </p>
-
-  <ul>
-      <li>Tipo de Cuenta: <strong>{{formBolsa.value.tipoCuenta}}</strong></li>
-      <li>Tipo de Proceso: <strong>{{formBolsa.value.tipoProceso}}</strong></li>
-      <li>Cuenta: <strong>{{formBolsa.value.cuenta}}</strong></li>
-      <li>País: <strong>{{formBolsa.value.pais}}</strong></li>
-      <li>Paquete de Datos a Recargar: <strong>{{formBolsa.value.paqueteDatos}}</strong></li>
-  </ul>
-  <ng-template pTemplate="footer">
-
-    <loading-button
-      label="Guardar"
-      labelLoad="Guardando"
-      [loading]="enviando"
-      (click)="sendData()"></loading-button>
-
-  </ng-template>
-</p-dialog> -->
 
 <p-toast
   [baseZIndex]="99999"
@@ -164,12 +118,12 @@
                     </th>
                     <th>
                       <div class="flex justify-content-center align-items-center">
-                          IP
+                          Archivo
                       </div>
                     </th>
                     <th>
                       <div class="flex justify-content-center align-items-center">
-                          Archivo
+                          Progreso
                       </div>
                     </th>
                 </tr>
@@ -197,18 +151,25 @@
                     <td class="text-center">
                       {{item.procesando}}
                     </td>
-                    <td class="text-center">
-                      {{item.ip}}
-                    </td>
                     <td *ngIf="item.archivo" class="text-center">
-                      <!-- {{item.archivo}} -->
                         <button pButton  style="background-color: #FF7987;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)" [loading]="estaSiendoDescargado(item.archivo)"></button>
-                        <!-- <button (click)="descargarArchivo(item.archivo)">Descargar</button> -->
                       </td>
                       <td *ngIf="!item.archivo" class="text-center">
                         <button pButton disabled style="background-color: grey;border: 0;" label="Descargar" (click)="descargarArchivo(item.archivo)"></button>
-                      <!-- {{item.archivo}} -->
-                    </td>  
+                    </td>
+                    <td class="text-center" class="barra-cargando">
+                      <!-- Completado: Muestra una palomita en verde -->
+                      <i *ngIf="item.status =='Completado'" class="pi pi-fw pi-check" style="color: green;font-size: 2rem;font-weight: bold;"></i>
+                      
+                      <!-- Error Descarga: Muestra una X en rojo -->
+                      <i *ngIf="item.status =='Error Descarga'" class="pi pi-fw pi-times" style="color: red;font-size: 2rem;font-weight: bold;"></i>
+                      
+                      <!-- Iniciando: Muestra una barra de progreso al 33% -->
+                      <p-progressBar *ngIf="item.status =='Iniciando Extraccion Canceladas'" [value]="33" class="barra-cargando"></p-progressBar>
+                      
+                      <!-- Descargando: Muestra una barra de progreso al 66% -->
+                      <p-progressBar *ngIf="item.status =='Descargando Archivo Siebel'" [value]="66" class="barra-cargando"></p-progressBar>
+                  </td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
