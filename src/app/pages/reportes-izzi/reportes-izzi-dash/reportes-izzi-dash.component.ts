@@ -105,27 +105,16 @@ export class ReportesIzziDashComponent implements OnInit {
           url = `ReportesIzzi/getReporteCreacionOrden`;
           para =`fecha1=${fechaini}&fecha2=${fechafin}`
           nomArchivo="Reporte_Creacion_OS"
-          // console.log(`${url}?${para}`)
-        }
-        // this.cors.get1(`${url}`,a).then((response) => {
-        //   this.show = true;
-        //   this.url1 = `https://rpabackizzi.azurewebsites.net/${url}?${para}`;
-        //   this.messageService.add({ severity: 'info', summary: 'Generando', detail: 'Se ha generado el reporte' });
-        //   this.button=false;
-          
-        // }).catch((error) => {
-        //   console.log("Error",error)
-        //   this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Intentalo mas tarde nuevamente!!!' });
-        //   this.button=false;
-        // })
-
-
-        
+        }else if(this.formReporte.value.tipoReporte =='Orden Call Trouble'){
+          console.log("Creacion OS")
+          url = `ReportesIzzi/ReporteOrdenesCallTrouble`;
+          para =`fecha1=${fechaini}&fecha2=${fechafin}`
+          nomArchivo="Reporte_Ordenes_Call_Trouble"
+        }  
         try {
           const headers = new HttpHeaders({
             'Content-Type': 'application/json',
-            // Aquí agregamos los headers para evitar problemas de CORS
-            'Access-Control-Allow-Origin': 'https://rpabackizzi.azurewebsites.net/', // Reemplaza con el dominio de tu frontend
+            'Access-Control-Allow-Origin': 'https://rpabackizzi.azurewebsites.net/',
             'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
           });
@@ -133,8 +122,7 @@ export class ReportesIzziDashComponent implements OnInit {
           headers:headers,  
           responseType: 'arraybuffer',
             observe: 'response'
-          }).toPromise(); 
-          // console.log(response)
+          }).toPromise();
           const blob = new Blob([response.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
           const link = document.createElement('a');
 
@@ -149,59 +137,6 @@ export class ReportesIzziDashComponent implements OnInit {
         } catch (error) {
           console.log(error)
         }
-
-        // try {
-        //   const response: any = await this.httpClient.get(`https://rpabackizzi.azurewebsites.net/${url}?${para}`, {
-        //   headers:headers,  
-        //   responseType: 'arraybuffer',
-        //     observe: 'response' // Añade esta opción para obtener la respuesta completa
-        //   }).toPromise();
-        //   console.log(response)
-        //   const blob = new Blob([response.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-  
-        //   // Crea una URL temporal para el Blob
-        //   const blobUrl = URL.createObjectURL(blob);
-    
-        //   // Abre una ventana emergente para la descarga
-        //   const newWindow = window.open(blobUrl, '_blank');
-        //   if (newWindow) {
-        //     newWindow.focus();
-        //   } else {
-        //     console.error('No se pudo abrir la ventana emergente');
-        //   }
-    
-        //   // Revoca la URL temporal
-        //   URL.revokeObjectURL(blobUrl);
-          
-        // } catch (error) {
-        //   console.log(error)
-        // }
-
-        
-      //   try {
-      //   const response: any = await this.httpClient.get(`https://rpabackizzi.azurewebsites.net/${url}?${para}`, {
-      //     headers: headers,
-      //     responseType: 'blob',
-      //     observe: 'response'
-      //   }).toPromise();
-
-      //   // Extraer el nombre del archivo del encabezado "Content-Disposition"
-      //   // const contentDispositionHeader = response.headers.get('content-disposition');
-      //   // const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-      //   // const matches = fileNameRegex.exec(contentDispositionHeader);
-      //   // const fileName = matches != null && matches[1] ? matches[1].replace(/['"]/g, '') : 'Reporte_NotDone.xlsx';
-
-      //   // Guardar el Blob como archivo con el nombre extraído
-      //   saveAs(response.body, "preubaX");
-      // } catch (error) {
-      //   console.error('Error al descargar el archivo:', error);
-      // }
-
-
-
-
-
-
         this.button = false
         this.formReporte.controls['tipoReporte'].reset();
         this.formReporte.controls['fechas'].reset();

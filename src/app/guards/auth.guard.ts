@@ -14,17 +14,17 @@ export class AuthGuard implements CanActivate {
 
 
     let permisos: any = {
-    "admin":['extraccion','home','ajustes','notDone','depuracion','limpieza','reporteFidelizacion','reportes','ajustesYcambioServicio','robots','ordenes'],
-    "Reporte":['home','reporteFidelizacion'],
-    "Extraccion":['home','extraccion'],
-    "Depuracion":['home','depuracion','reportes'],
-    "Ajustes":['home','ajustesYcambioServicio','reportes'],
-    "AjustesNotDone":['home','notDone','reportes'],
-    "testAjustes1":['home','ajustes','reportes','ordenes'],
-    "eBarrera":['extraccion','home','ajustes','notDone','depuracion','reporteFidelizacion','reportes','robots'],
-    "testReportes":['home','reportes'],
-    "ACS":['home','ajustesYcambioServicio'],
-    "recuperadores":['home','limpieza'],
+    "admin":['extraccion','izzi-rpacx','ajustes','notDone','depuracion','limpieza','reporteFidelizacion','reportes','ajustesYcambioServicio','robots','ordenes'],
+    "Reporte":['izzi-rpacx','reporteFidelizacion'],
+    "Extraccion":['izzi-rpacx','extraccion'],
+    "Depuracion":['izzi-rpacx','depuracion','reportes'],
+    "Ajustes":['izzi-rpacx','ajustesYcambioServicio','reportes'],
+    "AjustesNotDone":['izzi-rpacx','notDone','reportes'],
+    "testAjustes1":['izzi-rpacx','ajustes','reportes','ordenes'],
+    "eBarrera":['extraccion','izzi-rpacx','ajustes','notDone','depuracion','reporteFidelizacion','reportes','robots'],
+    "testReportes":['izzi-rpacx','reportes'],
+    "ACS":['izzi-rpacx','ajustesYcambioServicio'],
+    "recuperadores":['izzi-rpacx','limpieza'],
     }
     console.log("aca", route.url[0].path);
     
@@ -38,7 +38,7 @@ export class AuthGuard implements CanActivate {
 
     
 
-    this.router.navigate(['/404'], { skipLocationChange: true });
+    this.router.navigate(['/403'], { skipLocationChange: true });
     return false;
   }
 

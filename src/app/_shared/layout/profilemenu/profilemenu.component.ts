@@ -23,6 +23,6 @@ export class ProfilemenuComponent {
   }
   cerrarSesion(){
     localStorage.clear();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/'])
   }
 }

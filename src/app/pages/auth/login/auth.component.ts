@@ -13,6 +13,7 @@ import { Message, MessageService } from 'primeng/api';
 @Component({
     selector: 'app-root',
     templateUrl: './auth.component.html',
+    styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent {
     rememberMe: boolean = false;
@@ -158,7 +159,7 @@ export class AuthComponent {
                 }
                 
                 localStorage.setItem( "userData",JSON.stringify(a))   
-                this.router.navigate(['/home']);
+                this.router.navigate(['/izzi-rpacx']);
     
             }else{
                 this.messageService.add({

@@ -2,7 +2,23 @@ import { NotfoundComponent } from './_shared/layout/notfound/notfound.component'
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-
+import { LoginComponent } from '../app/components/login/login.component';
+import { RegistrarUsuarioComponent } from '../app/components/registrar-usuario/registrar-usuario.component';
+import { ActivaCuentaComponent } from './components/activa-cuenta/activa-cuenta.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { AuthGuardService } from './services/auth-guard/auth-guard.service';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { InicialComponent } from './components/inicial/inicial.component';
+import { CargarComponent } from './components/cargar/cargar.component';
+import { AnalizarComponent } from './components/analizar/analizar.component';
+import { ResultadosComponent } from './components/resultados/resultados.component';
+import { ReporteComponent } from './components/reporte/reporte.component';
+import { ProgramarComponent } from './components/programar/programar.component';
+import { ParametrosComponent } from './components/parametros/parametrosComponent/parametros.component';
+import { CategoriasComponent } from './components/parametros/categorias/categorias.component';
+import { CargarPlantillasComponent } from './components/cargar-plantillas/cargar-plantillas.component';
+import { PagprincipalComponent } from './pages/inicio/pagprincipal/pagprincipal.component';
+import { NotpermisosComponent } from './_shared/layout/notpermisos/notpermisos.component';
 
 
 const routerOptions: ExtraOptions = {
@@ -11,21 +27,24 @@ const routerOptions: ExtraOptions = {
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/CyberIdeas-Proyects',
     pathMatch: 'full'
   },
   {
-    path: 'login',
+    path: 'CyberIdeas-Proyects',component: PagprincipalComponent
+  },
+  {
+    path: 'login-Izzi',
     loadChildren: () =>
       import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/izzi-rpacx',
     pathMatch: 'full'
   },
   {
-    path: 'home',
+    path: 'izzi-rpacx',
     data: { breadcrumb: 'Home' },
     canActivate: [AuthGuard],
     loadChildren: () =>
@@ -97,11 +116,36 @@ const routes: Routes = [
       import('./pages/creaorden/creaorden.module').then((m) => m.CreaordenModule),
   },
   { path: 'robots', data: { breadcrumb: 'Robots' }, loadChildren: () => import('./pages/robots/robots.module').then(m => m.RobotsModule) },
-  { path: '**', redirectTo: '/404' },
+
+  //componentes de Mariana
+  {path: 'login-Mariana', component: LoginComponent},
+  {path: 'registrar', component: RegistrarUsuarioComponent},
+  {path: 'activar', component: ActivaCuentaComponent},
   {
-    path: '404',
-    component: NotfoundComponent,
+    path: 'mariana', component: SidenavComponent, 
+    canActivate: [AuthGuardService],
+    children: [
+      {path: '', component: DashboardComponent},
+      {path: 'inicial', component: InicialComponent},
+      {path: 'cargar', component: CargarComponent},
+      {path: 'cargar/individual', component: CargarComponent},
+      {path: 'cargar/masiva', component: CargarComponent},
+      {path: 'cargar', component: CargarComponent},
+      {path: 'analizar', component: AnalizarComponent},
+      {path: 'analizar/resultados/:tempName/:guia/:origen', component: ResultadosComponent},
+      {path: 'generar', component: ReporteComponent},
+      {path: 'programar', component: ProgramarComponent},
+      {path: 'parametros', component: ParametrosComponent},
+      {path: 'subcategorias', component: CategoriasComponent},
+      // {path: 'prueba', component: PruebaComponent},
+      {path: 'cargar-plantilla', component: CargarPlantillasComponent},
+      { path: 'asignacion', loadChildren: () => import('./components/asignacion/asignacion-routing.module').then(m => m.AsignacionRoutingModule) }
+    ]
   },
+
+  {path: '404',component: NotfoundComponent,},
+  {path: '403',component: NotpermisosComponent,},
+  { path: '**', redirectTo: '404' },
 ];
 
 @NgModule({

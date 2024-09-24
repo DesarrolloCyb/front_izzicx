@@ -115,15 +115,6 @@ export class DashboardReporteFidelizacionComponent implements OnInit {
 
   enviar(){
     this.formReporte.markAllAsTouched();
-    // console.log(this.formReporte)
-    // console.log(this.result1)
-    // console.log(this.formReporte)
-    // this.cors.getCommand(`http://192.168.48.225:21?command=REBOOT`)
-    // this.cors.getCommand(`http://192.168.48.225:80?command=REBOOT`)
-    // this.cors.getCommand(`http://192.168.48.225:9000?command=REBOOT`)
-    // this.cors.getCommand(`http://192.168.50.58:9000?command=REBOOT`)
-    // this.cors.getCommand(`http://192.168.61.4:9000?command=REBOOT`)
-    // this.cors.getCommand(`http://20.51.210.241:9000?command=REBOOT`)
     if(this.formReporte.valid){
         let aa = this.result1.filter((res:any)=>{
           return res.list_description == this.formReporte.value.reporte

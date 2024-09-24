@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit {
         {
           label: 'Dashboard',
           icon: 'pi pi-fw pi-home',
-          routerLink: ['/home'],
+          routerLink: ['/izzi-rpacx'],
         }
       ]
     },
@@ -282,17 +282,37 @@ export class MenuComponent implements OnInit {
           key: "ordenes",
           icon: 'pi pi-fw pi-compass',
           items: [
-            {
-            label: 'Base Creación de Ordenes',
-            icon: 'pi pi-fw pi-database',
-              routerLink: ['/ordenes/creacion-Orden'],
-            },
-            {
-              label: 'Consulta Creación de Ordenes',
-              icon: 'pi pi-fw pi-database',
-                routerLink: ['/ordenes/consulta-creacion-Orden'],
-            },
-          ]
+                  {
+                    label: 'Creacion de Ordenes',
+                    items:[      
+                        {
+                          label: 'Base Creación de Ordenes',
+                          icon: 'pi pi-fw pi-database',
+                          routerLink: ['/ordenes/creacion-Orden'],
+                        },
+                        {
+                          label: 'Consulta Creación de Ordenes',
+                          icon: 'pi pi-fw pi-search',
+                          routerLink: ['/ordenes/consulta-creacion-Orden'],
+                        },
+                      ]
+                  },
+                  {
+                    label: 'Ordenes Call Trouble',
+                    items:[      
+                        {
+                          label: 'Base Call Trouble',
+                          icon: 'pi pi-fw pi-database',
+                          routerLink: ['/ordenes/Ordenes-Call-Trouble'],
+                        },
+                        {
+                          label: 'Consulta Ordenes Call Trouble',
+                          icon: 'pi pi-fw pi-search',
+                          routerLink: ['/ordenes/Consulta-Ordenes-Call-Trouble'],
+                        },
+                      ]
+                  }
+                ]
           },
 
     {
